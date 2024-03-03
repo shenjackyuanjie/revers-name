@@ -6,7 +6,10 @@
   - `function [a-zA-Z0-9]*\(\) \{ \}`
   - 0/202
   
-- [x] 清理 `setFunctionNamesIfNecessary`
+- 清理无用/兼容函数
+  - `setFunctionNamesIfNecessary`
+  - `convertAllToFastObject`
+  - `convertToFastObject`
 
 - [ ] And more
 

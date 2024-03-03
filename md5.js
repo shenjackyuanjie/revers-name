@@ -108,16 +108,6 @@
         return a
     }
 
-    function convertToFastObject(a) {
-        function t() { }
-        t.prototype = a
-        new t()
-        return a
-    }
-
-    function convertAllToFastObject(a) {
-        for (var s = 0; s < a.length; ++s) convertToFastObject(a[s])
-    }
     var y = 0
 
     function instanceTearOffGetter(a, b) {
@@ -224,7 +214,6 @@
             lazyFinal: lazyFinal,
             lazyOld: lazyOld,
             updateHolder: updateHolder,
-            convertToFastObject: convertToFastObject,
             updateTypes: updateTypes,
             setOrUpdateInterceptorsByTag: setOrUpdateInterceptorsByTag,
             setOrUpdateLeafTags: setOrUpdateLeafTags
@@ -19907,7 +19896,7 @@
             var s = function (a) {
                 var m = {}
                 m[a] = 1
-                return Object.keys(hunkHelpers.convertToFastObject(m))[0]
+                return Object.keys(m)[0]
             }
             v.getIsolateTag = function (a) {
                 return s("___dart_" + a + v.isolateTag)
@@ -20544,8 +20533,6 @@
     Function.prototype.$6 = function (a, b, c, d, e, f) {
         return this(a, b, c, d, e, f)
     }
-    convertAllToFastObject(w)
-    convertToFastObject($);
     (function (a) {
         if (typeof document === "undefined") {
             a(null)
