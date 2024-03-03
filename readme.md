@@ -12,8 +12,9 @@
   - `convertToFastObject`
 
 - 清理一些函数
-  - [] `P.p` (svg 函数)
+  - [ ] `P.p` (svg 函数)
   - [x] `z` (检查环境函数)
+  - [x] `H.ve` -> `H.printString`
 
 - [ ] And more
 
