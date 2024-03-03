@@ -14,30 +14,30 @@
             if (!b.hasOwnProperty(q)) b[q] = a[q]
         }
     }
-    var z = function () {
-        // checkEnvironment
-        if (typeof navigator !== "undefined" && navigator.userAgent.includes("Chrome/")) {
-            return true;
-        }
+    // var z = function () {
+    //     // checkEnvironment
+    //     if (typeof navigator !== "undefined" && navigator.userAgent.includes("Chrome/")) {
+    //         return true;
+    //     }
     
-        if (typeof version === "function" && version.length === 0 && /^\d+\.\d+\.\d+\.\d+$/.test(version())) {
-            return true;
-        }
+    //     if (typeof version === "function" && version.length === 0 && /^\d+\.\d+\.\d+\.\d+$/.test(version())) {
+    //         return true;
+    //     }
     
-        return false;
-    }()
+    //     return false;
+    // }()
 
     function inherit(a, b) {
         a.prototype.constructor = a
         a.prototype["$i" + a.name] = a
         if (b != null) {
-            if (z) {
+            // if (z) {
                 a.prototype.__proto__ = b.prototype
                 return
-            }
-            var s = Object.create(b.prototype)
-            copyProperties(a.prototype, s)
-            a.prototype = s
+            // }
+            // var s = Object.create(b.prototype)
+            // copyProperties(a.prototype, s)
+            // a.prototype = s
         }
     }
 
