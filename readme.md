@@ -20,6 +20,10 @@
     - `$iH` -> `$isObject`
     - `H.aW` -> `H.equal_1`
 
+- `hunkHelpers`
+  - `s` -> `mk_instance`
+  - `r` -> `mk_static`
+
 - `H`
   - `iD` -> `find_type`
   - `iw` -> `universe_eval`
@@ -27,6 +31,12 @@
   - `og` -> `parser_parse`
   - `aW` -> `Rti`
   - `u2`-> `universe_create_generic_function_rti`
+  - `bN` -> `universe_install_type_tests`
+  - `uk` -> `install_specialized_as_check`
+  - `ul` -> `install_specialized_is_test`
+  - `oi` -> `universe_lookup_function_rti`
+  - `h` -> `throw_error`
+  - 
 
 - [ ] And more
 
