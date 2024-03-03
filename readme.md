@@ -19,6 +19,8 @@
     - `H.k(a)` -> `to_string_0(a)`
     - `$iH` -> `$isObject`
     - `H.aW` -> `H.equal_1`
+  - [x] `H.iD` -> `H.find_type`
+  - [x] `H.iw` -> `H.universe_eval`
 
 - [ ] And more
 

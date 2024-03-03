@@ -1726,8 +1726,8 @@
             tq(a) {
                 return a.cy
             },
-            iD(a) {
-                return H.iw(v.typeUniverse, a, false)
+            find_type(recipe) {
+                return H.universe_eval(v.typeUniverse, recipe, false)
             },
             bP(a, b, a0, a1) {
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f, e, d, c = b.y
@@ -1885,7 +1885,7 @@
                 var s, r = v.types,
                     q = r[a]
                 if (typeof q == "string") {
-                    s = H.iw(v.typeUniverse, q, false)
+                    s = H.universe_eval(v.typeUniverse, q, false)
                     r[a] = s
                     return s
                 }
@@ -1897,12 +1897,12 @@
                 s = a.cy
                 r = s.replace(/\*/g, "")
                 if (r === s) return a.x = new H.iu(a)
-                q = H.iw(v.typeUniverse, r, true)
+                q = H.universe_eval(v.typeUniverse, r, true)
                 p = q.x
                 return a.x = p == null ? q.x = new H.iu(q) : p
             },
             vp(a) {
-                return H.mz(H.iw(v.typeUniverse, a, false))
+                return H.mz(H.universe_eval(v.typeUniverse, a, false))
             },
             ul(a) {
                 var s, r, q, p = this,
@@ -2212,7 +2212,7 @@
             u9(a, b) {
                 var s, r, q, p, o, n = a.eT,
                     m = n[b]
-                if (m == null) return H.iw(a, b, false)
+                if (m == null) return H.universe_eval(a, b, false)
                 else if (typeof m == "number") {
                     s = m
                     r = H.eL(a, 5, "#")
@@ -2229,13 +2229,12 @@
             u6(a, b) {
                 return H.ol(a.eT, b)
             },
-            iw(a, b, c) {
-                var s, r = a.eC,
-                    q = r.get(b)
-                if (q != null) return q
-                s = H.og(H.oe(a, null, b, c))
-                r.set(b, s)
-                return s
+            universe_eval(a, b, c) {
+                var rit, t1 = a.eC, probe = t1.get(b)
+                if (probe != null) return probe
+                rit = H.og(H.oe(a, null, b, c))
+                t1.set(b, rit)
+                return rit
             },
             la(a, b, c) {
                 var s, r, q = b.ch
@@ -18597,122 +18596,122 @@
     var t = (function rtii() {
         // var H.iD = H.iD
         return {
-            fh: H.iD("@<l*>"),
-            cR: H.iD("cn"),
-            fK: H.iD("bX"),
-            b: H.iD("bY"),
-            gw: H.iD("A<@>"),
-            R: H.iD("Q"),
-            u: H.iD("O"),
-            aD: H.iD("o"),
-            c8: H.iD("cq"),
-            Z: H.iD("rS"),
-            h: H.iD("bl<@>"),
-            I: H.iD("c4"),
-            x: H.iD("E<aN>"),
-            s: H.iD("E<m>"),
-            gn: H.iD("E<@>"),
-            dC: H.iD("E<l>"),
-            H: H.iD("E<b5*>"),
-            Y: H.iD("E<rS*>"),
-            eV: H.iD("E<b7*>"),
-            j: H.iD("E<fr*>"),
-            D: H.iD("E<w<@>*>"),
-            E: H.iD("E<w<w<m*>*>*>"),
-            t: H.iD("E<w<m*>*>"),
-            gt: H.iD("E<w<bu*>*>"),
-            f: H.iD("E<w<l*>*>"),
-            gr: H.iD("E<cy*>"),
-            L: H.iD("E<u*>"),
-            F: H.iD("E<bG*>"),
-            ak: H.iD("E<ax*>"),
-            U: H.iD("E<aX*>"),
-            M: H.iD("E<aq*>"),
-            q: H.iD("E<q*>"),
-            gN: H.iD("E<eb*>"),
-            V: H.iD("E<m*>"),
-            he: H.iD("E<bu*>"),
-            i: H.iD("E<l*>"),
-            T: H.iD("cs"),
-            eH: H.iD("nM"),
-            O: H.iD("bn"),
-            aU: H.iD("ag<@>"),
-            d5: H.iD("aT<m*,u*>"),
-            aH: H.iD("w<@>"),
-            l: H.iD("c<aF*>"),
-            m: H.iD("c<fy*>"),
-            G: H.iD("c<bq*>"),
-            k: H.iD("c<ah*>"),
-            e: H.iD("c<aB*>"),
-            g: H.iD("c<aV*>"),
-            _: H.iD("c<bH*>"),
-            p: H.iD("c<cB*>"),
-            n: H.iD("c<aZ*>"),
-            eO: H.iD("bo<@,@>"),
-            bQ: H.iD("y<m,w<w<m*>*>*>"),
-            dG: H.iD("y<m,w<m*>*>"),
-            fj: H.iD("y<m*,m>"),
-            bK: H.iD("dH"),
-            bZ: H.iD("dJ"),
-            dD: H.iD("ab"),
-            bm: H.iD("cx"),
-            P: H.iD("N"),
-            K: H.iD("H"),
-            eh: H.iD("fN"),
-            fv: H.iD("o0"),
-            bJ: H.iD("a9<m>"),
-            ew: H.iD("cF"),
-            N: H.iD("m"),
-            g7: H.iD("p"),
-            aW: H.iD("cI"),
-            eK: H.iD("bc"),
-            bI: H.iD("bs"),
-            h9: H.iD("cL"),
-            ac: H.iD("az"),
-            eI: H.iD("U<@>"),
-            fJ: H.iD("U<l>"),
-            y: H.iD("ac"),
-            gR: H.iD("bu"),
-            z: H.iD("@"),
-            J: H.iD("@(H)"),
-            C: H.iD("@(H,ba)"),
-            ci: H.iD("l"),
-            aJ: H.iD("dd*"),
-            ch: H.iD("df*"),
-            b8: H.iD("bZ*"),
-            o: H.iD("dj*"),
-            cu: H.iD("dk*"),
-            w: H.iD("dm*"),
-            dK: H.iD("dn*"),
-            A: H.iD("c0*"),
-            eF: H.iD("fo*"),
-            a: H.iD("c3*"),
-            e_: H.iD("dw*"),
-            fM: H.iD("bC*"),
-            W: H.iD("x*"),
-            ck: H.iD("dx*"),
-            r: H.iD("dB*"),
-            eG: H.iD("w<m*>*"),
-            gl: H.iD("n<@>*"),
-            cF: H.iD("bo<@,@>*"),
-            f5: H.iD("dI*"),
-            aw: H.iD("0&*"),
-            c: H.iD("H*"),
-            cr: H.iD("u*"),
-            ax: H.iD("dS*"),
-            Q: H.iD("dV*"),
-            v: H.iD("dX*"),
-            d: H.iD("aq*"),
-            eb: H.iD("e0*"),
-            c5: H.iD("q*"),
-            S: H.iD("eh*"),
-            X: H.iD("m*"),
-            B: H.iD("l*"),
-            bG: H.iD("bl<N>?"),
-            cK: H.iD("H?"),
-            di: H.iD("vc"),
-            aX: H.iD("~(H)"),
-            da: H.iD("~(H,ba)")
+            fh: H.find_type("@<l*>"),
+            cR: H.find_type("cn"),
+            fK: H.find_type("bX"),
+            b: H.find_type("bY"),
+            gw: H.find_type("A<@>"),
+            R: H.find_type("Q"),
+            u: H.find_type("O"),
+            aD: H.find_type("o"),
+            c8: H.find_type("cq"),
+            Z: H.find_type("rS"),
+            h: H.find_type("bl<@>"),
+            I: H.find_type("c4"),
+            x: H.find_type("E<aN>"),
+            s: H.find_type("E<m>"),
+            gn: H.find_type("E<@>"),
+            dC: H.find_type("E<l>"),
+            H: H.find_type("E<b5*>"),
+            Y: H.find_type("E<rS*>"),
+            eV: H.find_type("E<b7*>"),
+            j: H.find_type("E<fr*>"),
+            D: H.find_type("E<w<@>*>"),
+            E: H.find_type("E<w<w<m*>*>*>"),
+            t: H.find_type("E<w<m*>*>"),
+            gt: H.find_type("E<w<bu*>*>"),
+            f: H.find_type("E<w<l*>*>"),
+            gr: H.find_type("E<cy*>"),
+            L: H.find_type("E<u*>"),
+            F: H.find_type("E<bG*>"),
+            ak: H.find_type("E<ax*>"),
+            U: H.find_type("E<aX*>"),
+            M: H.find_type("E<aq*>"),
+            q: H.find_type("E<q*>"),
+            gN: H.find_type("E<eb*>"),
+            V: H.find_type("E<m*>"),
+            he: H.find_type("E<bu*>"),
+            i: H.find_type("E<l*>"),
+            T: H.find_type("cs"),
+            eH: H.find_type("nM"),
+            O: H.find_type("bn"),
+            aU: H.find_type("ag<@>"),
+            d5: H.find_type("aT<m*,u*>"),
+            aH: H.find_type("w<@>"),
+            l: H.find_type("c<aF*>"),
+            m: H.find_type("c<fy*>"),
+            G: H.find_type("c<bq*>"),
+            k: H.find_type("c<ah*>"),
+            e: H.find_type("c<aB*>"),
+            g: H.find_type("c<aV*>"),
+            _: H.find_type("c<bH*>"),
+            p: H.find_type("c<cB*>"),
+            n: H.find_type("c<aZ*>"),
+            eO: H.find_type("bo<@,@>"),
+            bQ: H.find_type("y<m,w<w<m*>*>*>"),
+            dG: H.find_type("y<m,w<m*>*>"),
+            fj: H.find_type("y<m*,m>"),
+            bK: H.find_type("dH"),
+            bZ: H.find_type("dJ"),
+            dD: H.find_type("ab"),
+            bm: H.find_type("cx"),
+            P: H.find_type("N"),
+            K: H.find_type("H"),
+            eh: H.find_type("fN"),
+            fv: H.find_type("o0"),
+            bJ: H.find_type("a9<m>"),
+            ew: H.find_type("cF"),
+            N: H.find_type("m"),
+            g7: H.find_type("p"),
+            aW: H.find_type("cI"),
+            eK: H.find_type("bc"),
+            bI: H.find_type("bs"),
+            h9: H.find_type("cL"),
+            ac: H.find_type("az"),
+            eI: H.find_type("U<@>"),
+            fJ: H.find_type("U<l>"),
+            y: H.find_type("ac"),
+            gR: H.find_type("bu"),
+            z: H.find_type("@"),
+            J: H.find_type("@(H)"),
+            C: H.find_type("@(H,ba)"),
+            ci: H.find_type("l"),
+            aJ: H.find_type("dd*"),
+            ch: H.find_type("df*"),
+            b8: H.find_type("bZ*"),
+            o: H.find_type("dj*"),
+            cu: H.find_type("dk*"),
+            w: H.find_type("dm*"),
+            dK: H.find_type("dn*"),
+            A: H.find_type("c0*"),
+            eF: H.find_type("fo*"),
+            a: H.find_type("c3*"),
+            e_: H.find_type("dw*"),
+            fM: H.find_type("bC*"),
+            W: H.find_type("x*"),
+            ck: H.find_type("dx*"),
+            r: H.find_type("dB*"),
+            eG: H.find_type("w<m*>*"),
+            gl: H.find_type("n<@>*"),
+            cF: H.find_type("bo<@,@>*"),
+            f5: H.find_type("dI*"),
+            aw: H.find_type("0&*"),
+            c: H.find_type("H*"),
+            cr: H.find_type("u*"),
+            ax: H.find_type("dS*"),
+            Q: H.find_type("dV*"),
+            v: H.find_type("dX*"),
+            d: H.find_type("aq*"),
+            eb: H.find_type("e0*"),
+            c5: H.find_type("q*"),
+            S: H.find_type("eh*"),
+            X: H.find_type("m*"),
+            B: H.find_type("l*"),
+            bG: H.find_type("bl<N>?"),
+            cK: H.find_type("H?"),
+            di: H.find_type("vc"),
+            aX: H.find_type("~(H)"),
+            da: H.find_type("~(H,ba)")
         }
     })();
     (function constants() {
@@ -18907,14 +18906,14 @@
         $.eO = null
         $.ms = false
         $.P = C.f
-        $.ch = H.b([], H.iD("E<H>"))
+        $.ch = H.b([], H.find_type("E<H>"))
         $.bA = null
         $.m4 = null
         $.nJ = null
         $.nI = null
         $.et = P.cu(t.N, t.Z)
         $.jU = 0
-        $.ay = P.cu(t.X, H.iD("ax*"))
+        $.ay = P.cu(t.X, H.find_type("ax*"))
         $.rW = function () {
             var s = t.X
             return P.dD(["aokiji", "R0lGODlhEAAQAMIDAAAAAEB2/4Kl/////////////////////yH5BAEKAAQALAAAAAAQABAAAANISLrQsJC1MVwkLgSqLW6bQFFi4ACjIGxDoI7gqHFsO9UsXgFuPXIr0Or3691kHGSMxuRMSMPWi3IK/UqeTM7UuDio3YskDEkAADs=", "conan", "R0lGODlhEAAQAMIAAAAAANAYISpXyf///wAAAAAAAAAAAAAAACH5BAEKAAQALAAAAAAQABAAAANISATczkqBQasFcQlrBV6MsHGiEzQj5TEnELzM5cIsbdLLC+/6N/O/E6j3IP5ilVqrBUgNVi6HyDltSJoiVekTCU23me4DEkkAADs=", "covid", "R0lGODlhEAAQAIIAMf/GAOpK/f///wAAAP///wAAAAAAAAAAACH5BAEAAAQALAAAAAAQABAAAgNKSLrTvZC4AeqIqgEttoNU1wSOx1BBmoabNJGDGpjURlqBAJf6ba+WWgwmy3kcRYFO6AKolMuJBCAqmjIUJKd12moemNrxgnF9IgkAOw==", "ikaruga", "R0lGODlhEAAQAMIEAAAAAAcHB7MABFuV/////////////////yH5BAEKAAcALAAAAAAQABAAAANKeLrRsZA1Qlw8jmoCGgzaMAiC9iiTOFBk6WGUypLUk4pbW00EvhG0XWz1C2Z8o9kO1uuNSqUKCqR60l5MZ1AqAf0skczudJliFwkAOw==", "lazy", "R0lGODlhEAAQAMICAAAAAAgICP+3t/////+3t/+3t/+3t/+3tyH5BAEKAAQALAAAAAAQABAAAANPSLpM8K9JMCqQDoIwwp3VQG1fBnFeWFKW6GnL1rFi87raSQQcvXEhHkeQGwqOncBxKeAxj07io6kkQZXPKJM3YCa7yySwIhwnd5qAokhIAAA7", "mario", "R0lGODlhEAAQAIEAMQAAANgoAPz8/AAAACH5BAEAAAAALAAAAAAQABAAAQJBhD2px6AhRFgshRvvHCdJGH1CgoDhKXEWqLHboH2tvEItpq3ZvXvnfPIphooI0YgcLXyjpLKDQnE6g6hxSiVSAAUAOw==", "mosquito", "R0lGODlhEAAQAKECAAAAAP8AAP///////yH5BAEKAAMALAAAAAAQABAAAAJB3ICpaCnxRIRKoAkpsJu/AHpch4DgxR0kcK6GKrGB+zrylrzH2OL62or9SKcYYIgr5mq82eXI5AQtw1gxhVwwDAUAOw==", "saitama", "R0lGODlhEAAQAMIGAAAAAAgICGxsbP/AmP/PV/////jIUfjIUSH5BAEKAAcALAAAAAAQABAAAANKeLrRsZC1MVw8juraYNhUIVYSGIodZprPtG7ZC8YyFxSC8OZFAIi4nJAnAhgLx2DxZwQQCMZn7hmFOp/YKZZa3Xqth6bR1xADDgkAOw==", "seed", "R0lGODlhEAAQAMIDAAAAAG9tbUCy5////////////////////yH5BAEKAAQALAAAAAAQABAAAANFSLrQsJC1MVwkjuraVN6gA4CDIJCNSW5BkJon2LZpAMdzMLiAYN85HQ/28wWHpmJrN3sRjUya4xm0YJzNTmTKe1wkWkgCADs=", "slime", "R0lGODlhEAAQAMIEAAABAFaSRV6qSLn9qgAAAAAAAAAAAAAAACH5BAEKAAQALAAAAAAQABAAAANCSKrQvpA4QcWDrWoLsB5bxwDVYApB2jClaaaqRMIuCk92CuYBR8G9DSUjLBI3wMpRQzvhis4OqVUbjopKkczBvSQAADs=", "sonic", "R0lGODlhEAAQAMIDAAgICOgSJh9O/////////////////////yH5BAEKAAQALAAAAAAQABAAAANBSLrQsJA1IVwkjuraINDDsFUSFYZbh5knqj2T0LpUBp4jN9JpnJuc1S8UIGE+uUBRJRQonzXP5LlkSpCWy/URSQAAOw==", "yuri", "R0lGODlhEAAQAKEDAAAAAN4H28asxv///yH5BAEKAAMALAAAAAAQABAAAAI+hI85EB3s4DNBiFcvs3NjvmlL9WkesEDnKI7fw8Lpi6roMJ42jh8NNeEJVb+bsFc0HIfB5ZFhdPIO0mf0WAAAOw=="], s, s)
@@ -19882,13 +19881,13 @@
             return C.a.f5(H.b(O.d("ezfN").split("[]"), t.s), new T.kb(), t.X).fL(0)
         })
         r($, "Ac", "rj", function () {
-            return P.dD([O.j("e%XTi8O%`kSB", 94), new T.kq(), O.j("yz*^A*wx}^-:r`d", 95), new T.kr(), O.j("^dYkSp{^[&&o2d0:E2E", 59), new T.ks(), O.j("~47]&y= +_5ji7P", 85), new T.kt(), O.j("l+&iUIpO;.M(}FX", 23), new T.ku()], t.X, H.iD("bL*(m*,u*)*"))
+            return P.dD([O.j("e%XTi8O%`kSB", 94), new T.kq(), O.j("yz*^A*wx}^-:r`d", 95), new T.kr(), O.j("^dYkSp{^[&&o2d0:E2E", 59), new T.ks(), O.j("~47]&y= +_5ji7P", 85), new T.kt(), O.j("l+&iUIpO;.M(}FX", 23), new T.ku()], t.X, H.find_type("bL*(m*,u*)*"))
         })
         r($, "Ad", "rk", function () {
             return H.b([$.iL(), $.n8(), $.n6(), $.n9(), $.no(), $.nm(), $.nb(), $.nn(), $.np(), $.nj(), $.qg(), $.qj(), $.qt(), $.qX(), $.qf(), $.qN(), $.qd(), $.qT(), $.qV(), $.ql(), $.qS(), $.qe()], t.V)
         })
         r($, "AA", "nx", function () {
-            return new P.cK(null, null, null, H.iD("cK<m*>"))
+            return new P.cK(null, null, null, H.find_type("cK<m*>"))
         })
     })();
     (function nativeSupport() {
