@@ -15,35 +15,17 @@
         }
     }
     var z = function () {
-        var s = function () { }
-        s.prototype = {
-            p: {}
+        // checkEnvironment
+        if (typeof navigator !== "undefined" && navigator.userAgent.includes("Chrome/")) {
+            return true;
         }
-        var r = new s()
-        if (!(r.__proto__ && r.__proto__.p === s.prototype.p)) return false
-        try {
-            if (typeof navigator != "undefined" && typeof navigator.userAgent == "string" && navigator.userAgent.indexOf("Chrome/") >= 0) return true
-            if (typeof version == "function" && version.length == 0) {
-                var q = version()
-                if (/^\d+\.\d+\.\d+\.\d+$/.test(q)) return true
-            }
-        } catch (p) { }
-        return false
+    
+        if (typeof version === "function" && version.length === 0 && /^\d+\.\d+\.\d+\.\d+$/.test(version())) {
+            return true;
+        }
+    
+        return false;
     }()
-
-    function setFunctionNamesIfNecessary(a) {
-        function t() { };
-        if (typeof t.name == "string") return
-        for (var s = 0; s < a.length; s++) {
-            var r = a[s]
-            var q = Object.keys(r)
-            for (var p = 0; p < q.length; p++) {
-                var o = q[p]
-                var n = r[o]
-                if (typeof n == "function") n.name = o
-            }
-        }
-    }
 
     function inherit(a, b) {
         a.prototype.constructor = a
@@ -243,7 +225,6 @@
             lazyOld: lazyOld,
             updateHolder: updateHolder,
             convertToFastObject: convertToFastObject,
-            setFunctionNamesIfNecessary: setFunctionNamesIfNecessary,
             updateTypes: updateTypes,
             setOrUpdateInterceptorsByTag: setOrUpdateInterceptorsByTag,
             setOrUpdateLeafTags: setOrUpdateLeafTags
@@ -8252,7 +8233,6 @@
             }
         }
     var w = [A, C, F, H, J, L, M, O, P, Q, S, T, V, W, X, Y, Z]
-    hunkHelpers.setFunctionNamesIfNecessary(w)
     var $ = {}
     H.m8.prototype = {}
     J.af.prototype = {
