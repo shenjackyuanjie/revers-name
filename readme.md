@@ -15,7 +15,7 @@
   - [ ] `P.p` (svg 函数)
   - [x] `z` (检查环境函数)
   - [x] `H.ve` -> `H.printString`
-  - [x] `P.H` - `P.Object_` 
+  - [x] `P.H` - `P.Object_`
     - `H.k(a)` -> `to_string_0(a)`
     - `$iH` -> `$isObject`
     - `H.aW` -> `H.equal_1`
@@ -36,7 +36,6 @@
   - `ul` -> `install_specialized_is_test`
   - `oi` -> `universe_lookup_function_rti`
   - `h` -> `throw_error`
-  - 
 
 - [ ] And more
 
