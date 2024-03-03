@@ -2232,7 +2232,7 @@
             universe_eval(a, b, c) {
                 var rit, t1 = a.eC, probe = t1.get(b)
                 if (probe != null) return probe
-                rit = H.og(H.oe(a, null, b, c))
+                rit = H.parser_parse(H.oe(a, null, b, c))
                 t1.set(b, rit)
                 return rit
             },
@@ -2241,7 +2241,7 @@
                 if (q == null) q = b.ch = new Map()
                 s = q.get(c)
                 if (s != null) return s
-                r = H.og(H.oe(a, b, c, true))
+                r = H.parser_parse(H.oe(a, b, c, true))
                 q.set(c, r)
                 return r
             },
@@ -2263,7 +2263,7 @@
             eL(a, b, c) {
                 var s, r, q = a.eC.get(c)
                 if (q != null) return q
-                s = new H.aW(null, null)
+                s = new H.Rti(null, null)
                 s.y = b
                 s.cy = c
                 r = H.bN(a, s)
@@ -2286,7 +2286,7 @@
                     else r = true
                     if (r) return b
                 }
-                q = new H.aW(null, null)
+                q = new H.Rti(null, null)
                 q.y = 6
                 q.z = b
                 q.cy = c
@@ -2318,7 +2318,7 @@
                         else return H.tr(a, b)
                     }
                 }
-                p = new H.aW(null, null)
+                p = new H.Rti(null, null)
                 p.y = 7
                 p.z = b
                 p.cy = c
@@ -2344,7 +2344,7 @@
                     else if (s === 1) return H.eK(a, "bl", [b])
                     else if (b === t.P || b === t.T) return t.bG
                 }
-                q = new H.aW(null, null)
+                q = new H.Rti(null, null)
                 q.y = 8
                 q.z = b
                 q.cy = c
@@ -2354,7 +2354,7 @@
                 var s, r, q = "" + b + "^",
                     p = a.eC.get(q)
                 if (p != null) return p
-                s = new H.aW(null, null)
+                s = new H.Rti(null, null)
                 s.y = 13
                 s.z = b
                 s.cy = q
@@ -2382,7 +2382,7 @@
                 if (c.length > 0) p += "<" + H.iv(c) + ">"
                 s = a.eC.get(p)
                 if (s != null) return s
-                r = new H.aW(null, null)
+                r = new H.Rti(null, null)
                 r.y = 9
                 r.z = b
                 r.Q = c
@@ -2404,7 +2404,7 @@
                 q = s.cy + (";<" + H.iv(r) + ">")
                 p = a.eC.get(q)
                 if (p != null) return p
-                o = new H.aW(null, null)
+                o = new H.Rti(null, null)
                 o.y = 10
                 o.z = s
                 o.Q = r
@@ -2435,7 +2435,7 @@
                 q = n + (g + ")")
                 p = a.eC.get(q)
                 if (p != null) return p
-                o = new H.aW(null, null)
+                o = new H.Rti(null, null)
                 o.y = 11
                 o.z = b
                 o.Q = c
@@ -2448,34 +2448,34 @@
                 var s, r = b.cy + ("<" + H.iv(c) + ">"),
                     q = a.eC.get(r)
                 if (q != null) return q
-                s = H.u2(a, b, c, r, d)
+                s = H.universe_create_generic_function_rti(a, b, c, r, d)
                 a.eC.set(r, s)
                 return s
             },
-            u2(a, b, c, d, e) {
+            universe_create_generic_function_rti(universe, base_function_type, bounds, key, normalize) {
                 var s, r, q, p, o, n, m, l
-                if (e) {
-                    s = c.length
+                if (normalize) {
+                    s = bounds.length
                     r = H.ld(s)
                     for (q = 0, p = 0; p < s; ++p) {
-                        o = c[p]
+                        o = bounds[p]
                         if (o.y === 1) {
                             r[p] = o;
                             ++q
                         }
                     }
                     if (q > 0) {
-                        n = H.bP(a, b, r, 0)
-                        m = H.eP(a, c, r, 0)
-                        return H.mo(a, n, m, c !== m)
+                        n = H.bP(universe, base_function_type, r, 0)
+                        m = H.eP(universe, bounds, r, 0)
+                        return H.mo(universe, n, m, bounds !== m)
                     }
                 }
-                l = new H.aW(null, null)
+                l = new H.Rti(null, null)
                 l.y = 12
-                l.z = b
-                l.Q = c
-                l.cy = d
-                return H.bN(a, l)
+                l.z = base_function_type
+                l.Q = bounds
+                l.cy = key
+                return H.bN(universe, l)
             },
             oe(a, b, c, d) {
                 return {
@@ -2487,14 +2487,14 @@
                     n: d
                 }
             },
-            og(a) {
-                var s, r, q, p, o, n, m, l, k, j, i, h, g = a.r,
-                    f = a.s
+            parser_parse(parser) {
+                var s, r, q, p, o, n, m, l, k, j, i, h, g = parser.r,
+                    f = parser.s
                 for (s = g.length, r = 0; r < s;) {
                     q = g.charCodeAt(r)
                     if (q >= 48 && q <= 57) r = H.tV(r + 1, q, g, f)
-                    else if ((((q | 32) >>> 0) - 97 & 65535) < 26 || q === 95 || q === 36) r = H.of(a, r, g, f, false)
-                    else if (q === 46) r = H.of(a, r, g, f, true)
+                    else if ((((q | 32) >>> 0) - 97 & 65535) < 26 || q === 95 || q === 36) r = H.of(parser, r, g, f, false)
+                    else if (q === 46) r = H.of(parser, r, g, f, true)
                     else {
                         ++r
                         switch (q) {
@@ -2507,36 +2507,36 @@
                                 f.push(true)
                                 break
                             case 59:
-                                f.push(H.bM(a.u, a.e, f.pop()))
+                                f.push(H.bM(parser.u, parser.e, f.pop()))
                                 break
                             case 94:
-                                f.push(H.u5(a.u, f.pop()))
+                                f.push(H.u5(parser.u, f.pop()))
                                 break
                             case 35:
-                                f.push(H.eL(a.u, 5, "#"))
+                                f.push(H.eL(parser.u, 5, "#"))
                                 break
                             case 64:
-                                f.push(H.eL(a.u, 2, "@"))
+                                f.push(H.eL(parser.u, 2, "@"))
                                 break
                             case 126:
-                                f.push(H.eL(a.u, 3, "~"))
+                                f.push(H.eL(parser.u, 3, "~"))
                                 break
                             case 60:
-                                f.push(a.p)
-                                a.p = f.length
+                                f.push(parser.p)
+                                parser.p = f.length
                                 break
                             case 62:
-                                p = a.u
-                                o = f.splice(a.p)
-                                H.mm(a.u, a.e, o)
-                                a.p = f.pop()
+                                p = parser.u
+                                o = f.splice(parser.p)
+                                H.mm(parser.u, parser.e, o)
+                                parser.p = f.pop()
                                 n = f.pop()
                                 if (typeof n == "string") f.push(H.eK(p, n, o))
                                 else {
-                                    m = H.bM(p, a.e, n)
+                                    m = H.bM(p, parser.e, n)
                                     switch (m.y) {
                                         case 11:
-                                            f.push(H.mo(p, m, o, a.n))
+                                            f.push(H.mo(p, m, o, parser.n))
                                             break
                                         default:
                                             f.push(H.mn(p, m, o))
@@ -2545,26 +2545,26 @@
                                 }
                                 break
                             case 38:
-                                H.tW(a, f)
+                                H.tW(parser, f)
                                 break
                             case 42:
-                                l = a.u
-                                f.push(H.ok(l, H.bM(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                f.push(H.ok(l, H.bM(l, parser.e, f.pop()), parser.n))
                                 break
                             case 63:
-                                l = a.u
-                                f.push(H.mp(l, H.bM(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                f.push(H.mp(l, H.bM(l, parser.e, f.pop()), parser.n))
                                 break
                             case 47:
-                                l = a.u
-                                f.push(H.oj(l, H.bM(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                f.push(H.oj(l, H.bM(l, parser.e, f.pop()), parser.n))
                                 break
                             case 40:
-                                f.push(a.p)
-                                a.p = f.length
+                                f.push(parser.p)
+                                parser.p = f.length
                                 break
                             case 41:
-                                p = a.u
+                                p = parser.u
                                 k = new H.ib()
                                 j = p.sEA
                                 i = p.sEA
@@ -2580,33 +2580,33 @@
                                         f.push(n)
                                         break
                                 } else f.push(n)
-                                o = f.splice(a.p)
-                                H.mm(a.u, a.e, o)
-                                a.p = f.pop()
+                                o = f.splice(parser.p)
+                                H.mm(parser.u, parser.e, o)
+                                parser.p = f.pop()
                                 k.a = o
                                 k.b = j
                                 k.c = i
-                                f.push(H.oi(p, H.bM(p, a.e, f.pop()), k))
+                                f.push(H.oi(p, H.bM(p, parser.e, f.pop()), k))
                                 break
                             case 91:
-                                f.push(a.p)
-                                a.p = f.length
+                                f.push(parser.p)
+                                parser.p = f.length
                                 break
                             case 93:
-                                o = f.splice(a.p)
-                                H.mm(a.u, a.e, o)
-                                a.p = f.pop()
+                                o = f.splice(parser.p)
+                                H.mm(parser.u, parser.e, o)
+                                parser.p = f.pop()
                                 f.push(o)
                                 f.push(-1)
                                 break
                             case 123:
-                                f.push(a.p)
-                                a.p = f.length
+                                f.push(parser.p)
+                                parser.p = f.length
                                 break
                             case 125:
-                                o = f.splice(a.p)
-                                H.tY(a.u, a.e, o)
-                                a.p = f.pop()
+                                o = f.splice(parser.p)
+                                H.tY(parser.u, parser.e, o)
+                                parser.p = f.pop()
                                 f.push(o)
                                 f.push(-2)
                                 break
@@ -2616,7 +2616,7 @@
                     }
                 }
                 h = f.pop()
-                return H.bM(a.u, a.e, h)
+                return H.bM(parser.u, parser.e, h)
             },
             tV(a, b, c, d) {
                 var s, r, q = b - 48
@@ -2874,10 +2874,10 @@
             ld(a) {
                 return a > 0 ? new Array(a) : v.typeUniverse.sEA
             },
-            aW: function aW(a, b) {
+            Rti: function Rti(t0, t1) {
                 var _ = this
-                _.a = a
-                _.b = b
+                _.a = t0
+                _.b = t1
                 _.x = _.r = _.c = null
                 _.y = 0
                 _.cy = _.cx = _.ch = _.Q = _.z = null
@@ -9472,7 +9472,7 @@
     H.ez.prototype = {}
     H.eA.prototype = {}
     H.eB.prototype = {}
-    H.aW.prototype = {
+    H.Rti.prototype = {
         i(a) {
             return H.la(v.typeUniverse, this, a)
         },
@@ -18451,7 +18451,7 @@
             inherit = hunkHelpers.inherit,
             inheritMany = hunkHelpers.inheritMany
         inherit(P.Object_, null)
-        inheritMany(P.Object_, [H.m8, J.af, J.db, P.O, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.aW, H.ib, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, Z.fq, Z.jT, Z.ax, F.a_, F.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
+        inheritMany(P.Object_, [H.m8, J.af, J.db, P.O, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.ib, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, Z.fq, Z.jT, Z.ax, F.a_, F.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
         inheritMany(J.af, [J.fw, J.cs, J.bE, J.E, J.dA, J.bD, H.dJ, H.ab, W.fn, W.bX, W.fe, W.i6, W.bb, W.ja, W.jb, W.o, W.c4, W.jL, W.ig, W.il, W.iy, W.iA])
         inheritMany(J.bE, [J.fO, J.bs, J.bn])
         inherit(J.jG, J.E)

@@ -19,8 +19,14 @@
     - `H.k(a)` -> `to_string_0(a)`
     - `$iH` -> `$isObject`
     - `H.aW` -> `H.equal_1`
-  - [x] `H.iD` -> `H.find_type`
-  - [x] `H.iw` -> `H.universe_eval`
+
+- `H`
+  - `iD` -> `find_type`
+  - `iw` -> `universe_eval`
+  - `aW` -> `equal_1`
+  - `og` -> `parser_parse`
+  - `aW` -> `Rti`
+  - `u2`-> `universe_create_generic_function_rti`
 
 - [ ] And more
 
