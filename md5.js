@@ -720,7 +720,7 @@
             },
             tc(a) {
                 var s, r, q, p
-                if (a instanceof P.H) return H.aH(H.b_(a), null)
+                if (a instanceof P.Object_) return H.aH(H.b_(a), null)
                 if (J.cV(a) === C.J || t.bI.b(a)) {
                     s = C.p(a)
                     r = s !== "Object" && s !== ""
@@ -1833,9 +1833,9 @@
                 return a
             },
             oy(a) {
-                var s = a.$S
-                if (s != null) {
-                    if (typeof s == "number") return H.uU(s)
+            var s = a.$S
+            if (s != null) {
+                if (typeof s == "number") return H.uU(s)
                     return a.$S()
                 }
                 return null
@@ -1851,7 +1851,7 @@
             },
             b_(a) {
                 var s
-                if (a instanceof P.H) {
+                if (a instanceof P.Object_) {
                     s = a.$ti
                     return s != null ? s : H.mr(a)
                 }
@@ -1971,7 +1971,7 @@
                 var s, r = this
                 if (a == null) return H.ln(r)
                 s = r.r
-                if (a instanceof P.H) return !!a[s]
+                if (a instanceof P.Object_) return !!a[s]
                 return !!J.cV(a)[s]
             },
             uo(a) {
@@ -1980,7 +1980,7 @@
                 if (typeof a != "object") return false
                 if (Array.isArray(a)) return true
                 s = r.r
-                if (a instanceof P.H) return !!a[s]
+                if (a instanceof P.Object_) return !!a[s]
                 return !!J.cV(a)[s]
             },
             Au(a) {
@@ -3052,7 +3052,7 @@
                     if (typeof a == "function") return J.bn.prototype
                     return a
                 }
-                if (a instanceof P.H) return a
+                if (a instanceof P.Object_) return a
                 return J.lu(a)
             },
             a3(a) {
@@ -3063,7 +3063,7 @@
                     if (typeof a == "function") return J.bn.prototype
                     return a
                 }
-                if (a instanceof P.H) return a
+                if (a instanceof P.Object_) return a
                 return J.lu(a)
             },
             cW(a) {
@@ -3073,25 +3073,25 @@
                     if (typeof a == "function") return J.bn.prototype
                     return a
                 }
-                if (a instanceof P.H) return a
+                if (a instanceof P.Object_) return a
                 return J.lu(a)
             },
             oA(a) {
                 if (typeof a == "number") return J.dA.prototype
                 if (typeof a == "string") return J.bD.prototype
                 if (a == null) return a
-                if (!(a instanceof P.H)) return J.bs.prototype
+                if (!(a instanceof P.Object_)) return J.bs.prototype
                 return a
             },
             aQ(a) {
                 if (typeof a == "string") return J.bD.prototype
                 if (a == null) return a
-                if (!(a instanceof P.H)) return J.bs.prototype
+                if (!(a instanceof P.Object_)) return J.bs.prototype
                 return a
             },
             uR(a) {
                 if (a == null) return J.cs.prototype
-                if (!(a instanceof P.H)) return J.bs.prototype
+                if (!(a instanceof P.Object_)) return J.bs.prototype
                 return a
             },
             bv(a) {
@@ -3100,12 +3100,12 @@
                     if (typeof a == "function") return J.bn.prototype
                     return a
                 }
-                if (a instanceof P.H) return a
+                if (a instanceof P.Object_) return a
                 return J.lu(a)
             },
             uS(a) {
                 if (a == null) return a
-                if (!(a instanceof P.H)) return J.bs.prototype
+                if (!(a instanceof P.Object_)) return J.bs.prototype
                 return a
             },
             iN(a, b) {
@@ -4353,7 +4353,7 @@
             L: function L() { },
             fv: function fv() { },
             N: function N() { },
-            H: function H() { },
+            Object_: function H() { },
             iq: function iq() { },
             cH: function cH(a) {
                 this.a = a
@@ -11036,21 +11036,21 @@
     P.fv.prototype = {}
     P.N.prototype = {
         gak(a) {
-            return P.H.prototype.gak.call(this, this)
+            return P.Object_.prototype.gak.call(this, this)
         },
         k(a) {
             return "null"
         }
     }
-    P.H.prototype = {
-        $iH: 1,
-        aW(a, b) {
+    P.Object_.prototype = {
+        $isObject: 1,
+        equal_1(a, b) {
             return this === b
         },
         gak(a) {
             return H.dU(this)
         },
-        k(a) {
+        to_string_0(a) {
             return "Instance of '" + H.e(H.jZ(this)) + "'"
         },
         gcw(a) {
@@ -11058,7 +11058,7 @@
             return H.mz(s == null ? H.b_(this) : s)
         },
         toString() {
-            return this.k(this)
+            return this.to_string_0(this)
         }
     }
     P.iq.prototype = {
@@ -18451,8 +18451,8 @@
         var mixin = hunkHelpers.mixin,
             inherit = hunkHelpers.inherit,
             inheritMany = hunkHelpers.inheritMany
-        inherit(P.H, null)
-        inheritMany(P.H, [H.m8, J.af, J.db, P.O, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.aW, H.ib, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, Z.fq, Z.jT, Z.ax, F.a_, F.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
+        inherit(P.Object_, null)
+        inheritMany(P.Object_, [H.m8, J.af, J.db, P.O, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.aW, H.ib, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, Z.fq, Z.jT, Z.ax, F.a_, F.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
         inheritMany(J.af, [J.fw, J.cs, J.bE, J.E, J.dA, J.bD, H.dJ, H.ab, W.fn, W.bX, W.fe, W.i6, W.bb, W.ja, W.jb, W.o, W.c4, W.jL, W.ig, W.il, W.iy, W.iA])
         inheritMany(J.bE, [J.fO, J.bs, J.bn])
         inherit(J.jG, J.E)
