@@ -274,6 +274,8 @@
           return J.JavaScriptObject.prototype;
         }
       }
+      if (!(receiver instanceof A.Object))
+        return J.UnknownJavaScriptObject.prototype;
       return receiver;
     },
     getInterceptor$as(receiver) {
@@ -283,6 +285,8 @@
         return receiver;
       if (Array.isArray(receiver))
         return J.JSArray.prototype;
+      if (!(receiver instanceof A.Object))
+        return J.UnknownJavaScriptObject.prototype;
       return receiver;
     },
     get$length$as(receiver) {
@@ -301,6 +305,12 @@
     JSNull: function JSNull() {
     },
     JavaScriptObject: function JavaScriptObject() {
+    },
+    LegacyJavaScriptObject: function LegacyJavaScriptObject() {
+    },
+    PlainJavaScriptObject: function PlainJavaScriptObject() {
+    },
+    UnknownJavaScriptObject: function UnknownJavaScriptObject() {
     },
     JSArray: function JSArray(t0) {
       this.$ti = t0;
@@ -327,6 +337,9 @@
   },
     A = {
       JS_CONST: function JS_CONST() {
+      },
+      checkNotNullable(value, $name, $T) {
+        return value;
       },
       isToStringVisiting(object) {
         var t1, i;
@@ -368,7 +381,7 @@
         if (object instanceof A.Object)
           return A._rtiToString(A.instanceType(object), null);
         interceptor = J.getInterceptor$(object);
-        if (interceptor === B.Interceptor_methods || interceptor === B.JavaScriptObject_methods || false) {
+        if (interceptor === B.Interceptor_methods || interceptor === B.JavaScriptObject_methods || type$.UnknownJavaScriptObject._is(object)) {
           dispatchName = B.C_JS_CONST(object);
           if (dispatchName !== "Object" && dispatchName !== "")
             return dispatchName;
@@ -431,6 +444,184 @@
       },
       throwConcurrentModificationError(collection) {
         throw A.wrapException(new A.ConcurrentModificationError(collection));
+      },
+      TypeErrorDecoder_extractPattern(message) {
+        var match, $arguments, argumentsExpr, expr, method, receiver;
+        message = A.quoteStringForRegExp(message.replace(String({}), "$receiver$"));
+        match = message.match(/\\\$[a-zA-Z]+\\\$/g);
+        if (match == null)
+          match = A._setArrayType([], type$.JSArray_String);
+        $arguments = match.indexOf("\\$arguments\\$");
+        argumentsExpr = match.indexOf("\\$argumentsExpr\\$");
+        expr = match.indexOf("\\$expr\\$");
+        method = match.indexOf("\\$method\\$");
+        receiver = match.indexOf("\\$receiver\\$");
+        return new A.TypeErrorDecoder(message.replace(new RegExp("\\\\\\$arguments\\\\\\$", "g"), "((?:x|[^x])*)").replace(new RegExp("\\\\\\$argumentsExpr\\\\\\$", "g"), "((?:x|[^x])*)").replace(new RegExp("\\\\\\$expr\\\\\\$", "g"), "((?:x|[^x])*)").replace(new RegExp("\\\\\\$method\\\\\\$", "g"), "((?:x|[^x])*)").replace(new RegExp("\\\\\\$receiver\\\\\\$", "g"), "((?:x|[^x])*)"), $arguments, argumentsExpr, expr, method, receiver);
+      },
+      TypeErrorDecoder_provokeCallErrorOn(expression) {
+        return function ($expr$) {
+          var $argumentsExpr$ = "$arguments$";
+          try {
+            $expr$.$method$($argumentsExpr$);
+          } catch (e) {
+            return e.message;
+          }
+        }(expression);
+      },
+      TypeErrorDecoder_provokePropertyErrorOn(expression) {
+        return function ($expr$) {
+          try {
+            $expr$.$method$;
+          } catch (e) {
+            return e.message;
+          }
+        }(expression);
+      },
+      JsNoSuchMethodError$(_message, match) {
+        var t1 = match == null,
+          t2 = t1 ? null : match.method;
+        return new A.JsNoSuchMethodError(_message, t2, t1 ? null : match.receiver);
+      },
+      unwrapException(ex) {
+        if (ex == null)
+          return new A.NullThrownFromJavaScriptException(ex);
+        if (typeof ex !== "object")
+          return ex;
+        if ("dartException" in ex)
+          return A.saveStackTrace(ex, ex.dartException);
+        return A._unwrapNonDartException(ex);
+      },
+      saveStackTrace(ex, error) {
+        if (type$.Error._is(error))
+          if (error.$thrownJsError == null)
+            error.$thrownJsError = ex;
+        return error;
+      },
+      _unwrapNonDartException(ex) {
+        var message, number, ieErrorCode, nsme, notClosure, nullCall, nullLiteralCall, undefCall, undefLiteralCall, nullProperty, undefProperty, undefLiteralProperty, match;
+        if (!("message" in ex))
+          return ex;
+        message = ex.message;
+        if ("number" in ex && typeof ex.number == "number") {
+          number = ex.number;
+          ieErrorCode = number & 65535;
+          if ((B.JSInt_methods._shrOtherPositive$1(number, 16) & 8191) === 10)
+            switch (ieErrorCode) {
+              case 438:
+                return A.saveStackTrace(ex, A.JsNoSuchMethodError$(A.S(message) + " (Error " + ieErrorCode + ")", null));
+              case 445:
+              case 5007:
+                A.S(message);
+                return A.saveStackTrace(ex, new A.NullError());
+            }
+        }
+        if (ex instanceof TypeError) {
+          nsme = $.$get$TypeErrorDecoder_noSuchMethodPattern();
+          notClosure = $.$get$TypeErrorDecoder_notClosurePattern();
+          nullCall = $.$get$TypeErrorDecoder_nullCallPattern();
+          nullLiteralCall = $.$get$TypeErrorDecoder_nullLiteralCallPattern();
+          undefCall = $.$get$TypeErrorDecoder_undefinedCallPattern();
+          undefLiteralCall = $.$get$TypeErrorDecoder_undefinedLiteralCallPattern();
+          nullProperty = $.$get$TypeErrorDecoder_nullPropertyPattern();
+          $.$get$TypeErrorDecoder_nullLiteralPropertyPattern();
+          undefProperty = $.$get$TypeErrorDecoder_undefinedPropertyPattern();
+          undefLiteralProperty = $.$get$TypeErrorDecoder_undefinedLiteralPropertyPattern();
+          match = nsme.matchTypeError$1(message);
+          if (match != null)
+            return A.saveStackTrace(ex, A.JsNoSuchMethodError$(A._asString(message), match));
+          else {
+            match = notClosure.matchTypeError$1(message);
+            if (match != null) {
+              match.method = "call";
+              return A.saveStackTrace(ex, A.JsNoSuchMethodError$(A._asString(message), match));
+            } else if (nullCall.matchTypeError$1(message) != null || nullLiteralCall.matchTypeError$1(message) != null || undefCall.matchTypeError$1(message) != null || undefLiteralCall.matchTypeError$1(message) != null || nullProperty.matchTypeError$1(message) != null || nullLiteralCall.matchTypeError$1(message) != null || undefProperty.matchTypeError$1(message) != null || undefLiteralProperty.matchTypeError$1(message) != null) {
+              A._asString(message);
+              return A.saveStackTrace(ex, new A.NullError());
+            }
+          }
+          return A.saveStackTrace(ex, new A.UnknownJsTypeError(typeof message == "string" ? message : ""));
+        }
+        if (ex instanceof RangeError) {
+          if (typeof message == "string" && message.indexOf("call stack") !== -1)
+            return new A.StackOverflowError();
+          message = function (ex) {
+            try {
+              return String(ex);
+            } catch (e) {
+            }
+            return null;
+          }(ex);
+          return A.saveStackTrace(ex, new A.ArgumentError(false, null, null, typeof message == "string" ? message.replace(/^RangeError:\s*/, "") : message));
+        }
+        if (typeof InternalError == "function" && ex instanceof InternalError)
+          if (typeof message == "string" && message === "too much recursion")
+            return new A.StackOverflowError();
+        return ex;
+      },
+      getTraceFromException(exception) {
+        var trace;
+        if (exception == null)
+          return new A._StackTrace(exception);
+        trace = exception.$cachedTrace;
+        if (trace != null)
+          return trace;
+        trace = new A._StackTrace(exception);
+        if (typeof exception === "object")
+          exception.$cachedTrace = trace;
+        return trace;
+      },
+      _invokeClosure(closure, numberOfArguments, arg1, arg2, arg3, arg4) {
+        type$.Function._as(closure);
+        switch (A._asInt(numberOfArguments)) {
+          case 0:
+            return closure.call$0();
+          case 1:
+            return closure.call$1(arg1);
+          case 2:
+            return closure.call$2(arg1, arg2);
+          case 3:
+            return closure.call$3(arg1, arg2, arg3);
+          case 4:
+            return closure.call$4(arg1, arg2, arg3, arg4);
+        }
+        throw A.wrapException(new A._Exception("Unsupported number of arguments for wrapped closure"));
+      },
+      convertDartClosureToJS(closure, arity) {
+        var $function = closure.$identity;
+        if (!!$function)
+          return $function;
+        $function = A.convertDartClosureToJSUncached(closure, arity);
+        closure.$identity = $function;
+        return $function;
+      },
+      convertDartClosureToJSUncached(closure, arity) {
+        var entry;
+        switch (arity) {
+          case 0:
+            entry = closure.call$0;
+            break;
+          case 1:
+            entry = closure.call$1;
+            break;
+          case 2:
+            entry = closure.call$2;
+            break;
+          case 3:
+            entry = closure.call$3;
+            break;
+          case 4:
+            entry = closure.call$4;
+            break;
+          default:
+            entry = null;
+        }
+        if (entry != null)
+          return entry.bind(closure);
+        return function (closure, arity, invoke) {
+          return function (a1, a2, a3, a4) {
+            return invoke(closure, arity, a1, a2, a3, a4);
+          };
+        }(closure, arity, A._invokeClosure);
       },
       Closure_fromTearOff(parameters) {
         var $prototype, $constructor, t2, trampoline, applyTrampoline, i, stub, stub0, stubName, stubCallName,
@@ -639,7 +830,7 @@
           if (template[$name] === fieldName)
             return $name;
         }
-        throw A.wrapException(new A.ArgumentError(false, null, null, "Field name " + fieldName + " not found."));
+        throw A.wrapException(A.ArgumentError$("Field name " + fieldName + " not found.", null));
       },
       throwCyclicInit(staticName) {
         throw A.wrapException(new A._CyclicInitializationError(staticName));
@@ -655,7 +846,42 @@
           return $function.apply(null, fieldRtis);
         return $function(fieldRtis);
       },
+      quoteStringForRegExp(string) {
+        if (/[[\]{}()*+?.\\^$|]/.test(string))
+          return string.replace(/[[\]{}()*+?.\\^$|]/g, "\\$&");
+        return string;
+      },
+      TypeErrorDecoder: function TypeErrorDecoder(t0, t1, t2, t3, t4, t5) {
+        var _ = this;
+        _._pattern = t0;
+        _._arguments = t1;
+        _._argumentsExpr = t2;
+        _._expr = t3;
+        _._method = t4;
+        _._receiver = t5;
+      },
+      NullError: function NullError() {
+      },
+      JsNoSuchMethodError: function JsNoSuchMethodError(t0, t1, t2) {
+        this.__js_helper$_message = t0;
+        this._method = t1;
+        this._receiver = t2;
+      },
+      UnknownJsTypeError: function UnknownJsTypeError(t0) {
+        this.__js_helper$_message = t0;
+      },
+      NullThrownFromJavaScriptException: function NullThrownFromJavaScriptException(t0) {
+        this._irritant = t0;
+      },
+      _StackTrace: function _StackTrace(t0) {
+        this._exception = t0;
+        this._trace = null;
+      },
       Closure: function Closure() {
+      },
+      Closure0Args: function Closure0Args() {
+      },
+      Closure2Args: function Closure2Args() {
       },
       TearOffClosure: function TearOffClosure() {
       },
@@ -2257,6 +2483,412 @@
       _TypeError: function _TypeError(t0) {
         this.__rti$_message = t0;
       },
+      _AsyncRun__initializeScheduleImmediate() {
+        var div, span, t1 = {};
+        if (self.scheduleImmediate != null)
+          return A.async__AsyncRun__scheduleImmediateJsOverride$closure();
+        if (self.MutationObserver != null && self.document != null) {
+          div = self.document.createElement("div");
+          span = self.document.createElement("span");
+          t1.storedCallback = null;
+          new self.MutationObserver(A.convertDartClosureToJS(new A._AsyncRun__initializeScheduleImmediate_internalCallback(t1), 1)).observe(div, { childList: true });
+          return new A._AsyncRun__initializeScheduleImmediate_closure(t1, div, span);
+        } else if (self.setImmediate != null)
+          return A.async__AsyncRun__scheduleImmediateWithSetImmediate$closure();
+        return A.async__AsyncRun__scheduleImmediateWithTimer$closure();
+      },
+      _AsyncRun__scheduleImmediateJsOverride(callback) {
+        self.scheduleImmediate(A.convertDartClosureToJS(new A._AsyncRun__scheduleImmediateJsOverride_internalCallback(type$.void_Function._as(callback)), 0));
+      },
+      _AsyncRun__scheduleImmediateWithSetImmediate(callback) {
+        self.setImmediate(A.convertDartClosureToJS(new A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback(type$.void_Function._as(callback)), 0));
+      },
+      _AsyncRun__scheduleImmediateWithTimer(callback) {
+        A.Timer__createTimer(B.Duration_0, type$.void_Function._as(callback));
+      },
+      Timer__createTimer(duration, callback) {
+        var milliseconds = B.JSInt_methods._tdivFast$1(duration._duration, 1000);
+        return A._TimerImpl$(milliseconds, callback);
+      },
+      _TimerImpl$(milliseconds, callback) {
+        var t1 = new A._TimerImpl();
+        t1._TimerImpl$2(milliseconds, callback);
+        return t1;
+      },
+      AsyncError$(error, stackTrace) {
+        var t1 = A.checkNotNullable(error, "error", type$.Object);
+        return new A.AsyncError(t1, stackTrace == null ? A.AsyncError_defaultStackTrace(error) : stackTrace);
+      },
+      AsyncError_defaultStackTrace(error) {
+        var stackTrace;
+        if (type$.Error._is(error)) {
+          stackTrace = error.get$stackTrace();
+          if (stackTrace != null)
+            return stackTrace;
+        }
+        return B.C__StringStackTrace;
+      },
+      Future_Future$delayed(duration, $T) {
+        var result,
+          t1 = !$T._is(null);
+        if (t1)
+          throw A.wrapException(A.ArgumentError$value(null, "computation", "The type parameter is not nullable"));
+        result = new A._Future($.Zone__current, $T._eval$1("_Future<0>"));
+        A.Timer_Timer(duration, new A.Future_Future$delayed_closure(null, result, $T));
+        return result;
+      },
+      _Future__chainCoreFutureSync(source, target) {
+        var t1, t2, listeners;
+        for (t1 = type$._Future_dynamic; t2 = source._state, (t2 & 4) !== 0;)
+          source = t1._as(source._resultOrListeners);
+        if ((t2 & 24) !== 0) {
+          listeners = target._removeListeners$0();
+          target._cloneResult$1(source);
+          A._Future__propagateToListeners(target, listeners);
+        } else {
+          listeners = type$.nullable__FutureListener_dynamic_dynamic._as(target._resultOrListeners);
+          target._state = target._state & 1 | 4;
+          target._resultOrListeners = source;
+          source._prependListeners$1(listeners);
+        }
+      },
+      _Future__propagateToListeners(source, listeners) {
+        var t2, t3, t4, _box_0, t5, t6, hasError, asyncError, nextListener, nextListener0, sourceResult, t7, zone, oldZone, result, current, _box_1 = {},
+          t1 = _box_1.source = source;
+        for (t2 = type$.AsyncError, t3 = type$.nullable__FutureListener_dynamic_dynamic, t4 = type$.Future_dynamic; true;) {
+          _box_0 = {};
+          t5 = t1._state;
+          t6 = (t5 & 16) === 0;
+          hasError = !t6;
+          if (listeners == null) {
+            if (hasError && (t5 & 1) === 0) {
+              asyncError = t2._as(t1._resultOrListeners);
+              A._rootHandleError(asyncError.error, asyncError.stackTrace);
+            }
+            return;
+          }
+          _box_0.listener = listeners;
+          nextListener = listeners._nextListener;
+          for (t1 = listeners; nextListener != null; t1 = nextListener, nextListener = nextListener0) {
+            t1._nextListener = null;
+            A._Future__propagateToListeners(_box_1.source, t1);
+            _box_0.listener = nextListener;
+            nextListener0 = nextListener._nextListener;
+          }
+          t5 = _box_1.source;
+          sourceResult = t5._resultOrListeners;
+          _box_0.listenerHasError = hasError;
+          _box_0.listenerValueOrError = sourceResult;
+          if (t6) {
+            t7 = t1.state;
+            t7 = (t7 & 1) !== 0 || (t7 & 15) === 8;
+          } else
+            t7 = true;
+          if (t7) {
+            zone = t1.result._zone;
+            if (hasError) {
+              t5 = t5._zone === zone;
+              t5 = !(t5 || t5);
+            } else
+              t5 = false;
+            if (t5) {
+              t2._as(sourceResult);
+              A._rootHandleError(sourceResult.error, sourceResult.stackTrace);
+              return;
+            }
+            oldZone = $.Zone__current;
+            if (oldZone !== zone)
+              $.Zone__current = zone;
+            else
+              oldZone = null;
+            t1 = t1.state;
+            if ((t1 & 15) === 8)
+              new A._Future__propagateToListeners_handleWhenCompleteCallback(_box_0, _box_1, hasError).call$0();
+            else if (t6) {
+              if ((t1 & 1) !== 0)
+                new A._Future__propagateToListeners_handleValueCallback(_box_0, sourceResult).call$0();
+            } else if ((t1 & 2) !== 0)
+              new A._Future__propagateToListeners_handleError(_box_1, _box_0).call$0();
+            if (oldZone != null)
+              $.Zone__current = oldZone;
+            t1 = _box_0.listenerValueOrError;
+            if (t1 instanceof A._Future) {
+              t5 = _box_0.listener.$ti;
+              t5 = t5._eval$1("Future<2>")._is(t1) || !t5._rest[1]._is(t1);
+            } else
+              t5 = false;
+            if (t5) {
+              t4._as(t1);
+              result = _box_0.listener.result;
+              if ((t1._state & 24) !== 0) {
+                current = t3._as(result._resultOrListeners);
+                result._resultOrListeners = null;
+                listeners = result._reverseListeners$1(current);
+                result._state = t1._state & 30 | result._state & 1;
+                result._resultOrListeners = t1._resultOrListeners;
+                _box_1.source = t1;
+                continue;
+              } else
+                A._Future__chainCoreFutureSync(t1, result);
+              return;
+            }
+          }
+          result = _box_0.listener.result;
+          current = t3._as(result._resultOrListeners);
+          result._resultOrListeners = null;
+          listeners = result._reverseListeners$1(current);
+          t1 = _box_0.listenerHasError;
+          t5 = _box_0.listenerValueOrError;
+          if (!t1) {
+            result.$ti._precomputed1._as(t5);
+            result._state = 8;
+            result._resultOrListeners = t5;
+          } else {
+            t2._as(t5);
+            result._state = result._state & 1 | 16;
+            result._resultOrListeners = t5;
+          }
+          _box_1.source = result;
+          t1 = result;
+        }
+      },
+      _registerErrorHandler(errorHandler, zone) {
+        var t1 = type$.dynamic_Function_Object_StackTrace;
+        if (t1._is(errorHandler))
+          return t1._as(errorHandler);
+        t1 = type$.dynamic_Function_Object;
+        if (t1._is(errorHandler))
+          return t1._as(errorHandler);
+        throw A.wrapException(A.ArgumentError$value(errorHandler, "onError", string$.Error_));
+      },
+      _microtaskLoop() {
+        var entry, next;
+        for (entry = $._nextCallback; entry != null; entry = $._nextCallback) {
+          $._lastPriorityCallback = null;
+          next = entry.next;
+          $._nextCallback = next;
+          if (next == null)
+            $._lastCallback = null;
+          entry.callback.call$0();
+        }
+      },
+      _startMicrotaskLoop() {
+        $._isInCallbackLoop = true;
+        try {
+          A._microtaskLoop();
+        } finally {
+          $._lastPriorityCallback = null;
+          $._isInCallbackLoop = false;
+          if ($._nextCallback != null)
+            $.$get$_AsyncRun__scheduleImmediateClosure().call$1(A.async___startMicrotaskLoop$closure());
+        }
+      },
+      _scheduleAsyncCallback(callback) {
+        var newEntry = new A._AsyncCallbackEntry(callback),
+          lastCallback = $._lastCallback;
+        if (lastCallback == null) {
+          $._nextCallback = $._lastCallback = newEntry;
+          if (!$._isInCallbackLoop)
+            $.$get$_AsyncRun__scheduleImmediateClosure().call$1(A.async___startMicrotaskLoop$closure());
+        } else
+          $._lastCallback = lastCallback.next = newEntry;
+      },
+      _schedulePriorityAsyncCallback(callback) {
+        var entry, lastPriorityCallback, next,
+          t1 = $._nextCallback;
+        if (t1 == null) {
+          A._scheduleAsyncCallback(callback);
+          $._lastPriorityCallback = $._lastCallback;
+          return;
+        }
+        entry = new A._AsyncCallbackEntry(callback);
+        lastPriorityCallback = $._lastPriorityCallback;
+        if (lastPriorityCallback == null) {
+          entry.next = t1;
+          $._nextCallback = $._lastPriorityCallback = entry;
+        } else {
+          next = lastPriorityCallback.next;
+          entry.next = next;
+          $._lastPriorityCallback = lastPriorityCallback.next = entry;
+          if (next == null)
+            $._lastCallback = entry;
+        }
+      },
+      scheduleMicrotask(callback) {
+        var t1, _null = null,
+          currentZone = $.Zone__current;
+        if (B.C__RootZone === currentZone) {
+          A._rootScheduleMicrotask(_null, _null, B.C__RootZone, callback);
+          return;
+        }
+        t1 = false;
+        if (t1) {
+          A._rootScheduleMicrotask(_null, _null, currentZone, type$.void_Function._as(callback));
+          return;
+        }
+        A._rootScheduleMicrotask(_null, _null, currentZone, type$.void_Function._as(currentZone.bindCallbackGuarded$1(callback)));
+      },
+      Timer_Timer(duration, callback) {
+        var t1 = $.Zone__current;
+        if (t1 === B.C__RootZone)
+          return A.Timer__createTimer(duration, type$.void_Function._as(callback));
+        return A.Timer__createTimer(duration, type$.void_Function._as(t1.bindCallbackGuarded$1(callback)));
+      },
+      _rootHandleError(error, stackTrace) {
+        A._schedulePriorityAsyncCallback(new A._rootHandleError_closure(error, stackTrace));
+      },
+      _rootRun($self, $parent, zone, f, $R) {
+        var old,
+          t1 = $.Zone__current;
+        if (t1 === zone)
+          return f.call$0();
+        $.Zone__current = zone;
+        old = t1;
+        try {
+          t1 = f.call$0();
+          return t1;
+        } finally {
+          $.Zone__current = old;
+        }
+      },
+      _rootRunUnary($self, $parent, zone, f, arg, $R, $T) {
+        var old,
+          t1 = $.Zone__current;
+        if (t1 === zone)
+          return f.call$1(arg);
+        $.Zone__current = zone;
+        old = t1;
+        try {
+          t1 = f.call$1(arg);
+          return t1;
+        } finally {
+          $.Zone__current = old;
+        }
+      },
+      _rootRunBinary($self, $parent, zone, f, arg1, arg2, $R, T1, T2) {
+        var old,
+          t1 = $.Zone__current;
+        if (t1 === zone)
+          return f.call$2(arg1, arg2);
+        $.Zone__current = zone;
+        old = t1;
+        try {
+          t1 = f.call$2(arg1, arg2);
+          return t1;
+        } finally {
+          $.Zone__current = old;
+        }
+      },
+      _rootScheduleMicrotask($self, $parent, zone, f) {
+        type$.void_Function._as(f);
+        if (B.C__RootZone !== zone)
+          f = zone.bindCallbackGuarded$1(f);
+        A._scheduleAsyncCallback(f);
+      },
+      _AsyncRun__initializeScheduleImmediate_internalCallback: function _AsyncRun__initializeScheduleImmediate_internalCallback(t0) {
+        this._box_0 = t0;
+      },
+      _AsyncRun__initializeScheduleImmediate_closure: function _AsyncRun__initializeScheduleImmediate_closure(t0, t1, t2) {
+        this._box_0 = t0;
+        this.div = t1;
+        this.span = t2;
+      },
+      _AsyncRun__scheduleImmediateJsOverride_internalCallback: function _AsyncRun__scheduleImmediateJsOverride_internalCallback(t0) {
+        this.callback = t0;
+      },
+      _AsyncRun__scheduleImmediateWithSetImmediate_internalCallback: function _AsyncRun__scheduleImmediateWithSetImmediate_internalCallback(t0) {
+        this.callback = t0;
+      },
+      _TimerImpl: function _TimerImpl() {
+      },
+      _TimerImpl_internalCallback: function _TimerImpl_internalCallback(t0, t1) {
+        this.$this = t0;
+        this.callback = t1;
+      },
+      AsyncError: function AsyncError(t0, t1) {
+        this.error = t0;
+        this.stackTrace = t1;
+      },
+      Future_Future$delayed_closure: function Future_Future$delayed_closure(t0, t1, t2) {
+        this.computation = t0;
+        this.result = t1;
+        this.T = t2;
+      },
+      _FutureListener: function _FutureListener(t0, t1, t2, t3, t4) {
+        var _ = this;
+        _._nextListener = null;
+        _.result = t0;
+        _.state = t1;
+        _.callback = t2;
+        _.errorCallback = t3;
+        _.$ti = t4;
+      },
+      _Future: function _Future(t0, t1) {
+        var _ = this;
+        _._state = 0;
+        _._zone = t0;
+        _._resultOrListeners = null;
+        _.$ti = t1;
+      },
+      _Future__addListener_closure: function _Future__addListener_closure(t0, t1) {
+        this.$this = t0;
+        this.listener = t1;
+      },
+      _Future__prependListeners_closure: function _Future__prependListeners_closure(t0, t1) {
+        this._box_0 = t0;
+        this.$this = t1;
+      },
+      _Future__chainForeignFuture_closure: function _Future__chainForeignFuture_closure(t0) {
+        this.$this = t0;
+      },
+      _Future__chainForeignFuture_closure0: function _Future__chainForeignFuture_closure0(t0) {
+        this.$this = t0;
+      },
+      _Future__chainForeignFuture_closure1: function _Future__chainForeignFuture_closure1(t0, t1, t2) {
+        this.$this = t0;
+        this.e = t1;
+        this.s = t2;
+      },
+      _Future__propagateToListeners_handleWhenCompleteCallback: function _Future__propagateToListeners_handleWhenCompleteCallback(t0, t1, t2) {
+        this._box_0 = t0;
+        this._box_1 = t1;
+        this.hasError = t2;
+      },
+      _Future__propagateToListeners_handleWhenCompleteCallback_closure: function _Future__propagateToListeners_handleWhenCompleteCallback_closure(t0) {
+        this.originalSource = t0;
+      },
+      _Future__propagateToListeners_handleValueCallback: function _Future__propagateToListeners_handleValueCallback(t0, t1) {
+        this._box_0 = t0;
+        this.sourceResult = t1;
+      },
+      _Future__propagateToListeners_handleError: function _Future__propagateToListeners_handleError(t0, t1) {
+        this._box_1 = t0;
+        this._box_0 = t1;
+      },
+      _AsyncCallbackEntry: function _AsyncCallbackEntry(t0) {
+        this.callback = t0;
+        this.next = null;
+      },
+      _Zone: function _Zone() {
+      },
+      _rootHandleError_closure: function _rootHandleError_closure(t0, t1) {
+        this.error = t0;
+        this.stackTrace = t1;
+      },
+      _RootZone: function _RootZone() {
+      },
+      _RootZone_bindCallbackGuarded_closure: function _RootZone_bindCallbackGuarded_closure(t0, t1) {
+        this.$this = t0;
+        this.f = t1;
+      },
+      Error__throw(error, stackTrace) {
+        error = A.wrapException(error);
+        if (error == null)
+          error = type$.Object._as(error);
+        error.stack = stackTrace.toString$0(0);
+        throw error;
+        throw A.wrapException("unreachable");
+      },
       StringBuffer__writeAll(string, objects, separator) {
         var t2,
           t1 = A._arrayInstanceType(objects),
@@ -2286,8 +2918,19 @@
           return JSON.stringify(object);
         return A.Primitives_safeToString(object);
       },
+      Error_throwWithStackTrace(error, stackTrace) {
+        A.checkNotNullable(error, "error", type$.Object);
+        A.checkNotNullable(stackTrace, "stackTrace", type$.StackTrace);
+        A.Error__throw(error, stackTrace);
+      },
       AssertionError$(message) {
         return new A.AssertionError(message);
+      },
+      ArgumentError$(message, $name) {
+        return new A.ArgumentError(false, null, $name, message);
+      },
+      ArgumentError$value(value, $name, message) {
+        return new A.ArgumentError(true, value, $name, message);
       },
       UnsupportedError$(message) {
         return new A.UnsupportedError(message);
@@ -2311,7 +2954,10 @@
         return t1.charCodeAt(0) == 0 ? t1 : t1;
       },
       print(object) {
-        A.printString(object);
+        A.printString(A.S(object));
+      },
+      Duration: function Duration(t0) {
+        this._duration = t0;
       },
       Error: function Error() {
       },
@@ -2348,12 +2994,34 @@
       ConcurrentModificationError: function ConcurrentModificationError(t0) {
         this.modifiedObject = t0;
       },
+      OutOfMemoryError: function OutOfMemoryError() {
+      },
+      StackOverflowError: function StackOverflowError() {
+      },
+      _Exception: function _Exception(t0) {
+        this.message = t0;
+      },
       Null: function Null() {
       },
       Object: function Object() {
       },
+      _StringStackTrace: function _StringStackTrace() {
+      },
       StringBuffer: function StringBuffer(t0) {
         this._contents = t0;
+      },
+      main() {
+        var a, i, b,
+          _s13_ = "Hello, World!";
+        A.print(_s13_);
+        for (a = _s13_, i = 0; i < 10; ++i)
+          a += " " + B.JSInt_methods.toString$0(i);
+        for (b = 12242424242424, i = 0; i < 10; ++i)
+          b += b * i;
+        A.Future_Future$delayed(new A.Duration(1000000), type$.dynamic).then$1$1(new A.main_closure(), type$.Null);
+        A.print(a);
+      },
+      main_closure: function main_closure() {
       },
       printString(string) {
         if (typeof dartPrint == "function") {
@@ -2372,16 +3040,6 @@
       },
       throwLateFieldADI(fieldName) {
         A.throwExpressionWithWrapper(new A.LateError("Field '" + fieldName + "' has been assigned during initialization."), new Error());
-      },
-      main() {
-        var a, i, b,
-          _s13_ = "Hello, World!";
-        A.print(_s13_);
-        for (a = _s13_, i = 0; i < 10; ++i)
-          a += " " + B.JSInt_methods.toString$0(i);
-        for (b = 12242424242424, i = 0; i < 10; ++i)
-          b += b * i;
-        A.print(a);
       }
     },
     B = {};
@@ -2410,9 +3068,17 @@
     toString$0(receiver) {
       return "null";
     },
-    $isTrustedGetRuntimeType: 1
+    $isTrustedGetRuntimeType: 1,
+    $isNull: 1
   };
   J.JavaScriptObject.prototype = {};
+  J.LegacyJavaScriptObject.prototype = {
+    toString$0(receiver) {
+      return String(receiver);
+    }
+  };
+  J.PlainJavaScriptObject.prototype = {};
+  J.UnknownJavaScriptObject.prototype = {};
   J.JSArray.prototype = {
     add$1(receiver, value) {
       A._arrayInstanceType(receiver)._precomputed1._as(value);
@@ -2458,9 +3124,37 @@
       else
         return "" + receiver;
     },
+    _tdivFast$1(receiver, other) {
+      return (receiver | 0) === receiver ? receiver / other | 0 : this._tdivSlow$1(receiver, other);
+    },
+    _tdivSlow$1(receiver, other) {
+      var quotient = receiver / other;
+      if (quotient >= -2147483648 && quotient <= 2147483647)
+        return quotient | 0;
+      if (quotient > 0) {
+        if (quotient !== 1 / 0)
+          return Math.floor(quotient);
+      } else if (quotient > -1 / 0)
+        return Math.ceil(quotient);
+      throw A.wrapException(A.UnsupportedError$("Result of truncating division is " + A.S(quotient) + ": " + A.S(receiver) + " ~/ " + other));
+    },
+    _shrOtherPositive$1(receiver, other) {
+      var t1;
+      if (receiver > 0)
+        t1 = this._shrBothPositive$1(receiver, other);
+      else {
+        t1 = other > 31 ? 31 : other;
+        t1 = receiver >> t1 >>> 0;
+      }
+      return t1;
+    },
+    _shrBothPositive$1(receiver, other) {
+      return other > 31 ? 0 : receiver >>> other;
+    },
     get$runtimeType(receiver) {
       return A.createRuntimeType(type$.num);
-    }
+    },
+    $isnum: 1
   };
   J.JSInt.prototype = {
     get$runtimeType(receiver) {
@@ -2479,6 +3173,30 @@
     $add(receiver, other) {
       return receiver + other;
     },
+    $mul(receiver, times) {
+      var s, result;
+      if (0 >= times)
+        return "";
+      if (times === 1 || receiver.length === 0)
+        return receiver;
+      if (times !== times >>> 0)
+        throw A.wrapException(B.C_OutOfMemoryError);
+      for (s = receiver, result = ""; true;) {
+        if ((times & 1) === 1)
+          result = s + result;
+        times = times >>> 1;
+        if (times === 0)
+          break;
+        s += s;
+      }
+      return result;
+    },
+    padLeft$2(receiver, width, padding) {
+      var delta = width - receiver.length;
+      if (delta <= 0)
+        return receiver;
+      return this.$mul(padding, delta) + receiver;
+    },
     toString$0(receiver) {
       return receiver;
     },
@@ -2496,12 +3214,79 @@
       return "LateInitializationError: " + this._message;
     }
   };
+  A.TypeErrorDecoder.prototype = {
+    matchTypeError$1(message) {
+      var result, t1, _this = this,
+        match = new RegExp(_this._pattern).exec(message);
+      if (match == null)
+        return null;
+      result = Object.create(null);
+      t1 = _this._arguments;
+      if (t1 !== -1)
+        result.arguments = match[t1 + 1];
+      t1 = _this._argumentsExpr;
+      if (t1 !== -1)
+        result.argumentsExpr = match[t1 + 1];
+      t1 = _this._expr;
+      if (t1 !== -1)
+        result.expr = match[t1 + 1];
+      t1 = _this._method;
+      if (t1 !== -1)
+        result.method = match[t1 + 1];
+      t1 = _this._receiver;
+      if (t1 !== -1)
+        result.receiver = match[t1 + 1];
+      return result;
+    }
+  };
+  A.NullError.prototype = {
+    toString$0(_) {
+      return "Null check operator used on a null value";
+    }
+  };
+  A.JsNoSuchMethodError.prototype = {
+    toString$0(_) {
+      var t2, _this = this,
+        _s38_ = "NoSuchMethodError: method not found: '",
+        t1 = _this._method;
+      if (t1 == null)
+        return "NoSuchMethodError: " + _this.__js_helper$_message;
+      t2 = _this._receiver;
+      if (t2 == null)
+        return _s38_ + t1 + "' (" + _this.__js_helper$_message + ")";
+      return _s38_ + t1 + "' on '" + t2 + "' (" + _this.__js_helper$_message + ")";
+    }
+  };
+  A.UnknownJsTypeError.prototype = {
+    toString$0(_) {
+      var t1 = this.__js_helper$_message;
+      return t1.length === 0 ? "Error" : "Error: " + t1;
+    }
+  };
+  A.NullThrownFromJavaScriptException.prototype = {
+    toString$0(_) {
+      return "Throw of null ('" + (this._irritant === null ? "null" : "undefined") + "' from JavaScript)";
+    }
+  };
+  A._StackTrace.prototype = {
+    toString$0(_) {
+      var trace,
+        t1 = this._trace;
+      if (t1 != null)
+        return t1;
+      t1 = this._exception;
+      trace = t1 !== null && typeof t1 === "object" ? t1.stack : null;
+      return this._trace = trace == null ? "" : trace;
+    },
+    $isStackTrace: 1
+  };
   A.Closure.prototype = {
     toString$0(_) {
       var $constructor = this.constructor,
         $name = $constructor == null ? null : $constructor.name;
       return "Closure '" + A.unminifyOrTag($name == null ? "unknown" : $name) + "'";
     },
+    $isFunction: 1,
     get$$call() {
       return this;
     },
@@ -2509,6 +3294,8 @@
     $requiredArgCount: 1,
     $defaultValues: null
   };
+  A.Closure0Args.prototype = { "call*": "call$0", $requiredArgCount: 0 };
+  A.Closure2Args.prototype = { "call*": "call$2", $requiredArgCount: 2 };
   A.TearOffClosure.prototype = {};
   A.StaticClosure.prototype = {
     toString$0(_) {
@@ -2552,8 +3339,425 @@
       return this.__rti$_message;
     }
   };
-  A._TypeError.prototype = {};
-  A.Error.prototype = {};
+  A._TypeError.prototype = { $isTypeError: 1 };
+  A._AsyncRun__initializeScheduleImmediate_internalCallback.prototype = {
+    call$1(_) {
+      var t1 = this._box_0,
+        f = t1.storedCallback;
+      t1.storedCallback = null;
+      f.call$0();
+    },
+    $signature: 1
+  };
+  A._AsyncRun__initializeScheduleImmediate_closure.prototype = {
+    call$1(callback) {
+      var t1, t2;
+      this._box_0.storedCallback = type$.void_Function._as(callback);
+      t1 = this.div;
+      t2 = this.span;
+      t1.firstChild ? t1.removeChild(t2) : t1.appendChild(t2);
+    },
+    $signature: 4
+  };
+  A._AsyncRun__scheduleImmediateJsOverride_internalCallback.prototype = {
+    call$0() {
+      this.callback.call$0();
+    },
+    $signature: 3
+  };
+  A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback.prototype = {
+    call$0() {
+      this.callback.call$0();
+    },
+    $signature: 3
+  };
+  A._TimerImpl.prototype = {
+    _TimerImpl$2(milliseconds, callback) {
+      if (self.setTimeout != null)
+        self.setTimeout(A.convertDartClosureToJS(new A._TimerImpl_internalCallback(this, callback), 0), milliseconds);
+      else
+        throw A.wrapException(A.UnsupportedError$("`setTimeout()` not found."));
+    }
+  };
+  A._TimerImpl_internalCallback.prototype = {
+    call$0() {
+      this.callback.call$0();
+    },
+    $signature: 0
+  };
+  A.AsyncError.prototype = {
+    toString$0(_) {
+      return A.S(this.error);
+    },
+    $isError: 1,
+    get$stackTrace() {
+      return this.stackTrace;
+    }
+  };
+  A.Future_Future$delayed_closure.prototype = {
+    call$0() {
+      this.T._as(null);
+      this.result._complete$1(null);
+    },
+    $signature: 0
+  };
+  A._FutureListener.prototype = {
+    matchesErrorTest$1(asyncError) {
+      if ((this.state & 15) !== 6)
+        return true;
+      return this.result._zone.runUnary$2$2(type$.bool_Function_Object._as(this.callback), asyncError.error, type$.bool, type$.Object);
+    },
+    handleError$1(asyncError) {
+      var exception, _this = this,
+        errorCallback = _this.errorCallback,
+        result = null,
+        t1 = type$.dynamic,
+        t2 = type$.Object,
+        t3 = asyncError.error,
+        t4 = _this.result._zone;
+      if (type$.dynamic_Function_Object_StackTrace._is(errorCallback))
+        result = t4.runBinary$3$3(errorCallback, t3, asyncError.stackTrace, t1, t2, type$.StackTrace);
+      else
+        result = t4.runUnary$2$2(type$.dynamic_Function_Object._as(errorCallback), t3, t1, t2);
+      try {
+        t1 = _this.$ti._eval$1("2/")._as(result);
+        return t1;
+      } catch (exception) {
+        if (type$.TypeError._is(A.unwrapException(exception))) {
+          if ((_this.state & 1) !== 0)
+            throw A.wrapException(A.ArgumentError$("The error handler of Future.then must return a value of the returned future's type", "onError"));
+          throw A.wrapException(A.ArgumentError$("The error handler of Future.catchError must return a value of the future's type", "onError"));
+        } else
+          throw exception;
+      }
+    }
+  };
+  A._Future.prototype = {
+    then$1$2$onError(f, onError, $R) {
+      var currentZone, result, t2,
+        t1 = this.$ti;
+      t1._bind$1($R)._eval$1("1/(2)")._as(f);
+      currentZone = $.Zone__current;
+      if (currentZone === B.C__RootZone) {
+        if (onError != null && !type$.dynamic_Function_Object_StackTrace._is(onError) && !type$.dynamic_Function_Object._is(onError))
+          throw A.wrapException(A.ArgumentError$value(onError, "onError", string$.Error_));
+      } else {
+        $R._eval$1("@<0/>")._bind$1(t1._precomputed1)._eval$1("1(2)")._as(f);
+        if (onError != null)
+          onError = A._registerErrorHandler(onError, currentZone);
+      }
+      result = new A._Future(currentZone, $R._eval$1("_Future<0>"));
+      t2 = onError == null ? 1 : 3;
+      this._addListener$1(new A._FutureListener(result, t2, f, onError, t1._eval$1("@<1>")._bind$1($R)._eval$1("_FutureListener<1,2>")));
+      return result;
+    },
+    then$1$1(f, $R) {
+      return this.then$1$2$onError(f, null, $R);
+    },
+    _setErrorObject$1(error) {
+      this._state = this._state & 1 | 16;
+      this._resultOrListeners = error;
+    },
+    _cloneResult$1(source) {
+      this._state = source._state & 30 | this._state & 1;
+      this._resultOrListeners = source._resultOrListeners;
+    },
+    _addListener$1(listener) {
+      var source, _this = this,
+        t1 = _this._state;
+      if (t1 <= 3) {
+        listener._nextListener = type$.nullable__FutureListener_dynamic_dynamic._as(_this._resultOrListeners);
+        _this._resultOrListeners = listener;
+      } else {
+        if ((t1 & 4) !== 0) {
+          source = type$._Future_dynamic._as(_this._resultOrListeners);
+          if ((source._state & 24) === 0) {
+            source._addListener$1(listener);
+            return;
+          }
+          _this._cloneResult$1(source);
+        }
+        A._rootScheduleMicrotask(null, null, _this._zone, type$.void_Function._as(new A._Future__addListener_closure(_this, listener)));
+      }
+    },
+    _prependListeners$1(listeners) {
+      var t1, existingListeners, next, cursor, next0, source, _this = this, _box_0 = {};
+      _box_0.listeners = listeners;
+      if (listeners == null)
+        return;
+      t1 = _this._state;
+      if (t1 <= 3) {
+        existingListeners = type$.nullable__FutureListener_dynamic_dynamic._as(_this._resultOrListeners);
+        _this._resultOrListeners = listeners;
+        if (existingListeners != null) {
+          next = listeners._nextListener;
+          for (cursor = listeners; next != null; cursor = next, next = next0)
+            next0 = next._nextListener;
+          cursor._nextListener = existingListeners;
+        }
+      } else {
+        if ((t1 & 4) !== 0) {
+          source = type$._Future_dynamic._as(_this._resultOrListeners);
+          if ((source._state & 24) === 0) {
+            source._prependListeners$1(listeners);
+            return;
+          }
+          _this._cloneResult$1(source);
+        }
+        _box_0.listeners = _this._reverseListeners$1(listeners);
+        A._rootScheduleMicrotask(null, null, _this._zone, type$.void_Function._as(new A._Future__prependListeners_closure(_box_0, _this)));
+      }
+    },
+    _removeListeners$0() {
+      var current = type$.nullable__FutureListener_dynamic_dynamic._as(this._resultOrListeners);
+      this._resultOrListeners = null;
+      return this._reverseListeners$1(current);
+    },
+    _reverseListeners$1(listeners) {
+      var current, prev, next;
+      for (current = listeners, prev = null; current != null; prev = current, current = next) {
+        next = current._nextListener;
+        current._nextListener = prev;
+      }
+      return prev;
+    },
+    _chainForeignFuture$1(source) {
+      var e, s, exception, _this = this;
+      _this._state ^= 2;
+      try {
+        source.then$1$2$onError(new A._Future__chainForeignFuture_closure(_this), new A._Future__chainForeignFuture_closure0(_this), type$.Null);
+      } catch (exception) {
+        e = A.unwrapException(exception);
+        s = A.getTraceFromException(exception);
+        A.scheduleMicrotask(new A._Future__chainForeignFuture_closure1(_this, e, s));
+      }
+    },
+    _complete$1(value) {
+      var listeners, _this = this,
+        t1 = _this.$ti;
+      t1._eval$1("1/")._as(value);
+      if (t1._eval$1("Future<1>")._is(value))
+        _this._chainForeignFuture$1(value);
+      else {
+        listeners = _this._removeListeners$0();
+        t1._precomputed1._as(value);
+        _this._state = 8;
+        _this._resultOrListeners = value;
+        A._Future__propagateToListeners(_this, listeners);
+      }
+    },
+    _completeError$2(error, stackTrace) {
+      var listeners;
+      type$.StackTrace._as(stackTrace);
+      listeners = this._removeListeners$0();
+      this._setErrorObject$1(A.AsyncError$(error, stackTrace));
+      A._Future__propagateToListeners(this, listeners);
+    },
+    $isFuture: 1
+  };
+  A._Future__addListener_closure.prototype = {
+    call$0() {
+      A._Future__propagateToListeners(this.$this, this.listener);
+    },
+    $signature: 0
+  };
+  A._Future__prependListeners_closure.prototype = {
+    call$0() {
+      A._Future__propagateToListeners(this.$this, this._box_0.listeners);
+    },
+    $signature: 0
+  };
+  A._Future__chainForeignFuture_closure.prototype = {
+    call$1(value) {
+      var error, stackTrace, t2, listeners, exception,
+        t1 = this.$this;
+      t1._state ^= 2;
+      try {
+        t2 = t1.$ti._precomputed1;
+        value = t2._as(t2._as(value));
+        listeners = t1._removeListeners$0();
+        t1._state = 8;
+        t1._resultOrListeners = value;
+        A._Future__propagateToListeners(t1, listeners);
+      } catch (exception) {
+        error = A.unwrapException(exception);
+        stackTrace = A.getTraceFromException(exception);
+        t1._completeError$2(error, stackTrace);
+      }
+    },
+    $signature: 1
+  };
+  A._Future__chainForeignFuture_closure0.prototype = {
+    call$2(error, stackTrace) {
+      this.$this._completeError$2(type$.Object._as(error), type$.StackTrace._as(stackTrace));
+    },
+    $signature: 5
+  };
+  A._Future__chainForeignFuture_closure1.prototype = {
+    call$0() {
+      this.$this._completeError$2(this.e, this.s);
+    },
+    $signature: 0
+  };
+  A._Future__propagateToListeners_handleWhenCompleteCallback.prototype = {
+    call$0() {
+      var e, s, t1, exception, t2, originalSource, _this = this, completeResult = null;
+      try {
+        t1 = _this._box_0.listener;
+        completeResult = t1.result._zone.run$1$1(type$.dynamic_Function._as(t1.callback), type$.dynamic);
+      } catch (exception) {
+        e = A.unwrapException(exception);
+        s = A.getTraceFromException(exception);
+        t1 = _this.hasError && type$.AsyncError._as(_this._box_1.source._resultOrListeners).error === e;
+        t2 = _this._box_0;
+        if (t1)
+          t2.listenerValueOrError = type$.AsyncError._as(_this._box_1.source._resultOrListeners);
+        else
+          t2.listenerValueOrError = A.AsyncError$(e, s);
+        t2.listenerHasError = true;
+        return;
+      }
+      if (completeResult instanceof A._Future && (completeResult._state & 24) !== 0) {
+        if ((completeResult._state & 16) !== 0) {
+          t1 = _this._box_0;
+          t1.listenerValueOrError = type$.AsyncError._as(completeResult._resultOrListeners);
+          t1.listenerHasError = true;
+        }
+        return;
+      }
+      if (completeResult instanceof A._Future) {
+        originalSource = _this._box_1.source;
+        t1 = _this._box_0;
+        t1.listenerValueOrError = completeResult.then$1$1(new A._Future__propagateToListeners_handleWhenCompleteCallback_closure(originalSource), type$.dynamic);
+        t1.listenerHasError = false;
+      }
+    },
+    $signature: 0
+  };
+  A._Future__propagateToListeners_handleWhenCompleteCallback_closure.prototype = {
+    call$1(_) {
+      return this.originalSource;
+    },
+    $signature: 6
+  };
+  A._Future__propagateToListeners_handleValueCallback.prototype = {
+    call$0() {
+      var e, s, t1, t2, t3, t4, t5, exception;
+      try {
+        t1 = this._box_0;
+        t2 = t1.listener;
+        t3 = t2.$ti;
+        t4 = t3._precomputed1;
+        t5 = t4._as(this.sourceResult);
+        t1.listenerValueOrError = t2.result._zone.runUnary$2$2(t3._eval$1("2/(1)")._as(t2.callback), t5, t3._eval$1("2/"), t4);
+      } catch (exception) {
+        e = A.unwrapException(exception);
+        s = A.getTraceFromException(exception);
+        t1 = this._box_0;
+        t1.listenerValueOrError = A.AsyncError$(e, s);
+        t1.listenerHasError = true;
+      }
+    },
+    $signature: 0
+  };
+  A._Future__propagateToListeners_handleError.prototype = {
+    call$0() {
+      var asyncError, e, s, t1, exception, t2, _this = this;
+      try {
+        asyncError = type$.AsyncError._as(_this._box_1.source._resultOrListeners);
+        t1 = _this._box_0;
+        if (t1.listener.matchesErrorTest$1(asyncError) && t1.listener.errorCallback != null) {
+          t1.listenerValueOrError = t1.listener.handleError$1(asyncError);
+          t1.listenerHasError = false;
+        }
+      } catch (exception) {
+        e = A.unwrapException(exception);
+        s = A.getTraceFromException(exception);
+        t1 = type$.AsyncError._as(_this._box_1.source._resultOrListeners);
+        t2 = _this._box_0;
+        if (t1.error === e)
+          t2.listenerValueOrError = t1;
+        else
+          t2.listenerValueOrError = A.AsyncError$(e, s);
+        t2.listenerHasError = true;
+      }
+    },
+    $signature: 0
+  };
+  A._AsyncCallbackEntry.prototype = {};
+  A._Zone.prototype = { $isZone: 1 };
+  A._rootHandleError_closure.prototype = {
+    call$0() {
+      A.Error_throwWithStackTrace(this.error, this.stackTrace);
+    },
+    $signature: 0
+  };
+  A._RootZone.prototype = {
+    runGuarded$1(f) {
+      var e, s, exception;
+      type$.void_Function._as(f);
+      try {
+        if (B.C__RootZone === $.Zone__current) {
+          f.call$0();
+          return;
+        }
+        A._rootRun(null, null, this, f, type$.void);
+      } catch (exception) {
+        e = A.unwrapException(exception);
+        s = A.getTraceFromException(exception);
+        A._rootHandleError(type$.Object._as(e), type$.StackTrace._as(s));
+      }
+    },
+    bindCallbackGuarded$1(f) {
+      return new A._RootZone_bindCallbackGuarded_closure(this, type$.void_Function._as(f));
+    },
+    run$1$1(f, $R) {
+      $R._eval$1("0()")._as(f);
+      if ($.Zone__current === B.C__RootZone)
+        return f.call$0();
+      return A._rootRun(null, null, this, f, $R);
+    },
+    runUnary$2$2(f, arg, $R, $T) {
+      $R._eval$1("@<0>")._bind$1($T)._eval$1("1(2)")._as(f);
+      $T._as(arg);
+      if ($.Zone__current === B.C__RootZone)
+        return f.call$1(arg);
+      return A._rootRunUnary(null, null, this, f, arg, $R, $T);
+    },
+    runBinary$3$3(f, arg1, arg2, $R, T1, T2) {
+      $R._eval$1("@<0>")._bind$1(T1)._bind$1(T2)._eval$1("1(2,3)")._as(f);
+      T1._as(arg1);
+      T2._as(arg2);
+      if ($.Zone__current === B.C__RootZone)
+        return f.call$2(arg1, arg2);
+      return A._rootRunBinary(null, null, this, f, arg1, arg2, $R, T1, T2);
+    }
+  };
+  A._RootZone_bindCallbackGuarded_closure.prototype = {
+    call$0() {
+      return this.$this.runGuarded$1(this.f);
+    },
+    $signature: 0
+  };
+  A.Duration.prototype = {
+    toString$0(_) {
+      var minutes, minutesPadding, seconds, secondsPadding,
+        microseconds = this._duration,
+        hours = B.JSInt_methods._tdivFast$1(microseconds, 3600000000);
+      microseconds %= 3600000000;
+      minutes = B.JSInt_methods._tdivFast$1(microseconds, 60000000);
+      microseconds %= 60000000;
+      minutesPadding = minutes < 10 ? "0" : "";
+      seconds = B.JSInt_methods._tdivFast$1(microseconds, 1000000);
+      secondsPadding = seconds < 10 ? "0" : "";
+      return "" + hours + ":" + minutesPadding + minutes + ":" + secondsPadding + seconds + "." + B.JSString_methods.padLeft$2(B.JSInt_methods.toString$0(microseconds % 1000000), 6, "0");
+    }
+  };
+  A.Error.prototype = {
+    get$stackTrace() {
+      return A.getTraceFromException(this.$thrownJsError);
+    }
+  };
   A.AssertionError.prototype = {
     toString$0(_) {
       var t1 = this.message;
@@ -2625,6 +3829,29 @@
       return "Concurrent modification during iteration: " + A.Error_safeToString(this.modifiedObject) + ".";
     }
   };
+  A.OutOfMemoryError.prototype = {
+    toString$0(_) {
+      return "Out of Memory";
+    },
+    get$stackTrace() {
+      return null;
+    },
+    $isError: 1
+  };
+  A.StackOverflowError.prototype = {
+    toString$0(_) {
+      return "Stack Overflow";
+    },
+    get$stackTrace() {
+      return null;
+    },
+    $isError: 1
+  };
+  A._Exception.prototype = {
+    toString$0(_) {
+      return "Exception: " + this.message;
+    }
+  };
   A.Null.prototype = {
     toString$0(_) {
       return "null";
@@ -2642,6 +3869,12 @@
       return this.toString$0(this);
     }
   };
+  A._StringStackTrace.prototype = {
+    toString$0(_) {
+      return "";
+    },
+    $isStackTrace: 1
+  };
   A.StringBuffer.prototype = {
     get$length(_) {
       return this._contents.length;
@@ -2651,33 +3884,59 @@
       return t1.charCodeAt(0) == 0 ? t1 : t1;
     }
   };
+  A.main_closure.prototype = {
+    call$1(value) {
+      A.print("\u5ef6\u65f61\u79d2\u6267\u884c then ");
+      A.print(value);
+    },
+    $signature: 1
+  };
+  (function installTearOffs() {
+    var _static_1 = hunkHelpers._static_1,
+      _static_0 = hunkHelpers._static_0;
+    _static_1(A, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 2);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 2);
+    _static_1(A, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 2);
+    _static_0(A, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 0);
+  })();
   (function inheritance() {
     var _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(A.Object, null);
-    _inheritMany(A.Object, [A.JS_CONST, J.Interceptor, J.ArrayIterator, A.Error, A.Closure, A.Rti, A._FunctionParameters, A._Type, A.Null, A.StringBuffer]);
+    _inheritMany(A.Object, [A.JS_CONST, J.Interceptor, J.ArrayIterator, A.Error, A.TypeErrorDecoder, A.NullThrownFromJavaScriptException, A._StackTrace, A.Closure, A.Rti, A._FunctionParameters, A._Type, A._TimerImpl, A.AsyncError, A._FutureListener, A._Future, A._AsyncCallbackEntry, A._Zone, A.Duration, A.OutOfMemoryError, A.StackOverflowError, A._Exception, A.Null, A._StringStackTrace, A.StringBuffer]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSNumber, J.JSString]);
-    _inherit(J.JSArray, J.JavaScriptObject);
+    _inheritMany(J.JavaScriptObject, [J.LegacyJavaScriptObject, J.JSArray]);
+    _inheritMany(J.LegacyJavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
     _inheritMany(J.JSNumber, [J.JSInt, J.JSNumNotInt]);
-    _inheritMany(A.Error, [A.LateError, A._CyclicInitializationError, A.RuntimeError, A._Error, A.AssertionError, A.TypeError, A.ArgumentError, A.UnsupportedError, A.ConcurrentModificationError]);
-    _inherit(A.TearOffClosure, A.Closure);
+    _inheritMany(A.Error, [A.LateError, A.TypeError, A.JsNoSuchMethodError, A.UnknownJsTypeError, A._CyclicInitializationError, A.RuntimeError, A._Error, A.AssertionError, A.ArgumentError, A.UnsupportedError, A.ConcurrentModificationError]);
+    _inherit(A.NullError, A.TypeError);
+    _inheritMany(A.Closure, [A.Closure0Args, A.Closure2Args, A.TearOffClosure, A._AsyncRun__initializeScheduleImmediate_internalCallback, A._AsyncRun__initializeScheduleImmediate_closure, A._Future__chainForeignFuture_closure, A._Future__propagateToListeners_handleWhenCompleteCallback_closure, A.main_closure]);
     _inheritMany(A.TearOffClosure, [A.StaticClosure, A.BoundClosure]);
     _inherit(A._TypeError, A._Error);
+    _inheritMany(A.Closure0Args, [A._AsyncRun__scheduleImmediateJsOverride_internalCallback, A._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, A._TimerImpl_internalCallback, A.Future_Future$delayed_closure, A._Future__addListener_closure, A._Future__prependListeners_closure, A._Future__chainForeignFuture_closure1, A._Future__propagateToListeners_handleWhenCompleteCallback, A._Future__propagateToListeners_handleValueCallback, A._Future__propagateToListeners_handleError, A._rootHandleError_closure, A._RootZone_bindCallbackGuarded_closure]);
+    _inherit(A._Future__chainForeignFuture_closure0, A.Closure2Args);
+    _inherit(A._RootZone, A._Zone);
     _inheritMany(A.ArgumentError, [A.RangeError, A.IndexError]);
   })();
   var init = {
     typeUniverse: { eC: new Map(), tR: {}, eT: {}, tPV: {}, sEA: [] },
     mangledGlobalNames: { int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List", Object: "Object", Map: "Map" },
     mangledNames: {},
-    types: [],
+    types: ["~()", "Null(@)", "~(~())", "Null()", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)"],
     arrayRti: Symbol("$ti")
   };
-  A._Universe_addRules(init.typeUniverse, JSON.parse('{"JSBool":{"bool":[],"TrustedGetRuntimeType":[]},"JSNull":{"TrustedGetRuntimeType":[]},"JSArray":{"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"Iterable":["1"]},"JSInt":{"int":[],"TrustedGetRuntimeType":[]},"JSNumNotInt":{"TrustedGetRuntimeType":[]},"JSString":{"String":[],"TrustedGetRuntimeType":[]}}'));
+  A._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"LegacyJavaScriptObject","UnknownJavaScriptObject":"LegacyJavaScriptObject","JSBool":{"bool":[],"TrustedGetRuntimeType":[]},"JSNull":{"Null":[],"TrustedGetRuntimeType":[]},"JSArray":{"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"Iterable":["1"]},"JSNumber":{"num":[]},"JSInt":{"int":[],"num":[],"TrustedGetRuntimeType":[]},"JSNumNotInt":{"num":[],"TrustedGetRuntimeType":[]},"JSString":{"String":[],"TrustedGetRuntimeType":[]},"LateError":{"Error":[]},"NullError":{"TypeError":[],"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"Closure0Args":{"Function":[]},"Closure2Args":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"_CyclicInitializationError":{"Error":[]},"RuntimeError":{"Error":[]},"_Error":{"Error":[]},"_TypeError":{"TypeError":[],"Error":[]},"_Future":{"Future":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]}}'));
+  var string$ = {
+    Error_: "Error handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future's type"
+  };
   var type$ = (function rtii() {
     var findType = A.findType;
     return {
+      AsyncError: findType("AsyncError"),
+      Error: findType("Error"),
       Function: findType("Function"),
+      Future_dynamic: findType("Future<@>"),
       JSArray_String: findType("JSArray<String>"),
       JSArray_dynamic: findType("JSArray<@>"),
       JSNull: findType("JSNull"),
@@ -2685,16 +3944,28 @@
       Null: findType("Null"),
       Object: findType("Object"),
       Record: findType("Record"),
+      StackTrace: findType("StackTrace"),
       String: findType("String"),
       TrustedGetRuntimeType: findType("TrustedGetRuntimeType"),
+      TypeError: findType("TypeError"),
+      UnknownJavaScriptObject: findType("UnknownJavaScriptObject"),
+      _Future_dynamic: findType("_Future<@>"),
       bool: findType("bool"),
+      bool_Function_Object: findType("bool(Object)"),
       double: findType("double"),
+      dynamic: findType("@"),
+      dynamic_Function: findType("@()"),
+      dynamic_Function_Object: findType("@(Object)"),
+      dynamic_Function_Object_StackTrace: findType("@(Object,StackTrace)"),
       int: findType("int"),
       legacy_Never: findType("0&*"),
       legacy_Object: findType("Object*"),
       nullable_Future_Null: findType("Future<Null>?"),
       nullable_Object: findType("Object?"),
-      num: findType("num")
+      nullable__FutureListener_dynamic_dynamic: findType("_FutureListener<@,@>?"),
+      num: findType("num"),
+      void: findType("~"),
+      void_Function: findType("~()")
     };
   })();
   (function constants() {
@@ -2707,16 +3978,92 @@
       var s = Object.prototype.toString.call(o);
       return s.substring(8, s.length - 1);
     };
+    B.C_OutOfMemoryError = new A.OutOfMemoryError();
+    B.C__RootZone = new A._RootZone();
+    B.C__StringStackTrace = new A._StringStackTrace();
+    B.Duration_0 = new A.Duration(0);
   })();
   (function staticFields() {
     $.toStringVisiting = A._setArrayType([], A.findType("JSArray<Object>"));
     $.BoundClosure__receiverFieldNameCache = null;
     $.BoundClosure__interceptorFieldNameCache = null;
+    $._nextCallback = null;
+    $._lastCallback = null;
+    $._lastPriorityCallback = null;
+    $._isInCallbackLoop = false;
+    $.Zone__current = B.C__RootZone;
+  })();
+  (function lazyInitializers() {
+    var _lazyFinal = hunkHelpers.lazyFinal;
+    _lazyFinal($, "TypeErrorDecoder_noSuchMethodPattern", "$get$TypeErrorDecoder_noSuchMethodPattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokeCallErrorOn({
+      toString: function () {
+        return "$receiver$";
+      }
+    })));
+    _lazyFinal($, "TypeErrorDecoder_notClosurePattern", "$get$TypeErrorDecoder_notClosurePattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokeCallErrorOn({
+      $method$: null,
+      toString: function () {
+        return "$receiver$";
+      }
+    })));
+    _lazyFinal($, "TypeErrorDecoder_nullCallPattern", "$get$TypeErrorDecoder_nullCallPattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokeCallErrorOn(null)));
+    _lazyFinal($, "TypeErrorDecoder_nullLiteralCallPattern", "$get$TypeErrorDecoder_nullLiteralCallPattern", () => A.TypeErrorDecoder_extractPattern(function () {
+      var $argumentsExpr$ = "$arguments$";
+      try {
+        null.$method$($argumentsExpr$);
+      } catch (e) {
+        return e.message;
+      }
+    }()));
+    _lazyFinal($, "TypeErrorDecoder_undefinedCallPattern", "$get$TypeErrorDecoder_undefinedCallPattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokeCallErrorOn(void 0)));
+    _lazyFinal($, "TypeErrorDecoder_undefinedLiteralCallPattern", "$get$TypeErrorDecoder_undefinedLiteralCallPattern", () => A.TypeErrorDecoder_extractPattern(function () {
+      var $argumentsExpr$ = "$arguments$";
+      try {
+        (void 0).$method$($argumentsExpr$);
+      } catch (e) {
+        return e.message;
+      }
+    }()));
+    _lazyFinal($, "TypeErrorDecoder_nullPropertyPattern", "$get$TypeErrorDecoder_nullPropertyPattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokePropertyErrorOn(null)));
+    _lazyFinal($, "TypeErrorDecoder_nullLiteralPropertyPattern", "$get$TypeErrorDecoder_nullLiteralPropertyPattern", () => A.TypeErrorDecoder_extractPattern(function () {
+      try {
+        null.$method$;
+      } catch (e) {
+        return e.message;
+      }
+    }()));
+    _lazyFinal($, "TypeErrorDecoder_undefinedPropertyPattern", "$get$TypeErrorDecoder_undefinedPropertyPattern", () => A.TypeErrorDecoder_extractPattern(A.TypeErrorDecoder_provokePropertyErrorOn(void 0)));
+    _lazyFinal($, "TypeErrorDecoder_undefinedLiteralPropertyPattern", "$get$TypeErrorDecoder_undefinedLiteralPropertyPattern", () => A.TypeErrorDecoder_extractPattern(function () {
+      try {
+        (void 0).$method$;
+      } catch (e) {
+        return e.message;
+      }
+    }()));
+    _lazyFinal($, "_AsyncRun__scheduleImmediateClosure", "$get$_AsyncRun__scheduleImmediateClosure", () => A._AsyncRun__initializeScheduleImmediate());
   })();
   (function nativeSupport() {
     hunkHelpers.setOrUpdateInterceptorsByTag({});
     hunkHelpers.setOrUpdateLeafTags({});
   })();
+  Function.prototype.call$1$1 = function (a) {
+    return this(a);
+  };
+  Function.prototype.call$1 = function (a) {
+    return this(a);
+  };
+  Function.prototype.call$0 = function () {
+    return this();
+  };
+  Function.prototype.call$2 = function (a, b) {
+    return this(a, b);
+  };
+  Function.prototype.call$3 = function (a, b, c) {
+    return this(a, b, c);
+  };
+  Function.prototype.call$4 = function (a, b, c, d) {
+    return this(a, b, c, d);
+  };
   convertAllToFastObject(holders);
   convertToFastObject($);
   (function (callback) {

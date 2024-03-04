@@ -1171,7 +1171,7 @@
                     r = H.rG
                 switch (b ? -1 : a) {
                     case 0:
-                        throw H.throw_error(new H.h3("Intercepted function with no arguments."))
+                        throw H.throw_error(new H.RuntimeError("Intercepted function with no arguments."))
                     case 1:
                         return function (e, f, g) {
                             return function () {
@@ -1597,7 +1597,7 @@
                 this.a = a
                 this.b = b
             },
-            h3: function h3(a) {
+            RuntimeError: function h3(a) {
                 this.a = a
             },
             aT: function aT(a) {
@@ -7898,17 +7898,17 @@
             }
         },
         Z = {
-            hM(a) {
+            add_span(a) {
                 var s = document.createElement("span")
                 s.classList.add(a)
                 return s
             },
-            ae(a) {
+            add_div(a) {
                 var s = document.createElement("div")
                 s.classList.add(a)
                 return s
             },
-            nS(a) {
+            add_p(a) {
                 var s = document.createElement("p")
                 s.classList.add(a)
                 return s
@@ -8055,12 +8055,12 @@
                 return a
             },
             t7(a, b, c) {
-                var s = Z.ae("plr_list"),
-                    r = Z.ae("sgl"),
-                    q = Z.ae("name"),
-                    p = Z.ae("maxhp"),
-                    o = Z.ae("oldhp"),
-                    n = Z.ae("hp"),
+                var s = Z.add_div("plr_list"),
+                    r = Z.add_div("sgl"),
+                    q = Z.add_div("name"),
+                    p = Z.add_div("maxhp"),
+                    o = Z.add_div("oldhp"),
+                    n = Z.add_div("hp"),
                     m = $.jU + 1
                 $.jU = m
                 m = new Z.ax(a, s, r, q, p, o, n, m)
@@ -8068,12 +8068,12 @@
                 return m
             },
             t8(a, b, c) {
-                var s = Z.ae("plr_list"),
-                    r = Z.ae("sgl"),
-                    q = Z.ae("name"),
-                    p = Z.ae("maxhp"),
-                    o = Z.ae("oldhp"),
-                    n = Z.ae("hp"),
+                var s = Z.add_div("plr_list"),
+                    r = Z.add_div("sgl"),
+                    q = Z.add_div("name"),
+                    p = Z.add_div("maxhp"),
+                    o = Z.add_div("oldhp"),
+                    n = Z.add_div("hp"),
                     m = $.jU + 1
                 $.jU = m
                 m = new Z.fW(a, s, r, q, p, o, n, m)
@@ -8084,7 +8084,7 @@
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f = a.a
                 if (f > 0 && a.e != null) $.ay.h(0, a.e.gb2()).dc(f)
                 s = H.b([], t.j)
-                r = Z.hM("u")
+                r = Z.add_span("u")
                 C.R.by(r, H.oO(a.d, $.rm(), new Z.lq(new Z.lp(s, a), a), null), $.bV())
                 for (f = s.length, q = t.A, p = 0; p < s.length; s.length === f || (0, H.F)(s), ++p) {
                     o = s[p]
@@ -8981,7 +8981,7 @@
             return "Closure '" + H.e(this.$_name) + "' of " + ("Instance of '" + H.e(H.jZ(this.a)) + "'")
         }
     }
-    H.h3.prototype = {
+    H.RuntimeError.prototype = {
         to_string(a) {
             return "RuntimeError: " + this.a
         }
@@ -12769,13 +12769,13 @@
             p.d = P.mi(P.fm(10, 0), p.gbc(p))
             W.es(window, "resize", p.gff(p), false)
             p.ds(0, null)
-            s = Z.nS("row")
+            s = Z.add_p("row")
             r = p.b
             r.appendChild(s)
-            q = Z.hM("welcome")
+            q = Z.add_span("welcome")
             q.textContent = O.d("CeaN")
             s.appendChild(q)
-            q = Z.hM("welcome2")
+            q = Z.add_span("welcome2")
             q.textContent = O.d("NosN")
             s.appendChild(q)
             q = p.c
@@ -12959,7 +12959,7 @@
             else {
                 s = q.db
                 if (s == null) {
-                    s = Z.nS("row")
+                    s = Z.add_p("row")
                     q.db = s
                     q.b.appendChild(s)
                     if (q.dx) q.dx = false
@@ -13043,7 +13043,7 @@
             m.appendChild(k)
             for (q = o.length, i = 0; i < o.length; o.length === q || (0, H.F)(o), ++i) l.$1(o[i])
             d.appendChild(m)
-            h = Z.ae("buttonBar")
+            h = Z.add_div("buttonBar")
             d.appendChild(h)
             g = c.createElement("button")
             g.textContent = O.d("xPRN")
@@ -13167,8 +13167,8 @@
     Z.jT.prototype = {
         e3(a, b, c) {
             var s, r, q, p, o = this
-            if (b || c) o.b = Z.ae("plrg_body_gouped")
-            else o.b = Z.ae("plrg_body")
+            if (b || c) o.b = Z.add_div("plrg_body_gouped")
+            else o.b = Z.add_div("plrg_body")
             for (s = J.by(a), r = o.a; s.u();) {
                 q = s.gC()
                 if (J.aw(q) < 2) return
@@ -13196,8 +13196,8 @@
                 f = '<div class="name"> ',
                 e = "beforeend"
             i.cy = "pid" + i.cx
-            if (c) i.r = Z.ae("plr1")
-            else i.r = Z.ae("plr0")
+            if (c) i.r = Z.add_div("plr1")
+            else i.r = Z.add_div("plr0")
             s = J.a3(b)
             i.db = s.h(b, 0)
             i.dx = s.h(b, 1)
@@ -13231,7 +13231,7 @@
             m = J.m_(i.dy, "+")
             if (m > -1) {
                 q = i.r
-                l = Z.hM("small")
+                l = Z.add_span("small")
                 l.textContent = J.nB(i.dy, m)
                 q.appendChild(l)
                 i.r.appendChild(document.createTextNode(" "))
@@ -13239,14 +13239,14 @@
             i.fr = g + i.cy + '">' + H.e(i.x.outerHTML) + f + C.o.ab(i.dx) + " </div></div>"
             i.fx = g + i.cy + '">' + H.e(i.x.outerHTML) + f + C.o.ab(i.dx) + ' </div><div class="maxhp" style="width: ' + n + '" /></div>'
             if (c) {
-                k = Z.ae("detail")
+                k = Z.add_div("detail")
                 q = i.r
                 l = O.d("BxJN") + (" " + H.e(i.go))
                 j = document
                 q.appendChild(j.createTextNode(l))
                 if (p != null) {
                     q = i.r
-                    l = Z.hM("small")
+                    l = Z.add_span("small")
                     l.textContent = p
                     q.appendChild(l)
                 }
@@ -18456,7 +18456,7 @@
         inheritMany(J.bE, [J.fO, J.bs, J.bn])
         inherit(J.jG, J.E)
         inheritMany(J.dA, [J.dz, J.jF])
-        inheritMany(P.Error, [H.fz, H.dO, P.bc, H.fx, H.hU, H.h3, H.i9, P.f2, P.fL, P.aS, P.UnsupportedError, P.hS, P.bJ, P.fh, P.fj])
+        inheritMany(P.Error, [H.fz, H.dO, P.bc, H.fx, H.hU, H.RuntimeError, H.i9, P.f2, P.fL, P.aS, P.UnsupportedError, P.hS, P.bJ, P.fh, P.fj])
         inherit(P.dE, P.ev)
         inheritMany(P.dE, [H.cJ, W.az])
         inherit(H.ff, H.cJ)
