@@ -12266,28 +12266,28 @@
     }
     Function.prototype.$4 = function (a, b, c, d) {
         return this(a, b, c, d)
-    }
-        (function (a) {
-            if (typeof document === "undefined") {
-                a(null)
-                return
-            }
-            if (typeof document.currentScript != "undefined") {
-                a(document.currentScript)
-                return
-            }
-            var s = document.scripts
+    };
+    (function (a) {
+        if (typeof document === "undefined") {
+            a(null)
+            return
+        }
+        if (typeof document.currentScript != "undefined") {
+            a(document.currentScript)
+            return
+        }
+        var s = document.scripts
 
-            function onLoad(b) {
-                for (var q = 0; q < s.length; ++q) s[q].removeEventListener("load", onLoad, false)
-                a(b.target)
-            }
-            for (var r = 0; r < s.length; ++r) s[r].addEventListener("load", onLoad, false)
-        })(function (a) {
-            v.currentScript = a
-            var s = E.main_program
-            if (typeof dartMainRunner === "function") dartMainRunner(s, [])
-            else s([])
-        })
+        function onLoad(b) {
+            for (var q = 0; q < s.length; ++q) s[q].removeEventListener("load", onLoad, false)
+            a(b.target)
+        }
+        for (var r = 0; r < s.length; ++r) s[r].addEventListener("load", onLoad, false)
+    })(function (a) {
+        v.currentScript = a
+        var s = E.main_program
+        if (typeof dartMainRunner === "function") dartMainRunner(s, [])
+        else s([])
+    })
 })()
 //# sourceMappingURL=index.dart.js.map
