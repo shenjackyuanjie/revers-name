@@ -1,5 +1,6 @@
 // js
-import 'dart:js' as js;
+import 'dart:js' as Js;
+import 'dart:html';
 
 void main() {
   print("Hello, World!");
@@ -16,5 +17,10 @@ void main() {
       print("延时1秒执行 then ");
       print(value);
     });
+
+  var closuer = () {
+    print("closuer");
+  };
+  closuer();
   print(a);
 }
