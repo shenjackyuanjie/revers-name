@@ -24,6 +24,9 @@
   - `s` -> `mk_instance`
   - `r` -> `mk_static`
 
+- `M`
+  - `mB` -> `main_program`
+
 - `H`
   - `iD` -> `find_type`
   - `iw` -> `universe_eval`
@@ -44,5 +47,8 @@
 - [ ] 清理所有空函数
   - `function [a-zA-Z0-9]*\(\) \{ \}`
   - 0/177
+
+- `E`
+  - `nu` -> `main_program`
 
 - [ ] And more

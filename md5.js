@@ -3270,7 +3270,7 @@
             }
         },
         M = {
-            mB() {
+            main_program() {
                 var s = 0,
                     r = P.am(t.z)
                 var $async$mB = P.an(function (a, b) {
@@ -20550,7 +20550,7 @@
         for (var r = 0; r < s.length; ++r) s[r].addEventListener("load", onLoad, false)
     })(function (a) {
         v.currentScript = a
-        var s = M.mB
+        var s = M.main_program
         if (typeof dartMainRunner === "function") dartMainRunner(s, [])
         else s([])
     })

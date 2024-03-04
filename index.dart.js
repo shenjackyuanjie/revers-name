@@ -490,7 +490,7 @@
             }
         },
         E = {
-            nu() {
+            main_program() {
                 G.ig()
             }
         },
@@ -12298,7 +12298,7 @@
         for (var r = 0; r < s.length; ++r) s[r].addEventListener("load", onLoad, false)
     })(function (a) {
         v.currentScript = a
-        var s = E.nu
+        var s = E.main_program
         if (typeof dartMainRunner === "function") dartMainRunner(s, [])
         else s([])
     })
