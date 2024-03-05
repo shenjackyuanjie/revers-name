@@ -2206,7 +2206,7 @@
             mx(a) {
                 var s = this
                 if (a == null) return H.hb(s)
-                return H.G(v.typeUniverse, H.jQ(a, s), null, s, null)
+                return H.is_sub_type(v.typeUniverse, H.jQ(a, s), null, s, null)
             },
             mz(a) {
                 if (a == null) return !0
@@ -2740,7 +2740,7 @@
                     t1 = parser.s
                 for (s = source.length, r = 0; r < s;) {
                     q = source.charCodeAt(r)
-                    if (q >= 48 && q <= 57) r = H.m0(r + 1, q, source, t1)
+                    if (q >= 48 && q <= 57) r = H.parser_handle_digit(r + 1, q, source, t1)
                     else if ((((q | 32) >>> 0) - 97 & 65535) < 26 || q === 95 || q === 36) r = H.parser_handle_identifier(parser, r, source, t1, !1)
                     else if (q === 46) r = H.parser_handle_identifier(parser, r, source, t1, !0)
                     else {
@@ -2866,7 +2866,7 @@
                 h = t1.pop()
                 return H.parser_to_type(parser.u, parser.e, h)
             },
-            m0(a, b, c, d) {
+            parser_handle_digit(a, b, c, d) {
                 var s, r, q = b - 48
                 for (s = c.length; a < s; ++a) {
                     r = c.charCodeAt(a)
@@ -2914,7 +2914,7 @@
             },
             parser_to_type(a, b, c) {
                 if (typeof c == "string") return H.cr(a, c, a.sEA)
-                else if (typeof c == "number") return H.m2(a, b, c)
+                else if (typeof c == "number") return H.parser_index_to_type(a, b, c)
                 else return c
             },
             parser_to_types(a, b, c) {
@@ -2925,7 +2925,7 @@
                 var s, r = c.length
                 for (s = 2; s < r; s += 3) c[s] = H.parser_to_type(a, b, c[s])
             },
-            m2(a, b, c) {
+            parser_index_to_type(a, b, c) {
                 var s, r, q = b.y
                 if (q === 10) {
                     if (c === 0) return b.z
@@ -2941,7 +2941,7 @@
                 if (c <= s.length) return s[c - 1]
                 throw H.b(P.eg("Bad index " + c + " for " + b.j(0)))
             },
-            G(a, b, c, d, e) {
+            is_sub_type(a, b, c, d, e) {
                 var s, r, q, p, o, n, m, l, k, j
                 if (b === d) return !0
                 if (!H.an(d))
@@ -2957,27 +2957,27 @@
                 if (s) return !0
                 q = r === 13
                 if (q)
-                    if (H.G(a, c[b.z], c, d, e)) return !0
+                    if (H.is_sub_type(a, c[b.z], c, d, e)) return !0
                 p = d.y
-                if (r === 6) return H.G(a, b.z, c, d, e)
+                if (r === 6) return H.is_sub_type(a, b.z, c, d, e)
                 if (p === 6) {
                     s = d.z
-                    return H.G(a, b, c, s, e)
+                    return H.is_sub_type(a, b, c, s, e)
                 }
                 if (r === 8) {
-                    if (!H.G(a, b.z, c, d, e)) return !1
-                    return H.G(a, H.je(a, b), c, d, e)
+                    if (!H.is_sub_type(a, b.z, c, d, e)) return !1
+                    return H.is_sub_type(a, H.je(a, b), c, d, e)
                 }
                 if (r === 7) {
-                    s = H.G(a, b.z, c, d, e)
+                    s = H.is_sub_type(a, b.z, c, d, e)
                     return s
                 }
                 if (p === 8) {
-                    if (H.G(a, b, c, d.z, e)) return !0
-                    return H.G(a, b, c, H.je(a, d), e)
+                    if (H.is_sub_type(a, b, c, d.z, e)) return !0
+                    return H.is_sub_type(a, b, c, H.je(a, d), e)
                 }
                 if (p === 7) {
-                    s = H.G(a, b, c, d.z, e)
+                    s = H.is_sub_type(a, b, c, d.z, e)
                     return s
                 }
                 if (q) return !1
@@ -2995,7 +2995,7 @@
                     for (l = 0; l < m; ++l) {
                         k = o[l]
                         j = n[l]
-                        if (!H.G(a, k, c, j, e) || !H.G(a, j, e, k, c)) return !1
+                        if (!H.is_sub_type(a, k, c, j, e) || !H.is_sub_type(a, j, e, k, c)) return !1
                     }
                     return H.jE(a, b.z, c, d.z, e)
                 }
@@ -3012,7 +3012,7 @@
             },
             jE(a2, a3, a4, a5, a6) {
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1
-                if (!H.G(a2, a3.z, a4, a5.z, a6)) return !1
+                if (!H.is_sub_type(a2, a3.z, a4, a5.z, a6)) return !1
                 s = a3.Q
                 r = a5.Q
                 q = s.a
@@ -3028,15 +3028,15 @@
                 if (o + j < n + i) return !1
                 for (h = 0; h < o; ++h) {
                     g = q[h]
-                    if (!H.G(a2, p[h], a6, g, a4)) return !1
+                    if (!H.is_sub_type(a2, p[h], a6, g, a4)) return !1
                 }
                 for (h = 0; h < m; ++h) {
                     g = l[h]
-                    if (!H.G(a2, p[o + h], a6, g, a4)) return !1
+                    if (!H.is_sub_type(a2, p[o + h], a6, g, a4)) return !1
                 }
                 for (h = 0; h < i; ++h) {
                     g = l[m + h]
-                    if (!H.G(a2, k[h], a6, g, a4)) return !1
+                    if (!H.is_sub_type(a2, k[h], a6, g, a4)) return !1
                 }
                 f = s.c
                 e = r.c
@@ -3051,7 +3051,7 @@
                         if (a0 < a1) return !1
                         if (a1 < a0) continue
                         g = f[b - 1]
-                        if (!H.G(a2, e[a + 2], a6, g, a4)) return !1
+                        if (!H.is_sub_type(a2, e[a + 2], a6, g, a4)) return !1
                         break
                     }
                 }
@@ -3083,7 +3083,7 @@
                 for (s = 0; s < p; ++s) {
                     r = b[s]
                     q = e[s]
-                    if (!H.G(a, r, d, q, f)) return !1
+                    if (!H.is_sub_type(a, r, d, q, f)) return !1
                 }
                 return !0
             },
