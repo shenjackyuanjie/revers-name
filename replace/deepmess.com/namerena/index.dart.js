@@ -205,7 +205,7 @@
 
     function initializeDeferredHunk(a) {
         x = v.types.length
-        a(hunkHelpers, v, w, $)
+        a(hunkHelpers, v, holders, $)
     }
     var B = {
         iN() {
@@ -444,7 +444,7 @@
         },
         E = {
             main_program() {
-                G.ig()
+                G.inner_main()
             }
         },
         F = {
@@ -559,7 +559,7 @@
                 s.bY(a, b)
                 return s
             },
-            ig() {
+            inner_main() {
                 var s = 0,
                     r = P.mO(t.z),
                     q, p
@@ -569,11 +569,11 @@
                         case 0:
                             $.hA = H.a([], t.i)
                             for (q = 0; q < 8; ++q) $.hA.push($.kD().a3(256))
-                            $.i7 = G.cZ(O.w("D1Oce", 54), G.hv())
-                            $.ie = G.cZ(O.w("pT#tU", 98), G.nq())
-                            $.id = G.cZ(O.w("vJf:N", 6), G.hv())
-                            $.i8 = G.cZ(O.w("K_sGC", 58), G.hv())
-                            $.ib = G.cZ(O.w("%QzBK", 99), G.hv())
+                            $.i7 = G.cZ(O.some_unwrap("D1Oce", 54), G.hv())
+                            $.ie = G.cZ(O.some_unwrap("pT#tU", 98), G.nq())
+                            $.id = G.cZ(O.some_unwrap("vJf:N", 6), G.hv())
+                            $.i8 = G.cZ(O.some_unwrap("K_sGC", 58), G.hv())
+                            $.ib = G.cZ(O.some_unwrap("%QzBK", 99), G.hv())
                             p = $.iy()
                             p.toString
                             W.K(p, "load", G.nr(), !1)
@@ -583,7 +583,7 @@
                 return P.mo($async$ig, r)
             },
             no() {
-                var s, r, q, p, o, n, m, l, k, j, i, h, g = "none",
+                var s, r, q, p, o, val_1, m, l, k, j, i, h, g = "none",
                     f = ".checkBoss",
                     e = ".loaderbg",
                     d = "click"
@@ -600,96 +600,96 @@
                 o = o.style
                 o.display = g
                 o = t.c7
-                n = o.a(r.querySelector("#refreshPageBtn"))
-                q.c = n
+                val_1 = o.a(r.querySelector("#refreshPageBtn"))
+                q.c = val_1
                 m = p.a(r.querySelector("#endtitle"))
                 q.b = m
                 l = O.J("Nxfa")
                 k = C.a.j(0)
                 m.textContent = H.aW(l, "[0]", k)
-                n.textContent = O.J("uTrn")
-                W.K(n, d, q.gcT(), !1)
-                n = new G.cH()
+                val_1.textContent = O.J("uTrn")
+                W.K(val_1, d, q.gcT(), !1)
+                val_1 = new G.cH()
                 r.querySelector(f).textContent = O.J("WQTA")
-                n.a = p.a(r.querySelector(".bossSgl"))
-                n.b = p.a(r.querySelector(".bossName"))
+                val_1.a = p.a(r.querySelector(".bossSgl"))
+                val_1.b = p.a(r.querySelector(".bossName"))
                 p.a(r.querySelector(".showBossList"))
-                n.d = p.a(r.querySelector(".bossList"))
+                val_1.d = p.a(r.querySelector(".bossList"))
                 m = J.kL(r.querySelector(".showBossBtn"))
-                W.K(m.a, m.b, n.gcu(), !1)
-                n.ap(null)
-                n.cV()
-                n = new G.d3(s, q, n)
-                n.a = p.a(r.querySelector(".body"))
-                n.b = p.a(r.querySelector("#inputPanel"))
+                W.K(m.a, m.b, val_1.gcu(), !1)
+                val_1.ap(null)
+                val_1.cV()
+                val_1 = new G.d3(s, q, val_1)
+                val_1.a = p.a(r.querySelector(".body"))
+                val_1.b = p.a(r.querySelector("#inputPanel"))
                 q = p.a(r.querySelector("#sharePanel"))
-                n.c = q
+                val_1.c = q
                 q = q.style
                 q.display = g
                 s = t.l.a(r.querySelector("#inputPanel textarea"))
-                n.d = s
-                n.cy = t.Y.a(r.querySelector(".mdframe"))
-                n.db = p.a(r.querySelector(".ad_h"))
-                n.dx = p.a(r.querySelector(".ad_v"))
+                val_1.d = s
+                val_1.cy = t.Y.a(r.querySelector(".mdframe"))
+                val_1.db = p.a(r.querySelector(".ad_h"))
+                val_1.dx = p.a(r.querySelector(".ad_v"))
                 r.querySelector("#inputtitle").textContent = O.J("MiIa")
                 s.placeholder = O.J("Pvyn")
                 s = o.a(r.querySelector(".goBtn"))
-                n.e = s
+                val_1.e = s
                 s.textContent = O.J("ZeAN")
-                W.K(s, d, n.gdl(), !1)
+                W.K(s, d, val_1.gdl(), !1)
                 s = p.a(r.querySelector(".controlbar"))
-                n.f = s
+                val_1.f = s
                 s = s.style
                 s.display = g
-                n.dy = p.a(r.querySelector(e))
+                val_1.dy = p.a(r.querySelector(e))
                 s = o.a(r.querySelector("#inputPanel .closeBtn"))
-                n.z = s
+                val_1.z = s
                 s.toString
-                q = n.gd2()
+                q = val_1.gd2()
                 W.K(s, d, q, !1)
-                n.z.title = O.J("ZltN")
-                s = n.z.style
+                val_1.z.title = O.J("ZltN")
+                s = val_1.z.style
                 s.display = g
                 r.querySelector("#sharetitle").textContent = O.J("KXmn")
                 s = o.a(r.querySelector("#sharePanel .closeBtn"))
-                n.Q = s
+                val_1.Q = s
                 s.toString
                 W.K(s, d, q, !1)
-                n.Q.title = O.J("ZltN")
+                val_1.Q.title = O.J("ZltN")
                 q = o.a(r.querySelector("#refreshBtn"))
-                n.x = q
+                val_1.x = q
                 q.toString
-                W.K(q, d, n.gdg(), !1)
-                n.x.title = O.J("xPRN")
+                W.K(q, d, val_1.gdg(), !1)
+                val_1.x.title = O.J("xPRN")
                 q = o.a(r.querySelector("#fastBtn"))
-                n.y = q
+                val_1.y = q
                 q.toString
-                W.K(q, d, n.gd4(), !1)
-                n.y.title = O.J("Izgn")
+                W.K(q, d, val_1.gd4(), !1)
+                val_1.y.title = O.J("Izgn")
                 o = o.a(r.querySelector("#shareBtn"))
-                n.r = o
+                val_1.r = o
                 o.toString
-                W.K(o, d, n.gdk(), !1)
-                n.r.title = O.J("KXmn")
+                W.K(o, d, val_1.gdk(), !1)
+                val_1.r.title = O.J("KXmn")
                 o = p.a(r.querySelector(f))
-                n.cx = o
+                val_1.cx = o
                 o.toString
-                W.K(o, "mousedown", n.gd3(), !1)
-                n.ch = p.a(r.querySelector(".inputoptions"))
+                W.K(o, "mousedown", val_1.gd3(), !1)
+                val_1.ch = p.a(r.querySelector(".inputoptions"))
                 $.hI = "http://" + H.d($.ip()) + J.ee(window.location.pathname, J.ed(window.location.pathname, "/")) + "#n="
-                W.K(window, "resize", n.gdh(n), !1)
-                n.bC(0, null)
-                W.K(window, "message", n.gde(n), !1)
+                W.K(window, "resize", val_1.gdh(val_1), !1)
+                val_1.bC(0, null)
+                W.K(window, "message", val_1.gde(val_1), !1)
                 j = window.location.search
                 i = J.ed(j, "l=")
                 if (i > 0) {
-                    n.go = C.b.M(j, i)
+                    val_1.go = C.b.M(j, i)
                     s = window.location
-                    $.hI = (s && C.da).gdm(s) + H.d(window.location.pathname) + "?" + H.d(n.go) + "#n="
-                } else n.go = null
-                W.K(window, "hashchange", n.gd8(n), !1)
-                n.bA(0, null)
-                W.K(r, "keydown", n.gd9(n), !1)
+                    $.hI = (s && C.da).gdm(s) + H.d(window.location.pathname) + "?" + H.d(val_1.go) + "#n="
+                } else val_1.go = null
+                W.K(window, "hashchange", val_1.gd8(val_1), !1)
+                val_1.bA(0, null)
+                W.K(r, "keydown", val_1.gd9(val_1), !1)
                 h = r.querySelector(e)
                 s = h.style
                 s.toString
@@ -705,7 +705,7 @@
             nl() {
                 var s, r, q, p = $.ib
                 if (p != null && $.id.d != null && $.i8.d != null && p.d != null) {
-                    s = O.w("k4w`nL1(zURGrm{kMa@1C`J^+LT,ubF", 27)
+                    s = O.some_unwrap("k4w`nL1(zURGrm{kMa@1C`J^+LT,ubF", 27)
                     if ((window.localStorage.getItem(s) == null || C.a.n(window.localStorage.getItem(s).length, 100) !== 0) && $.i7.d != null) window.localStorage.setItem(s, new H.c3(H.a($.i7.d.split(""), t.s), t.H).cZ(0))
                     $.ht = J.iH($.id.d, "[1,3,0,9]", J.to_string($.hA))
                     r = (self.URL || self.webkitURL).createObjectURL(W.iK([$.i8.d], "text/css"))
@@ -3845,7 +3845,7 @@
                 p = p < 26 ? p + 65 : p + 71
                 return P.au(H.a([r, q, p, o < 26 ? o + 65 : o + 71], t.i), 0, null)
             },
-            w(a, b) {
+            some_unwrap(a, b) {
                 return C.f.w(0, X.iJ(a, b))
             },
             J(a) {
@@ -5625,7 +5625,7 @@
                 this.b = b
             }
         }
-    var w = [B, C, D, E, F, G, H, J, K, M, N, O, P, Q, S, T, V, W, X, Y]
+    var holders = [B, C, D, E, F, G, H, J, K, M, N, O, P, Q, S, T, V, W, X, Y]
     var $ = {}
     H.Js_Const.prototype = {}
     J.Interceptor.prototype = {
@@ -11528,49 +11528,49 @@
             return P.j8()
         })
         lazy_old($, "oc", "kd", function () {
-            return O.w("bIA", 60)
+            return O.some_unwrap("bIA", 60)
         })
         lazy_old($, "o3", "io", function () {
-            return O.w("Hi!Jb1R=5Ru", 3)
+            return O.some_unwrap("Hi!Jb1R=5Ru", 3)
         })
         lazy_old($, "o8", "ka", function () {
-            return O.w("nUH:z,A", 6)
+            return O.some_unwrap("nUH:z,A", 6)
         })
         lazy_old($, "of", "kg", function () {
-            return O.w("nn:G5tA", 33)
+            return O.some_unwrap("nn:G5tA", 33)
         })
         lazy_old($, "o9", "kb", function () {
-            return O.w("`.kZ/WdBIF", 84)
+            return O.some_unwrap("`.kZ/WdBIF", 84)
         })
         lazy_old($, "og", "kh", function () {
-            return O.w("!1H:b", 6)
+            return O.some_unwrap("!1H:b", 6)
         })
         lazy_old($, "oe", "kf", function () {
-            return O.w("5W]Z:WA", 68)
+            return O.some_unwrap("5W]Z:WA", 68)
         })
         lazy_old($, "o6", "k8", function () {
-            return O.w("%n%.k;MYG", 5)
+            return O.some_unwrap("%n%.k;MYG", 5)
         })
         lazy_old($, "o4", "k6", function () {
-            return O.w("wZa,(xA", 38)
+            return O.some_unwrap("wZa,(xA", 38)
         })
         lazy_old($, "o2", "k5", function () {
-            return O.w("yynHJ8/B", 61)
+            return O.some_unwrap("yynHJ8/B", 61)
         })
         lazy_old($, "o7", "k9", function () {
-            return O.w("JJ9-W", 34)
+            return O.some_unwrap("JJ9-W", 34)
         })
         lazy_old($, "o5", "k7", function () {
-            return O.w("d'n0s=A", 23)
+            return O.some_unwrap("d'n0s=A", 23)
         })
         lazy_old($, "od", "ke", function () {
-            return O.w("Jtjgg;*}D", 17)
+            return O.some_unwrap("Jtjgg;*}D", 17)
         })
         lazy_old($, "oa", "ip", function () {
-            return O.w("-y]/V]sYd9?+SboT>912/)A0jU", 23)
+            return O.some_unwrap("-y]/V]sYd9?+SboT>912/)A0jU", 23)
         })
         lazy_old($, "ob", "kc", function () {
-            return O.w("tRIy]s)+AFLg,Z,g$D=u]bf_wCGfk;V-L8^n_7hoA", 50)
+            return O.some_unwrap("tRIy]s)+AFLg,Z,g$D=u]bf_wCGfk;V-L8^n_7hoA", 50)
         })
         lazy_old($, "p9", "kC", function () {
             return new G.hm().$0()
@@ -11585,10 +11585,10 @@
             return P.f4("[\\u0000-\\u0003]")
         })
         lazy_old($, "lm", "kk", function () {
-            return O.w("K[0/O)W0:H^^Dm~lG[A3ehCM^xV99 $!Z`xX>h2cjI _BTMS=#!P1idJIv('HNxVk6xwZk7T^2m.f=QTo6Xa4kGXK)~_xRrIw^:?1iP*pa<h{A-YX(]]B!I9{B1xT!OuSiNluf2.-=j0/83*hm,cv0T-MuS0Q!oQHoGXV*j,V=6%H9H@si]~gl^j7pn0|/VjCV}4Z8FTA_ab=>$c|Rg6iPITs>ab=>2,/zL9YxOL`Z;uE'SuN9&&I(clQ>n:dW^[OJE`*}hK(<9jjUr6m+Ifwy$!T9otZk_@n0x[5[NJY]f5CUr)^ WQgvC~Si91]Z<_{]e9L=Y5-M`Z`:L>bN_Q ty71QF,%.w,P5JGB5v@Fo8Gv0D'/-v#y!%DbyN]W+^i|8!JYlsG@F #wxNr41B", 13)
+            return O.some_unwrap("K[0/O)W0:H^^Dm~lG[A3ehCM^xV99 $!Z`xX>h2cjI _BTMS=#!P1idJIv('HNxVk6xwZk7T^2m.f=QTo6Xa4kGXK)~_xRrIw^:?1iP*pa<h{A-YX(]]B!I9{B1xT!OuSiNluf2.-=j0/83*hm,cv0T-MuS0Q!oQHoGXV*j,V=6%H9H@si]~gl^j7pn0|/VjCV}4Z8FTA_ab=>$c|Rg6iPITs>ab=>2,/zL9YxOL`Z;uE'SuN9&&I(clQ>n:dW^[OJE`*}hK(<9jjUr6m+Ifwy$!T9otZk_@n0x[5[NJY]f5CUr)^ WQgvC~Si91]Z<_{]e9L=Y5-M`Z`:L>bN_Q ty71QF,%.w,P5JGB5v@Fo8Gv0D'/-v#y!%DbyN]W+^i|8!JYlsG@F #wxNr41B", 13)
         })
         lazy_old($, "ln", "kl", function () {
-            return O.w("@.a1H'8(Az+?`*{k*.3:*kpn(GH5<7Zk(,g)Q+.]d9-?`*blefGJI'Xj8yX2o?fpnqof4.=LZ%74$l7kvq|.9:'-4G(?@'|R).a1H'8(iJ-+:4,M{QK1f/)zDP(3846St3l0^]n9d9+?h8wOPi92E<_o;9Ny'a:N*.'gL)?dYHAucF1i_vhaq*9H99vz4w1jmJt*I'k(3Qs?u}#U.*R7wha|iblV!&fKTd]s8!N[27Qk_OUJC'jjp%I65P?ML?Qf%of|Mx*o>yrIl;((gT<.6D:N`Z'g)Ze(syTytwlS-^qb?h,,<JU](Y7S;Tl0^]TtB1<7ZQnp[9qDQkt/Qf$:*oPTs!-4;NT pw2j@REJ`]-HU#V2;w7lt3BKV5fH0G4]cFNLE7`(9b9nV%l>Z mVb", 8)
+            return O.some_unwrap("@.a1H'8(Az+?`*{k*.3:*kpn(GH5<7Zk(,g)Q+.]d9-?`*blefGJI'Xj8yX2o?fpnqof4.=LZ%74$l7kvq|.9:'-4G(?@'|R).a1H'8(iJ-+:4,M{QK1f/)zDP(3846St3l0^]n9d9+?h8wOPi92E<_o;9Ny'a:N*.'gL)?dYHAucF1i_vhaq*9H99vz4w1jmJt*I'k(3Qs?u}#U.*R7wha|iblV!&fKTd]s8!N[27Qk_OUJC'jjp%I65P?ML?Qf%of|Mx*o>yrIl;((gT<.6D:N`Z'g)Ze(syTytwlS-^qb?h,,<JU](Y7S;Tl0^]TtB1<7ZQnp[9qDQkt/Qf$:*oPTs!-4;NT pw2j@REJ`]-HU#V2;w7lt3BKV5fH0G4]cFNLE7`(9b9nV%l>Z mVb", 8)
         })
         lazy_old($, "p7", "hC", function () {
             return K.mu()
