@@ -1964,7 +1964,7 @@
             },
             je(a, b) {
                 var s = b.c
-                return s == null ? b.c = H.cr(a, "ac", [b.z]) : s
+                return s == null ? b.c = H.universe_lookup_interface_Rti(a, "ac", [b.z]) : s
             },
             jf(a) {
                 var s = a.y
@@ -2005,7 +2005,7 @@
                         q = b.Q
                         p = H.cy(a, q, a0, a1)
                         if (p === q) return b
-                        return H.cr(a, b.z, p)
+                        return H.universe_lookup_interface_Rti(a, b.z, p)
                     case 10:
                         o = b.z
                         n = H.az(a, o, a0, a1)
@@ -2465,7 +2465,7 @@
                     r = H.universe_lookup_terminal_Rti(a, 5, "#")
                     q = H.h3(s)
                     for (p = 0; p < s; ++p) q[p] = r
-                    o = H.cr(a, b, q)
+                    o = H.universe_lookup_interface_Rti(a, b, q)
                     n[b] = o
                     return o
                 } else return m
@@ -2589,7 +2589,7 @@
                         else r = !0
                     else r = !0
                     if (r || b === t.K) return b
-                    else if (s === 1) return H.cr(a, "ac", [b])
+                    else if (s === 1) return H.universe_lookup_interface_Rti(a, "ac", [b])
                     else if (b === t.P || b === t.T) return t.bc
                 }
                 q = new H.a1(null, null)
@@ -2625,7 +2625,7 @@
                 }
                 return s
             },
-            cr(a, b, c) {
+            universe_lookup_interface_Rti(a, b, c) {
                 var s, r, q, p = b
                 if (c.length > 0) p += "<" + H.e3(c) + ">"
                 s = a.eC.get(p)
@@ -2736,7 +2736,7 @@
                 }
             },
             parser_parse(parser) {
-                var s, r, q, p, o, head, m, l, k, optional_positinoal, named, h, source = parser.r,
+                var s, r, q, t3, array, head, m, l, k, optional_positinoal, named, h, source = parser.r,
                     t1 = parser.s
                 for (s = source.length, r = 0; r < s;) {
                     q = source.charCodeAt(r)
@@ -2774,20 +2774,20 @@
                                 parser.p = t1.length
                                 break
                             case 62:
-                                p = parser.u
-                                o = t1.splice(parser.p)
-                                H.parser_to_types(parser.u, parser.e, o)
+                                t3 = parser.u
+                                array = t1.splice(parser.p)
+                                H.parser_to_types(parser.u, parser.e, array)
                                 parser.p = t1.pop()
                                 head = t1.pop()
-                                if (typeof head == "string") t1.push(H.cr(p, head, o))
+                                if (typeof head == "string") t1.push(H.universe_lookup_interface_Rti(t3, head, array))
                                 else {
-                                    m = H.parser_to_type(p, parser.e, head)
+                                    m = H.parser_to_type(t3, parser.e, head)
                                     switch (m.y) {
                                         case 11:
-                                            t1.push(H.universe_lookup_generic_function_Rti(p, m, o, parser.n))
+                                            t1.push(H.universe_lookup_generic_function_Rti(t3, m, array, parser.n))
                                             break
                                         default:
-                                            t1.push(H.universe_lookup_binding_Rti(p, m, o))
+                                            t1.push(H.universe_lookup_binding_Rti(t3, m, array))
                                             break
                                     }
                                 }
@@ -2812,10 +2812,10 @@
                                 parser.p = t1.length
                                 break
                             case 41:
-                                p = parser.u
+                                t3 = parser.u
                                 k = new H.function_parameters()
-                                optional_positinoal = p.sEA
-                                named = p.sEA
+                                optional_positinoal = t3.sEA
+                                named = t3.sEA
                                 head = t1.pop()
                                 if (typeof head == "number") switch (head) {
                                     case -1:
@@ -2828,23 +2828,23 @@
                                         t1.push(head)
                                         break
                                 } else t1.push(head)
-                                o = t1.splice(parser.p)
-                                H.parser_to_types(parser.u, parser.e, o)
+                                array = t1.splice(parser.p)
+                                H.parser_to_types(parser.u, parser.e, array)
                                 parser.p = t1.pop()
-                                k.a = o
+                                k.a = array
                                 k.b = optional_positinoal
                                 k.c = named
-                                t1.push(H._Universe__lookupFunctionRti(p, H.parser_to_type(p, parser.e, t1.pop()), k))
+                                t1.push(H._Universe__lookupFunctionRti(t3, H.parser_to_type(t3, parser.e, t1.pop()), k))
                                 break
                             case 91:
                                 t1.push(parser.p)
                                 parser.p = t1.length
                                 break
                             case 93:
-                                o = t1.splice(parser.p)
-                                H.parser_to_types(parser.u, parser.e, o)
+                                array = t1.splice(parser.p)
+                                H.parser_to_types(parser.u, parser.e, array)
                                 parser.p = t1.pop()
-                                t1.push(o)
+                                t1.push(array)
                                 t1.push(-1)
                                 break
                             case 123:
@@ -2852,10 +2852,10 @@
                                 parser.p = t1.length
                                 break
                             case 125:
-                                o = t1.splice(parser.p)
-                                H.parser_to_types_named(parser.u, parser.e, o)
+                                array = t1.splice(parser.p)
+                                H.parser_to_types_named(parser.u, parser.e, array)
                                 parser.p = t1.pop()
-                                t1.push(o)
+                                t1.push(array)
                                 t1.push(-2)
                                 break
                             default:
@@ -2913,7 +2913,7 @@
                 throw H.b(P.eg("Unexpected extended operation " + H.d(s)))
             },
             parser_to_type(a, b, c) {
-                if (typeof c == "string") return H.cr(a, c, a.sEA)
+                if (typeof c == "string") return H.universe_lookup_interface_Rti(a, c, a.sEA)
                 else if (typeof c == "number") return H.parser_index_to_type(a, b, c)
                 else return c
             },
