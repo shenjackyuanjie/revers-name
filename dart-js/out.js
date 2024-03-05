@@ -3192,10 +3192,11 @@
         },
         V = {
             main: function () {
-                var t3, t4, tr, td, t5, plist, pbody, p, a, i, b,
-                    _s13_ = "Hello, World!",
-                    t1 = document,
-                    t2 = t1.querySelector("#an-id");
+                var t1, t2, t3, t4, tr, td, t5, plist, pbody, p, a, i, b,
+                    _s13_ = "Hello, World!";
+                P.print($.$get$Dt_s_win());
+                t1 = document;
+                t2 = t1.querySelector("#an-id");
                 t2.toString;
                 t3 = t1.querySelector(".a-class");
                 t3.toString;
@@ -4511,7 +4512,8 @@
         $._toStringVisiting = H.setRuntimeTypeInfo([], H.findType("JSArray<Object>"));
     })();
     (function lazyInitializers() {
-        var _lazyFinal = hunkHelpers.lazyFinal;
+        var _lazyFinal = hunkHelpers.lazyFinal,
+            _lazy = hunkHelpers.lazy;
         _lazyFinal($, "DART_CLOSURE_PROPERTY_NAME", "$get$DART_CLOSURE_PROPERTY_NAME", function () {
             return H.getIsolateAffinityTag("_$dart_dartClosure");
         });
@@ -4582,6 +4584,9 @@
         });
         _lazyFinal($, "_AsyncRun__scheduleImmediateClosure", "$get$_AsyncRun__scheduleImmediateClosure", function () {
             return P._AsyncRun__initializeScheduleImmediate();
+        });
+        _lazy($, "Dt_s_win", "$get$Dt_s_win", function () {
+            return '<div class="smile s_win"></div>';
         });
     })();
     (function nativeSupport() {
