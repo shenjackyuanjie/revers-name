@@ -1359,50 +1359,50 @@
                 throw H.b("Error in functionType of tearoff")
             },
             closure_csp_forward_call(a, b, c, d) {
-                var s = H.iM
+                var get_self = H.bound_closure_self_of
                 switch (b ? -1 : a) {
                     case 0:
                         return function (e, f) {
                             return function () {
                                 return f(this)[e]()
                             }
-                        }(c, s)
+                        }(c, get_self)
                     case 1:
                         return function (e, f) {
                             return function (g) {
                                 return f(this)[e](g)
                             }
-                        }(c, s)
+                        }(c, get_self)
                     case 2:
                         return function (e, f) {
                             return function (g, h) {
                                 return f(this)[e](g, h)
                             }
-                        }(c, s)
+                        }(c, get_self)
                     case 3:
                         return function (e, f) {
                             return function (g, h, i) {
                                 return f(this)[e](g, h, i)
                             }
-                        }(c, s)
+                        }(c, get_self)
                     case 4:
                         return function (e, f) {
                             return function (g, h, i, j) {
                                 return f(this)[e](g, h, i, j)
                             }
-                        }(c, s)
+                        }(c, get_self)
                     case 5:
                         return function (e, f) {
                             return function (g, h, i, j, k) {
                                 return f(this)[e](g, h, i, j, k)
                             }
-                        }(c, s)
+                        }(c, get_self)
                     default:
                         return function (e, f) {
                             return function () {
                                 return e.apply(f(this), arguments)
                             }
-                        }(d, s)
+                        }(d, get_self)
                 }
             },
             iP(a, b, c, d) {
@@ -1428,8 +1428,8 @@
                 return new Function(r + (p == null ? $.bC = H.em(n) : p) + "." + H.d(a) + "(" + o + ");}")()
             },
             l0(a, b, c, d) {
-                var s = H.iM,
-                    r = H.kW
+                var s = H.bound_closure_self_of,
+                    r = H.bound_closure_receiver_of
                 switch (b ? -1 : a) {
                     case 0:
                         throw H.b(new H.dp("Intercepted function with no arguments."))
@@ -1505,10 +1505,10 @@
             kV(a, b) {
                 return H.h0(v.typeUniverse, H.Z(a.a), b)
             },
-            iM(a) {
+            bound_closure_self_of(a) {
                 return a.a
             },
-            kW(a) {
+            bound_closure_receiver_of(a) {
                 return a.b
             },
             em(a) {
@@ -2462,7 +2462,7 @@
                 if (m == null) return H.h_(a, b, !1)
                 else if (typeof m == "number") {
                     s = m
-                    r = H.cs(a, 5, "#")
+                    r = H.universe_lookup_terminal_Rti(a, 5, "#")
                     q = H.h3(s)
                     for (p = 0; p < s; ++p) q[p] = r
                     o = H.cr(a, b, q)
@@ -2480,7 +2480,7 @@
                 var s, r = a.eC,
                     q = r.get(b)
                 if (q != null) return q
-                s = H.js(H.jq(a, null, b, c))
+                s = H.parser_parse(H.parser_create(a, null, b, c))
                 r.set(b, s)
                 return s
             },
@@ -2489,7 +2489,7 @@
                 if (q == null) q = b.ch = new Map()
                 s = q.get(c)
                 if (s != null) return s
-                r = H.js(H.jq(a, b, c, !0))
+                r = H.parser_parse(H.parser_create(a, b, c, !0))
                 q.set(c, r)
                 return r
             },
@@ -2508,7 +2508,7 @@
                 b.b = H.mC
                 return b
             },
-            cs(a, b, c) {
+            universe_lookup_terminal_Rti(a, b, c) {
                 var s, r, q = a.eC.get(c)
                 if (q != null) return q
                 s = new H.a1(null, null)
@@ -2598,7 +2598,7 @@
                 q.cy = c
                 return H.ax(a, q)
             },
-            mb(a, b) {
+            universe_lookup_generic_function_parameter_Rti(a, b) {
                 var s, r, q = "" + b + "^",
                     p = a.eC.get(q)
                 if (p != null) return p
@@ -2725,7 +2725,7 @@
                 l.cy = d
                 return H.ax(a, l)
             },
-            jq(a, b, c, d) {
+            parser_create(a, b, c, d) {
                 return {
                     u: a,
                     e: b,
@@ -2735,136 +2735,136 @@
                     n: d
                 }
             },
-            js(a) {
-                var s, r, q, p, o, n, m, l, k, j, i, h, g = a.r,
-                    f = a.s
-                for (s = g.length, r = 0; r < s;) {
-                    q = g.charCodeAt(r)
-                    if (q >= 48 && q <= 57) r = H.m0(r + 1, q, g, f)
-                    else if ((((q | 32) >>> 0) - 97 & 65535) < 26 || q === 95 || q === 36) r = H.jr(a, r, g, f, !1)
-                    else if (q === 46) r = H.jr(a, r, g, f, !0)
+            parser_parse(parser) {
+                var s, r, q, p, o, n, m, l, k, j, i, h, source = parser.r,
+                    t1 = parser.s
+                for (s = source.length, r = 0; r < s;) {
+                    q = source.charCodeAt(r)
+                    if (q >= 48 && q <= 57) r = H.m0(r + 1, q, source, t1)
+                    else if ((((q | 32) >>> 0) - 97 & 65535) < 26 || q === 95 || q === 36) r = H.universe_lookup_generic_function_parameter_Rti(parser, r, source, t1, !1)
+                    else if (q === 46) r = H.universe_lookup_generic_function_parameter_Rti(parser, r, source, t1, !0)
                     else {
                         ++r
                         switch (q) {
                             case 44:
                                 break
                             case 58:
-                                f.push(!1)
+                                t1.push(false)
                                 break
                             case 33:
-                                f.push(!0)
+                                t1.push(true)
                                 break
                             case 59:
-                                f.push(H.aw(a.u, a.e, f.pop()))
+                                t1.push(H.parser_to_type(parser.u, parser.e, t1.pop()))
                                 break
                             case 94:
-                                f.push(H.mb(a.u, f.pop()))
+                                t1.push(H.universe_lookup_generic_function_parameter_Rti(parser.u, t1.pop()))
                                 break
                             case 35:
-                                f.push(H.cs(a.u, 5, "#"))
+                                t1.push(H.universe_lookup_terminal_Rti(parser.u, 5, "#"))
                                 break
                             case 64:
-                                f.push(H.cs(a.u, 2, "@"))
+                                t1.push(H.universe_lookup_terminal_Rti(parser.u, 2, "@"))
                                 break
                             case 126:
-                                f.push(H.cs(a.u, 3, "~"))
+                                t1.push(H.universe_lookup_terminal_Rti(parser.u, 3, "~"))
                                 break
                             case 60:
-                                f.push(a.p)
-                                a.p = f.length
+                                t1.push(parser.p)
+                                parser.p = t1.length
                                 break
                             case 62:
-                                p = a.u
-                                o = f.splice(a.p)
-                                H.hT(a.u, a.e, o)
-                                a.p = f.pop()
-                                n = f.pop()
-                                if (typeof n == "string") f.push(H.cr(p, n, o))
+                                p = parser.u
+                                o = t1.splice(parser.p)
+                                H.hT(parser.u, parser.e, o)
+                                parser.p = t1.pop()
+                                n = t1.pop()
+                                if (typeof n == "string") t1.push(H.cr(p, n, o))
                                 else {
-                                    m = H.aw(p, a.e, n)
+                                    m = H.parser_to_type(p, parser.e, n)
                                     switch (m.y) {
                                         case 11:
-                                            f.push(H.hV(p, m, o, a.n))
+                                            t1.push(H.hV(p, m, o, parser.n))
                                             break
                                         default:
-                                            f.push(H.hU(p, m, o))
+                                            t1.push(H.hU(p, m, o))
                                             break
                                     }
                                 }
                                 break
                             case 38:
-                                H.m1(a, f)
+                                H.m1(parser, t1)
                                 break
                             case 42:
-                                l = a.u
-                                f.push(H.jw(l, H.aw(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                t1.push(H.jw(l, H.parser_to_type(l, parser.e, t1.pop()), parser.n))
                                 break
                             case 63:
-                                l = a.u
-                                f.push(H.hW(l, H.aw(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                t1.push(H.hW(l, H.parser_to_type(l, parser.e, t1.pop()), parser.n))
                                 break
                             case 47:
-                                l = a.u
-                                f.push(H.jv(l, H.aw(l, a.e, f.pop()), a.n))
+                                l = parser.u
+                                t1.push(H.jv(l, H.parser_to_type(l, parser.e, t1.pop()), parser.n))
                                 break
                             case 40:
-                                f.push(a.p)
-                                a.p = f.length
+                                t1.push(parser.p)
+                                parser.p = t1.length
                                 break
                             case 41:
-                                p = a.u
+                                p = parser.u
                                 k = new H.dP()
                                 j = p.sEA
                                 i = p.sEA
-                                n = f.pop()
+                                n = t1.pop()
                                 if (typeof n == "number") switch (n) {
                                     case -1:
-                                        j = f.pop()
+                                        j = t1.pop()
                                         break
                                     case -2:
-                                        i = f.pop()
+                                        i = t1.pop()
                                         break
                                     default:
-                                        f.push(n)
+                                        t1.push(n)
                                         break
-                                } else f.push(n)
-                                o = f.splice(a.p)
-                                H.hT(a.u, a.e, o)
-                                a.p = f.pop()
+                                } else t1.push(n)
+                                o = t1.splice(parser.p)
+                                H.hT(parser.u, parser.e, o)
+                                parser.p = t1.pop()
                                 k.a = o
                                 k.b = j
                                 k.c = i
-                                f.push(H.ju(p, H.aw(p, a.e, f.pop()), k))
+                                t1.push(H.ju(p, H.parser_to_type(p, parser.e, t1.pop()), k))
                                 break
                             case 91:
-                                f.push(a.p)
-                                a.p = f.length
+                                t1.push(parser.p)
+                                parser.p = t1.length
                                 break
                             case 93:
-                                o = f.splice(a.p)
-                                H.hT(a.u, a.e, o)
-                                a.p = f.pop()
-                                f.push(o)
-                                f.push(-1)
+                                o = t1.splice(parser.p)
+                                H.hT(parser.u, parser.e, o)
+                                parser.p = t1.pop()
+                                t1.push(o)
+                                t1.push(-1)
                                 break
                             case 123:
-                                f.push(a.p)
-                                a.p = f.length
+                                t1.push(parser.p)
+                                parser.p = t1.length
                                 break
                             case 125:
-                                o = f.splice(a.p)
-                                H.m3(a.u, a.e, o)
-                                a.p = f.pop()
-                                f.push(o)
-                                f.push(-2)
+                                o = t1.splice(parser.p)
+                                H.m3(parser.u, parser.e, o)
+                                parser.p = t1.pop()
+                                t1.push(o)
+                                t1.push(-2)
                                 break
                             default:
                                 throw "Bad character " + q
                         }
                     }
                 }
-                h = f.pop()
-                return H.aw(a.u, a.e, h)
+                h = t1.pop()
+                return H.parser_to_type(parser.u, parser.e, h)
             },
             m0(a, b, c, d) {
                 var s, r, q = b - 48
@@ -2876,7 +2876,7 @@
                 d.push(q)
                 return a
             },
-            jr(a, b, c, d, e) {
+            universe_lookup_generic_function_parameter_Rti(a, b, c, d, e) {
                 var s, r, q, p, o, n, m = b + 1
                 for (s = c.length; m < s; ++m) {
                     r = c.charCodeAt(m)
@@ -2903,27 +2903,27 @@
             m1(a, b) {
                 var s = b.pop()
                 if (0 === s) {
-                    b.push(H.cs(a.u, 1, "0&"))
+                    b.push(H.universe_lookup_terminal_Rti(a.u, 1, "0&"))
                     return
                 }
                 if (1 === s) {
-                    b.push(H.cs(a.u, 4, "1&"))
+                    b.push(H.universe_lookup_terminal_Rti(a.u, 4, "1&"))
                     return
                 }
                 throw H.b(P.eg("Unexpected extended operation " + H.d(s)))
             },
-            aw(a, b, c) {
+            parser_to_type(a, b, c) {
                 if (typeof c == "string") return H.cr(a, c, a.sEA)
                 else if (typeof c == "number") return H.m2(a, b, c)
                 else return c
             },
             hT(a, b, c) {
                 var s, r = c.length
-                for (s = 0; s < r; ++s) c[s] = H.aw(a, b, c[s])
+                for (s = 0; s < r; ++s) c[s] = H.parser_to_type(a, b, c[s])
             },
             m3(a, b, c) {
                 var s, r = c.length
-                for (s = 2; s < r; s += 3) c[s] = H.aw(a, b, c[s])
+                for (s = 2; s < r; s += 3) c[s] = H.parser_to_type(a, b, c[s])
             },
             m2(a, b, c) {
                 var s, r, q = b.y
