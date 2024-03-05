@@ -1264,7 +1264,7 @@
                     return H.save_stack_trace(a, new H.dB(typeof s == "string" ? s : ""))
                 }
                 if (a instanceof RangeError) {
-                    if (typeof s == "string" && s.indexOf("call stack") !== -1) return new P.c5()
+                    if (typeof s == "string" && s.indexOf("call stack") !== -1) return new P.StackOverflowError()
                     s = function (b) {
                         try {
                             return String(b)
@@ -1274,7 +1274,7 @@
                     return H.save_stack_trace(a, new P.a_(!1, e, e, typeof s == "string" ? s.replace(/^RangeError:\s*/, "") : s))
                 }
                 if (typeof InternalError == "function" && a instanceof InternalError)
-                    if (typeof s == "string" && s === "too much recursion") return new P.c5()
+                    if (typeof s == "string" && s === "too much recursion") return new P.StackOverflowError()
                 return a
             },
             am(a) {
@@ -4949,7 +4949,7 @@
                 return new P.dD(a)
             },
             dA(a) {
-                return new P.dz(a)
+                return new P.UnimplementedError(a)
             },
             S(a) {
                 return new P.set_error_test(a)
@@ -5070,7 +5070,7 @@
             dD: function dD(a) {
                 this.a = a
             },
-            dz: function dz(a) {
+            UnimplementedError: function dz(a) {
                 this.a = a
             },
             set_error_test: function bg(a) {
@@ -5079,8 +5079,8 @@
             cL: function cL(a) {
                 this.a = a
             },
-            df: function df() { },
-            c5: function c5() { },
+            OutOfMemoryError: function df() { },
+            StackOverflowError: function c5() { },
             cN: function cN(a) {
                 this.a = a
             },
@@ -8356,30 +8356,30 @@
         }
     }
     P.dD.prototype = {
-        j(a) {
+        to_string(a) {
             return "Unsupported operation: " + this.a
         }
     }
-    P.dz.prototype = {
-        j(a) {
+    P.UnimplementedError.prototype = {
+        to_string(a) {
             var s = this.a
             return s != null ? "UnimplementedError: " + s : "UnimplementedError"
         }
     }
     P.set_error_test.prototype = {
-        j(a) {
+        to_string(a) {
             return "Bad state: " + this.a
         }
     }
     P.cL.prototype = {
-        j(a) {
+        to_string(a) {
             var s = this.a
             if (s == null) return "Concurrent modification during iteration."
             return "Concurrent modification during iteration: " + P.b4(s) + "."
         }
     }
-    P.df.prototype = {
-        j(a) {
+    P.OutOfMemoryError.prototype = {
+        to_string(a) {
             return "Out of Memory"
         },
         gam() {
@@ -8387,8 +8387,8 @@
         },
         $in: 1
     }
-    P.c5.prototype = {
-        j(a) {
+    P.StackOverflowError.prototype = {
+        to_string(a) {
             return "Stack Overflow"
         },
         gam() {
@@ -8397,18 +8397,18 @@
         $in: 1
     }
     P.cN.prototype = {
-        j(a) {
+        to_string(a) {
             var s = this.a
             return s == null ? "Reading static variable during its initialization" : "Reading static variable '" + s + "' during its initialization"
         }
     }
     P.fw.prototype = {
-        j(a) {
+        to_string(a) {
             return "Exception: " + this.a
         }
     }
     P.ey.prototype = {
-        j(a) {
+        to_string(a) {
             var s, r, q, p, o, n, m, l, k, j, i, h, g = this.a,
                 f = "" !== g ? "FormatException: " + g : "FormatException",
                 e = this.c,
@@ -8499,7 +8499,7 @@
             }
             throw H.b(P.bN(b, this, "index", null, r))
         },
-        j(a) {
+        to_string(a) {
             return P.lf(this, "(", ")")
         }
     }
@@ -8508,7 +8508,7 @@
         gF(a) {
             return P.Object.prototype.gF.call(this, this)
         },
-        j(a) {
+        to_string(a) {
             return "null"
         }
     }
@@ -8520,18 +8520,18 @@
         gF(a) {
             return H.di(this)
         },
-        j(a) {
+        to_string(a) {
             return "Instance of '" + H.d(H.f_(this)) + "'"
         },
         aq(a, b) {
             throw H.b(P.j5(this, b.gbw(), b.gbE(), b.gby()))
         },
         toString() {
-            return this.j(this)
+            return this.to_string(this)
         }
     }
     P.dZ.prototype = {
-        j(a) {
+        to_string(a) {
             return ""
         },
         $iaP: 1
@@ -8540,7 +8540,7 @@
         gh(a) {
             return this.a.length
         },
-        j(a) {
+        to_string(a) {
             var s = this.a
             return s.charCodeAt(0) == 0 ? s : s
         }
@@ -8564,12 +8564,12 @@
         $ie: 1
     }
     W.cA.prototype = {
-        j(a) {
+        to_string(a) {
             return String(a)
         }
     }
     W.cB.prototype = {
-        j(a) {
+        to_string(a) {
             return String(a)
         }
     }
@@ -8628,7 +8628,7 @@
         $iaH: 1
     }
     W.er.prototype = {
-        j(a) {
+        to_string(a) {
             return String(a)
         }
     }
@@ -8641,7 +8641,7 @@
         gcB(a) {
             return new W.bq(a)
         },
-        j(a) {
+        to_string(a) {
             return a.localName
         },
         U(a, b, c, d) {
@@ -8767,7 +8767,7 @@
             if ("origin" in a) return a.origin
             return H.d(a.protocol) + "//" + H.d(a.host)
         },
-        j(a) {
+        to_string(a) {
             return String(a)
         }
     }
@@ -10764,12 +10764,12 @@
             r = hunkHelpers.inherit,
             q = hunkHelpers.inheritMany
         r(P.Object, null)
-        q(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.n, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.cp, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.a1, H.dP, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.b3, P.df, P.c5, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
+        q(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.n, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.cp, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.a1, H.dP, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.b3, P.OutOfMemoryError, P.StackOverflowError, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
         q(J.Interceptor, [J.cW, J.bQ, J.as, J.p, J.aJ, J.ar, H.bX, H.A, W.cQ, W.aE, W.eo, W.dM, W.er, W.es, W.c, W.bL, W.d4, W.dT, W.dW, W.e6, P.bR])
         q(J.as, [J.dh, J.av, J.ad])
         r(J.eE, J.p)
         q(J.aJ, [J.bP, J.cX])
-        q(P.n, [H.d0, H.dn, H.c1, P.a6, H.d_, H.dB, H.dp, H.dN, P.cD, P.de, P.a_, P.dc, P.dD, P.dz, P.set_error_test, P.cL, P.cN])
+        q(P.n, [H.d0, H.dn, H.c1, P.a6, H.d_, H.dB, H.dp, H.dN, P.cD, P.de, P.a_, P.dc, P.dD, P.UnimplementedError, P.set_error_test, P.cL, P.cN])
         r(P.bT, P.cg)
         q(P.bT, [H.bm, W.M])
         r(H.ap, H.bm)
@@ -11125,7 +11125,7 @@
             return hooks;
         }
         C.M = new P.eG()
-        C.N = new P.df()
+        C.N = new P.OutOfMemoryError()
         C.f = new P.ff()
         C.O = new P.fj()
         C.t = new P.fJ()
