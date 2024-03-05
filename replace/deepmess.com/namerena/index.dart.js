@@ -2554,7 +2554,7 @@
                     s = b.y
                     if (!H.an(b))
                         if (!(b === t.P || b === t.T))
-                            if (s !== 7) r = s === 8 && H.hr(b.z)
+                            if (s !== 7) r = s === 8 && H.is_nullable(b.z)
                             else r = !0
                         else r = !0
                     else r = !0
@@ -2562,7 +2562,7 @@
                     else if (s === 1 || b === t.A) return t.P
                     else if (s === 6) {
                         q = b.z
-                        if (q.y === 8 && H.hr(q.z)) return q
+                        if (q.y === 8 && H.is_nullable(q.z)) return q
                         else return H.lG(a, b)
                     }
                 }
@@ -2941,7 +2941,7 @@
                 if (c <= s.length) return s[c - 1]
                 throw H.b(P.eg("Bad index " + c + " for " + b.j(0)))
             },
-            is_sub_type(a, b, c, d, e) {
+            is_sub_type(a, b, s_env, d, t_env) {
                 var s, r, q, p, o, n, m, l, k, j
                 if (b === d) return !0
                 if (!H.an(d))
@@ -2957,27 +2957,27 @@
                 if (s) return !0
                 q = r === 13
                 if (q)
-                    if (H.is_sub_type(a, c[b.z], c, d, e)) return !0
+                    if (H.is_sub_type(a, s_env[b.z], s_env, d, t_env)) return !0
                 p = d.y
-                if (r === 6) return H.is_sub_type(a, b.z, c, d, e)
+                if (r === 6) return H.is_sub_type(a, b.z, s_env, d, t_env)
                 if (p === 6) {
                     s = d.z
-                    return H.is_sub_type(a, b, c, s, e)
+                    return H.is_sub_type(a, b, s_env, s, t_env)
                 }
                 if (r === 8) {
-                    if (!H.is_sub_type(a, b.z, c, d, e)) return !1
-                    return H.is_sub_type(a, H.je(a, b), c, d, e)
+                    if (!H.is_sub_type(a, b.z, s_env, d, t_env)) return !1
+                    return H.is_sub_type(a, H.je(a, b), s_env, d, t_env)
                 }
                 if (r === 7) {
-                    s = H.is_sub_type(a, b.z, c, d, e)
+                    s = H.is_sub_type(a, b.z, s_env, d, t_env)
                     return s
                 }
                 if (p === 8) {
-                    if (H.is_sub_type(a, b, c, d.z, e)) return !0
-                    return H.is_sub_type(a, b, c, H.je(a, d), e)
+                    if (H.is_sub_type(a, b, s_env, d.z, t_env)) return !0
+                    return H.is_sub_type(a, b, s_env, H.je(a, d), t_env)
                 }
                 if (p === 7) {
-                    s = H.is_sub_type(a, b, c, d.z, e)
+                    s = H.is_sub_type(a, b, s_env, d.z, t_env)
                     return s
                 }
                 if (q) return !1
@@ -2990,27 +2990,27 @@
                     n = d.Q
                     m = o.length
                     if (m !== n.length) return !1
-                    c = c == null ? o : o.concat(c)
-                    e = e == null ? n : n.concat(e)
+                    s_env = s_env == null ? o : o.concat(s_env)
+                    t_env = t_env == null ? n : n.concat(t_env)
                     for (l = 0; l < m; ++l) {
                         k = o[l]
                         j = n[l]
-                        if (!H.is_sub_type(a, k, c, j, e) || !H.is_sub_type(a, j, e, k, c)) return !1
+                        if (!H.is_sub_type(a, k, s_env, j, t_env) || !H.is_sub_type(a, j, t_env, k, s_env)) return !1
                     }
-                    return H.jE(a, b.z, c, d.z, e)
+                    return H.is_function_sub_type(a, b.z, s_env, d.z, t_env)
                 }
                 if (p === 11) {
                     if (b === t.g) return !0
                     if (s) return !1
-                    return H.jE(a, b, c, d, e)
+                    return H.is_function_sub_type(a, b, s_env, d, t_env)
                 }
                 if (r === 9) {
                     if (p !== 9) return !1
-                    return H.mE(a, b, c, d, e)
+                    return H.is_interface_sub_type(a, b, s_env, d, t_env)
                 }
                 return !1
             },
-            jE(a2, a3, a4, a5, a6) {
+            is_function_sub_type(a2, a3, a4, a5, a6) {
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1
                 if (!H.is_sub_type(a2, a3.z, a4, a5.z, a6)) return !1
                 s = a3.Q
@@ -3057,7 +3057,7 @@
                 }
                 return !0
             },
-            mE(a, b, c, d, e) {
+            is_interface_sub_type(a, b, c, d, e) {
                 var s, r, q, p, o, n, m, l = b.z,
                     k = d.z
                 for (; l !== k;) {
@@ -3072,31 +3072,31 @@
                     q = r.length
                     p = q > 0 ? new Array(q) : v.typeUniverse.sEA
                     for (o = 0; o < q; ++o) p[o] = H.h0(a, b, r[o])
-                    return H.jy(a, p, null, c, d.Q, e)
+                    return H._inner_is_interface_sub_type(a, p, null, d.Q, e)
                 }
                 n = b.Q
                 m = d.Q
-                return H.jy(a, n, null, c, m, e)
+                return H._inner_is_interface_sub_type(a, n, null, m, e)
             },
-            jy(a, b, c, d, e, f) {
+            _inner_is_interface_sub_type(a, b, d, e, f) {
                 var s, r, q, p = b.length
                 for (s = 0; s < p; ++s) {
                     r = b[s]
                     q = e[s]
                     if (!H.is_sub_type(a, r, d, q, f)) return !1
                 }
-                return !0
+                return true
             },
-            hr(a) {
+            is_nullable(a) {
                 var s, r = a.y
                 if (!(a === t.P || a === t.T))
                     if (!H.an(a))
                         if (r !== 7)
-                            if (!(r === 6 && H.hr(a.z))) s = r === 8 && H.hr(a.z)
-                            else s = !0
-                        else s = !0
-                    else s = !0
-                else s = !0
+                            if (!(r === 6 && H.is_nullable(a.z))) s = r === 8 && H.is_nullable(a.z)
+                            else s = true
+                        else s = true
+                    else s = true
+                else s = true
                 return s
             },
             nk(a) {
