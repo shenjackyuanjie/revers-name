@@ -2153,7 +2153,7 @@
                 var s, r, q, p = this,
                     o = t.K
                 if (p === o) return H.bv(p, a, H.is_object)
-                if (!H.an(p))
+                if (!H.is_strong_top_type(p))
                     if (!(p === t._)) o = p === o
                     else o = !0
                 else o = !0
@@ -2167,7 +2167,7 @@
                 if (r != null) return H.bv(p, a, r)
                 if (s.y === 9) {
                     q = s.z
-                    if (s.Q.every(H.nk)) {
+                    if (s.Q.every(H.is_top_type)) {
                         p.r = "$i" + q
                         if (q === "i") return H.bv(p, a, H.mF)
                         return H.bv(p, a, H.mJ)
@@ -2181,7 +2181,7 @@
             },
             mB(a) {
                 var s, r, q = this
-                if (!H.an(q))
+                if (!H.is_strong_top_type(q))
                     if (!(q === t._)) s = q === t.K
                     else s = !0
                 else s = !0
@@ -2193,7 +2193,7 @@
             },
             hb(a) {
                 var s, r = a.y
-                if (!H.an(a))
+                if (!H.is_strong_top_type(a))
                     if (!(a === t._))
                         if (!(a === t.A))
                             if (r !== 7) s = r === 8 && H.hb(a.z) || a === t.P || a === t.T
@@ -2471,10 +2471,10 @@
                 } else return m
             },
             md(a, b) {
-                return H.jx(a.tR, b)
+                return H.utils_object_assign(a.tR, b)
             },
             mc(a, b) {
-                return H.jx(a.eT, b)
+                return H.utils_object_assign(a.eT, b)
             },
             h_(a, b, c) {
                 var s, r = a.eC,
@@ -2511,7 +2511,7 @@
             universe_lookup_terminal_Rti(a, b, c) {
                 var s, r, q = a.eC.get(c)
                 if (q != null) return q
-                s = new H.a1(null, null)
+                s = new H.Rti(null, null)
                 s.y = b
                 s.cy = c
                 r = H.ax(a, s)
@@ -2530,11 +2530,11 @@
                 var s, r, q
                 if (d) {
                     s = b.y
-                    if (!H.an(b)) r = b === t.P || b === t.T || s === 7 || s === 6
+                    if (!H.is_strong_top_type(b)) r = b === t.P || b === t.T || s === 7 || s === 6
                     else r = !0
                     if (r) return b
                 }
-                q = new H.a1(null, null)
+                q = new H.Rti(null, null)
                 q.y = 6
                 q.z = b
                 q.cy = c
@@ -2552,7 +2552,7 @@
                 var s, r, q, p
                 if (d) {
                     s = b.y
-                    if (!H.an(b))
+                    if (!H.is_strong_top_type(b))
                         if (!(b === t.P || b === t.T))
                             if (s !== 7) r = s === 8 && H.is_nullable(b.z)
                             else r = !0
@@ -2566,7 +2566,7 @@
                         else return H.lG(a, b)
                     }
                 }
-                p = new H.a1(null, null)
+                p = new H.Rti(null, null)
                 p.y = 7
                 p.z = b
                 p.cy = c
@@ -2584,7 +2584,7 @@
                 var s, r, q
                 if (d) {
                     s = b.y
-                    if (!H.an(b))
+                    if (!H.is_strong_top_type(b))
                         if (!(b === t._)) r = b === t.K
                         else r = !0
                     else r = !0
@@ -2592,7 +2592,7 @@
                     else if (s === 1) return H.universe_lookup_interface_Rti(a, "ac", [b])
                     else if (b === t.P || b === t.T) return t.bc
                 }
-                q = new H.a1(null, null)
+                q = new H.Rti(null, null)
                 q.y = 8
                 q.z = b
                 q.cy = c
@@ -2602,7 +2602,7 @@
                 var s, r, q = "" + b + "^",
                     p = a.eC.get(q)
                 if (p != null) return p
-                s = new H.a1(null, null)
+                s = new H.Rti(null, null)
                 s.y = 13
                 s.z = b
                 s.cy = q
@@ -2630,7 +2630,7 @@
                 if (c.length > 0) p += "<" + H.e3(c) + ">"
                 s = a.eC.get(p)
                 if (s != null) return s
-                r = new H.a1(null, null)
+                r = new H.Rti(null, null)
                 r.y = 9
                 r.z = b
                 r.Q = c
@@ -2652,7 +2652,7 @@
                 q = s.cy + (";<" + H.e3(r) + ">")
                 p = a.eC.get(q)
                 if (p != null) return p
-                o = new H.a1(null, null)
+                o = new H.Rti(null, null)
                 o.y = 10
                 o.z = s
                 o.Q = r
@@ -2683,7 +2683,7 @@
                 q = n + (g + ")")
                 p = a.eC.get(q)
                 if (p != null) return p
-                o = new H.a1(null, null)
+                o = new H.Rti(null, null)
                 o.y = 11
                 o.z = b
                 o.Q = c
@@ -2718,7 +2718,7 @@
                         return H.universe_lookup_generic_function_Rti(a, n, m, c !== m)
                     }
                 }
-                l = new H.a1(null, null)
+                l = new H.Rti(null, null)
                 l.y = 12
                 l.z = b
                 l.Q = c
@@ -2944,14 +2944,14 @@
             is_sub_type(a, b, s_env, d, t_env) {
                 var s, r, q, p, o, n, m, l, k, j
                 if (b === d) return !0
-                if (!H.an(d))
+                if (!H.is_strong_top_type(d))
                     if (!(d === t._)) s = d === t.K
                     else s = !0
                 else s = !0
                 if (s) return !0
                 r = b.y
                 if (r === 4) return !0
-                if (H.an(b)) return !1
+                if (H.is_strong_top_type(b)) return !1
                 if (b.y !== 1) s = b === t.P || b === t.T
                 else s = !0
                 if (s) return !0
@@ -3090,7 +3090,7 @@
             is_nullable(a) {
                 var s, r = a.y
                 if (!(a === t.P || a === t.T))
-                    if (!H.an(a))
+                    if (!H.is_strong_top_type(a))
                         if (r !== 7)
                             if (!(r === 6 && H.is_nullable(a.z))) s = r === 8 && H.is_nullable(a.z)
                             else s = true
@@ -3099,30 +3099,30 @@
                 else s = true
                 return s
             },
-            nk(a) {
+            is_top_type(a) {
                 var s
-                if (!H.an(a))
+                if (!H.is_strong_top_type(a))
                     if (!(a === t._)) s = a === t.K
                     else s = !0
                 else s = !0
                 return s
             },
-            an(a) {
-                var s = a.y
-                return s === 2 || s === 3 || s === 4 || s === 5 || a === t.O
+            is_strong_top_type(a) {
+                var kind = a.y
+                return kind === 2 || kind === 3 || kind === 4 || kind === 5 || a === t.O
             },
-            jx(a, b) {
-                var s, r, q = Object.keys(b),
+            utils_object_assign(o, other) {
+                var s, r, q = Object.keys(other),
                     p = q.length
                 for (s = 0; s < p; ++s) {
                     r = q[s]
-                    a[r] = b[r]
+                    o[r] = other[r]
                 }
             },
             h3(a) {
                 return a > 0 ? new Array(a) : v.typeUniverse.sEA
             },
-            a1: function a1(a, b) {
+            Rti: function Rti(a, b) {
                 var _ = this
                 _.a = a
                 _.b = b
@@ -6941,7 +6941,7 @@
     H.ck.prototype = {}
     H.cl.prototype = {}
     H.cm.prototype = {}
-    H.a1.prototype = {
+    H.Rti.prototype = {
         k(a) {
             return H.h0(v.typeUniverse, this, a)
         },
@@ -10727,7 +10727,7 @@
             _inherit = hunkHelpers.inherit,
             _inherit_many = hunkHelpers.inheritMany
         _inherit(P.Object, null)
-        _inherit_many(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.StackTrace, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.a1, H.function_parameters, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.b3, P.OutOfMemoryError, P.StackOverflowError, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
+        _inherit_many(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.StackTrace, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.Rti, H.function_parameters, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.b3, P.OutOfMemoryError, P.StackOverflowError, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
         _inherit_many(J.Interceptor, [J.cW, J.bQ, J.as, J.p, J.aJ, J.ar, H.bX, H.A, W.cQ, W.aE, W.eo, W.dM, W.er, W.es, W.c, W.bL, W.d4, W.dT, W.dW, W.e6, P.bR])
         _inherit_many(J.as, [J.dh, J.av, J.ad])
         _inherit(J.eE, J.p)
