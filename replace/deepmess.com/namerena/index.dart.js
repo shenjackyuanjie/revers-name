@@ -707,7 +707,7 @@
                     r = (self.URL || self.webkitURL).createObjectURL(W.iK([$.i8.d], "text/css"))
                     q = (self.URL || self.webkitURL).createObjectURL(W.iK([J.iH($.ib.d, "md5.css", r)], "text/html"))
                     $.iy().src = q
-                    if ($.hs != null) P.jh(P.iS(1), G.ns())
+                    if ($.hs != null) P.Timer_Timer(P.iS(1), G.ns())
                     p = document.querySelector(".loaderbg").style
                     p.toString
                     C.d.T(p, C.d.N(p, "opacity"), "0", "")
@@ -3876,9 +3876,9 @@
                 self.setImmediate(H.aU(new P.fp(a), 0))
             },
             lU(a) {
-                P.Timer_create_time(C.Duration_0, a)
+                P.Timer_create_Timer(C.Duration_0, a)
             },
-            Timer_create_time(duration, callback) {
+            Timer_create_Timer(duration, callback) {
                 var mill_sec = C.a.A(duration.a, 1000)
                 return P.Timer_impl(mill_sec < 0 ? 0 : mill_sec, callback)
             },
@@ -3970,7 +3970,7 @@
                     if (b == null) {
                         if (o && (q & 1) === 0) {
                             e = e.c
-                            P.hc(e.a, e.b)
+                            P.root_handle_uncaught_error(e.a, e.b)
                         }
                         return
                     }
@@ -3997,7 +3997,7 @@
                             q = !(q || q)
                         } else q = !1
                         if (q) {
-                            P.hc(l.a, l.b)
+                            P.root_handle_uncaught_error(l.a, l.b)
                             return
                         }
                         i = $.q
@@ -4112,15 +4112,15 @@
                 H.hi(a, "stream", t.K)
                 return new P.dX()
             },
-            jh(a, b) {
-                var s = $.q
-                if (s === C.e) return P.Timer_create_time(a, b)
-                return P.Timer_create_time(a, s.aL(b))
+            Timer_Timer(duration, callback) {
+                var t1 = $.q
+                if (t1 === C.e) return P.Timer_create_Timer(duration, callback)
+                return P.Timer_create_Timer(duration, t1.aL(callback))
             },
-            hc(a, b) {
+            root_handle_uncaught_error(a, b) {
                 P.mV(new P.hd(a, b))
             },
-            jF(a, b, c, d) {
+            root_run(a, b, c, d) {
                 var s, r = $.q
                 if (r === c) return d.$0()
                 $.q = c
@@ -4132,7 +4132,7 @@
                     $.q = s
                 }
             },
-            jG(a, b, c, d, e) {
+            root_run_unary(a, b, c, d, e) {
                 var s, r = $.q
                 if (r === c) return d.$1(e)
                 $.q = c
@@ -7405,11 +7405,11 @@
                     a.$0()
                     return
                 }
-                P.jF(null, null, this, a)
+                P.root_run(null, null, this, a)
             } catch (q) {
                 s = H.unwrap_Exception(q)
                 r = H.get_trace_from_exception(q)
-                P.hc(s, r)
+                P.root_handle_uncaught_error(s, r)
             }
         },
         dz(a, b) {
@@ -7419,11 +7419,11 @@
                     a.$1(b)
                     return
                 }
-                P.jG(null, null, this, a, b)
+                P.root_run_unary(null, null, this, a, b)
             } catch (q) {
                 s = H.unwrap_Exception(q)
                 r = H.get_trace_from_exception(q)
-                P.hc(s, r)
+                P.root_handle_uncaught_error(s, r)
             }
         },
         dA(a, b) {
@@ -7437,14 +7437,14 @@
         },
         ds(a) {
             if ($.q === C.e) return a.$0()
-            return P.jF(null, null, this, a)
+            return P.root_run(null, null, this, a)
         },
         bI(a) {
             return this.ds(a, t.z)
         },
         dw(a, b) {
             if ($.q === C.e) return a.$1(b)
-            return P.jG(null, null, this, a, b)
+            return P.root_run_unary(null, null, this, a, b)
         },
         aV(a, b) {
             return this.dw(a, b, t.z, t.z)
@@ -10021,7 +10021,7 @@
                 o = t.W.a(q.i(0, p))
             r.b = o
             s = o.i(0, "responseText")
-            if (J.a3(r.b.i(0, "readyState"), 4) && typeof s == "string" && s !== "") P.jh(P.iS(0), new G.eF(r, s))
+            if (J.a3(r.b.i(0, "readyState"), 4) && typeof s == "string" && s !== "") P.Timer_Timer(P.iS(0), new G.eF(r, s))
             else r.b.aj("addEventListener", ["load", r.gdc(r)])
             q.m(0, p, null)
         },
