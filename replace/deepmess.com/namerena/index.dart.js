@@ -3876,15 +3876,15 @@
                 self.setImmediate(H.aU(new P.fp(a), 0))
             },
             lU(a) {
-                P.hQ(C.Q, a)
+                P.Timer_create_time(C.Duration_0, a)
             },
-            hQ(a, b) {
-                var s = C.a.A(a.a, 1000)
-                return P.m4(s < 0 ? 0 : s, b)
+            Timer_create_time(duration, callback) {
+                var mill_sec = C.a.A(duration.a, 1000)
+                return P.Timer_impl(mill_sec < 0 ? 0 : mill_sec, callback)
             },
-            m4(a, b) {
+            Timer_impl(mill_sec, callback) {
                 var s = new P.fY()
-                s.c1(a, b)
+                s.c1(mill_sec, callback)
                 return s
             },
             mO(a) {
@@ -4114,8 +4114,8 @@
             },
             jh(a, b) {
                 var s = $.q
-                if (s === C.e) return P.hQ(a, b)
-                return P.hQ(a, s.aL(b))
+                if (s === C.e) return P.Timer_create_time(a, b)
+                return P.Timer_create_time(a, s.aL(b))
             },
             hc(a, b) {
                 P.mV(new P.hd(a, b))
@@ -4859,7 +4859,7 @@
                 return "0" + a
             },
             iS(a) {
-                return new P.b3(1e6 * a)
+                return new P.Duration(1e6 * a)
             },
             b4(a) {
                 if (typeof a == "number" || H.is_bool(a) || a == null) return J.to_string(a)
@@ -4985,7 +4985,7 @@
                 this.a = a
                 this.b = b
             },
-            b3: function b3(a) {
+            Duration: function b3(a) {
                 this.a = a
             },
             et: function et() { },
@@ -8192,10 +8192,10 @@
             else return r + "-" + q + "-" + p + " " + o + ":" + n + ":" + m + "." + l
         }
     }
-    P.b3.prototype = {
+    P.Duration.prototype = {
         a_(a, b) {
             if (b == null) return !1
-            return b instanceof P.b3 && this.a === b.a
+            return b instanceof P.Duration && this.a === b.a
         },
         gF(a) {
             return C.a.gF(this.a)
@@ -8203,7 +8203,7 @@
         j(a) {
             var s, r, q, p = new P.eu(),
                 o = this.a
-            if (o < 0) return "-" + new P.b3(0 - o).j(0)
+            if (o < 0) return "-" + new P.Duration(0 - o).j(0)
             s = p.$1(C.a.A(o, 6e7) % 60)
             r = p.$1(C.a.A(o, 1e6) % 60)
             q = new P.et().$1(o % 1e6)
@@ -10723,7 +10723,7 @@
             _inherit = hunkHelpers.inherit,
             _inherit_many = hunkHelpers.inheritMany
         _inherit(P.Object, null)
-        _inherit_many(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.StackTrace, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.Rti, H.function_parameters, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.b3, P.OutOfMemoryError, P.StackOverflowError, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
+        _inherit_many(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.cg, H.aG, P.r, H.a5, P.cV, H.bJ, H.dC, H.bi, P.bV, H.bD, H.eD, H.fc, H.eY, H.bI, H.StackTrace, H.fM, P.bb, H.eI, H.d1, H.b8, H.ch, H.dH, H.dv, H.fT, H.Rti, H.function_parameters, H.e2, P.fY, P.dI, P.cE, P.dL, P.bs, P.v, P.dJ, P.c6, P.dt, P.du, P.dX, P.h5, P.cu, P.fL, P.dS, P.k, P.e4, P.c4, P.cK, P.fr, P.fq, P.h2, P.h1, P.b2, P.Duration, P.OutOfMemoryError, P.StackOverflowError, P.fw, P.ey, P.u, P.dZ, P.bh, W.ep, W.hL, W.bt, W.bM, W.c0, W.co, W.e0, W.bK, W.fs, W.fQ, W.e5, P.fU, P.fk, P.W, P.eX, P.fJ, O.b6, O.eA, O.cS, O.ei, O.ej, O.en, O.el, O.fb, O.f5, Y.ag, N.cP, N.f0, S.dd, G.cY, G.d3, G.cH, Q.dV, V.dk, V.eC, D.f2, D.f1, Y.dm])
         _inherit_many(J.Interceptor, [J.JsBool, J.JsNull, J.as, J.JsArray, J.aJ, J.JsString, H.bX, H.A, W.cQ, W.aE, W.eo, W.dM, W.er, W.es, W.c, W.bL, W.d4, W.dT, W.dW, W.e6, P.bR])
         _inherit_many(J.as, [J.dh, J.av, J.JavaScriptFunction])
         _inherit(J.eE, J.JsArray)
@@ -11091,7 +11091,7 @@
         C.u = new H.fM()
         C.e = new P.fN()
         C.P = new P.dZ()
-        C.Q = new P.b3(0)
+        C.Duration_0 = new P.Duration(0)
         C.T = new P.eH(null)
         C.Y = H.a(make_const_list([1, 0, 3, 2]), t.i)
         C.w = H.a(make_const_list([1, 2, 5, 2]), t.i)
