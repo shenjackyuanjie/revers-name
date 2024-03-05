@@ -167,12 +167,12 @@
         return a
     }
     var hunkHelpers = function () {
-        var s = function (a, b, c, d, e) {
+        var mk_instance = function (a, b, c, d, e) {
             return function (f, g, h, i) {
                 return installInstanceTearOff(f, g, a, b, c, d, [h], i, e, false)
             }
         },
-            r = function (a, b, c, d) {
+            mk_static = function (a, b, c, d) {
                 return function (e, f, g, h) {
                     return installStaticTearOff(e, f, a, b, c, [g], h, d)
                 }
@@ -183,15 +183,15 @@
             mixin: mixin,
             installStaticTearOff: installStaticTearOff,
             installInstanceTearOff: installInstanceTearOff,
-            _instance_0u: s(0, 0, null, ["$0"], 0),
-            _instance_1u: s(0, 1, null, ["$1"], 0),
-            _instance_2u: s(0, 2, null, ["$2"], 0),
-            _instance_0i: s(1, 0, null, ["$0"], 0),
-            _instance_1i: s(1, 1, null, ["$1"], 0),
-            _instance_2i: s(1, 2, null, ["$2"], 0),
-            _static_0: r(0, null, ["$0"], 0),
-            _static_1: r(1, null, ["$1"], 0),
-            _static_2: r(2, null, ["$2"], 0),
+            _instance_0u: mk_instance(0, 0, null, ["$0"], 0),
+            _instance_1u: mk_instance(0, 1, null, ["$1"], 0),
+            _instance_2u: mk_instance(0, 2, null, ["$2"], 0),
+            _instance_0i: mk_instance(1, 0, null, ["$0"], 0),
+            _instance_1i: mk_instance(1, 1, null, ["$1"], 0),
+            _instance_2i: mk_instance(1, 2, null, ["$2"], 0),
+            _static_0: mk_static(0, null, ["$0"], 0),
+            _static_1: mk_static(1, null, ["$1"], 0),
+            _static_2: mk_static(2, null, ["$2"], 0),
             makeConstList: makeConstList,
             lazy: lazy,
             lazyFinal: lazyFinal,
@@ -203,10 +203,6 @@
         }
     }()
 
-    function initializeDeferredHunk(a) {
-        x = v.types.length
-        a(hunkHelpers, v, holders, $)
-    }
     var B = {
         iN() {
             var s, r
