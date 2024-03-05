@@ -2,6 +2,9 @@
 import 'dart:js' as Js;
 import 'dart:html';
 
+abstract class IPlr {}
+
+class NPlr extends IPlr {}
 
 SpanElement Span(String cls) {
   return new SpanElement()..classes.add(cls);
@@ -10,7 +13,8 @@ SpanElement Span(String cls) {
 DivElement Div(String cls) {
   return new DivElement()..classes.add(cls);
 }
-TableCellElement TD(TableRowElement tr){
+
+TableCellElement TD(TableRowElement tr) {
   TableCellElement td = new TableCellElement();
   tr.append(td);
   return td;
@@ -23,12 +27,20 @@ ParagraphElement P(String cls) {
 String b(String str) {
   return str;
 }
+
 String smile(String str) {
   return '<div class="smile s_$str"></div>';
 }
 
 String l(String str, String key) {
   return str;
+}
+
+num drawText(CanvasRenderingContext2D ctx, String txt, int x, int y, int w,
+    bool center) {
+  TextMetrics tm = ctx.measureText(txt);
+  ctx.fillText(txt, x, y + 15, w);
+  return 1;
 }
 
 void main() {
@@ -41,12 +53,24 @@ void main() {
 // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
-    TableRowElement tr = new TableRowElement();
-    TD(tr)..text = l('击杀','killedCount')..style.width = '44px';
-    TD(tr)..text = l('致命一击','killerName')..style.minWidth = '112px';
+  TableRowElement tr = new TableRowElement();
+  TD(tr)
+    ..text = l('击杀', 'killedCount')
+    ..style.width = '44px';
+  TD(tr)
+    ..text = l('致命一击', 'killerName')
+    ..style.minWidth = '112px';
+
+  var plr = new NPlr();
 
   DivElement plist = document.querySelector('.plist') as DivElement;
   DivElement pbody = document.querySelector('.pbody') as DivElement;
+
+  DivElement p = Div('p');
+
+  p.append(tr);
+  pbody.append(p);
+  plist.append(pbody);
 
   print(idElement);
   print(classElement);
