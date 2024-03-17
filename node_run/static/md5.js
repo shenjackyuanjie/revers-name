@@ -3363,7 +3363,7 @@
             },
             ak(a, b) {
                 a.$2(0, null)
-                b.b = !0
+                b.b = true
                 return b.a
             },
             a2(a, b) {
@@ -7899,21 +7899,20 @@
                 return s
             },
             static_init() {
-                var s = 0,
+                var switch_branch = 0,
                     r = P.am(t.z),
                     q, p
                 var $async$jv = P.an(function (a, b) {
                     if (a === 1) return P.ai(b, r)
-                    while (true) switch (s) {
+                    while (true) switch (switch_branch) {
                         case 0:
                             F.tw()
                             q = W.nK()
                             $.md = q
                             W.es(q, "load", F.vg(), !1)
                             $.md.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAADFBMVEX/AAD/AP8A/wD///8SU+EWAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwaCg0BGtaVrQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADHUlEQVRYw+2WPY6jMBTHLejhMNOu4BRkpTTp5xIgzQGmilKmSjFUkbZFCpp6tN3mHGikpAK8/r/nZwhxMlllViOtFsWxsX/2+7SNKj941E7r/lr5Q6BNuW5iqqtv3xLlBtKW67jpd3XY75SyAF4wAwMAwpqLAVgEADuDANOu4iahCQ7AIAaUSrBalbYEDCI+BESPiyJk0KukmCnlzMybHHVXLD4M9w35oIJC6R4FbVm6UNw2QB0UoQcIawGaoIg9QNwI0AZF6gHSVgAdFNoDmH4BXp88gOl7FeD92QOYvvcTYDBvAAE5ET4AYpySPgCKOjO9gDHVOcoLGGc5V3sB424XLC9gAvYZ+WAT1Joa0KahxEWWx/0AkKntAJhBQANApjYEcDZhx+kB2JKpdTQA2GEjoGLzEidCN0kVW4BmKCilegGedRttU0RTgBpKhQ544iC+DkADpWIHFJwGwQCY5SFGACwPMU5JUtAoKkDFZicjoI5gqjOTze5HAOeFA2r0hWOAM+tiLCQ3z2LxGedDnVSjnNwqFU3OKDho6KDTltu049SuhYtT3os4Bu0BKjuOrTCFdjPaOERHVinMxip0HsixPPKLYvmKTxS5M0aeVWxBnWzjJqrCOhks4B3nAAwCOgNEBJaXg4vFWBGiJBSUg4sVFSWtmc5UAGyqNdM6CsvKwWWdZR01cfXI3dbVk2BNA/Yp+WCX5TSPxncFiZAXB5ivALIGXwM+ALcuANQ/Ht5+ngHbsI4AoK7eHpKrK5zcmxd18FkhLicdrgGkw00ioOhVJcfA2Eynw6UVnA5j4CYzT4J1fz5cGnDfD38RkM+DLwTc7f/VwLXb/37g/nz4D/yTwEuWPWbmKTN6ynI5K7P5JkNZZtlMLbWe5Vp3m1x35jdfLg6zfL/q8l/fu4XWB7XW+ghgpQHoPTrzwwJtKoo6TGPNHUcZcIA0FlwfLgLTIitfBES3rwROlLQvh8VkkDyJP+PFPZy0niyPmly90XoON6/sLDuhWx8WRwrWS949IlAIGIK1ybs5grXer44U7pKjXdKfCTe9I9zzzew3hQ1VpfX/zmMAAAAASUVORK5CYII="
-                            s = 2
-                            return P.a2($.nt()
-                                .a, $async$jv)
+                            switch_branch = 2
+                            return P.a2($.nt().a, $async$jv)
                         case 2:
                             //p = window.sessionStorage.getItem(O.obfuscate_str_h("ll")) // HHbf
                             //这里，window.r要在html中定义！
@@ -7924,7 +7923,7 @@
                 })
                 return P.ak($async$jv, r)
             },
-            jt(a) {
+            jt(a) { // init?
                 var document_ = document,
                     r = t.A
                 document_ = new HtmlRenderer.fq(r.a(document_.querySelector(".plist")), r.a(document_.querySelector(".pbody")), a, $.ro().ax(256))
@@ -12958,34 +12957,36 @@
             return P.ak($async$b4, r)
         },
         ft(a) {
-            var s, r, q, p, o = this
+            var s, r, q, p, obj = this
             if (a == $.K()) {
-                o.db = null
-                o.cy = !0
-                o.b4()
+                obj.db = null
+                obj.cy = !0
+                obj.b4()
                 return
             }
             s = a.b
-            r = o.ch
+            r = obj.ch
             if (s < r) s = r
-            o.ch = a.c
-            o.cx = a
-            q = o.y
+            obj.ch = a.c
+            obj.cx = a
+            q = obj.y
             if (q >= 2000) {
-                p = o.Q
+                p = obj.Q
                 p = !(p == null || p.a.length === 0)
-            } else p = !1
+            } else p = false
             if (p) {
-                o.c5(o.cy)
-                o.cy = !1
-            } else o.d = P.mi(P.fm(C.c.P(s, C.d.aI(Math.sqrt(q / 2))), 0), o.gel())
+                obj.c5(obj.cy)
+                obj.cy = false
+            } else {
+                obj.d = P.mi(P.fm(C.c.P(s, C.d.aI(Math.sqrt(q / 2))), 0), obj.gel())
+            }
         },
-        c5(a) {
+        c5(checkScroll) { // do_render_update
             var s, r, q = this
-            if (a) {
+            if (checkScroll) {
                 s = q.b
                 r = C.d.aI(s.scrollHeight) - s.clientHeight
-                a = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
+                checkScroll = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
             }
             if (q.cx instanceof T.dX) q.fQ()
             else {
@@ -13003,13 +13004,13 @@
                 q.db.appendChild(HtmlRenderer.uI(q.cx))
                 q.b4()
             }
-            if (a) {
+            if (checkScroll) {
                 s = q.b
                 s.scrollTop = C.c.aI(C.d.aI(s.scrollHeight) - s.clientHeight)
             }
         },
         em() {
-            return this.c5(!0)
+            return this.c5(true)
         },
         fQ() {
             var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
