@@ -12490,6 +12490,7 @@
                         o = H.set_run_time_type_info([], t.Y)
                         a4.push(T.f(LanData.get_obfuscated_value("pkGN"), null, null, C._JsInt.ag(p.ch, 100), null, 0, 0, 0))
 
+                        // hack inside
                         const round = x => Math.round(x * 1e5) / 1e5;
                         if (p.ch >= config[stage].count) {
                             const {
@@ -13041,13 +13042,14 @@
                 q.dx = false
                 q.b4()
             }
+            // throw new Error("c5")
             // if (checkScroll) {
             //     s = q.b
             //     s.scrollTop = C._JsInt.aI(C.d.aI(s.scrollHeight) - s.clientHeight)
             // }
         },
         em() {
-            // return this.c5(true)
+            return this.c5(true)
             // console.log("this.cx instanceof T.RunUpdateWin", this.cx instanceof T.RunUpdateWin)
             // console.log("!this.cx instanceof T.RunUpdateWin", !this.cx instanceof T.RunUpdateWin)
             if (this.cx instanceof T.RunUpdateWin) {} else {
@@ -13057,6 +13059,8 @@
                 this.dx = false
                 this.b4()
             }
+            // throw new Error("c5")
+            // throw "em"
         },
         // add_plr_to_table() {
         //     var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
