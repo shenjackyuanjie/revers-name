@@ -8165,7 +8165,7 @@
             jD: function jD(a) {
                 this.a = a
             },
-            jE: function jE(a, b, c, d, e) {
+            post_message: function jE(a, b, c, d, e) {
                 var _ = this
                 _.a = a
                 _.b = b
@@ -12826,7 +12826,7 @@
             if (p.a == null) return
             A.vo(p.gfd())
             p.d = P.mi(P.fm(10, 0), p.gbc(p))
-            W.es(window, "resize", p.gff(p), !1)
+            W.es(window, "resize", p.gff(p), false)
             p.ds(0, null)
             s = HtmlRenderer.nS("row")
             r = p.b
@@ -12842,7 +12842,7 @@
                 q = q.gbu(q)
                 r.appendChild(document.createTextNode(q))
             }
-            W.es(window, "message", p.gfb(p), !1)
+            W.es(window, "message", p.gfb(p), false)
         },
         fc(a, b) {
             var s = b.data,
@@ -13011,118 +13011,118 @@
         },
         c5(checkScroll) { // do_render_update
             var s, r, q = this
-            if (checkScroll) {
-                s = q.b
-                r = C.d.aI(s.scrollHeight) - s.clientHeight
-                checkScroll = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
-            }
+            // if (checkScroll) {
+            //     s = q.b
+            //     r = C.d.aI(s.scrollHeight) - s.clientHeight
+            //     checkScroll = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
+            // }
             if (q.cx instanceof T.dX) q.fQ()
             else {
-                s = q.db
-                if (s == null) {
-                    s = HtmlRenderer.nS("row")
-                    q.db = s
-                    q.b.appendChild(s)
-                    if (q.dx) q.dx = !1
-                    else {
-                        s = q.db;
-                        (s && C.Q).cJ(s, "\u2003")
-                    }
-                } else s.appendChild(document.createTextNode(", "))
-                q.db.appendChild(HtmlRenderer.uI(q.cx))
+                // s = q.db
+                // if (s == null) {
+                //     s = HtmlRenderer.nS("row")
+                //     q.db = s
+                //     q.b.appendChild(s)
+                //     if (q.dx) q.dx = !1
+                //     else {
+                //         s = q.db;
+                //         (s && C.Q).cJ(s, "\u2003")
+                //     }
+                // } else s.appendChild(document.createTextNode(", "))
+                // q.db.appendChild(HtmlRenderer.uI(q.cx))
                 q.b4()
             }
-            if (checkScroll) {
-                s = q.b
-                s.scrollTop = C._JsInt.aI(C.d.aI(s.scrollHeight) - s.clientHeight)
-            }
+            // if (checkScroll) {
+            //     s = q.b
+            //     s.scrollTop = C._JsInt.aI(C.d.aI(s.scrollHeight) - s.clientHeight)
+            // }
         },
         em() {
             return this.c5(true)
         },
-        add_plr_to_table() {
-            var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
-                e = "click",
-                d = f.b,
-                c = document
-            d.appendChild(c.createElement("br"))
-            s = f.cx.e.gb2()
-            r = $.ay.h(0, s).a
-            q = t.ak
-            p = H.set_run_time_type_info([], q)
-            o = H.set_run_time_type_info([], q)
-            n = []
-            $.ay.aw(0, new HtmlRenderer.jA(r, p, n, o))
-            C.Array.bb(p, HtmlRenderer.oD())
-            C.Array.bb(o, HtmlRenderer.oD())
-            m = c.createElement("table")
-            l = new HtmlRenderer.jz(m)
-            k = c.createElement("tr")
-            j = c.createElement("td")
-            k.appendChild(j)
-            C.j.by(j, C.String.B(J.iN($.nh(), LanData.get_obfuscated_value("ePya")), $.nh()), $.bV())
-            q = j.style
-            q.minWidth = "112px"
-            q = j.style
-            q.height = "32px"
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("AoUA")
-            q = j.style
-            q.width = "44px"
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("aXIa")
-            q = j.style
-            q.width = "44px"
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("MdQa")
-            q = j.style
-            q.minWidth = "112px"
-            q = k.style
-            q.background = "#FAFAFA"
-            m.appendChild(k)
-            for (q = p.length, i = 0; i < p.length; p.length === q || (0, H.F)(p), ++i) l.$1(p[i])
-            k = c.createElement("tr")
-            j = c.createElement("td")
-            k.appendChild(j)
-            C.j.by(j, C.String.B(J.iN($.nf(), LanData.get_obfuscated_value("eFKN")), $.nf()), $.bV())
-            q = j.style
-            q.height = "32px"
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("AoUA")
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("aXIa")
-            j = c.createElement("td")
-            k.appendChild(j)
-            j.textContent = LanData.get_obfuscated_value("MdQa")
-            q = k.style
-            q.background = "#FAFAFA"
-            m.appendChild(k)
-            for (q = o.length, i = 0; i < o.length; o.length === q || (0, H.F)(o), ++i) l.$1(o[i])
-            d.appendChild(m)
-            h = HtmlRenderer.ae("buttonBar")
-            d.appendChild(h)
-            g = c.createElement("button")
-            g.textContent = LanData.get_obfuscated_value("xPRN")
-            h.appendChild(g)
-            W.es(g, e, new HtmlRenderer.jB(), !1)
-            g = c.createElement("button")
-            g.textContent = LanData.get_obfuscated_value("KXmn")
-            h.appendChild(g)
-            W.es(g, e, new HtmlRenderer.jC(), !1)
-            g = c.createElement("button")
-            g.textContent = LanData.get_obfuscated_value("Zvon")
-            h.appendChild(g)
-            W.es(g, e, new HtmlRenderer.jD($.qq()), !1)
-            d = h.style
-            c = "" + (C.d.aI(m.offsetWidth) - C.d.aI(h.offsetWidth) - 8) + "px"
-            d.marginLeft = c
-            if (W.ll(window.parent) !== window) new HtmlRenderer.jE(f, p, o, n, $.ay.h(0, J.J(J.J(f.z[0], 0), 0))).$0()
-        }
+        // add_plr_to_table() {
+        //     var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
+        //         e = "click",
+        //         d = f.b,
+        //         c = document
+        //     d.appendChild(c.createElement("br"))
+        //     s = f.cx.e.gb2()
+        //     r = $.ay.h(0, s).a
+        //     q = t.ak
+        //     p = H.set_run_time_type_info([], q)
+        //     o = H.set_run_time_type_info([], q)
+        //     n = []
+        //     $.ay.aw(0, new HtmlRenderer.jA(r, p, n, o))
+        //     C.Array.bb(p, HtmlRenderer.oD())
+        //     C.Array.bb(o, HtmlRenderer.oD())
+        //     m = c.createElement("table")
+        //     l = new HtmlRenderer.jz(m)
+        //     k = c.createElement("tr")
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     C.j.by(j, C.String.B(J.iN($.nh(), LanData.get_obfuscated_value("ePya")), $.nh()), $.bV())
+        //     q = j.style
+        //     q.minWidth = "112px"
+        //     q = j.style
+        //     q.height = "32px"
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("AoUA")
+        //     q = j.style
+        //     q.width = "44px"
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("aXIa")
+        //     q = j.style
+        //     q.width = "44px"
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("MdQa")
+        //     q = j.style
+        //     q.minWidth = "112px"
+        //     q = k.style
+        //     q.background = "#FAFAFA"
+        //     m.appendChild(k)
+        //     for (q = p.length, i = 0; i < p.length; p.length === q || (0, H.F)(p), ++i) l.$1(p[i])
+        //     k = c.createElement("tr")
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     C.j.by(j, C.String.B(J.iN($.nf(), LanData.get_obfuscated_value("eFKN")), $.nf()), $.bV())
+        //     q = j.style
+        //     q.height = "32px"
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("AoUA")
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("aXIa")
+        //     j = c.createElement("td")
+        //     k.appendChild(j)
+        //     j.textContent = LanData.get_obfuscated_value("MdQa")
+        //     q = k.style
+        //     q.background = "#FAFAFA"
+        //     m.appendChild(k)
+        //     for (q = o.length, i = 0; i < o.length; o.length === q || (0, H.F)(o), ++i) l.$1(o[i])
+        //     d.appendChild(m)
+        //     h = HtmlRenderer.ae("buttonBar")
+        //     d.appendChild(h)
+        //     g = c.createElement("button")
+        //     g.textContent = LanData.get_obfuscated_value("xPRN")
+        //     h.appendChild(g)
+        //     W.es(g, e, new HtmlRenderer.jB(), !1)
+        //     g = c.createElement("button")
+        //     g.textContent = LanData.get_obfuscated_value("KXmn")
+        //     h.appendChild(g)
+        //     W.es(g, e, new HtmlRenderer.jC(), !1)
+        //     g = c.createElement("button")
+        //     g.textContent = LanData.get_obfuscated_value("Zvon")
+        //     h.appendChild(g)
+        //     W.es(g, e, new HtmlRenderer.jD($.qq()), !1)
+        //     d = h.style
+        //     c = "" + (C.d.aI(m.offsetWidth) - C.d.aI(h.offsetWidth) - 8) + "px"
+        //     d.marginLeft = c
+        //     if (W.ll(window.parent) !== window) new HtmlRenderer.post_message(f, p, o, n, $.ay.h(0, J.J(J.J(f.z[0], 0), 0))).$0()
+        // }
     }
     HtmlRenderer.jx.prototype = {
         $1(a) {
@@ -13201,7 +13201,7 @@
         },
         $S: 6
     }
-    HtmlRenderer.jE.prototype = {
+    HtmlRenderer.post_message.prototype = {
         $0() {
             var s = 0,
                 r = P.make_async_await_completer(t.P),
@@ -18575,7 +18575,7 @@
         inherit(H.dK, H.eB)
         inherit_may(H.dK, [H.fE, H.fF, H.fG, H.fH, H.fI, H.dL, H.cx])
         inherit(H.eI, H.i9)
-        inherit_may(H.j5, [P.kC, P.kD, P.l9, P.jp, P.kH, P.kO, P.kM, P.kJ, P.kN, P.kI, P.kR, P.kQ, P.kP, P.kf, P.l2, P.kW, P.lo, P.kY, P.km, P.kl, X.je, X.j9, HtmlRenderer.jE, Sgls.k4])
+        inherit_may(H.j5, [P.kC, P.kD, P.l9, P.jp, P.kH, P.kO, P.kM, P.kJ, P.kN, P.kI, P.kR, P.kQ, P.kP, P.kf, P.l2, P.kW, P.lo, P.kY, P.km, P.kl, X.je, X.j9, HtmlRenderer.post_message, Sgls.k4])
         inherit(P.cg, P.i4)
         inherit(P.cK, P.im)
         inherit(P.eF, P.em)
