@@ -2677,6 +2677,14 @@
                 var t1 = $._JS_INTEROP_INTERCEPTOR_TAG;
                 return t1 == null ? $._JS_INTEROP_INTERCEPTOR_TAG = init.getIsolateTag("_$dart_js") : t1;
             },
+            JSArray_JSArray$fixed: function ($length, $E) {
+                if ($length < 0 || $length > 4294967295)
+                    throw H.wrapException(P.RangeError$range($length, 0, 4294967295, "length", null));
+                return J.JSArray_JSArray$markFixed(new Array($length), $E);
+            },
+            JSArray_JSArray$markFixed: function (allocation, $E) {
+                return J.JSArray_markFixedList(H.setRuntimeTypeInfo(allocation, $E._eval$1("JSArray<0>")), $E);
+            },
             JSArray_markFixedList: function (list, $T) {
                 list.fixed$length = Array;
                 return list;
@@ -3342,6 +3350,14 @@
                     return object.toString$0(0);
                 return "Instance of '" + H.Primitives_objectTypeName(object) + "'";
             },
+            List_List$filled: function ($length, fill, growable, $E) {
+                var i,
+                    result = J.JSArray_JSArray$fixed($length, $E);
+                if ($length !== 0 && true)
+                    for (i = 0; i < $length; ++i)
+                        result[i] = fill;
+                return result;
+            },
             List_List$of: function (elements, growable, $E) {
                 var t1 = P.List_List$_of(elements, $E);
                 return t1;
@@ -3388,6 +3404,9 @@
             },
             RangeError$value: function (value, $name) {
                 return new P.RangeError(null, null, true, value, $name, "Value not in range");
+            },
+            RangeError$range: function (invalidValue, minValue, maxValue, $name, message) {
+                return new P.RangeError(minValue, maxValue, true, invalidValue, $name, "Invalid value");
             },
             IndexError$: function (invalidValue, indexable, $name, message, $length) {
                 var t1 = H._asInt($length == null ? J.get$length$asx(indexable) : $length);
@@ -3500,9 +3519,17 @@
             _NodeList_Interceptor_ListMixin_ImmutableListMixin: function _NodeList_Interceptor_ListMixin_ImmutableListMixin() {}
         },
         V = {
+            test_list: function (str) {
+                var t1 = type$.JSArray_String;
+                if (C.JSArray_methods.join$1(H.setRuntimeTypeInfo(str.split(""), t1), "").length === 0)
+                    return H.setRuntimeTypeInfo([], t1);
+                return H.setRuntimeTypeInfo(["a", "b", "c"], t1);
+            },
             main: function () {
                 var t1, t2, t3, t4, test_map, t5, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
+                P.print(V.test_list("abc"));
+                P.print(V.test_list(""));
                 P.print($.$get$Dt_at());
                 t1 = document;
                 t2 = t1.querySelector("#an-id");
@@ -3632,6 +3659,13 @@
                 H.throwExpression(P.UnsupportedError$("add"));
             receiver.push(value);
         },
+        join$1: function (receiver, separator) {
+            var i,
+                list = P.List_List$filled(receiver.length, "", false, type$.String);
+            for (i = 0; i < receiver.length; ++i)
+                this.$indexSet(list, i, H.S(receiver[i]));
+            return list.join(separator);
+        },
         toString$0: function (receiver) {
             return P.IterableBase_iterableToFullString(receiver, "[", "]");
         },
@@ -3643,6 +3677,14 @@
         },
         get$length: function (receiver) {
             return receiver.length;
+        },
+        $indexSet: function (receiver, index, value) {
+            H._arrayInstanceType(receiver)._precomputed1._as(value);
+            if (!!receiver.immutable$list)
+                H.throwExpression(P.UnsupportedError$("indexed set"));
+            if (index >= receiver.length || false)
+                throw H.wrapException(H.diagnoseIndexError(receiver, index));
+            receiver[index] = value;
         },
         $isIterable: 1,
         $isList: 1

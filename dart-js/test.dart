@@ -50,8 +50,23 @@ class Dt {
   static String at = b('@');
 }
 
+List<String> test_list(String str) {
+  // spilt with ""
+  str = str.split("").join("");
+
+  // if empty -> return []
+  if (str.isEmpty) {
+    return [];
+  }
+
+  return ["a", "b", "c"];
+
+}
 
 void main() {
+
+  print(test_list("abc"));
+  print(test_list(""));
 
   print(Dt.at);
 
