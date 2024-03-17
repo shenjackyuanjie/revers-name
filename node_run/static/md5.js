@@ -3249,23 +3249,25 @@
                 this.a = a
             }
         },
-        M = {
-            main_func() {
-                // var s = 0,
-                //     r = P.am(t.z)
-                // var $async$mB = P.an(function (a, b) {
-                //     if (a === 1) return P.ai(b, r)
-                //     while (true) switch (s) {
-                //         case 0:
-                //             Q.iE()
-                //             return P.aj(null, r)
-                //     }
-                // })
-                // return P.ak($async$mB, r)
-                // 上面的代码都是用来模拟异步的，实际上是同步的
-                Q.iE()
-            }
-        },
+        // M.main_func
+        // 因为实际上就是个异步模拟接口, 直接去掉了
+        // M = {
+        //     main_func() {
+        //         // var s = 0,
+        //         //     r = P.am(t.z)
+        //         // var $async$mB = P.an(function (a, b) {
+        //         //     if (a === 1) return P.ai(b, r)
+        //         //     while (true) switch (s) {
+        //         //         case 0:
+        //         //             Q.iE()
+        //         //             return P.aj(null, r)
+        //         //     }
+        //         // })
+        //         // return P.ak($async$mB, r)
+        //         // 上面的代码都是用来模拟异步的，实际上是同步的
+        //         Q.iE()
+        //     }
+        // },
         LanData = {
             obfuscate_str_h(a) {
                 var s, r, q, p, o, n
@@ -8241,7 +8243,8 @@
                 this.b = b
             }
         }
-    var w = [A, C, F, H, J, L, M, LanData, P, Q, S, T, V, W, X, Y, HtmlRenderer]
+    // var w = [A, C, F, H, J, L, M, LanData, P, Q, S, T, V, W, X, Y, HtmlRenderer]
+    var w = [A, C, F, H, J, L, LanData, P, Q, S, T, V, W, X, Y, HtmlRenderer]
     var $ = {}
     H.Js_Const.prototype = {}
     J.Interceptor.prototype = {
@@ -20603,6 +20606,7 @@
     Function.prototype.$6 = function (a, b, c, d, e, f) {
         return this(a, b, c, d, e, f)
     };
-    M.main_func()
+    // M.main_func()
+    Q.iE()
 })()
 //# sourceMappingURL=md5.js.map
