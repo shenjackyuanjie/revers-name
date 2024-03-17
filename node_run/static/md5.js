@@ -3295,9 +3295,9 @@
                 return s
             },
             v1(a) {
-                J.lY(a, new O.lA())
+                J.lY(a, new O.load_lan())
             },
-            lA: function lA() {},
+            load_lan: function lA() {},
             fZ(a) {
                 var s = H.b([0], t.i)
                 C.a.a5(s, C.P_kj.gaB().ab(a))
@@ -13469,7 +13469,7 @@
         },
         $S: 45
     }
-    O.lA.prototype = {
+    O.load_lan.prototype = {
         $2(a, b) {
             if (typeof b == "string" && !C.b.w(b, "<") && !C.b.w(b, ">")) $.obfuscate.m(0, O.obfuscate_str_h(H.lg(a)), b)
         },
@@ -18502,7 +18502,7 @@
         inherit_may(H.kg, [H.kc, H.dg])
         inherit(P.dG, P.aU)
         inherit_may(P.dG, [H.JsLinkedHashMap, P.ic, W.i2])
-        inherit_may(H.j6, [H.lw, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, F.k7, O.lA, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
+        inherit_may(H.j6, [H.lw, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, F.k7, O.load_lan, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
         inherit(H.hZ, P.dy)
         inherit(H.cw, H.ab)
         inherit_may(H.cw, [H.ey, H.eA])
