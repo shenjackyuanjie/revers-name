@@ -5633,28 +5633,56 @@
                 return g
             },
             parse_string(str) {
-                var s, r, q, p, current_group, n, m, l, k, j, i, h, g, f, e = null,
+                var s, r, q, grouped, current_group, n, m, l, k, j, i, h, g, f, e = null,
                     d = t.E,
-                    c = H.b([], d),
-                    b = C.b.cK(str, $.r_())
-                for (s = $.a(); s < b.length; ++s) {
-                    r = b[s]
+                    c = H.b([], d)
+
+                // static final RegExp regNewLine = new RegExp(r'\r?\n');
+                // List<String> names = str.split(regNewLine);
+
+                var names = C.b.cK(str, $.r_())
+
+                for (s = $.a(); s < names.length; ++s) {
+                    r = names[s]
                     q = $.r0()
                     r.toString
                     r = H.iG(r, q, " ", 0)
                     q = $.nq()
-                    b[s] = H.iG(r, q, "", 0)
+                    names[s] = H.iG(r, q, "", 0)
                 }
-                for (; J.Y(C.a.gbl(b), "");) {
-                    b.pop()
-                    if (b.length === 0) return H.b([], d)
+
+                // while (names.last == '') {
+                //     names.removeLast();
+                //     if (names.isEmpty) {
+                //       return [];
+                //     }
+                //   }
+
+                // for (; J.Y(C.a.gbl(names), "");) {
+                //     names.pop()
+                //     if (names.length === 0) return H.b([], d)
+                // }
+
+                for (; J.Y(C.a.gbl(names), "");) {
+                    names.pop() // 移除列表names的最后一个元素
+                    // 如果列表names为空
+                    if (names.length === 0) {
+                        return H.b([], d)
+                    } // 返回一个空列表
                 }
-                p = C.a.w(b, "") && true
+
+
+                grouped = C.a.w(names, "") && true
+                /*
+                bool grouped = false;
+                if (names.contains('')) {
+                  grouped = true;
+                }*/
                 d = t.t
                 current_group = H.b([], d)
 
-                for (s = $.a(), r = t.V, q = !p, n = e; s < b.length; ++s) {
-                    m = b[s]
+                for (s = $.a(), r = t.V, q = !grouped, n = e; s < names.length; ++s) {
+                    m = names[s]
                     if (m === "") {
                         if (current_group.length !== 0) c.push(current_group)
                         current_group = H.b([], d)
@@ -5697,10 +5725,10 @@
                         else current_group.push(H.b([h[$.a()], h[$.i()], j], r))
                     } else if (C.b.bA(m, " ")) current_group.push(H.b([C.b.ay(m, $.i()), n, j], r))
                     else {
-                        if (s + $.i() < b.length) {
+                        if (s + $.i() < names.length) {
                             l = $.n5()
                             if (l == null) H.G(H.R(l))
-                            l = !H.iF(m, l, 0) && J.m1(b[s + $.i()], " ")
+                            l = !H.iF(m, l, 0) && J.m1(names[s + $.i()], " ")
                         } else l = false
                         if (l) n = m
                         else {
