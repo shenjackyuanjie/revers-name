@@ -2029,7 +2029,7 @@
                         i = b.Q
                         h = H.mX(a, i, a0, a1)
                         if (j === k && h === i) return b
-                        return H._Universe__lookupFunctionRti(a, j, h)
+                        return H.universe_lookup_function_Rti(a, j, h)
                     case 12:
                         g = b.Q
                         a1 += g.length
@@ -2671,7 +2671,7 @@
                 a.eC.set(q, n)
                 return n
             },
-            _Universe__lookupFunctionRti(a, b, c) {
+            universe_lookup_function_Rti(a, b, c) {
                 var s, r, q, p, o, n = b.cy,
                     m = c.a,
                     l = m.length,
@@ -2844,7 +2844,7 @@
                                 k.a = array
                                 k.b = optional_positinoal
                                 k.c = named
-                                t1.push(H._Universe__lookupFunctionRti(t3, H.parser_to_type(t3, parser.e, t1.pop()), k))
+                                t1.push(H.universe_lookup_function_Rti(t3, H.parser_to_type(t3, parser.e, t1.pop()), k))
                                 break
                             case 91:
                                 t1.push(parser.p)
@@ -4884,14 +4884,14 @@
                 return new P.cD(a)
             },
             y(a, b) {
-                return new P.a_(!1, null, b, a)
+                return new P.a_(false, null, b, a)
             },
             cC(a, b, c) {
-                return new P.a_(!0, a, b, c)
+                return new P.a_(true, a, b, c)
             },
             lE(a) {
                 var s = null
-                return new P.be(s, s, !1, s, s, a)
+                return new P.be(s, s, false, s, s, a)
             },
             j9(a, b) {
                 return new P.be(null, null, !0, a, b, "Value not in range")
