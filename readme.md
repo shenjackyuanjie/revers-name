@@ -1,5 +1,14 @@
 # 某个游戏的 js 的逆向工程
 
+## 一些交互结论
+
+```text
+h_(ll) -> HHbf -> 语言文件加载 session storage
+h_(k) -> fYwD -> 名称输入 session storage
+```
+
+- `Z` -> `HtmlRenderer`
+
 ## `md5.js`
 
 - [ ] 清理所有空函数
