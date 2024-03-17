@@ -5659,14 +5659,10 @@
                 //   }
 
                 // for (; J.Y(C.a.gbl(names), "");) {
-                //     names.pop()
-                //     if (names.length === 0) return H.set_run_time_type_info([], d)
-                // }
-
-                for (; J.Y(C.a.gbl(names), "");) {
+                while (C.a.gbl(names) == "") {
                     names.pop() // 移除列表names的最后一个元素
                     // 如果列表names为空
-                    if (names.length === 0) {
+                    if (names.isEmpty) {
                         return H.set_run_time_type_info([], js_array_string)
                     } // 返回一个空列表
                 }
