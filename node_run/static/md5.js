@@ -13023,15 +13023,17 @@
                 if (s == null) {
                     s = HtmlRenderer.nS("row")
                     q.db = s
-                    q.b.appendChild(s)
+                    // q.b.appendChild(s)
                     if (q.dx) {
                         q.dx = false
                     } else {
-                        s = q.db;
-                        (s && C.Q).cJ(s, "\u2003")
+                        // s = q.db;
+                        // (s && C.Q).cJ(s, "\u2003")
                     }
-                } else s.appendChild(document.createTextNode(", "))
-                q.db.appendChild(HtmlRenderer.uI(q.cx))
+                } else {
+                    // s.appendChild(document.createTextNode(", "))
+                }
+                // q.db.appendChild(HtmlRenderer.uI(q.cx))
                 q.b4()
             }
             // if (checkScroll) {
