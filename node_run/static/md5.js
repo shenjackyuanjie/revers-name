@@ -3343,7 +3343,7 @@
                 // _Future<0> _AsyncAwaitCompleter<0>
                 return new P.i_(new P.U($.P, a.i("U<0>")), a.i("i_<0>"))
             },
-            ak(a, b) {
+            async_start_sync(a, b) {
                 a.$2(0, null)
                 b.b = true
                 return b.a
@@ -3386,15 +3386,15 @@
                 }(a, 1)
                 return $.P.ct(new P.lr(s))
             },
-            iQ(a, b) {
+            async_error(a, b) {
                 var s = H.ls(a, "error", t.K)
-                return new P.f3(s, b == null ? P.m2(a) : b)
+                return new P.AsyncError(s, b == null ? P.async_error_default_stack_trace(a) : b)
             },
-            m2(a) {
-                var s
+            async_error_default_stack_trace(a) {
+                var stack_trace
                 if (t.u.b(a)) {
-                    s = a.gbz()
-                    if (s != null) return s
+                    stack_trace = a.gbz()
+                    if (stack_trace != null) return stack_trace
                 }
                 return C.G
             },
@@ -3412,7 +3412,7 @@
                 if ((s & 24) !== 0) {
                     r = b.bI()
                     b.c1(a)
-                    P.cO(b, r)
+                    P.future_propagate_to_listeners(b, r)
                 } else {
                     r = b.c
                     b.a = b.a & 1 | 4
@@ -3420,26 +3420,26 @@
                     a.d3(r)
                 }
             },
-            cO(a, b) {
-                var s, r, q, p, o, n, m, l, k, j, i, h, g, f = {},
+            future_propagate_to_listeners(a, listeners) {
+                var s, r, q, p, o, n, m, l, k, j, i, result, g, f = {},
                     e = f.a = a
                 for (s = t.h; !0;) {
                     r = {}
                     q = e.a
                     p = (q & 16) === 0
                     o = !p
-                    if (b == null) {
+                    if (listeners == null) {
                         if (o && (q & 1) === 0) {
                             e = e.c
                             P.root_handle_uncaught_error(e.a, e.b)
                         }
                         return
                     }
-                    r.a = b
-                    n = b.a
-                    for (e = b; n != null; e = n, n = m) {
+                    r.a = listeners
+                    n = listeners.a
+                    for (e = listeners; n != null; e = n, n = m) {
                         e.a = null
-                        P.cO(f.a, e)
+                        P.future_propagate_to_listeners(f.a, e)
                         r.a = n
                         m = n.a
                     }
@@ -3476,36 +3476,36 @@
                             q = q.i("bl<2>").b(e) || !q.Q[1].b(e)
                         } else q = !1
                         if (q) {
-                            h = r.a.b
+                            result = r.a.b
                             if (e instanceof P.U)
                                 if ((e.a & 24) !== 0) {
-                                    g = h.c
-                                    h.c = null
-                                    b = h.bJ(g)
-                                    h.a = e.a & 30 | h.a & 1
-                                    h.c = e.c
+                                    g = result.c
+                                    result.c = null
+                                    listeners = result.bJ(g)
+                                    result.a = e.a & 30 | result.a & 1
+                                    result.c = e.c
                                     f.a = e
                                     continue
-                                } else P.mk(e, h)
-                            else h.cV(e)
+                                } else P.mk(e, result)
+                            else result.cV(e)
                             return
                         }
                     }
-                    h = r.a.b
-                    g = h.c
-                    h.c = null
-                    b = h.bJ(g)
+                    result = r.a.b
+                    g = result.c
+                    result.c = null
+                    listeners = result.bJ(g)
                     e = r.b
                     q = r.c
                     if (!e) {
-                        h.a = 8
-                        h.c = q
+                        result.a = 8
+                        result.c = q
                     } else {
-                        h.a = h.a & 1 | 16
-                        h.c = q
+                        result.a = result.a & 1 | 16
+                        result.c = q
                     }
-                    f.a = h
-                    e = h
+                    f.a = result
+                    e = result
                 }
             },
             uz(a, b) {
@@ -3666,7 +3666,7 @@
             lr: function lr(a) {
                 this.a = a
             },
-            f3: function f3(a, b) {
+            AsyncError: function f3(a, b) {
                 this.a = a
                 this.b = b
             },
@@ -4515,7 +4515,7 @@
                             return P.ai(o, r)
                     }
                 })
-                return P.ak($async$iE, r)
+                return P.async_start_sync($async$iE, r)
             }
         },
         S = {
@@ -5753,7 +5753,7 @@
                             return P.async_return(q, r)
                     }
                 })
-                return P.ak($async$c2, r)
+                return P.async_start_sync($async$c2, r)
             },
             rT(a, b) {
                 var s = a.e,
@@ -7938,7 +7938,7 @@
                             return P.async_return(null, r)
                     }
                 })
-                return P.ak($async$jv, r)
+                return P.async_start_sync($async$jv, r)
             },
             init_out(a) { // init?
                 var document_ = document,
@@ -9572,7 +9572,7 @@
         },
         cj(a, b) {
             var s
-            if (b == null) b = P.m2(a)
+            if (b == null) b = P.async_error_default_stack_trace(a)
             s = this.a
             if (this.b) s.be(a, b)
             else s.cT(a, b)
@@ -9596,7 +9596,7 @@
         },
         $S: 61
     }
-    P.f3.prototype = {
+    P.AsyncError.prototype = {
         k(a) {
             return H.e(this.a)
         },
@@ -9617,7 +9617,7 @@
             H.ls(a, "error", t.K)
             s = this.a
             if ((s.a & 30) !== 0) throw H.h(P.cd("Future already completed"))
-            if (b == null) b = P.m2(a)
+            if (b == null) b = P.async_error_default_stack_trace(a)
             s.cT(a, b)
         },
         dg(a) {
@@ -9754,19 +9754,19 @@
                 r = s.bI()
             s.a = 8
             s.c = a
-            P.cO(s, r)
+            P.future_propagate_to_listeners(s, r)
         },
         c2(a) {
             var s = this,
                 r = s.bI()
             s.a = 8
             s.c = a
-            P.cO(s, r)
+            P.future_propagate_to_listeners(s, r)
         },
         be(a, b) {
             var s = this.bI()
-            this.ex(P.iQ(a, b))
-            P.cO(this, s)
+            this.ex(P.async_error(a, b))
+            P.future_propagate_to_listeners(this, s)
         },
         cS(a) {
             if (this.$ti.i("bl<1>").b(a)) {
@@ -9798,13 +9798,13 @@
     }
     P.kH.prototype = {
         $0() {
-            P.cO(this.a, this.b)
+            P.future_propagate_to_listeners(this.a, this.b)
         },
         $S: 0
     }
     P.kO.prototype = {
         $0() {
-            P.cO(this.b, this.a.a)
+            P.future_propagate_to_listeners(this.b, this.a.a)
         },
         $S: 0
     }
@@ -9870,7 +9870,7 @@
                 } else q = !1
                 o = m.a
                 if (q) o.c = m.b.a.c
-                else o.c = P.iQ(s, r)
+                else o.c = P.async_error(s, r)
                 o.b = !0
                 return
             }
@@ -9908,7 +9908,7 @@
                 s = H.unwrap_Exception(o)
                 r = H.get_trace_from_exception(o)
                 q = this.a
-                q.c = P.iQ(s, r)
+                q.c = P.async_error(s, r)
                 q.b = !0
             }
         },
@@ -9932,7 +9932,7 @@
                 m = r
                 l = k.b
                 if (n == null ? m == null : n === m) l.c = p
-                else l.c = P.iQ(r, q)
+                else l.c = P.async_error(r, q)
                 l.b = !0
             }
         },
@@ -12291,7 +12291,7 @@
                         return P.async_return(q, r)
                 }
             })
-            return P.ak($async$O, r)
+            return P.async_start_sync($async$O, r)
         },
         ae(a, b) {
             return this.dJ(0, b)
@@ -12346,7 +12346,7 @@
                         return P.async_return(null, r)
                 }
             })
-            return P.ak($async$ae, r)
+            return P.async_start_sync($async$ae, r)
         }
     }
     L.iS.prototype = {
@@ -12522,7 +12522,7 @@
                         return P.async_return(q, r)
                 }
             })
-            return P.ak($async$O, r)
+            return P.async_start_sync($async$O, r)
         },
         eS() {
             var s, r = this,
@@ -12576,7 +12576,7 @@
                         return P.async_return(null, r)
                 }
             })
-            return P.ak($async$ae, r)
+            return P.async_start_sync($async$ae, r)
         }
     }
     V.j_.prototype = {
@@ -12753,7 +12753,7 @@
                         return P.async_return(q, r)
                 }
             })
-            return P.ak($async$O, r)
+            return P.async_start_sync($async$O, r)
         },
         ae(a, b) {
             return this.dL(0, b)
@@ -12982,7 +12982,7 @@
                         return P.async_return(q, async_completer)
                 }
             })
-            return P.ak($async$b4, async_completer)
+            return P.async_start_sync($async$b4, async_completer)
         },
         ft(a) {
             var s, r, q, p, obj = this
@@ -13221,7 +13221,7 @@
                         return P.async_return(null, r)
                 }
             })
-            return P.ak($async$$0, r)
+            return P.async_start_sync($async$$0, r)
         },
         $S: 40
     }
@@ -16183,7 +16183,7 @@
                         return P.async_return(q, r)
                 }
             })
-            return P.ak($async$bD, r)
+            return P.async_start_sync($async$bD, r)
         },
         bE() {
             var s = 0,
@@ -16199,7 +16199,7 @@
                         return P.async_return(null, r)
                 }
             })
-            return P.ak($async$bE, r)
+            return P.async_start_sync($async$bE, r)
         },
         fz(a, b) {
             var s, r = this,
@@ -16274,7 +16274,7 @@
                         return P.async_return(q, r)
                 }
             })
-            return P.ak($async$O, r)
+            return P.async_start_sync($async$O, r)
         },
         ae(a, b) {
             return this.dM(0, b)
@@ -16671,7 +16671,7 @@
                         return P.async_return(null, r)
                 }
             })
-            return P.ak($async$cg, r)
+            return P.async_start_sync($async$cg, r)
             // 你别说, 这异步还真有效
         },
         az() {
@@ -18546,7 +18546,7 @@
             inherit = hunkHelpers.inherit,
             inherit_may = hunkHelpers.inheritMany
         inherit(P.Object, null)
-        inherit_may(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.function_parameters, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, HtmlRenderer.fq, HtmlRenderer.jT, HtmlRenderer.ax, Sgls.a_, Sgls.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
+        inherit_may(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.function_parameters, H.iu, P.l8, P.i_, P.AsyncError, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, HtmlRenderer.fq, HtmlRenderer.jT, HtmlRenderer.ax, Sgls.a_, Sgls.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
         inherit_may(J.Interceptor, [J.JsBool, J.JsNull, J.bE, J.JsArray, J.dA, J.JsString, H.dJ, H.ab, W.fn, W.bX, W.fe, W.i6, W.bb, W.ja, W.jb, W.o, W.c4, W.jL, W.ig, W.il, W.iy, W.iA])
         inherit_may(J.bE, [J.fO, J.bs, J.JavaScriptFunction])
         inherit(J.jG, J.JsArray)
