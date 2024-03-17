@@ -208,7 +208,7 @@
                 // var s = window.localStorage,
                 // r = O.obfuscate_str_h("i") // xAWt
                 // s.setItem(r, a)
-                s = $.nx()
+                var s = $.nx()
                 r = s.b
                 if (r >= 4) H.G(s.ee())
                 if ((r & 1) !== 0) s.cc(a)
@@ -222,7 +222,7 @@
             }
         },
         C = {},
-        F = {
+        Sgls = {
             get_sgl_css(a) {
                 var s, r, q
                 if ($.k8.J(0, a)) return $.k8.h(0, a)
@@ -230,7 +230,7 @@
                 $.e_ = s + 1
                 r = "icon_" + s
                 $.k8.m(0, a, r)
-                q = F.tt(a).toDataURL("image/png", null)
+                q = Sgls.tt(a).toDataURL("image/png", null)
                 $.mg.m(0, a, q)
                 t.w.a(C.v.gbl(document.styleSheets)).insertRule("div." + r + ' { background-image:url("' + H.e(q) + '"); }', $.e_ - 1)
                 return r
@@ -282,7 +282,7 @@
                 s = q.c
                 s.toString
                 r = H.a1(s).i("y<1,l*>")
-                return F.ts(P.aa(new H.y(s, new F.k5(), r), !0, r.i("M.E")))
+                return Sgls.ts(P.aa(new H.y(s, new Sgls.k5(), r), !0, r.i("M.E")))
             },
             ts(a) {
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f = C.d.V(a[0], $.me.length),
@@ -318,7 +318,7 @@
                 n.fillStyle = "rgba(" + s + ", " + r + ", " + k + ", 1)"
                 n.fillRect(1, 1, 14, 14)
                 j = H.set_run_time_type_info([], e)
-                i = new F.k6(j, m, d)
+                i = new Sgls.k6(j, m, d)
                 for (p = o, h = 0; h < d.length; ++h) {
                     o = p + 1
                     g = C.d.V(a[p], $.d7())
@@ -327,9 +327,9 @@
                         g = C.d.V(a[p], $.d7())
                     }
                     j.push(g)
-                    F.o4(n, $.dZ[d[h]], $.mf[g])
+                    Sgls.o4(n, $.dZ[d[h]], $.mf[g])
                 }
-                F.tu(n, f)
+                Sgls.tu(n, f)
                 return $.nu()
             },
             o4(a, b, c) {
@@ -352,7 +352,7 @@
             },
             tu(a, b) {
                 var s, r, q, p
-                F.o4(a, $.me[b], H.set_run_time_type_info([64, 64, 64], t.i))
+                Sgls.o4(a, $.me[b], H.set_run_time_type_info([64, 64, 64], t.i))
                 s = P.my(a.getImageData(0, 0, 16, 16))
                 r = $.o5[b]
                 for (q = J.bv(s), p = 0; p < 256; ++p) q.gck(s)[p * 4 + 3] = r[p]
@@ -4405,6 +4405,8 @@
                     }
                     while (true) switch (switch_branch) {
                         case 0:
+                            // await HtmlRenderer.init();
+
                             a8 = LanData.oC(true).c
                             a9 = a8[$.B()]
                             $.mb = a9
@@ -4424,6 +4426,7 @@
 
                         case 3:
                             // main
+                            
                             switch_to = 5
                             /*m = window.sessionStorage.getItem(O.obfuscate_str_h("k")) // fYwD
                             l = X.f4(m, 0)
@@ -4581,31 +4584,31 @@
                     a0 = H.set_run_time_type_info([], t.q),
                     a1 = H.set_run_time_type_info([], t.H),
                     a2 = P.a0(t.String_list, t.W),
-                    a3 = new F.c(t.n)
+                    a3 = new Sgls.c(t.n)
                 a3.c = a3
                 a3.b = a3
-                s = new F.c(t.p)
+                s = new Sgls.c(t.p)
                 s.c = s
                 s.b = s
-                r = new F.c(t.g)
+                r = new Sgls.c(t.g)
                 r.c = r
                 r.b = r
-                q = new F.c(t.G)
+                q = new Sgls.c(t.G)
                 q.c = q
                 q.b = q
-                p = new F.c(t._)
+                p = new Sgls.c(t._)
                 p.c = p
                 p.b = p
-                o = new F.c(t.e)
+                o = new Sgls.c(t.e)
                 o.c = o
                 o.b = o
-                n = new F.c(t.k)
+                n = new Sgls.c(t.k)
                 n.c = n
                 n.b = n
-                m = new F.c(t.l)
+                m = new Sgls.c(t.l)
                 m.c = m
                 m.b = m
-                l = new F.c(t.m)
+                l = new Sgls.c(t.m)
                 l.c = l
                 l.b = l
                 k = t.i
@@ -4758,31 +4761,31 @@
                     q = H.set_run_time_type_info([], t.q)
                     p = H.set_run_time_type_info([], t.H)
                     o = P.a0(t.String_list, t.W)
-                    n = new F.c(t.n)
+                    n = new Sgls.c(t.n)
                     n.c = n
                     n.b = n
-                    m = new F.c(t.p)
+                    m = new Sgls.c(t.p)
                     m.c = m
                     m.b = m
-                    l = new F.c(t.g)
+                    l = new Sgls.c(t.g)
                     l.c = l
                     l.b = l
-                    k = new F.c(t.G)
+                    k = new Sgls.c(t.G)
                     k.c = k
                     k.b = k
-                    j = new F.c(t._)
+                    j = new Sgls.c(t._)
                     j.c = j
                     j.b = j
-                    i = new F.c(t.e)
+                    i = new Sgls.c(t.e)
                     i.c = i
                     i.b = i
-                    h = new F.c(t.k)
+                    h = new Sgls.c(t.k)
                     h.c = h
                     h.b = h
-                    g = new F.c(t.l)
+                    g = new Sgls.c(t.l)
                     g.c = g
                     g.b = g
-                    f = new F.c(t.m)
+                    f = new Sgls.c(t.m)
                     f.c = f
                     f.b = f
                     e = t.i
@@ -4802,31 +4805,31 @@
                     q = H.set_run_time_type_info([], t.q)
                     p = H.set_run_time_type_info([], t.H)
                     o = P.a0(t.String_list, t.W)
-                    n = new F.c(t.n)
+                    n = new Sgls.c(t.n)
                     n.c = n
                     n.b = n
-                    m = new F.c(t.p)
+                    m = new Sgls.c(t.p)
                     m.c = m
                     m.b = m
-                    l = new F.c(t.g)
+                    l = new Sgls.c(t.g)
                     l.c = l
                     l.b = l
-                    k = new F.c(t.G)
+                    k = new Sgls.c(t.G)
                     k.c = k
                     k.b = k
-                    j = new F.c(t._)
+                    j = new Sgls.c(t._)
                     j.c = j
                     j.b = j
-                    i = new F.c(t.e)
+                    i = new Sgls.c(t.e)
                     i.c = i
                     i.b = i
-                    h = new F.c(t.k)
+                    h = new Sgls.c(t.k)
                     h.c = h
                     h.b = h
-                    g = new F.c(t.l)
+                    g = new Sgls.c(t.l)
                     g.c = g
                     g.b = g
-                    f = new F.c(t.m)
+                    f = new Sgls.c(t.m)
                     f.c = f
                     f.b = f
                     e = t.i
@@ -4850,31 +4853,31 @@
                         n = H.set_run_time_type_info([], t.q)
                         m = H.set_run_time_type_info([], t.H)
                         l = P.a0(t.String_list, t.W)
-                        k = new F.c(t.n)
+                        k = new Sgls.c(t.n)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.p)
+                        j = new Sgls.c(t.p)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.g)
+                        i = new Sgls.c(t.g)
                         i.c = i
                         i.b = i
-                        h = new F.c(t.G)
+                        h = new Sgls.c(t.G)
                         h.c = h
                         h.b = h
-                        g = new F.c(t._)
+                        g = new Sgls.c(t._)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.e)
+                        f = new Sgls.c(t.e)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.k)
+                        e = new Sgls.c(t.k)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.l)
+                        d = new Sgls.c(t.l)
                         d.c = d
                         d.b = d
-                        c = new F.c(t.m)
+                        c = new Sgls.c(t.m)
                         c.c = c
                         c.b = c
                         b = t.i
@@ -4895,31 +4898,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -4940,31 +4943,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -4985,31 +4988,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5031,31 +5034,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5076,31 +5079,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5121,31 +5124,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5166,31 +5169,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5211,31 +5214,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5256,31 +5259,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5302,31 +5305,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5350,31 +5353,31 @@
                         o = H.set_run_time_type_info([], t.q)
                         n = H.set_run_time_type_info([], t.H)
                         m = P.a0(t.String_list, t.W)
-                        l = new F.c(t.n)
+                        l = new Sgls.c(t.n)
                         l.c = l
                         l.b = l
-                        k = new F.c(t.p)
+                        k = new Sgls.c(t.p)
                         k.c = k
                         k.b = k
-                        j = new F.c(t.g)
+                        j = new Sgls.c(t.g)
                         j.c = j
                         j.b = j
-                        i = new F.c(t.G)
+                        i = new Sgls.c(t.G)
                         i.c = i
                         i.b = i
-                        h = new F.c(t._)
+                        h = new Sgls.c(t._)
                         h.c = h
                         h.b = h
-                        g = new F.c(t.e)
+                        g = new Sgls.c(t.e)
                         g.c = g
                         g.b = g
-                        f = new F.c(t.k)
+                        f = new Sgls.c(t.k)
                         f.c = f
                         f.b = f
-                        e = new F.c(t.l)
+                        e = new Sgls.c(t.l)
                         e.c = e
                         e.b = e
-                        d = new F.c(t.m)
+                        d = new Sgls.c(t.m)
                         d.c = d
                         d.b = d
                         c = t.i
@@ -5394,31 +5397,31 @@
                     p = H.set_run_time_type_info([], t.q)
                     o = H.set_run_time_type_info([], t.H)
                     n = P.a0(t.String_list, t.W)
-                    m = new F.c(t.n)
+                    m = new Sgls.c(t.n)
                     m.c = m
                     m.b = m
-                    l = new F.c(t.p)
+                    l = new Sgls.c(t.p)
                     l.c = l
                     l.b = l
-                    k = new F.c(t.g)
+                    k = new Sgls.c(t.g)
                     k.c = k
                     k.b = k
-                    j = new F.c(t.G)
+                    j = new Sgls.c(t.G)
                     j.c = j
                     j.b = j
-                    i = new F.c(t._)
+                    i = new Sgls.c(t._)
                     i.c = i
                     i.b = i
-                    h = new F.c(t.e)
+                    h = new Sgls.c(t.e)
                     h.c = h
                     h.b = h
-                    g = new F.c(t.k)
+                    g = new Sgls.c(t.k)
                     g.c = g
                     g.b = g
-                    f = new F.c(t.l)
+                    f = new Sgls.c(t.l)
                     f.c = f
                     f.b = f
-                    e = new F.c(t.m)
+                    e = new Sgls.c(t.m)
                     e.c = e
                     e.b = e
                     d = t.i
@@ -5527,31 +5530,31 @@
                     b = H.set_run_time_type_info([], t.q),
                     a = H.set_run_time_type_info([], t.H),
                     a0 = P.a0(t.String_list, t.W),
-                    a1 = new F.c(t.n)
+                    a1 = new Sgls.c(t.n)
                 a1.c = a1
                 a1.b = a1
-                s = new F.c(t.p)
+                s = new Sgls.c(t.p)
                 s.c = s
                 s.b = s
-                r = new F.c(t.g)
+                r = new Sgls.c(t.g)
                 r.c = r
                 r.b = r
-                q = new F.c(t.G)
+                q = new Sgls.c(t.G)
                 q.c = q
                 q.b = q
-                p = new F.c(t._)
+                p = new Sgls.c(t._)
                 p.c = p
                 p.b = p
-                o = new F.c(t.e)
+                o = new Sgls.c(t.e)
                 o.c = o
                 o.b = o
-                n = new F.c(t.k)
+                n = new Sgls.c(t.k)
                 n.c = n
                 n.b = n
-                m = new F.c(t.l)
+                m = new Sgls.c(t.l)
                 m.c = m
                 m.b = m
-                l = new F.c(t.m)
+                l = new Sgls.c(t.m)
                 l.c = l
                 l.b = l
                 k = t.i
@@ -5573,31 +5576,31 @@
                     b = H.set_run_time_type_info([], t.q),
                     a = H.set_run_time_type_info([], t.H),
                     a0 = P.a0(t.String_list, t.W),
-                    a1 = new F.c(t.n)
+                    a1 = new Sgls.c(t.n)
                 a1.c = a1
                 a1.b = a1
-                s = new F.c(t.p)
+                s = new Sgls.c(t.p)
                 s.c = s
                 s.b = s
-                r = new F.c(t.g)
+                r = new Sgls.c(t.g)
                 r.c = r
                 r.b = r
-                q = new F.c(t.G)
+                q = new Sgls.c(t.G)
                 q.c = q
                 q.b = q
-                p = new F.c(t._)
+                p = new Sgls.c(t._)
                 p.c = p
                 p.b = p
-                o = new F.c(t.e)
+                o = new Sgls.c(t.e)
                 o.c = o
                 o.b = o
-                n = new F.c(t.k)
+                n = new Sgls.c(t.k)
                 n.c = n
                 n.b = n
-                m = new F.c(t.l)
+                m = new Sgls.c(t.l)
                 m.c = m
                 m.b = m
-                l = new F.c(t.m)
+                l = new Sgls.c(t.m)
                 l.c = l
                 l.b = l
                 k = t.i
@@ -5916,31 +5919,31 @@
                     d = H.set_run_time_type_info([], t.q),
                     c = H.set_run_time_type_info([], t.H),
                     b = P.a0(t.String_list, t.W),
-                    a = new F.c(t.n)
+                    a = new Sgls.c(t.n)
                 a.c = a
                 a.b = a
-                s = new F.c(t.p)
+                s = new Sgls.c(t.p)
                 s.c = s
                 s.b = s
-                r = new F.c(t.g)
+                r = new Sgls.c(t.g)
                 r.c = r
                 r.b = r
-                q = new F.c(t.G)
+                q = new Sgls.c(t.G)
                 q.c = q
                 q.b = q
-                p = new F.c(t._)
+                p = new Sgls.c(t._)
                 p.c = p
                 p.b = p
-                o = new F.c(t.e)
+                o = new Sgls.c(t.e)
                 o.c = o
                 o.b = o
-                n = new F.c(t.k)
+                n = new Sgls.c(t.k)
                 n.c = n
                 n.b = n
-                m = new F.c(t.l)
+                m = new Sgls.c(t.l)
                 m.c = m
                 m.b = m
-                l = new F.c(t.m)
+                l = new Sgls.c(t.m)
                 l.c = l
                 l.b = l
                 k = t.i
@@ -7919,10 +7922,10 @@
                     if (a === 1) return P.ai(b, r)
                     while (true) switch (switch_branch) {
                         case 0:
-                            F.tw()
+                            Sgls.tw()
                             q = W.nK()
                             $.md = q
-                            W.es(q, "load", F.vg(), !1)
+                            W.es(q, "load", Sgls.vg(), !1)
                             $.md.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAADFBMVEX/AAD/AP8A/wD///8SU+EWAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwaCg0BGtaVrQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADHUlEQVRYw+2WPY6jMBTHLejhMNOu4BRkpTTp5xIgzQGmilKmSjFUkbZFCpp6tN3mHGikpAK8/r/nZwhxMlllViOtFsWxsX/2+7SNKj941E7r/lr5Q6BNuW5iqqtv3xLlBtKW67jpd3XY75SyAF4wAwMAwpqLAVgEADuDANOu4iahCQ7AIAaUSrBalbYEDCI+BESPiyJk0KukmCnlzMybHHVXLD4M9w35oIJC6R4FbVm6UNw2QB0UoQcIawGaoIg9QNwI0AZF6gHSVgAdFNoDmH4BXp88gOl7FeD92QOYvvcTYDBvAAE5ET4AYpySPgCKOjO9gDHVOcoLGGc5V3sB424XLC9gAvYZ+WAT1Joa0KahxEWWx/0AkKntAJhBQANApjYEcDZhx+kB2JKpdTQA2GEjoGLzEidCN0kVW4BmKCilegGedRttU0RTgBpKhQ544iC+DkADpWIHFJwGwQCY5SFGACwPMU5JUtAoKkDFZicjoI5gqjOTze5HAOeFA2r0hWOAM+tiLCQ3z2LxGedDnVSjnNwqFU3OKDho6KDTltu049SuhYtT3os4Bu0BKjuOrTCFdjPaOERHVinMxip0HsixPPKLYvmKTxS5M0aeVWxBnWzjJqrCOhks4B3nAAwCOgNEBJaXg4vFWBGiJBSUg4sVFSWtmc5UAGyqNdM6CsvKwWWdZR01cfXI3dbVk2BNA/Yp+WCX5TSPxncFiZAXB5ivALIGXwM+ALcuANQ/Ht5+ngHbsI4AoK7eHpKrK5zcmxd18FkhLicdrgGkw00ioOhVJcfA2Eynw6UVnA5j4CYzT4J1fz5cGnDfD38RkM+DLwTc7f/VwLXb/37g/nz4D/yTwEuWPWbmKTN6ynI5K7P5JkNZZtlMLbWe5Vp3m1x35jdfLg6zfL/q8l/fu4XWB7XW+ghgpQHoPTrzwwJtKoo6TGPNHUcZcIA0FlwfLgLTIitfBES3rwROlLQvh8VkkDyJP+PFPZy0niyPmly90XoON6/sLDuhWx8WRwrWS949IlAIGIK1ybs5grXer44U7pKjXdKfCTe9I9zzzew3hQ1VpfX/zmMAAAAASUVORK5CYII="
                             switch_branch = 2
                             return P.a2($.nt().a, $async$jv)
@@ -8220,7 +8223,7 @@
                 this.b = b
             }
         }
-    var w = [A, C, F, H, J, L, LanData, P, Q, S, T, V, W, X, Y, HtmlRenderer]
+    var w = [A, C, Sgls, H, J, L, LanData, P, Q, S, T, V, W, X, Y, HtmlRenderer]
     var $ = {}
     H.Js_Const.prototype = {}
     J.Interceptor.prototype = {
@@ -13266,7 +13269,7 @@
             else r.textContent = " " + H.e(i.dx) + " "
             r = i.x
             r.toString
-            q = F.get_sgl_css(i.fy)
+            q = Sgls.get_sgl_css(i.fy)
             r.classList.add(q)
             if (J.nz(i.fy, $.aD())) i.y.textContent = " " + H.e(i.dx) + " "
             p = s.h(b, 4)
@@ -13398,7 +13401,7 @@
                 r = "" + C.d.R(a.c / 4) + "px"
                 q = s.z.style
                 q.width = r
-                s.fx = '<div class="plr_body ' + s.cy + '"><div class="sgl ' + H.e(F.get_sgl_css(s.fy)) + '"></div>' + H.e(s.y.outerHTML) + '<div class="maxhp" style="width: ' + r + '" /></div>'
+                s.fx = '<div class="plr_body ' + s.cy + '"><div class="sgl ' + H.e(Sgls.get_sgl_css(s.fy)) + '"></div>' + H.e(s.y.outerHTML) + '<div class="maxhp" style="width: ' + r + '" /></div>'
                 return s.fr
             }
             if (a instanceof T.bB) return '<div class="damage">' + H.e(a.a) + "</div>"
@@ -13422,7 +13425,7 @@
         },
         $S: 17
     }
-    F.k7.prototype = {
+    Sgls.k7.prototype = {
         $2(a, b) {
             var s, r, q = "data:image/gif;base64," + H.e(b),
                 p = $.e_
@@ -13435,7 +13438,7 @@
         },
         $S: 65
     }
-    F.k4.prototype = {
+    Sgls.k4.prototype = {
         $0() {
             var s, r, q, p, o, n, m, l, k, j, i, h = new Array($.d7())
             h.fixed$length = Array
@@ -13466,13 +13469,13 @@
         },
         $S: 44
     }
-    F.k5.prototype = {
+    Sgls.k5.prototype = {
         $1(a) {
             return ((a ^ 6) >>> 0) * 99 + 218 & 255
         },
         $S: 2
     }
-    F.k6.prototype = {
+    Sgls.k6.prototype = {
         $1(a) {
             var s, r, q, p = this,
                 o = p.a
@@ -13502,7 +13505,7 @@
         },
         $S: 23
     }
-    F.c.prototype = {
+    Sgls.c.prototype = {
         j(a, b) {
             var s, r, q, p = this
             if (b.a === p) return
@@ -13532,7 +13535,7 @@
             return !0
         },
         ga0(a) {
-            return new F.a_(this, this.b, this.$ti.i("a_<1*>"))
+            return new Sgls.a_(this, this.b, this.$ti.i("a_<1*>"))
         },
         gp(a) {
             return this.a
@@ -13581,7 +13584,7 @@
             return this.c = a
         }
     }
-    F.a_.prototype = {
+    Sgls.a_.prototype = {
         gC() {
             return this.b
         },
@@ -13599,7 +13602,7 @@
             return !0
         }
     }
-    F.n.prototype = {
+    Sgls.n.prototype = {
         ga4() {
             return 1e4
         },
@@ -14748,31 +14751,31 @@
             m = H.set_run_time_type_info([], t.q)
             l = H.set_run_time_type_info([], t.H)
             k = P.a0(t.String_list, t.W)
-            j = new F.c(t.n)
+            j = new Sgls.c(t.n)
             j.c = j
             j.b = j
-            i = new F.c(t.p)
+            i = new Sgls.c(t.p)
             i.c = i
             i.b = i
-            h = new F.c(t.g)
+            h = new Sgls.c(t.g)
             h.c = h
             h.b = h
-            g = new F.c(t.G)
+            g = new Sgls.c(t.G)
             g.c = g
             g.b = g
-            f = new F.c(t._)
+            f = new Sgls.c(t._)
             f.c = f
             f.b = f
-            e = new F.c(t.e)
+            e = new Sgls.c(t.e)
             e.c = e
             e.b = e
-            d = new F.c(t.k)
+            d = new Sgls.c(t.k)
             d.c = d
             d.b = d
-            c = new F.c(t.l)
+            c = new Sgls.c(t.l)
             c.c = c
             c.b = c
-            b = new F.c(t.m)
+            b = new Sgls.c(t.m)
             b.c = b
             b.b = b
             a = t.i
@@ -14968,31 +14971,31 @@
                 n = H.set_run_time_type_info([], t.q)
                 m = H.set_run_time_type_info([], t.H)
                 l = P.a0(t.String_list, t.W)
-                k = new F.c(t.n)
+                k = new Sgls.c(t.n)
                 k.c = k
                 k.b = k
-                j = new F.c(t.p)
+                j = new Sgls.c(t.p)
                 j.c = j
                 j.b = j
-                i = new F.c(t.g)
+                i = new Sgls.c(t.g)
                 i.c = i
                 i.b = i
-                h = new F.c(t.G)
+                h = new Sgls.c(t.G)
                 h.c = h
                 h.b = h
-                g = new F.c(t._)
+                g = new Sgls.c(t._)
                 g.c = g
                 g.b = g
-                f = new F.c(t.e)
+                f = new Sgls.c(t.e)
                 f.c = f
                 f.b = f
-                e = new F.c(t.k)
+                e = new Sgls.c(t.k)
                 e.c = e
                 e.b = e
-                d = new F.c(t.l)
+                d = new Sgls.c(t.l)
                 d.c = d
                 d.b = d
-                c = new F.c(t.m)
+                c = new Sgls.c(t.m)
                 c.c = c
                 c.b = c
                 b = t.i
@@ -16859,7 +16862,7 @@
             r.z = r.y
             r.id = $.T()
             r.A = !1
-            for (s = r.rx, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.ar(r)
+            for (s = r.rx, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.ar(r)
         },
         ci() {
             var s, r, q, p, o, n, m, l, k, j, i = this,
@@ -16886,7 +16889,7 @@
             s = p.cy * (b.n() & 3)
             r = p.ry
             if (!r.gbv(r))
-                for (r = new F.a_(r, r.b, r.$ti.i("a_<1*>")); r.u();) s = r.b.x.fo(s, b, c)
+                for (r = new Sgls.a_(r, r.b, r.$ti.i("a_<1*>")); r.u();) s = r.b.x.fo(s, b, c)
             r = p.l = p.l + s
             q = $.bx()
             if (r > q) {
@@ -16938,19 +16941,19 @@
         },
         fn(a, b, c) {
             var s, r
-            for (s = this.x1, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")), r = null; s.u();) r = s.b.aN(r, a, b, c)
+            for (s = this.x1, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")), r = null; s.u();) r = s.b.aN(r, a, b, c)
             return r
         },
         at(a, b) {
             var s
             this.a_ = !0
             b.a.push($.K())
-            for (s = this.x2, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.at(a, b)
+            for (s = this.x2, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.at(a, b)
             this.a_ = !1
         },
         du(a, b, c, d, e, f) {
             var s, r
-            for (s = this.y1, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) {
+            for (s = this.y1, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) {
                 a = s.b.dv(a, b, c, this, d, e, f)
                 r = $.ao()
                 if (a == r) return r
@@ -16959,7 +16962,7 @@
         },
         aq(a, b, c, d, e) {
             var s
-            for (s = this.y2, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) a = s.b.aq(a, b, c, d, e)
+            for (s = this.y2, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) a = s.b.aq(a, b, c, d, e)
             return a
         },
         a3(a, b, c, d, e, f) {
@@ -17022,7 +17025,7 @@
         },
         cr(a, b, c, d, e) {
             var s
-            for (s = this.G, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.aD(a, c, d, e)
+            for (s = this.G, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();) s.b.aD(a, c, d, e)
             if (this.fx <= $.a()) {
                 this.bm(b, c, d, e)
                 return b
@@ -17039,7 +17042,7 @@
             r = new T.dp()
             r.a = q.e
             p.push(T.f(s, b, r, null, null, $.b1(), 1000, 100))
-            for (p = q.L, p = new F.a_(p, p.b, p.$ti.i("a_<1*>")); p.u();)
+            for (p = q.L, p = new Sgls.a_(p, p.b, p.$ti.i("a_<1*>")); p.u();)
                 if (p.b.b1(a, b, c, d)) break
             if (q.fx > $.a()) return
             q.y.dj(q)
@@ -17047,7 +17050,7 @@
         },
         bS(a, b, c) {
             var s
-            for (s = this.S, s = new F.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();)
+            for (s = this.S, s = new Sgls.a_(s, s.b, s.$ti.i("a_<1*>")); s.u();)
                 if (s.b.bS(a, b, c)) break
         },
         k(a) {
@@ -17771,31 +17774,31 @@
                 n = H.set_run_time_type_info([], t.q)
                 m = H.set_run_time_type_info([], t.H)
                 l = P.a0(t.String_list, t.W)
-                k = new F.c(t.n)
+                k = new Sgls.c(t.n)
                 k.c = k
                 k.b = k
-                j = new F.c(t.p)
+                j = new Sgls.c(t.p)
                 j.c = j
                 j.b = j
-                i = new F.c(t.g)
+                i = new Sgls.c(t.g)
                 i.c = i
                 i.b = i
-                h = new F.c(t.G)
+                h = new Sgls.c(t.G)
                 h.c = h
                 h.b = h
-                g = new F.c(t._)
+                g = new Sgls.c(t._)
                 g.c = g
                 g.b = g
-                f = new F.c(t.e)
+                f = new Sgls.c(t.e)
                 f.c = f
                 f.b = f
-                e = new F.c(t.k)
+                e = new Sgls.c(t.k)
                 e.c = e
                 e.b = e
-                d = new F.c(t.l)
+                d = new Sgls.c(t.l)
                 d.c = d
                 d.b = d
-                c = new F.c(t.m)
+                c = new Sgls.c(t.m)
                 c.c = c
                 c.b = c
                 b = t.i
@@ -18517,7 +18520,7 @@
         instance_0i(i, "gbc", "dI", 0)
         l(i, "gfd", "fe", 33)
         k(i, "gel", 0, 0, null, ["$1", "$0"], ["c5", "em"], 34, 0, 0)
-        static_1(F, "vg", "tv", 8)
+        static_1(Sgls, "vg", "tv", 8)
         install_static_tear_off(T, "v6", 5, null, ["$5"], ["ty"], 1, 0)
         install_static_tear_off(T, "v7", 5, null, ["$5"], ["tA"], 1, 0)
         install_static_tear_off(T, "v9", 5, null, ["$5"], ["tC"], 1, 0)
@@ -18542,7 +18545,7 @@
             inherit = hunkHelpers.inherit,
             inherit_may = hunkHelpers.inheritMany
         inherit(P.Object, null)
-        inherit_may(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.function_parameters, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, HtmlRenderer.fq, HtmlRenderer.jT, HtmlRenderer.ax, F.a_, F.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
+        inherit_may(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.function_parameters, H.iu, P.l8, P.i_, P.f3, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, HtmlRenderer.fq, HtmlRenderer.jT, HtmlRenderer.ax, Sgls.a_, Sgls.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
         inherit_may(J.Interceptor, [J.JsBool, J.JsNull, J.bE, J.JsArray, J.dA, J.JsString, H.dJ, H.ab, W.fn, W.bX, W.fe, W.i6, W.bb, W.ja, W.jb, W.o, W.c4, W.jL, W.ig, W.il, W.iy, W.iA])
         inherit_may(J.bE, [J.fO, J.bs, J.JavaScriptFunction])
         inherit(J.jG, J.JsArray)
@@ -18551,17 +18554,17 @@
         inherit(P.dE, P.ev)
         inherit_may(P.dE, [H.cJ, W.az])
         inherit(H.ff, H.cJ)
-        inherit_may(P.L, [H.A, H.c6, H.cf, P.dy, H.ip, F.c])
+        inherit_may(P.L, [H.A, H.c6, H.cf, P.dy, H.ip, Sgls.c])
         inherit_may(H.A, [H.M, H.dC])
         inherit(H.dr, H.c6)
         inherit_may(P.fv, [H.fB, H.hX])
         inherit_may(H.M, [H.y, H.a9, P.id])
         inherit(H.dP, P.bc)
-        inherit_may(H.c_, [H.j5, H.j6, H.kg, H.jH, H.lv, H.lx, P.kB, P.kA, P.lh, P.kK, P.kS, P.ke, P.kZ, P.jc, P.jd, W.jf, W.kF, W.jP, W.jO, W.l0, W.l1, W.l7, P.lE, P.lF, L.iS, L.iT, L.iU, V.j0, V.j1, X.iX, X.iY, X.iZ, HtmlRenderer.jx, HtmlRenderer.jy, HtmlRenderer.jw, HtmlRenderer.jz, HtmlRenderer.jB, HtmlRenderer.jC, HtmlRenderer.jD, HtmlRenderer.jV, HtmlRenderer.lp, HtmlRenderer.lq, F.k5, F.k6, T.k9, T.jk, T.jj, T.jl, T.ji, T.lD, T.jW, T.k3, T.kb, T.ko, T.kp, LanData.k_])
+        inherit_may(H.c_, [H.j5, H.j6, H.kg, H.jH, H.lv, H.lx, P.kB, P.kA, P.lh, P.kK, P.kS, P.ke, P.kZ, P.jc, P.jd, W.jf, W.kF, W.jP, W.jO, W.l0, W.l1, W.l7, P.lE, P.lF, L.iS, L.iT, L.iU, V.j0, V.j1, X.iX, X.iY, X.iZ, HtmlRenderer.jx, HtmlRenderer.jy, HtmlRenderer.jw, HtmlRenderer.jz, HtmlRenderer.jB, HtmlRenderer.jC, HtmlRenderer.jD, HtmlRenderer.jV, HtmlRenderer.lp, HtmlRenderer.lq, Sgls.k5, Sgls.k6, T.k9, T.jk, T.jj, T.jl, T.ji, T.lD, T.jW, T.k3, T.kb, T.ko, T.kp, LanData.k_])
         inherit_may(H.kg, [H.kc, H.dg])
         inherit(P.dG, P.aU)
         inherit_may(P.dG, [H.JsLinkedHashMap, P.ic, W.i2])
-        inherit_may(H.j6, [H.lw, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, F.k7, LanData.load_lan, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
+        inherit_may(H.j6, [H.lw, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, Sgls.k7, LanData.load_lan, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
         inherit(H.hZ, P.dy)
         inherit(H.cw, H.ab)
         inherit_may(H.cw, [H.ey, H.eA])
@@ -18571,7 +18574,7 @@
         inherit(H.dK, H.eB)
         inherit_may(H.dK, [H.fE, H.fF, H.fG, H.fH, H.fI, H.dL, H.cx])
         inherit(H.eI, H.i9)
-        inherit_may(H.j5, [P.kC, P.kD, P.l9, P.jp, P.kH, P.kO, P.kM, P.kJ, P.kN, P.kI, P.kR, P.kQ, P.kP, P.kf, P.l2, P.kW, P.lo, P.kY, P.km, P.kl, X.je, X.j9, HtmlRenderer.jE, F.k4])
+        inherit_may(H.j5, [P.kC, P.kD, P.l9, P.jp, P.kH, P.kO, P.kM, P.kJ, P.kN, P.kI, P.kR, P.kQ, P.kP, P.kf, P.l2, P.kW, P.lo, P.kY, P.km, P.kl, X.je, X.j9, HtmlRenderer.jE, Sgls.k4])
         inherit(P.cg, P.i4)
         inherit(P.cK, P.im)
         inherit(P.eF, P.em)
@@ -18610,7 +18613,7 @@
         inherit(P.kx, P.kw)
         inherit(P.cF, P.p)
         inherit(HtmlRenderer.fW, HtmlRenderer.ax)
-        inherit_may(F.n, [T.q, T.aZ, T.aB, T.bq, T.cB, T.bH, T.ah, T.aV, T.aF])
+        inherit_may(Sgls.n, [T.q, T.aZ, T.aB, T.bq, T.cB, T.bH, T.ah, T.aV, T.aF])
         inherit_may(T.q, [T.b5, T.h6, T.he, T.hn, T.hq, T.ea, T.ef, T.cb, T.e6, T.hl, T.hs, T.eb, T.ed, T.hw, T.hC, T.hJ, T.hK])
         inherit_may(T.b5, [T.e1, T.h5, T.h7, T.dd, T.h9, T.ha, T.e3, T.e4, T.e5, T.hf, T.hh, T.hi, T.cc, T.e7, T.hk, T.e8, T.e9, T.ho, T.ht, T.hv, T.ec, T.hx, T.hu, T.hB, T.hG, T.hj, T.hH, T.hI, T.e2, T.hb, T.dl, T.hd, T.hm, T.dB, T.hp, T.hr, T.hA, T.h8, T.hD, T.bI, T.hg, T.ee, T.hz])
         inherit_may(T.aZ, [T.dj, T.dw, T.dx, T.eh, T.bd, T.h1])
@@ -19164,7 +19167,7 @@
             return 21
         })
         lazy_old($, "zV", "nv", function () {
-            return new F.k4().$0()
+            return new Sgls.k4().$0()
         })
         lazy_old($, "zS", "nt", function () {
             return P.rM(t.String_list)
