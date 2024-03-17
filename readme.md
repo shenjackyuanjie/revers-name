@@ -10,6 +10,7 @@ h_(k) -> fYwD -> 名称输入 session storage
 - `Z` -> `HtmlRenderer`
 - `O`
   - `d` -> `get_obfuscated_value`
+  - `eq` -> `obfuscate_str_h`
 
 ## `md5.js`
 
