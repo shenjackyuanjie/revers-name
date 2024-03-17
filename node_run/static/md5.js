@@ -3339,7 +3339,8 @@
                 s.e8(mill_sec, callback)
                 return s
             },
-            am(a) {
+            make_async_await_completer(a) {
+                // _Future<0> _AsyncAwaitCompleter<0>
                 return new P.i_(new P.U($.P, a.i("U<0>")), a.i("i_<0>"))
             },
             ak(a, b) {
@@ -3347,10 +3348,10 @@
                 b.b = true
                 return b.a
             },
-            a2(a, b) {
+            async_await(a, b) {
                 P.uf(a, b)
             },
-            aj(a, b) {
+            async_return(a, b) {
                 b.bM(0, a)
             },
             ai(a, b) {
@@ -3371,7 +3372,7 @@
                     }
                 }
             },
-            an(a) {
+            wrap_js_function_for_async(a) {
                 var s = function (b, c) {
                     return function (d, e) {
                         while (true) try {
@@ -4394,11 +4395,11 @@
         Q = {
             main_func() {
                 var switch_branch = 0,
-                    r = P.am(t.z),
+                    r = P.make_async_await_completer(t.z),
                     q, switch_to = 2,
                     o, n = [],
                     m, l, k, j, input_name, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0
-                var $async$iE = P.an(function (b1, b2) {
+                var $async$iE = P.wrap_js_function_for_async(function (b1, b2) {
                     if (b1 === 1) {
                         o = b2
                         switch_branch = switch_to
@@ -4422,7 +4423,7 @@
                             // 抄tinman的https://tinman00.github.io/100/namerena/md5.js
                             $.ox = `@@ABMECIGUB@OK@CHBAA@FCMFNBEABCICEG@DJDGBGHMDALBAHHEDIEFB@AACFLCFDC@ABIC@DBLIABFPCFDCTD@B@@ID@@EHDI@GDGFDAH@ABBAGBBF@PKALADHG@AAOC@EJ@@FCHC@MLKBAHBGDAKDGA\\C@A@FHE@TTHWCGHJBBAFBSGCAAF@I@D@A@AC@AGIFXHBAEU@@@AMTGFF@AAIBJGAKAAAE@BJIMH@CAAHAABC@DD@L@AABEDFECBCT@BGED@GDF@CFDDGH@ACDBDH@DAFOBBIKD@ICJGCAH@GBADBDGDH@@DIY@BFDEOEAS@G@DIN@GABNHECOCBEAHPBC@AIBDAFBDWB@GCAB@EACD@DE@@FFDB@JBFAENJ@L@JMM@R@JD@@DBCFCDAB@@@EBABCEA@PAEBKB@@@DXBCACFABCDFBIAFDBAEAFCY@LB@EHH@B@BIIDFGDOCH@EB@LFCCCDCE@BF@DG@LNDQKKCC@FACDFCGBCSC@CLI@CHLBHELHA@BCA@AABSBBBNBFI@MBCMB@UB@PNA@DEJ_GOD@DKDBIMC@BMBBADFVEB@DCBA@AG@HE@FDCE@AC@EBBL]@AF@@A@FBHBECJAFDAMBA@EBEICGFDCEBADMC@LC@FH@D@@EEBAFPAHIAAACBBD@BBBCCDCB@GDHCMHAGAGA@HVBFCRCDHCJBERJBBEBEIGOAD@WBDCDKAACK@BAMAOADFE@@EUFAF@NKICDFBFWLAIICBABBKWBGLLZAGHBA@AB@A@DEBG@HER@CDAO@@FCDA@EOFB@DBOJRAAAABCAFFDBAAKDB@ACD@FC@I@@EB@HHCBGCCLCB@BDBA@BFBBHNIA@DDQA@@@EAO@EHIGBOAFSAZCGJRCN@CMJL@CACE@HCIDTBGSFAA@AA@DFBA@J@DJDGEBEFBBHIJ@GCFGDLBA@@DBBD@FA@TBCAIHAJ@CCLHDA@DHFF@HJCF@DEAJE@JGI@ABFJEDKD@DGEICHECPMDBIELA@D[F@HDGDABBND@CAKHBCCDOAJACEE@CIDFVALABQAC@P@HBBBKBA@AM@@RCAC@PKD@HC@@IABD@PCFFA@NQD@DBJFJCAAA@HACFFBAAJ@AM@GDBECBADD@D@@CNK@@FPEJGDATACFJQANKADFA@LKVGEAJQAAB@@KDA@C@DCAEBAADBNHCCE@@@AACGED@JBBFBHANAFMAASHDC@DBIJJHDECAD@FDAFECDGC@GHQB@@BBCEFEXABBA@@EIIJF@@DEC@AAQCA@A@CIBGNACK@CHLEFBCBD@BOIB@BJDEGFD@AL@INECCAUAXHBBEDWBBA@BBLDADD@BHB@D@HHFB@GGAKABAAEGCKFJHJC@@@HECDDVBL@BCLB@DEEE@BDFN[@DPA@DF@AAFF@B@EGEDG@ABBBFCAAA@FPAJBBACBBFGA@@@D@LOOBBQDGDOJRACGABCUCAHGBF@BBKDAA@FCCO[AAIALA@SKHKB@ABRLDDBC@CAEAFBGFCLA@DBFFB@A@EG]DEGEBQWKMB@NBBMEADKI^@@@KHED@P@CC@FACZNADAM@IADC@V@@@A@IO@CKEEKCBLIBCBG@AEBCANA@BJAFBAVCLDGHCKPDEDLIFHBL@@FF@DH@ABDGFDF@HLDIBAEBCF@@BLFBA@AAFBCDBBFA@FBL@AA@AABBCFEEAFCJUICDI@@@I@AA@FBBDFE@C@AKAEBBBC@EGAEKACA@@B@AGHMHHD@ACGABHBEFVCT@FGADC@DADGDADLPNGBAAAEACF@D@PAH@PELHAEJ@CCKEICAAG@DNDE@CDBF@AEJK@O@DEC@FCICLDNHHDBCANBCE@AGLCDGCHCBCCCA@PECE@K@AJJ@QBNBO@@DODCEBNLFBACBEBFABJCFBOBPKRBB@EAFACGGIC@CGG^DDAFVACFHBBACAJDP@GDM@ABB@GG@@@B@K@EBFFAFB@DGB@FANBH@BQDE@FEBBGJ@FBGBAOAI@DQEJA@KE@ATC@JUG@QADH@@HAB@DDA@JCFFB@AAOCL@MPBAC@@CAQCCAA@@DIUHG@EBUEAIHSERCJK@@GTAD@N@AHRCMEL@HCA@@AICAB@HI@AF@ABLAEW@GBZ@CFNKDCHN@@BDO@@CFL@NDBN@L@AUBHBAEFEEQGAKHQ@@@CAB@KIOCA@CF@P@MA@DLBABARQBA@KCAIDGIDG@JCCBBFBFKED@ABEFBBAHGDBDBBMBDFBDBDDABABD@DPCF\\DB@G@DD@E@G@CV@EBF@O@@CA@BQFDBLAB@BDGHF@@@@BI@DADEBBCDEGCD@A_@EAKACCA@CICDEPKGCEADNABFDCG@DFCBPE@FEDECBAFGBAGCBH@JDAENADAF@CBHACBA@@BCCQCF@FNNBAD@GABKAEBFACGCBFKCGOEBG@DBI@B@GBAJADIOWA@KKLCGFAABAR@TH@BBDAF@DMDA@AHAABREIABAHCED@@EAFHHEBEDSEABNMBAOREEJ@A@ALACIGHFBNPIEDDFDF@@KBHCGBBBOBCAILBFHDMATBDAD@ADFBWHJ@@BACCRC@FJAB@DCFM@IBHCIAF@ED@HAG@@@ECDHBAAHBEKDC@@@BCENC@C@ACDEBDG@A@A@K@BBCNOK@FBCAFIAPFECBBIOEGHDACGBB@@J@ADEECBEG@AACEADD@@JEGACHJ@BDE@JE@IFAQGEBFDDDKUECEEHFD_@CDCG@BJALEB@B@@QEKE@LKBD@ABW@QBNNAL@B@KCADDADA@BD@QBEQ@DQUC@EC@BOGB@AM@DGBAANEIAGFNPEICA@CHEDGDCD@A@LEP@N@CEMFJ@@BIACB@NIBJG@NG^A@EAIMCDHH@BCFEPOJGC@CSNAAAJ@FCGT@FAAOKHXFVFACJHFMAADAA@LA@MHLKTGSZ@HAAJ@AABD@BCBEPDHCJJB@JAABKEBCCEH@D@DBHIAACABAGBBB@EGCACFUDFC@LB@AAFHDBC@G@E@DQD@DKD@CFEBHABANEQ@CCLDAGCAHBA@@@CKC@DAHCGEMJOBGZ@A@CB@AD@ECQ@DAZNN@ACC@@CECDCJAFNJRGBGG@NCBJ@@BI@DBIDCO@B@CCDAAMTGGGCAKDGG@A@ALBA@@FDQ@BA@AB@AVKDJED@@@CDLFC@@C@PCBMCDK@IEHCEAC@CRCOBCAFAGEFUK@@BADGAUFBFIA@H@AI@DDB@BGAAHLVC@KCKBDCBBACHC@A@NI@BEBDIFVF@AGBCIELDIZABAJAFD@AUKS@DJ@@DD@BMHABFBE@IBBDBADAM@GMDBHD@@EAD@BEADGPGGAAFEEABBECKIBAW@BEEQE@DD@FCCAEHJFB@C@E@BMJCB@ALGD@CBC@F@AFJDECAAA@BEO@EBNACDCUH@@K@A@DB@BFECFMAEHDBAEEADFB@EE@CI@ABDBDCAD@A@@B@JCB@FAGJCK@GG@ABFLQ@BHDEHOAB@DBIDSBDBIVA@FD@@ABCAAAA`
                             switch_branch = 3
-                            return P.a2(HtmlRenderer.static_init(), $async$iE)
+                            return P.async_await(HtmlRenderer.static_init(), $async$iE)
 
                         case 3:
                             // main
@@ -4490,7 +4491,7 @@
                                 }
                             }
                             switch_branch = 8
-                            return P.a2(T.c2(h), $async$iE)
+                            return P.async_await(T.c2(h), $async$iE)
                         case 8:
                             a0 = b2
                             HtmlRenderer.init_out(a0)
@@ -4509,7 +4510,7 @@
                             break
                         case 7:
                         case 1:
-                            return P.aj(q, r)
+                            return P.async_return(q, r)
                         case 2:
                             return P.ai(o, r)
                     }
@@ -5725,9 +5726,9 @@
             },
             c2(a) {
                 var s = 0,
-                    r = P.am(t.eF),
+                    r = P.make_async_await_completer(t.eF),
                     q, p, o, n, m, l, k, j, i, h
-                var $async$c2 = P.an(function (b, c) {
+                var $async$c2 = P.wrap_js_function_for_async(function (b, c) {
                     if (b === 1) return P.ai(c, r)
                     while (true) switch (s) {
                         case 0:
@@ -5743,13 +5744,13 @@
                             m = -n
                             l = new T.fo(j, h, k, i, new H.JsLinkedHashMap(t.d5), a, p, o, m, m, new Float64Array(n))
                             s = 3
-                            return P.a2(l.bD(), $async$c2)
+                            return P.async_await(l.bD(), $async$c2)
                         case 3:
                             q = l
                             s = 1
                             break
                         case 1:
-                            return P.aj(q, r)
+                            return P.async_return(q, r)
                     }
                 })
                 return P.ak($async$c2, r)
@@ -7916,9 +7917,9 @@
             },
             static_init() {
                 var switch_branch = 0,
-                    r = P.am(t.z),
+                    r = P.make_async_await_completer(t.z),
                     q, p
-                var $async$jv = P.an(function (a, b) {
+                var $async$jv = P.wrap_js_function_for_async(function (a, b) {
                     if (a === 1) return P.ai(b, r)
                     while (true) switch (switch_branch) {
                         case 0:
@@ -7928,13 +7929,13 @@
                             W.es(q, "load", Sgls.vg(), !1)
                             $.md.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAADFBMVEX/AAD/AP8A/wD///8SU+EWAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwaCg0BGtaVrQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADHUlEQVRYw+2WPY6jMBTHLejhMNOu4BRkpTTp5xIgzQGmilKmSjFUkbZFCpp6tN3mHGikpAK8/r/nZwhxMlllViOtFsWxsX/2+7SNKj941E7r/lr5Q6BNuW5iqqtv3xLlBtKW67jpd3XY75SyAF4wAwMAwpqLAVgEADuDANOu4iahCQ7AIAaUSrBalbYEDCI+BESPiyJk0KukmCnlzMybHHVXLD4M9w35oIJC6R4FbVm6UNw2QB0UoQcIawGaoIg9QNwI0AZF6gHSVgAdFNoDmH4BXp88gOl7FeD92QOYvvcTYDBvAAE5ET4AYpySPgCKOjO9gDHVOcoLGGc5V3sB424XLC9gAvYZ+WAT1Joa0KahxEWWx/0AkKntAJhBQANApjYEcDZhx+kB2JKpdTQA2GEjoGLzEidCN0kVW4BmKCilegGedRttU0RTgBpKhQ544iC+DkADpWIHFJwGwQCY5SFGACwPMU5JUtAoKkDFZicjoI5gqjOTze5HAOeFA2r0hWOAM+tiLCQ3z2LxGedDnVSjnNwqFU3OKDho6KDTltu049SuhYtT3os4Bu0BKjuOrTCFdjPaOERHVinMxip0HsixPPKLYvmKTxS5M0aeVWxBnWzjJqrCOhks4B3nAAwCOgNEBJaXg4vFWBGiJBSUg4sVFSWtmc5UAGyqNdM6CsvKwWWdZR01cfXI3dbVk2BNA/Yp+WCX5TSPxncFiZAXB5ivALIGXwM+ALcuANQ/Ht5+ngHbsI4AoK7eHpKrK5zcmxd18FkhLicdrgGkw00ioOhVJcfA2Eynw6UVnA5j4CYzT4J1fz5cGnDfD38RkM+DLwTc7f/VwLXb/37g/nz4D/yTwEuWPWbmKTN6ynI5K7P5JkNZZtlMLbWe5Vp3m1x35jdfLg6zfL/q8l/fu4XWB7XW+ghgpQHoPTrzwwJtKoo6TGPNHUcZcIA0FlwfLgLTIitfBES3rwROlLQvh8VkkDyJP+PFPZy0niyPmly90XoON6/sLDuhWx8WRwrWS949IlAIGIK1ybs5grXer44U7pKjXdKfCTe9I9zzzew3hQ1VpfX/zmMAAAAASUVORK5CYII="
                             switch_branch = 2
-                            return P.a2($.nt().a, $async$jv)
+                            return P.async_await($.nt().a, $async$jv)
                         case 2:
                             //p = window.sessionStorage.getItem(O.obfuscate_str_h("ll")) // HHbf
                             //这里，window.r要在html中定义！
                             p = window.r
                             if (typeof p == "string") LanData.out_load_lan(t.cF.a(C.C.bt(0, p)))
-                            return P.aj(null, r)
+                            return P.async_return(null, r)
                     }
                 })
                 return P.ak($async$jv, r)
@@ -12216,10 +12217,10 @@
         },
         O() {
             var s = 0,
-                r = P.am(t.d),
+                r = P.make_async_await_completer(t.d),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
-            var $async$O = P.an(function (a, b) {
+            var $async$O = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) switch (s) {
                     case 0:
@@ -12243,7 +12244,7 @@
                         h = H.set_run_time_type_info([m, l, [H.set_run_time_type_info([H.e($.ni()) + p.d++, $.cl()], k)]], j)
                         if (p.z === 0) h.pop()
                         s = 5
-                        return P.a2(T.c2(h), $async$O)
+                        return P.async_await(T.c2(h), $async$O)
                     case 5:
                         g = b
                         f = null
@@ -12253,7 +12254,7 @@
                             break
                         }
                         s = 9
-                        return P.a2(g.O(), $async$O)
+                        return P.async_await(g.O(), $async$O)
                     case 9:
                         e = b
                         if (e == null) {
@@ -12287,7 +12288,7 @@
                         s = 1
                         break
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, r)
                 }
             })
             return P.ak($async$O, r)
@@ -12297,10 +12298,10 @@
         },
         dJ(a, b) {
             var s = 0,
-                r = P.am(t.z),
+                r = P.make_async_await_completer(t.z),
                 q = this,
                 p, o, n, m, l
-            var $async$ae = P.an(function (c, d) {
+            var $async$ae = P.wrap_js_function_for_async(function (c, d) {
                 if (c === 1) return P.ai(d, r)
                 while (true) switch (s) {
                     case 0:
@@ -12314,7 +12315,7 @@
                             break
                         }
                         s = 5
-                        return P.a2(o[m].az(), $async$ae)
+                        return P.async_await(o[m].az(), $async$ae)
                     case 5:
                     case 3:
                         o.length === n || (0, H.F)(o), ++m
@@ -12328,7 +12329,7 @@
                             break
                         }
                         s = 9
-                        return P.a2(n[m].az(), $async$ae)
+                        return P.async_await(n[m].az(), $async$ae)
                     case 9:
                     case 7:
                         n.length === l || (0, H.F)(n), ++m
@@ -12342,7 +12343,7 @@
                         l = P.aa(new H.y(new H.a9(o, n), new L.iU(q), l), !0, l.i("M.E"))
                         C.Array.a5(l, H.fJ(p.buffer, 0, null))
                         A.eR(X.dc(l))
-                        return P.aj(null, r)
+                        return P.async_return(null, r)
                 }
             })
             return P.ak($async$ae, r)
@@ -12410,10 +12411,10 @@
         },
         O() {
             var s = 0,
-                r = P.am(t.d),
+                r = P.make_async_await_completer(t.d),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4
-            var $async$O = P.an(function (a5, a6) {
+            var $async$O = P.wrap_js_function_for_async(function (a5, a6) {
                 if (a5 === 1) return P.ai(a6, r)
                 while (true) switch (s) {
                     case 0:
@@ -12444,7 +12445,7 @@
                             for (f = 0; f < m.length; ++f) g.push(H.set_run_time_type_info(["" + p.e++, l], k))
                         }
                         s = 5
-                        return P.a2(T.c2(h), $async$O)
+                        return P.async_await(T.c2(h), $async$O)
                     case 5:
                         e = a6
                         d = null
@@ -12454,7 +12455,7 @@
                             break
                         }
                         s = 9
-                        return P.a2(e.O(), $async$O)
+                        return P.async_await(e.O(), $async$O)
                     case 9:
                         c = a6
                         if (c == null) {
@@ -12518,7 +12519,7 @@
                         s = 1
                         break
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, r)
                 }
             })
             return P.ak($async$O, r)
@@ -12541,10 +12542,10 @@
         },
         dK(a, b) {
             var s = 0,
-                r = P.am(t.z),
+                r = P.make_async_await_completer(t.z),
                 q = this,
                 p, o, n, m, l
-            var $async$ae = P.an(function (c, d) {
+            var $async$ae = P.wrap_js_function_for_async(function (c, d) {
                 if (c === 1) return P.ai(d, r)
                 while (true) switch (s) {
                     case 0:
@@ -12558,7 +12559,7 @@
                             break
                         }
                         s = 5
-                        return P.a2(o[m].az(), $async$ae)
+                        return P.async_await(o[m].az(), $async$ae)
                     case 5:
                     case 3:
                         o.length === n || (0, H.F)(o), ++m
@@ -12572,7 +12573,7 @@
                         l = P.aa(new H.y(new H.a9(o, n), new V.j1(q), l), !0, l.i("M.E"))
                         C.Array.a5(l, H.fJ(p.buffer, 0, null))
                         A.eR(X.dc(l))
-                        return P.aj(null, r)
+                        return P.async_return(null, r)
                 }
             })
             return P.ak($async$ae, r)
@@ -12635,10 +12636,10 @@
         },
         O() {
             var s = 0,
-                r = P.am(t.d),
+                r = P.make_async_await_completer(t.d),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
-            var $async$O = P.an(function (a, b) {
+            var $async$O = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) switch (s) {
                     case 0:
@@ -12672,7 +12673,7 @@
                         p.b = m + 1
                         k = H.set_run_time_type_info([H.set_run_time_type_info([l, H.set_run_time_type_info(["" + p.c++, "\x02"], e)], o), H.set_run_time_type_info([H.set_run_time_type_info(["" + p.c++, "\x02"], e), H.set_run_time_type_info(["" + p.c++, "\x02"], e)], o)], n)
                         s = 5
-                        return P.a2(T.c2(k), $async$O)
+                        return P.async_await(T.c2(k), $async$O)
                     case 5:
                         j = b
                         i = C.Array.dl(j.c, new X.iX())
@@ -12680,7 +12681,7 @@
                         g = i.Y
                     case 6:
                         s = 8
-                        return P.a2(j.O(), $async$O)
+                        return P.async_await(j.O(), $async$O)
                     case 8:
                         if (!(b != null)) {
                             s = 7
@@ -12696,12 +12697,12 @@
                             break
                         }
                         s = 12
-                        return P.a2(T.c2(k), $async$O)
+                        return P.async_await(T.c2(k), $async$O)
                     case 12:
                         j = b
                     case 13:
                         s = 15
-                        return P.a2(j.O(), $async$O)
+                        return P.async_await(j.O(), $async$O)
                     case 15:
                         if (!(b != null)) {
                             s = 14
@@ -12720,7 +12721,7 @@
                     case 16:
                         ++p.e
                         s = 18
-                        return P.a2(P.jo(new P.c1(1e6), t.z), $async$O)
+                        return P.async_await(P.jo(new P.c1(1e6), t.z), $async$O)
                     case 18:
                         e = p.r
                         e[0] = Date.now() + 1
@@ -12749,7 +12750,7 @@
                         s = 1
                         break
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, r)
                 }
             })
             return P.ak($async$O, r)
@@ -12789,7 +12790,7 @@
             m = P.aa(new H.y(new H.a9(o, n), new X.iZ(q), m), !0, m.i("M.E"))
             C.Array.a5(m, H.fJ(p.buffer, 0, null))
             A.eR(X.dc(m))
-            return P.aj(null, r)
+            return P.async_return(null, r)
         }
     }
     X.iX.prototype = {
@@ -12947,25 +12948,25 @@
             }
         },
         b4() {
-            var switch_branch = 0,
-                r = P.am(t.z),
+            var async_goto = 0,
+                async_completer = P.make_async_await_completer(t.z),
                 q, p = this,
                 o
-            var $async$b4 = P.an(function (a, b) {
-                if (a === 1) return P.ai(b, r)
-                while (true) switch (switch_branch) {
+            var $async$b4 = P.wrap_js_function_for_async(function (async_error_code, async_result) {
+                if (async_error_code === 1) return P.ai(async_result, async_completer)
+                while (true) switch (async_goto) {
                     case 0:
                         p.d = null
                         o = p.Q
-                        switch_branch = o == null || o.a.length === 0 ? 3 : 4
+                        async_goto = o == null || o.a.length === 0 ? 3 : 4
                         break
                     case 3:
-                        switch_branch = 5
-                        return P.a2(p.c.O(), $async$b4)
+                        async_goto = 5
+                        return P.async_await(p.c.O(), $async$b4)
                     case 5:
-                        p.Q = b
-                        switch_branch = 6
-                        return P.a2(P.jo(P.fm(1, 0), t.z), $async$b4)
+                        p.Q = async_result
+                        async_goto = 6
+                        return P.async_await(P.jo(P.fm(1, 0), t.z), $async$b4)
                     case 6:
                         p.db = null
                         p.dx = true
@@ -12973,15 +12974,15 @@
                     case 4:
                         o = p.Q
                         if (o == null) {
-                            switch_branch = 1
+                            async_goto = 1
                             break
                         }
                         p.ft(C.Array.cu(o.a, 0))
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, async_completer)
                 }
             })
-            return P.ak($async$b4, r)
+            return P.ak($async$b4, async_completer)
         },
         ft(a) {
             var s, r, q, p, obj = this
@@ -13203,21 +13204,21 @@
     HtmlRenderer.jE.prototype = {
         $0() {
             var s = 0,
-                r = P.am(t.P),
+                r = P.make_async_await_completer(t.P),
                 q = this,
                 p, o, n
-            var $async$$0 = P.an(function (a, b) {
+            var $async$$0 = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) switch (s) {
                     case 0:
                         n = t.z
                         s = 2
-                        return P.a2(P.jo(P.fm(1, 0), n), $async$$0)
+                        return P.async_await(P.jo(P.fm(1, 0), n), $async$$0)
                     case 2:
                         p = HtmlRenderer.to_canvas(q.b, q.c)
                         o = P.dD(["winners", q.d, "all", q.a.z, "pic", p.toDataURL("image/png", null), "firstKill", q.e.e], n, n)
                         J.m0(W.ll(window.parent), o, "*")
-                        return P.aj(null, r)
+                        return P.async_return(null, r)
                 }
             })
             return P.ak($async$$0, r)
@@ -16041,10 +16042,10 @@
     T.fo.prototype = {
         bD() {
             var s = 0,
-                r = P.am(t.z),
+                r = P.make_async_await_completer(t.z),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3
-            var $async$bD = P.an(function (b4, b5) {
+            var $async$bD = P.wrap_js_function_for_async(function (b4, b5) {
                 if (b4 === 1) return P.ai(b5, r)
                 while (true) switch (s) {
                     case 0:
@@ -16129,7 +16130,7 @@
                         }
                         b0 = a7[h]
                         s = 6
-                        return P.a2(l.h(0, b0).cg(), $async$bD)
+                        return P.async_await(l.h(0, b0).cg(), $async$bD)
                     case 6:
                         n = l.h(0, b0)
                         m = p.b
@@ -16179,23 +16180,23 @@
                         }
                         for (o = p.c, n = o.length, h = 0; h < o.length; o.length === n || (0, H.F)(o), ++h) o[h].l = p.b.n()
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, r)
                 }
             })
             return P.ak($async$bD, r)
         },
         bE() {
             var s = 0,
-                r = P.am(t.z)
-            var $async$bE = P.an(function (a, b) {
+                r = P.make_async_await_completer(t.z)
+            var $async$bE = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) switch (s) {
                     case 0:
                         s = 2
-                        return P.a2(P.jo(P.fm($.C(), 0), t.z), $async$bE)
+                        return P.async_await(P.jo(P.fm($.C(), 0), t.z), $async$bE)
                     case 2:
                         $.mc = $.a()
-                        return P.aj(null, r)
+                        return P.async_return(null, r)
                 }
             })
             return P.ak($async$bE, r)
@@ -16215,11 +16216,11 @@
         },
         O() {
             var s = 0,
-                r = P.am(t.d),
+                r = P.make_async_await_completer(t.d),
                 q, p = [],
                 o = this,
                 n, m, l, k, j, i, h, g, f
-            var $async$O = P.an(function (a, b) {
+            var $async$O = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) $async$outer: switch (s) {
                     case 0:
@@ -16242,7 +16243,7 @@
                         n.a.push(g)
                         o.cx = !0
                         s = 5
-                        return P.a2(o.bE(), $async$O)
+                        return P.async_await(o.bE(), $async$O)
                     case 5:
                         q = n
                         s = 1
@@ -16270,7 +16271,7 @@
                         s = 1
                         break
                     case 1:
-                        return P.aj(q, r)
+                        return P.async_return(q, r)
                 }
             })
             return P.ak($async$O, r)
@@ -16332,7 +16333,7 @@
             j = P.aa(new H.y(new H.a9(p, o), new T.jl(q), j), !0, j.i("M.E"))
             C.Array.a5(j, H.fJ(n.buffer, $.a(), null))
             A.eR(X.dc(j))
-            return P.aj(null, r)
+            return P.async_return(null, r)
         },
         cq(a, b) {
             return this.f7(a, b)
@@ -16365,7 +16366,7 @@
             o = P.aa(new H.y(new H.a9(n, p), new T.ji(q), o), !0, o.i("M.E"))
             C.Array.a5(o, H.fJ(q.dx.buffer, $.a(), null))
             A.eR(X.dc(o))
-            return P.aj(null, r)
+            return P.async_return(null, r)
         },
         gbu(a) {
             return this.f
@@ -16660,14 +16661,14 @@
         },
         cg() {
             var s = 0,
-                r = P.am(t.z),
+                r = P.make_async_await_completer(t.z),
                 q = this
-            var $async$cg = P.an(function (a, b) {
+            var $async$cg = P.wrap_js_function_for_async(function (a, b) {
                 if (a === 1) return P.ai(b, r)
                 while (true) switch (s) {
                     case 0:
                         q.az()
-                        return P.aj(null, r)
+                        return P.async_return(null, r)
                 }
             })
             return P.ak($async$cg, r)
