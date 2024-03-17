@@ -1,0 +1,50 @@
+{
+  "备注": "//mode只有preliminary是测，其它任何字段都是不测 //count应该是测多少次的意思//score是个分数限制，低于这个就认为失败，不记录",
+  "threads": 2,
+  "QP": {
+    "mode": "preliminary",
+    "thresholds": [
+      {
+        "score": 5500,
+        "count": 1000
+      },
+      {
+        "count": 10000,
+        "skillLabel": "QP 100%"
+      }
+    ]
+  },
+  "QD": {
+    "mode": "preliminary",
+    "thresholds": [
+      {
+        "score": 5500,
+        "count": 1000
+      },
+      {
+        "count": 10000
+      }
+    ]
+  },
+  "PP": {
+    "mode": "disabled",
+    "thresholds": [
+      {
+        "count": 10,
+        "score": 6050
+      },
+      {
+        "count": 100,
+        "score": 6850
+      }
+    ]
+  },
+  "PD": {
+    "mode": "disabled",
+    "thresholds": [
+      {
+        "count": 10000
+      }
+    ]
+  }
+}
