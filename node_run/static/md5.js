@@ -4427,7 +4427,7 @@
 
                         case 3:
                             // main
-                            
+
                             switch_to = 5
                             /*m = window.sessionStorage.getItem(O.obfuscate_str_h("k")) // fYwD
                             l = X.f4(m, 0)
@@ -7190,7 +7190,7 @@
                 _.r = g
                 _.x = h
             },
-            dX: function dX(a, b, c, d, e, f, g, h) {
+            RunUpdateWin: function dX(a, b, c, d, e, f, g, h) {
                 var _ = this
                 _.a = a
                 _.b = b
@@ -13016,20 +13016,22 @@
             //     r = C.d.aI(s.scrollHeight) - s.clientHeight
             //     checkScroll = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
             // }
-            if (q.cx instanceof T.dX) q.fQ()
-            else {
-                // s = q.db
-                // if (s == null) {
-                //     s = HtmlRenderer.nS("row")
-                //     q.db = s
-                //     q.b.appendChild(s)
-                //     if (q.dx) q.dx = !1
-                //     else {
-                //         s = q.db;
-                //         (s && C.Q).cJ(s, "\u2003")
-                //     }
-                // } else s.appendChild(document.createTextNode(", "))
-                // q.db.appendChild(HtmlRenderer.uI(q.cx))
+            if (q.cx instanceof T.RunUpdateWin) {
+                q.fQ()
+            } else {
+                s = q.db
+                if (s == null) {
+                    s = HtmlRenderer.nS("row")
+                    q.db = s
+                    q.b.appendChild(s)
+                    if (q.dx) {
+                        q.dx = false
+                    } else {
+                        s = q.db;
+                        (s && C.Q).cJ(s, "\u2003")
+                    }
+                } else s.appendChild(document.createTextNode(", "))
+                q.db.appendChild(HtmlRenderer.uI(q.cx))
                 q.b4()
             }
             // if (checkScroll) {
@@ -16238,7 +16240,7 @@
                         j = LanData.get_obfuscated_value("eTpN")
                         i = $.a()
                         h = $.lJ()
-                        g = new T.dX(i, h, 100, j, k, null, null, null)
+                        g = new T.RunUpdateWin(i, h, 100, j, k, null, null, null)
                         g.aK(j, k, null, null, null, i, h, 100)
                         n.a.push(g)
                         o.cx = !0
@@ -16524,7 +16526,7 @@
         }
     }
     T.h2.prototype = {}
-    T.dX.prototype = {}
+    T.RunUpdateWin.prototype = {}
     T.aq.prototype = {
         k(a) {
             return H.e(this.a)
@@ -18628,7 +18630,7 @@
         inherit(T.fb, T.bZ)
         inherit(T.eg, T.e3)
         inherit_may(T.fr, [T.bF, T.V, T.dF, T.dp])
-        inherit_may(T.aX, [T.h2, T.dX])
+        inherit_may(T.aX, [T.h2, T.RunUpdateWin])
         inherit(T.fY, T.cB)
         inherit(T.cA, T.ah)
         inherit_may(T.aV, [T.ca, T.h0])
