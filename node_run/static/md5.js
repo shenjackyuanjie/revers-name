@@ -5634,8 +5634,8 @@
             },
             parse_string(str) {
                 var s, r, q, grouped, current_group, n, m, l, k, j, i, h, g, f, e = null,
-                    js_array_string = t.E,
-                    c = H.set_run_time_type_info([], js_array_string)
+                    js_array_array_string = t.E,
+                    c = H.set_run_time_type_info([], js_array_array_string)
 
                 // static final RegExp regNewLine = new RegExp(r'\r?\n');
                 // List<String> names = str.split(regNewLine);
@@ -5663,7 +5663,7 @@
                     names.pop() // 移除列表names的最后一个元素
                     // 如果列表names为空
                     if (names.isEmpty) {
-                        return H.set_run_time_type_info([], js_array_string)
+                        return H.set_run_time_type_info([], js_array_array_string)
                     } // 返回一个空列表
                 }
 
@@ -5674,7 +5674,8 @@
                 if (names.contains('')) {
                   grouped = true;
                 }*/
-                js_array_string = t.t
+
+                var js_array_string = t.t
                 current_group = H.set_run_time_type_info([], js_array_string)
 
                 for (s = $.a(), r = t.V, q = !grouped, n = e; s < names.length; ++s) {
@@ -18683,8 +18684,8 @@
             eV: find_type("E<b7*>"),
             j: find_type("E<fr*>"),
             D: find_type("E<w<@>*>"),
-            E: find_type("E<w<w<m*>*>*>"),
-            t: find_type("E<w<m*>*>"),
+            E: find_type("E<w<w<m*>*>*>"), // List<List<String>>
+            t: find_type("E<w<m*>*>"), // List<String>
             gt: find_type("E<w<bu*>*>"),
             f: find_type("E<w<l*>*>"),
             gr: find_type("E<cy*>"),
