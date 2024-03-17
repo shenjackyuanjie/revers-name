@@ -236,7 +236,7 @@
                 return r
             },
             tw() {
-                $.rW.aw(0, new F.k7())
+                // $.rW.aw(0, new F.k7())
             },
             tv(a) {
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f = W.j4()
@@ -12755,27 +12755,38 @@
             return this.dL(0, b)
         },
         dL(a, b) {
-            var s = 0,
-                r = P.am(t.z),
-                q = this,
-                p, o, n, m
-            var $async$ae = P.an(function (c, d) {
-                if (c === 1) return P.ai(d, r)
-                while (true) switch (s) {
-                    case 0:
-                        q.f = b
-                        p = q.r
-                        p[0] = Date.now() + 1
-                        o = C.P_kj.gaB().ab("\t\t\t\t\n")
-                        n = H.b_(o).i("a9<z.E>")
-                        m = n.i("y<M.E,l*>")
-                        m = P.aa(new H.y(new H.a9(o, n), new X.iZ(q), m), !0, m.i("M.E"))
-                        C.Array.a5(m, H.fJ(p.buffer, 0, null))
-                        A.eR(X.dc(m))
-                        return P.aj(null, r)
-                }
-            })
-            return P.ak($async$ae, r)
+            // var s = 0,
+            //     r = P.am(t.z),
+            //     q = this,
+            //     p, o, n, m
+            // var $async$ae = P.an(function (c, d) {
+            //     if (c === 1) return P.ai(d, r)
+            //     while (true) switch (s) {
+            //         case 0:
+            //             q.f = b
+            //             p = q.r
+            //             p[0] = Date.now() + 1
+            //             o = C.P_kj.gaB().ab("\t\t\t\t\n")
+            //             n = H.b_(o).i("a9<z.E>")
+            //             m = n.i("y<M.E,l*>")
+            //             m = P.aa(new H.y(new H.a9(o, n), new X.iZ(q), m), !0, m.i("M.E"))
+            //             C.Array.a5(m, H.fJ(p.buffer, 0, null))
+            //             A.eR(X.dc(m))
+            //             return P.aj(null, r)
+            //     }
+            // })
+            // return P.ak($async$ae, r)
+            // 无效异步模拟, 反正就一个函数
+            q.f = b
+            p = q.r
+            p[0] = Date.now() + 1
+            o = C.P_kj.gaB().ab("\t\t\t\t\n")
+            n = H.b_(o).i("a9<z.E>")
+            m = n.i("y<M.E,l*>")
+            m = P.aa(new H.y(new H.a9(o, n), new X.iZ(q), m), !0, m.i("M.E"))
+            C.Array.a5(m, H.fJ(p.buffer, 0, null))
+            A.eR(X.dc(m))
+            return P.aj(null, r)
         }
     }
     X.iX.prototype = {
@@ -16265,62 +16276,93 @@
             return this.dM(0, b)
         },
         dM(a, b) {
-            var s = 0,
-                r = P.am(t.z),
-                q = this,
-                p, o, n, m, l, k, j
-            var $async$ae = P.an(function (c, d) {
-                if (c === 1) return P.ai(d, r)
-                while (true) switch (s) {
-                    case 0:
-                        q.db = b
-                        p = Date.now()
-                        o = $.bx()
-                        n = q.dx
-                        n[$.a()] = p + o
-                        o = q.a
-                        m = new H.y(o, new T.jk(), H.a1(o).i("y<1,m*>")).aV(0, "\n")
-                        p = q.z
-                        o = p.length
-                        if (o !== 0)
-                            for (l = 0; l < p.length; p.length === o || (0, H.F)(p), ++l) {
-                                k = p[l]
-                                m += "\n" + H.e(k.e) + "\t" + H.e(k.a)
-                            }
-                        p = C.P_kj.gaB().ab(m)
-                        o = H.b_(p).i("a9<z.E>")
-                        j = o.i("y<M.E,l*>")
-                        j = P.aa(new H.y(new H.a9(p, o), new T.jl(q), j), !0, j.i("M.E"))
-                        C.Array.a5(j, H.fJ(n.buffer, $.a(), null))
-                        A.eR(X.dc(j))
-                        return P.aj(null, r)
+            // var s = 0,
+            //     r = P.am(t.z),
+            //     q = this,
+            //     p, o, n, m, l, k, j
+            // var $async$ae = P.an(function (c, d) {
+            //     if (c === 1) return P.ai(d, r)
+            //     while (true) switch (s) {
+            //         case 0:
+            //             q.db = b
+            //             p = Date.now()
+            //             o = $.bx()
+            //             n = q.dx
+            //             n[$.a()] = p + o
+            //             o = q.a
+            //             m = new H.y(o, new T.jk(), H.a1(o).i("y<1,m*>")).aV(0, "\n")
+            //             p = q.z
+            //             o = p.length
+            //             if (o !== 0)
+            //                 for (l = 0; l < p.length; p.length === o || (0, H.F)(p), ++l) {
+            //                     k = p[l]
+            //                     m += "\n" + H.e(k.e) + "\t" + H.e(k.a)
+            //                 }
+            //             p = C.P_kj.gaB().ab(m)
+            //             o = H.b_(p).i("a9<z.E>")
+            //             j = o.i("y<M.E,l*>")
+            //             j = P.aa(new H.y(new H.a9(p, o), new T.jl(q), j), !0, j.i("M.E"))
+            //             C.Array.a5(j, H.fJ(n.buffer, $.a(), null))
+            //             A.eR(X.dc(j))
+            //             return P.aj(null, r)
+            //     }
+            // })
+            // return P.ak($async$ae, r)
+            // 无效异步
+            q.db = b
+            p = Date.now()
+            o = $.bx()
+            n = q.dx
+            n[$.a()] = p + o
+            o = q.a
+            m = new H.y(o, new T.jk(), H.a1(o).i("y<1,m*>")).aV(0, "\n")
+            p = q.z
+            o = p.length
+            if (o !== 0)
+                for (l = 0; l < p.length; p.length === o || (0, H.F)(p), ++l) {
+                    k = p[l]
+                    m += "\n" + H.e(k.e) + "\t" + H.e(k.a)
                 }
-            })
-            return P.ak($async$ae, r)
+            p = C.P_kj.gaB().ab(m)
+            o = H.b_(p).i("a9<z.E>")
+            j = o.i("y<M.E,l*>")
+            j = P.aa(new H.y(new H.a9(p, o), new T.jl(q), j), !0, j.i("M.E"))
+            C.Array.a5(j, H.fJ(n.buffer, $.a(), null))
+            A.eR(X.dc(j))
+            return P.aj(null, r)
         },
         cq(a, b) {
             return this.f7(a, b)
         },
         f7(a, b) {
-            var s = 0,
-                r = P.am(t.z),
-                q = this,
-                p, o, n
-            var $async$cq = P.an(function (c, d) {
-                if (c === 1) return P.ai(d, r)
-                while (true) switch (s) {
-                    case 0:
-                        n = H.e(a.gap().e) + "\r" + H.e(a.I.$0())
-                        n = C.P_kj.gaB().ab(n)
-                        p = H.b_(n).i("a9<z.E>")
-                        o = p.i("y<M.E,l*>")
-                        o = P.aa(new H.y(new H.a9(n, p), new T.ji(q), o), !0, o.i("M.E"))
-                        C.Array.a5(o, H.fJ(q.dx.buffer, $.a(), null))
-                        A.eR(X.dc(o))
-                        return P.aj(null, r)
-                }
-            })
-            return P.ak($async$cq, r)
+            // var s = 0,
+            //     r = P.am(t.z),
+            //     q = this,
+            //     p, o, n
+            // var $async$cq = P.an(function (c, d) {
+            //     if (c === 1) return P.ai(d, r)
+            //     while (true) switch (s) {
+            //         case 0:
+            //             n = H.e(a.gap().e) + "\r" + H.e(a.I.$0())
+            //             n = C.P_kj.gaB().ab(n)
+            //             p = H.b_(n).i("a9<z.E>")
+            //             o = p.i("y<M.E,l*>")
+            //             o = P.aa(new H.y(new H.a9(n, p), new T.ji(q), o), !0, o.i("M.E"))
+            //             C.Array.a5(o, H.fJ(q.dx.buffer, $.a(), null))
+            //             A.eR(X.dc(o))
+            //             return P.aj(null, r)
+            //     }
+            // })
+            // return P.ak($async$cq, r)
+            // 无效异步
+            n = H.e(a.gap().e) + "\r" + H.e(a.I.$0())
+            n = C.P_kj.gaB().ab(n)
+            p = H.b_(n).i("a9<z.E>")
+            o = p.i("y<M.E,l*>")
+            o = P.aa(new H.y(new H.a9(n, p), new T.ji(q), o), !0, o.i("M.E"))
+            C.Array.a5(o, H.fJ(q.dx.buffer, $.a(), null))
+            A.eR(X.dc(o))
+            return P.aj(null, r)
         },
         gbu(a) {
             return this.f
@@ -16626,6 +16668,7 @@
                 }
             })
             return P.ak($async$cg, r)
+            // 你别说, 这异步还真有效
         },
         az() {
             var s, r = this
