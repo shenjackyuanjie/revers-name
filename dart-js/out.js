@@ -3501,7 +3501,7 @@
         },
         V = {
             main: function () {
-                var t1, t2, t3, t4, t5, test_map, t6, tr, td, plist, pbody, p, a, i, b,
+                var t1, t2, t3, t4, test_map, t5, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
                 P.print($.$get$Dt_at());
                 t1 = document;
@@ -3512,8 +3512,7 @@
                 t4 = type$.Element;
                 H.checkTypeBound(t4, t4, "T", "querySelectorAll");
                 t4 = t1.querySelectorAll("div");
-                t5 = type$.dynamic;
-                test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], t5, t5);
+                test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], type$.String, type$.int);
                 test_map.$indexSet(0, "b", 2);
                 test_map.remove$1(0, "a");
                 test_map.$indexSet(0, "b", 3);
@@ -3524,10 +3523,10 @@
                 P.print(test_map._length !== 0);
                 P.print(test_map.containsKey$1("b"));
                 P.print(test_map.containsValue$1(3));
-                t6 = H._instanceType(test_map)._eval$1("LinkedHashMapKeyIterable<1>");
-                P.print(P.List_List$of(new H.LinkedHashMapKeyIterable(test_map, t6), true, t6._eval$1("Iterable.E")));
-                t6 = test_map.get$values(test_map);
-                P.print(P.List_List$of(t6, true, H._instanceType(t6)._eval$1("Iterable.E")));
+                t5 = H._instanceType(test_map)._eval$1("LinkedHashMapKeyIterable<1>");
+                P.print(P.List_List$of(new H.LinkedHashMapKeyIterable(test_map, t5), true, t5._eval$1("Iterable.E")));
+                t5 = test_map.get$values(test_map);
+                P.print(P.List_List$of(t5, true, H._instanceType(t5)._eval$1("Iterable.E")));
                 P.print(P.MapBase_mapToString(test_map));
                 if (test_map._length > 0) {
                     test_map._strings = test_map._nums = test_map._rest = test_map._first = test_map._last = null;
@@ -3539,16 +3538,16 @@
                 td = t1.createElement("td");
                 tr.appendChild(td);
                 C.TableCellElement_methods.set$text(td, "\u51fb\u6740");
-                t6 = td.style;
-                t6.width = "44px";
+                t5 = td.style;
+                t5.width = "44px";
                 td = t1.createElement("td");
                 tr.appendChild(td);
                 C.TableCellElement_methods.set$text(td, "\u81f4\u547d\u4e00\u51fb");
-                t6 = td.style;
-                t6.minWidth = "112px";
-                t6 = type$.DivElement;
-                plist = t6._as(t1.querySelector(".plist"));
-                pbody = t6._as(t1.querySelector(".pbody"));
+                t5 = td.style;
+                t5.minWidth = "112px";
+                t5 = type$.DivElement;
+                plist = t5._as(t1.querySelector(".plist"));
+                pbody = t5._as(t1.querySelector(".pbody"));
                 p = t1.createElement("div");
                 p.classList.add("p");
                 p.appendChild(tr);
@@ -3563,7 +3562,7 @@
                     a += " " + C.JSInt_methods.toString$0(i);
                 for (b = 124242424, i = 0; i < 10; ++i)
                     b += b * i;
-                P.Future_Future$delayed(new P.Duration(1000000), t5).then$1$1(new V.main_closure0(), type$.Null);
+                P.Future_Future$delayed(new P.Duration(1000000), type$.dynamic).then$1$1(new V.main_closure0(), type$.Null);
                 new V.main_closure1().call$0();
                 P.print(a);
             },
@@ -4993,7 +4992,9 @@
     W._NodeList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
     V.main_closure.prototype = {
         call$2: function (key, value) {
-            P.print(H.S(key) + " : " + H.S(value));
+            H._asString(key);
+            H._asInt(value);
+            P.print(key + " : " + value);
         },
         $signature: 12
     };
@@ -5082,7 +5083,7 @@
         mangledNames: {},
         getTypeFromName: getGlobalFromName,
         metadata: [],
-        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(@,@)"],
+        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(String,int)"],
         interceptorsByTag: null,
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"

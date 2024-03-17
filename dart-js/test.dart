@@ -64,7 +64,7 @@ void main() {
 // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
-  Map test_map = {
+  Map<String, int> test_map = {
     "a": 1,
   };
 
