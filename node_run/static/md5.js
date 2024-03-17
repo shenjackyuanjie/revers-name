@@ -3835,7 +3835,7 @@
                 delete s["<non-identifier-key>"]
                 return s
             },
-            rX(a, b, c) {
+            iterable_base_iterable_to_short_string(a, b, c) {
                 var s, r
                 if (P.mt(a)) {
                     if (b === "(" && c === ")") return "(...)"
@@ -11053,7 +11053,7 @@
             throw H.h(P.ft(b, this, "index", null, r))
         },
         k(a) {
-            return P.rX(this, "(", ")")
+            return P.iterable_base_iterable_to_short_string(this, "(", ")")
         }
     }
     P.fv.prototype = {}
