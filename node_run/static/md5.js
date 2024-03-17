@@ -1390,16 +1390,16 @@
             },
             init_hooks() {
                 var s, r, q, p, o, n, m = C.w()
-                m = H.cT(C.x, H.cT(C.y, H.cT(C.q, H.cT(C.q, H.cT(C.z, H.cT(C.A, H.cT(C.B(C.p), m)))))))
-                if (typeof dartNativeDispatchHooksTransformer != "undefined") {
-                    s = dartNativeDispatchHooksTransformer
-                    if (typeof s == "function") s = [s]
-                    if (s.constructor == Array)
-                        for (r = 0; r < s.length; ++r) {
-                            q = s[r]
-                            if (typeof q == "function") m = q(m) || m
-                        }
-                }
+                // m = H.cT(C.x, H.cT(C.y, H.cT(C.q, H.cT(C.q, H.cT(C.z, H.cT(C.A, H.cT(C.B(C.p), m)))))))
+                // if (typeof dartNativeDispatchHooksTransformer != "undefined") {
+                //     s = dartNativeDispatchHooksTransformer
+                //     if (typeof s == "function") s = [s]
+                //     if (s.constructor == Array)
+                //         for (r = 0; r < s.length; ++r) {
+                //             q = s[r]
+                //             if (typeof q == "function") m = q(m) || m
+                //         }
+                // }
                 p = m.getTag
                 o = m.getUnknownTag
                 n = m.prototypeForTag
@@ -13017,23 +13017,28 @@
             //     checkScroll = r - C.d.aI(s.scrollTop) < 50 || C.d.aI(s.scrollTop) / r > 0.95
             // }
             if (q.cx instanceof T.RunUpdateWin) {
-                q.fQ()
+                // q.fQ()
             } else {
-                s = q.db
-                if (s == null) {
-                    s = HtmlRenderer.nS("row")
-                    q.db = s
-                    // q.b.appendChild(s)
-                    if (q.dx) {
-                        q.dx = false
-                    } else {
-                        // s = q.db;
-                        // (s && C.Q).cJ(s, "\u2003")
-                    }
-                } else {
-                    // s.appendChild(document.createTextNode(", "))
+                // s = q.db
+                // if (s == null) {
+                //     s = HtmlRenderer.nS("row")
+                //     // q.db = s
+                //     // q.b.appendChild(s)
+                //     if (q.dx) {
+                //         q.dx = false
+                //     } else {
+                //         // s = q.db;
+                //         // (s && C.Q).cJ(s, "\u2003")
+                //     }
+                // } else {
+                //     // s.appendChild(document.createTextNode(", "))
+                // }
+                // // q.db.appendChild(HtmlRenderer.uI(q.cx))
+                // 总结一下上面那一大堆没啥用的代码
+                if (q.db == null) {
+                    q.db = HtmlRenderer.nS("row")
                 }
-                // q.db.appendChild(HtmlRenderer.uI(q.cx))
+                q.dx = false
                 q.b4()
             }
             // if (checkScroll) {
@@ -13042,7 +13047,16 @@
             // }
         },
         em() {
-            return this.c5(true)
+            // return this.c5(true)
+            // console.log("this.cx instanceof T.RunUpdateWin", this.cx instanceof T.RunUpdateWin)
+            // console.log("!this.cx instanceof T.RunUpdateWin", !this.cx instanceof T.RunUpdateWin)
+            if (this.cx instanceof T.RunUpdateWin) {} else {
+                if (this.db == null) {
+                    this.db = HtmlRenderer.nS("row")
+                }
+                this.dx = false
+                this.b4()
+            }
         },
         // add_plr_to_table() {
         //     var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
