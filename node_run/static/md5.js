@@ -3251,17 +3251,19 @@
         },
         M = {
             main_func() {
-                var s = 0,
-                    r = P.am(t.z)
-                var $async$mB = P.an(function (a, b) {
-                    if (a === 1) return P.ai(b, r)
-                    while (true) switch (s) {
-                        case 0:
-                            Q.iE()
-                            return P.aj(null, r)
-                    }
-                })
-                return P.ak($async$mB, r)
+                // var s = 0,
+                //     r = P.am(t.z)
+                // var $async$mB = P.an(function (a, b) {
+                //     if (a === 1) return P.ai(b, r)
+                //     while (true) switch (s) {
+                //         case 0:
+                //             Q.iE()
+                //             return P.aj(null, r)
+                //     }
+                // })
+                // return P.ak($async$mB, r)
+                // 上面的代码都是用来模拟异步的，实际上是同步的
+                Q.iE()
             }
         },
         LanData = {
