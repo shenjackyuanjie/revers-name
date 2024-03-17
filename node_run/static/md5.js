@@ -3349,7 +3349,7 @@
                 return b.a
             },
             async_await(a, b) {
-                P.uf(a, b)
+                P.await_on_object(a, b)
             },
             async_return(a, b) {
                 b.bM(0, a)
@@ -3357,7 +3357,7 @@
             ai(a, b) {
                 b.cj(H.unwrap_Exception(a), H.get_trace_from_exception(a))
             },
-            uf(a, b) {
+            await_on_object(a, b) {
                 var s, r, q = new P.lh(b),
                     p = new P.li(b)
                 if (a instanceof P.U) a.d7(q, p, t.z)
