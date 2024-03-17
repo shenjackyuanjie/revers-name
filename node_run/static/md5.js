@@ -7940,7 +7940,7 @@
             draw_plr(a, b, c, d) {
                 $.bU().src = $.mg.h(0, b.fy)
                 a.drawImage($.bU(), c + 4, d + 6)
-                HtmlRenderer.draw_text(a, b.dx, c + 24, d + 5, 90, !1)
+                HtmlRenderer.draw_text(a, b.dx, c + 24, d + 5, 90, false)
             },
             to_canvas(a, b) {
                 var s, r, q, p, o, n, m, l, k, j, i, h = "#000000",
@@ -7959,17 +7959,17 @@
                 q.toString
                 s.font = window.getComputedStyle(q, "").font
                 s.fillStyle = h
-                HtmlRenderer.draw_text(s, "\u21dc\u3000" + LanData.get_obfuscated_value("CeaN") + "\u3000\u21dd", 0, 4, 320, !0)
+                HtmlRenderer.draw_text(s, "\u21dc\u3000" + LanData.get_obfuscated_value("CeaN") + "\u3000\u21dd", 0, 4, 320, true)
                 r = 26
                 s.fillStyle = "#FAFAFA"
                 J.bj(s, 0, r, 320, 32)
                 s.fillStyle = g
                 J.bj(s, 0, r, 320, 2)
                 s.fillStyle = h
-                p = HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("ePya"), 0, r + 8, 114, !0)
-                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("AoUA"), 114, r + 8, 46, !0)
-                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("aXIa"), 160, r + 8, 46, !0)
-                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("MdQa"), 206, r + 8, 114, !0)
+                p = HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("ePya"), 0, r + 8, 114, true)
+                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("AoUA"), 114, r + 8, 46, true)
+                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("aXIa"), 160, r + 8, 46, true)
+                HtmlRenderer.draw_text(s, LanData.get_obfuscated_value("MdQa"), 206, r + 8, 114, true)
                 $.bU().src = "data:image/gif;base64,R0lGODlhFAAUALMAAAAAAP///98AJDsBRb3L09fi6NHf5ur2/JbFU63abcPuhcLthc/1mf///wAAAAAAACH5BAEAAA0ALAAAAAAUABQAAASCsMk5x6A4y6Gu/pyCXMJUaqGiJELbtCc1MOqiwnhl7aq675WAUGgIDYaBQ7FxTA4OyuIRengalr+fL2thWnrgcKLLLFS53ALh0nxWoe64mi1s1++BwZyJt+fre3p/g356axuEfQEFA4cbjIp5c44beowFl2sEax4yjY2aoZ0ZaEAUEQA7"
                 q = $.bU()
                 o = C.d.ag(114 - p, 2) - 24
@@ -7988,8 +7988,8 @@
                     J.bj(s, 22, r + 4, C.d.R(l.go / 4), 2)
                     s.fillStyle = h
                     HtmlRenderer.draw_plr(s, l, 0, r)
-                    HtmlRenderer.draw_text(s, C.c.k(l.c), 114, r + 5, 46, !0)
-                    HtmlRenderer.draw_text(s, C.c.k(l.d), 160, r + 5, 46, !0)
+                    HtmlRenderer.draw_text(s, C.c.k(l.c), 114, r + 5, 46, true)
+                    HtmlRenderer.draw_text(s, C.c.k(l.d), 160, r + 5, 46, true)
                     k = l.e
                     if (k != null) HtmlRenderer.draw_plr(s, $.ay.h(0, k), 206, r)
                     r += 26
@@ -8013,8 +8013,8 @@
                     J.bj(s, 0, r, 320, 2)
                     s.fillStyle = h
                     HtmlRenderer.draw_plr(s, j, 0, r)
-                    HtmlRenderer.draw_text(s, C.c.k(j.c), 114, r + 5, 46, !0)
-                    HtmlRenderer.draw_text(s, C.c.k(j.d), 160, r + 5, 46, !0)
+                    HtmlRenderer.draw_text(s, C.c.k(j.c), 114, r + 5, 46, true)
+                    HtmlRenderer.draw_text(s, C.c.k(j.d), 160, r + 5, 46, true)
                     o = j.e
                     if (o != null) HtmlRenderer.draw_plr(s, $.ay.h(0, o), 206, r)
                     r += 26
