@@ -3654,6 +3654,10 @@
                                 return P._asyncAwait(V.md5run(), $async$b_run);
                             case 2:
                                 // returning from await.
+                                $async$goto = 3;
+                                return P._asyncAwait(V.async_catch(), $async$b_run);
+                            case 3:
+                                // returning from await.
                                 P.print("object after 1s");
                                 // implicit return
                                 return P._asyncReturn(null, $async$completer);
@@ -3682,6 +3686,72 @@
                         }
                 });
                 return P._asyncStartSync($async$md5run, $async$completer);
+            },
+            a_async_throw: function () {
+                var $async$goto = 0,
+                    $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic);
+                var $async$a_async_throw = P._wrapJsFunctionForAsync(function ($async$errorCode, $async$result) {
+                    if ($async$errorCode === 1)
+                        return P._asyncRethrow($async$result, $async$completer);
+                    while (true)
+                        switch ($async$goto) {
+                            case 0:
+                                // Function start
+                                throw H.wrapException("a_async_throw");
+                                // implicit return
+                                return P._asyncReturn(null, $async$completer);
+                        }
+                });
+                return P._asyncStartSync($async$a_async_throw, $async$completer);
+            },
+            async_catch: function () {
+                var $async$goto = 0,
+                    $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic),
+                    $async$handler = 1,
+                    $async$currentError, $async$next = [],
+                    e, exception, $async$exception;
+                var $async$async_catch = P._wrapJsFunctionForAsync(function ($async$errorCode, $async$result) {
+                    if ($async$errorCode === 1) {
+                        $async$currentError = $async$result;
+                        $async$goto = $async$handler;
+                    }
+                    while (true)
+                        switch ($async$goto) {
+                            case 0:
+                                // Function start
+                                $async$handler = 3;
+                                $async$goto = 6;
+                                return P._asyncAwait(V.a_async_throw(), $async$async_catch);
+                            case 6:
+                                // returning from await.
+                                $async$handler = 1;
+                                // goto after finally
+                                $async$goto = 5;
+                                break;
+                            case 3:
+                                // catch
+                                $async$handler = 2;
+                                $async$exception = $async$currentError;
+                                e = H.unwrapException($async$exception);
+                                P.print(e);
+                                // goto after finally
+                                $async$goto = 5;
+                                break;
+                            case 2:
+                                // uncaught
+                                // goto rethrow
+                                $async$goto = 1;
+                                break;
+                            case 5:
+                                // after finally
+                                // implicit return
+                                return P._asyncReturn(null, $async$completer);
+                            case 1:
+                                // rethrow
+                                return P._asyncRethrow($async$currentError, $async$completer);
+                        }
+                });
+                return P._asyncStartSync($async$async_catch, $async$completer);
             },
             a_run: function () {
                 var $async$goto = 0,

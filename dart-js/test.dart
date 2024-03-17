@@ -66,6 +66,7 @@ List<String> test_list(String str) {
 b_run() async {
   print("object in b_run");
   await md5run();
+  await async_catch();
   print("object after 1s");
 }
 
@@ -73,6 +74,18 @@ md5run() async{
   print("object in md5run");
   await Future.delayed(Duration(milliseconds: 1000));
   print("object in md5run after 1s");
+}
+
+a_async_throw() async {
+  throw "a_async_throw";
+}
+
+async_catch() async {
+  try {
+    await a_async_throw();
+  } catch (e) {
+    print(e);
+  }
 }
 
 a_run() async{
