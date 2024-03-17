@@ -4456,6 +4456,7 @@
                                         g = d
                                         f = HtmlRenderer.init_out(g)
                                         f.r = 2000
+                                        // return
                                         async_goto = 1
                                         break
                                     } else {
@@ -4476,6 +4477,7 @@
                                         d.d = 1000
                                         c = HtmlRenderer.init_out(d)
                                         c.r = 2000
+                                        // return
                                         async_goto = 1
                                         break
                                     } if (J.aw(h) === 3) {
@@ -4492,6 +4494,7 @@
                                     b.c = 1000
                                     a = HtmlRenderer.init_out(b)
                                     a.r = 2000
+                                    // return
                                     async_goto = 1
                                     break
                                 }
