@@ -33,55 +33,55 @@
         a.prototype.constructor = a
     }
 
-    function lazyOld(a, b, c, d) {
-        var s = a
-        a[b] = s
-        a[c] = function () {
-            a[c] = function () {
-                H.vl(b)
+    function lazyOld(holder, name, getter_name, initializer) {
+        var s = holder
+        holder[name] = s
+        holder[getter_name] = function () {
+            holder[getter_name] = function () {
+                H.vl(name)
             }
-            var r
-            var q = d
+            var result
+            var sentinel_in_progress = initializer
             try {
-                if (a[b] === s) {
-                    r = a[b] = q
-                    r = a[b] = d()
-                } else r = a[b]
+                if (holder[name] === s) {
+                    result = holder[name] = sentinel_in_progress
+                    result = holder[name] = initializer()
+                } else result = holder[name]
             } finally {
-                if (r === q) a[b] = null
-                a[c] = function () {
-                    return this[b]
+                if (result === sentinel_in_progress) holder[name] = null
+                holder[getter_name] = function () {
+                    return this[name]
                 }
             }
-            return r
+            return result
         }
     }
 
-    function lazy(a, b, c, d) {
-        var s = a
-        a[b] = s
-        a[c] = function () {
-            if (a[b] === s) a[b] = d()
-            a[c] = function () {
-                return this[b]
+    function lazy(holder, name, getter_name, initializer) {
+        var s = holder
+        holder[name] = s
+        holder[getter_name] = function () {
+            if (holder[name] === s) holder[name] = initializer()
+            holder[getter_name] = function () {
+                return this[name]
             }
-            return a[b]
+            return holder[name]
         }
     }
 
-    function lazyFinal(a, b, c, d) {
-        var s = a
-        a[b] = s
-        a[c] = function () {
-            if (a[b] === s) {
-                var r = d()
-                if (a[b] !== s) H.vm(b)
-                a[b] = r
+    function lazyFinal(holder, name, getter_name, initializer) {
+        var s = holder
+        holder[name] = s
+        holder[getter_name] = function () {
+            if (holder[name] === s) {
+                var r = initializer()
+                if (holder[name] !== s) H.vm(name)
+                holder[name] = r
             }
-            a[c] = function () {
-                return this[b]
+            holder[getter_name] = function () {
+                return this[name]
             }
-            return a[b]
+            return holder[name]
         }
     }
 
@@ -19512,7 +19512,7 @@
         lazy_old($, "za", "qK", function () {
             return LanData.j("4TmcbC~p%FZ3OG+NROs)LBB[)kvXjGQy?A8^J'Kzl-B", 35)
         })
-        lazy_old($, "yG", "qp", function () {
+        lazy_old($, "yG", "qp", function () {  // deepmess.com/namerena
             return LanData.j("H<|dA6D5:4]j*v#HA'XH>zwoSP", 57)
         })
         lazy_old($, "yH", "qq", function () {
