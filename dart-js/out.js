@@ -3639,6 +3639,28 @@
                     return H.setRuntimeTypeInfo([], t1);
                 return H.setRuntimeTypeInfo(["a", "b", "c"], t1);
             },
+            b_run: function () {
+                var $async$goto = 0,
+                    $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic);
+                var $async$b_run = P._wrapJsFunctionForAsync(function ($async$errorCode, $async$result) {
+                    if ($async$errorCode === 1)
+                        return P._asyncRethrow($async$result, $async$completer);
+                    while (true)
+                        switch ($async$goto) {
+                            case 0:
+                                // Function start
+                                P.print("object in b_run");
+                                $async$goto = 2;
+                                return P._asyncAwait(V.md5run(), $async$b_run);
+                            case 2:
+                                // returning from await.
+                                P.print("object after 1s");
+                                // implicit return
+                                return P._asyncReturn(null, $async$completer);
+                        }
+                });
+                return P._asyncStartSync($async$b_run, $async$completer);
+            },
             md5run: function () {
                 var $async$goto = 0,
                     $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic);
@@ -3675,6 +3697,10 @@
                                 $async$goto = 2;
                                 return P._asyncAwait(V.md5run(), $async$a_run);
                             case 2:
+                                // returning from await.
+                                $async$goto = 3;
+                                return P._asyncAwait(V.b_run(), $async$a_run);
+                            case 3:
                                 // returning from await.
                                 P.print("object after 1s");
                                 // implicit return

@@ -63,6 +63,12 @@ List<String> test_list(String str) {
 
 }
 
+b_run() async {
+  print("object in b_run");
+  await md5run();
+  print("object after 1s");
+}
+
 md5run() async{
   print("object in md5run");
   await Future.delayed(Duration(milliseconds: 1000));
@@ -72,6 +78,7 @@ md5run() async{
 a_run() async{
   print("object");
   await md5run();
+  await b_run();
   print("object after 1s");
 }
 
