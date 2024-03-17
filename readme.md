@@ -8,6 +8,8 @@ h_(k) -> fYwD -> 名称输入 session storage
 ```
 
 - `Z` -> `HtmlRenderer`
+- `O`
+  - `d` -> `get_obfuscated_value`
 
 ## `md5.js`
 
@@ -48,6 +50,12 @@ h_(k) -> fYwD -> 名称输入 session storage
   - `ul` -> `install_specialized_is_test`
   - `oi` -> `universe_lookup_function_rti`
   - `h` -> `throw_error`
+
+- `T`
+  - `X` -> str list
+
+- `P`
+  - `cu` -> `obfuscate_a_b`
 
 - [ ] And more
 

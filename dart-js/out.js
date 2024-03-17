@@ -570,49 +570,12 @@
                 return exception.$cachedTrace = new H._StackTrace(exception);
             },
             fillLiteralMap: function (keyValuePairs, result) {
-                var t1, t2, index, index0, key, value, strings, cell, nums, rest, hash, bucket,
+                var index, index0, index1,
                     $length = keyValuePairs.length;
-                for (t1 = H._instanceType(result), t2 = t1._precomputed1, t1 = t1._rest[1], index = 0; index < $length;) {
+                for (index = 0; index < $length; index = index1) {
                     index0 = index + 1;
-                    key = keyValuePairs[index];
-                    index = index0 + 1;
-                    value = keyValuePairs[index0];
-                    t2._as(key);
-                    t1._as(value);
-                    if (typeof key == "string") {
-                        strings = result._strings;
-                        if (strings == null)
-                            strings = result._strings = result._newHashTable$0();
-                        cell = result._getTableCell$2(strings, key);
-                        if (cell == null)
-                            result._setTableEntry$3(strings, key, result._newLinkedCell$2(key, value));
-                        else
-                            cell.hashMapCellValue = value;
-                    } else if (typeof key == "number" && (key & 0x3ffffff) === key) {
-                        nums = result._nums;
-                        if (nums == null)
-                            nums = result._nums = result._newHashTable$0();
-                        cell = result._getTableCell$2(nums, key);
-                        if (cell == null)
-                            result._setTableEntry$3(nums, key, result._newLinkedCell$2(key, value));
-                        else
-                            cell.hashMapCellValue = value;
-                    } else {
-                        rest = result.__js_helper$_rest;
-                        if (rest == null)
-                            rest = result.__js_helper$_rest = result._newHashTable$0();
-                        hash = J.get$hashCode$(key) & 0x3ffffff;
-                        bucket = result._getTableBucket$2(rest, hash);
-                        if (bucket == null)
-                            result._setTableEntry$3(rest, hash, [result._newLinkedCell$2(key, value)]);
-                        else {
-                            index0 = result.internalFindBucketIndex$2(bucket, key);
-                            if (index0 >= 0)
-                                bucket[index0].hashMapCellValue = value;
-                            else
-                                bucket.push(result._newLinkedCell$2(key, value));
-                        }
-                    }
+                    index1 = index0 + 1;
+                    result.$indexSet(0, keyValuePairs[index], keyValuePairs[index0]);
                 }
                 return result;
             },
@@ -1139,9 +1102,10 @@
                 _.$ti = t0;
             },
             LinkedHashMapCell: function LinkedHashMapCell(t0, t1) {
-                this.hashMapCellKey = t0;
-                this.hashMapCellValue = t1;
-                this._next = null;
+                var _ = this;
+                _.hashMapCellKey = t0;
+                _.hashMapCellValue = t1;
+                _._previous = _._next = null;
             },
             initHooks_closure: function initHooks_closure(t0) {
                 this.getTag = t0;
@@ -3371,7 +3335,7 @@
         },
         V = {
             main: function () {
-                var t1, t2, t3, t4, t5, tr, td, t6, plist, pbody, p, a, i, b,
+                var t1, t2, t3, t4, t5, test_map, tr, td, t6, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
                 P.print($.$get$Dt_at());
                 t1 = document;
@@ -3383,7 +3347,16 @@
                 H.checkTypeBound(t4, t4, "T", "querySelectorAll");
                 t4 = t1.querySelectorAll("div");
                 t5 = type$.dynamic;
-                P.print(P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], t5, t5));
+                test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], t5, t5);
+                test_map.$indexSet(0, "b", 2);
+                P.print(test_map);
+                test_map.remove$1(0, "a");
+                P.print(test_map);
+                test_map.$indexSet(0, "b", 3);
+                P.print(test_map);
+                P.print(test_map.$index(0, "b"));
+                test_map.forEach$1(0, new V.main_closure());
+                P.print(test_map);
                 tr = t1.createElement("tr");
                 td = t1.createElement("td");
                 tr.appendChild(td);
@@ -3412,12 +3385,13 @@
                     a += " " + C.JSInt_methods.toString$0(i);
                 for (b = 124242424, i = 0; i < 10; ++i)
                     b += b * i;
-                P.Future_Future$delayed(new P.Duration(1000000), t5).then$1$1(new V.main_closure(), type$.Null);
-                new V.main_closure0().call$0();
+                P.Future_Future$delayed(new P.Duration(1000000), t5).then$1$1(new V.main_closure0(), type$.Null);
+                new V.main_closure1().call$0();
                 P.print(a);
             },
             main_closure: function main_closure() {},
-            main_closure0: function main_closure0() {}
+            main_closure0: function main_closure0() {},
+            main_closure1: function main_closure1() {}
         };
     var holders = [C, H, J, P, W, V];
     hunkHelpers.setFunctionNamesIfNecessary(holders);
@@ -3752,6 +3726,69 @@
         get$length: function (_) {
             return this.__js_helper$_length;
         },
+        $index: function (_, key) {
+            var strings, cell, t1, nums, _this = this,
+                _null = null;
+            if (typeof key == "string") {
+                strings = _this._strings;
+                if (strings == null)
+                    return _null;
+                cell = _this._getTableCell$2(strings, key);
+                t1 = cell == null ? _null : cell.hashMapCellValue;
+                return t1;
+            } else if (typeof key == "number" && (key & 0x3ffffff) === key) {
+                nums = _this._nums;
+                if (nums == null)
+                    return _null;
+                cell = _this._getTableCell$2(nums, key);
+                t1 = cell == null ? _null : cell.hashMapCellValue;
+                return t1;
+            } else
+                return _this.internalGet$1(key);
+        },
+        internalGet$1: function (key) {
+            var bucket, index,
+                rest = this.__js_helper$_rest;
+            if (rest == null)
+                return null;
+            bucket = this._getTableBucket$2(rest, J.get$hashCode$(key) & 0x3ffffff);
+            index = this.internalFindBucketIndex$2(bucket, key);
+            if (index < 0)
+                return null;
+            return bucket[index].hashMapCellValue;
+        },
+        $indexSet: function (_, key, value) {
+            var strings, nums, rest, hash, bucket, index, _this = this,
+                t1 = H._instanceType(_this);
+            t1._precomputed1._as(key);
+            t1._rest[1]._as(value);
+            if (typeof key == "string") {
+                strings = _this._strings;
+                _this._addHashTableEntry$3(strings == null ? _this._strings = _this._newHashTable$0() : strings, key, value);
+            } else if (typeof key == "number" && (key & 0x3ffffff) === key) {
+                nums = _this._nums;
+                _this._addHashTableEntry$3(nums == null ? _this._nums = _this._newHashTable$0() : nums, key, value);
+            } else {
+                rest = _this.__js_helper$_rest;
+                if (rest == null)
+                    rest = _this.__js_helper$_rest = _this._newHashTable$0();
+                hash = J.get$hashCode$(key) & 0x3ffffff;
+                bucket = _this._getTableBucket$2(rest, hash);
+                if (bucket == null)
+                    _this._setTableEntry$3(rest, hash, [_this._newLinkedCell$2(key, value)]);
+                else {
+                    index = _this.internalFindBucketIndex$2(bucket, key);
+                    if (index >= 0)
+                        bucket[index].hashMapCellValue = value;
+                    else
+                        bucket.push(_this._newLinkedCell$2(key, value));
+                }
+            }
+        },
+        remove$1: function (_, key) {
+            var t1 = this._removeHashTableEntry$2(this._strings, key);
+            return t1;
+        },
         forEach$1: function (_, action) {
             var cell, modifications, _this = this;
             H._instanceType(_this)._eval$1("~(1,2)")._as(action);
@@ -3764,17 +3801,61 @@
                 cell = cell._next;
             }
         },
+        _addHashTableEntry$3: function (table, key, value) {
+            var cell, _this = this,
+                t1 = H._instanceType(_this);
+            t1._precomputed1._as(key);
+            t1._rest[1]._as(value);
+            cell = _this._getTableCell$2(table, key);
+            if (cell == null)
+                _this._setTableEntry$3(table, key, _this._newLinkedCell$2(key, value));
+            else
+                cell.hashMapCellValue = value;
+        },
+        _removeHashTableEntry$2: function (table, key) {
+            var cell;
+            if (table == null)
+                return null;
+            cell = this._getTableCell$2(table, key);
+            if (cell == null)
+                return null;
+            this._unlinkCell$1(cell);
+            this._deleteTableEntry$2(table, key);
+            return cell.hashMapCellValue;
+        },
+        _modified$0: function () {
+            this._modifications = this._modifications + 1 & 67108863;
+        },
         _newLinkedCell$2: function (key, value) {
             var _this = this,
                 t1 = H._instanceType(_this),
                 cell = new H.LinkedHashMapCell(t1._precomputed1._as(key), t1._rest[1]._as(value));
             if (_this._first == null)
                 _this._first = _this._last = cell;
-            else
-                _this._last = _this._last._next = cell;
+            else {
+                t1 = _this._last;
+                t1.toString;
+                cell._previous = t1;
+                _this._last = t1._next = cell;
+            }
             ++_this.__js_helper$_length;
-            _this._modifications = _this._modifications + 1 & 67108863;
+            _this._modified$0();
             return cell;
+        },
+        _unlinkCell$1: function (cell) {
+            var _this = this,
+                previous = cell._previous,
+                next = cell._next;
+            if (previous == null)
+                _this._first = next;
+            else
+                previous._next = next;
+            if (next == null)
+                _this._last = previous;
+            else
+                next._previous = previous;
+            --_this.__js_helper$_length;
+            _this._modified$0();
         },
         internalFindBucketIndex$2: function (bucket, key) {
             var $length, i;
@@ -4604,13 +4685,19 @@
     W._NodeList_Interceptor_ListMixin.prototype = {};
     W._NodeList_Interceptor_ListMixin_ImmutableListMixin.prototype = {};
     V.main_closure.prototype = {
+        call$2: function (key, value) {
+            P.print(H.S(key) + " : " + H.S(value));
+        },
+        $signature: 12
+    };
+    V.main_closure0.prototype = {
         call$1: function (value) {
             P.print("\u5ef6\u65f61\u79d2\u6267\u884c then ");
             P.print(value);
         },
         $signature: 1
     };
-    V.main_closure0.prototype = {
+    V.main_closure1.prototype = {
         call$0: function () {
             P.print("closuer");
         },
@@ -4642,7 +4729,7 @@
         _inheritMany(J.JSNumber, [J.JSInt, J.JSDouble]);
         _inheritMany(P.Error, [H.LateError, P.TypeError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, H._Error, P.AssertionError, P.NullThrownError, P.ArgumentError, P.UnsupportedError, P.UnimplementedError, P.ConcurrentModificationError, P.CyclicInitializationError]);
         _inherit(H.NullError, P.TypeError);
-        _inheritMany(H.Closure, [H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0]);
+        _inheritMany(H.Closure, [H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0, V.main_closure1]);
         _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
         _inherit(P.MapBase, P.MapMixin);
         _inherit(H.JsLinkedHashMap, P.MapBase);
@@ -4683,7 +4770,7 @@
         mangledNames: {},
         getTypeFromName: getGlobalFromName,
         metadata: [],
-        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)"],
+        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(@,@)"],
         interceptorsByTag: null,
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"

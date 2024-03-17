@@ -68,6 +68,23 @@ void main() {
     "a": 1,
   };
 
+  // 插入
+  test_map["b"] = 2;
+  print(test_map);
+  // 删除
+  test_map.remove("a");
+  print(test_map);
+  // 修改
+  test_map["b"] = 3;
+  print(test_map);
+  // 查找
+  print(test_map["b"]);
+  // 遍历
+  test_map.forEach((key, value) {
+    print("$key : $value");
+  });
+
+
   print(test_map);
 
   TableRowElement tr = new TableRowElement();
