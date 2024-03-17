@@ -203,10 +203,6 @@
         }
     }()
 
-    function initializeDeferredHunk(a) {
-        x = v.types.length
-        a(hunkHelpers, v, w, $)
-    }
     var A = {
             eR(a) {
                 // var s = window.localStorage,
@@ -227,7 +223,7 @@
         },
         C = {},
         F = {
-            o6(a) {
+            get_sgl_css(a) {
                 var s, r, q
                 if ($.k8.J(0, a)) return $.k8.h(0, a)
                 s = $.e_
@@ -4396,7 +4392,7 @@
             p: function p() {}
         },
         Q = {
-            iE() {
+            main_func() {
                 var switch_branch = 0,
                     r = P.am(t.z),
                     q, switch_to = 2,
@@ -4416,12 +4412,12 @@
                             $.nV = a8[$.C()]
                             $.nW = a8[$.X()]
                             $.tb = a8[$.a4()]
-                            //a2 = window.localStorage.getItem(O.j("T|a`4tFX30f3:o_Vx]na4ki/|ye&j=D", 15))
+                            // a2 = window.localStorage.getItem(O.j("T|a`4tFX30f3:o_Vx]na4ki/|ye&j=D", 15))
                             /*
                             if (a2 != null) $.ox = new H.a9(H.set_run_time_type_info(a2.split(""), t.s), t.bJ)
                             	.f3(0)
                             */
-                            //抄tinman的https://tinman00.github.io/100/namerena/md5.js
+                            // 抄tinman的https://tinman00.github.io/100/namerena/md5.js
                             $.ox = `@@ABMECIGUB@OK@CHBAA@FCMFNBEABCICEG@DJDGBGHMDALBAHHEDIEFB@AACFLCFDC@ABIC@DBLIABFPCFDCTD@B@@ID@@EHDI@GDGFDAH@ABBAGBBF@PKALADHG@AAOC@EJ@@FCHC@MLKBAHBGDAKDGA\\C@A@FHE@TTHWCGHJBBAFBSGCAAF@I@D@A@AC@AGIFXHBAEU@@@AMTGFF@AAIBJGAKAAAE@BJIMH@CAAHAABC@DD@L@AABEDFECBCT@BGED@GDF@CFDDGH@ACDBDH@DAFOBBIKD@ICJGCAH@GBADBDGDH@@DIY@BFDEOEAS@G@DIN@GABNHECOCBEAHPBC@AIBDAFBDWB@GCAB@EACD@DE@@FFDB@JBFAENJ@L@JMM@R@JD@@DBCFCDAB@@@EBABCEA@PAEBKB@@@DXBCACFABCDFBIAFDBAEAFCY@LB@EHH@B@BIIDFGDOCH@EB@LFCCCDCE@BF@DG@LNDQKKCC@FACDFCGBCSC@CLI@CHLBHELHA@BCA@AABSBBBNBFI@MBCMB@UB@PNA@DEJ_GOD@DKDBIMC@BMBBADFVEB@DCBA@AG@HE@FDCE@AC@EBBL]@AF@@A@FBHBECJAFDAMBA@EBEICGFDCEBADMC@LC@FH@D@@EEBAFPAHIAAACBBD@BBBCCDCB@GDHCMHAGAGA@HVBFCRCDHCJBERJBBEBEIGOAD@WBDCDKAACK@BAMAOADFE@@EUFAF@NKICDFBFWLAIICBABBKWBGLLZAGHBA@AB@A@DEBG@HER@CDAO@@FCDA@EOFB@DBOJRAAAABCAFFDBAAKDB@ACD@FC@I@@EB@HHCBGCCLCB@BDBA@BFBBHNIA@DDQA@@@EAO@EHIGBOAFSAZCGJRCN@CMJL@CACE@HCIDTBGSFAA@AA@DFBA@J@DJDGEBEFBBHIJ@GCFGDLBA@@DBBD@FA@TBCAIHAJ@CCLHDA@DHFF@HJCF@DEAJE@JGI@ABFJEDKD@DGEICHECPMDBIELA@D[F@HDGDABBND@CAKHBCCDOAJACEE@CIDFVALABQAC@P@HBBBKBA@AM@@RCAC@PKD@HC@@IABD@PCFFA@NQD@DBJFJCAAA@HACFFBAAJ@AM@GDBECBADD@D@@CNK@@FPEJGDATACFJQANKADFA@LKVGEAJQAAB@@KDA@C@DCAEBAADBNHCCE@@@AACGED@JBBFBHANAFMAASHDC@DBIJJHDECAD@FDAFECDGC@GHQB@@BBCEFEXABBA@@EIIJF@@DEC@AAQCA@A@CIBGNACK@CHLEFBCBD@BOIB@BJDEGFD@AL@INECCAUAXHBBEDWBBA@BBLDADD@BHB@D@HHFB@GGAKABAAEGCKFJHJC@@@HECDDVBL@BCLB@DEEE@BDFN[@DPA@DF@AAFF@B@EGEDG@ABBBFCAAA@FPAJBBACBBFGA@@@D@LOOBBQDGDOJRACGABCUCAHGBF@BBKDAA@FCCO[AAIALA@SKHKB@ABRLDDBC@CAEAFBGFCLA@DBFFB@A@EG]DEGEBQWKMB@NBBMEADKI^@@@KHED@P@CC@FACZNADAM@IADC@V@@@A@IO@CKEEKCBLIBCBG@AEBCANA@BJAFBAVCLDGHCKPDEDLIFHBL@@FF@DH@ABDGFDF@HLDIBAEBCF@@BLFBA@AAFBCDBBFA@FBL@AA@AABBCFEEAFCJUICDI@@@I@AA@FBBDFE@C@AKAEBBBC@EGAEKACA@@B@AGHMHHD@ACGABHBEFVCT@FGADC@DADGDADLPNGBAAAEACF@D@PAH@PELHAEJ@CCKEICAAG@DNDE@CDBF@AEJK@O@DEC@FCICLDNHHDBCANBCE@AGLCDGCHCBCCCA@PECE@K@AJJ@QBNBO@@DODCEBNLFBACBEBFABJCFBOBPKRBB@EAFACGGIC@CGG^DDAFVACFHBBACAJDP@GDM@ABB@GG@@@B@K@EBFFAFB@DGB@FANBH@BQDE@FEBBGJ@FBGBAOAI@DQEJA@KE@ATC@JUG@QADH@@HAB@DDA@JCFFB@AAOCL@MPBAC@@CAQCCAA@@DIUHG@EBUEAIHSERCJK@@GTAD@N@AHRCMEL@HCA@@AICAB@HI@AF@ABLAEW@GBZ@CFNKDCHN@@BDO@@CFL@NDBN@L@AUBHBAEFEEQGAKHQ@@@CAB@KIOCA@CF@P@MA@DLBABARQBA@KCAIDGIDG@JCCBBFBFKED@ABEFBBAHGDBDBBMBDFBDBDDABABD@DPCF\\DB@G@DD@E@G@CV@EBF@O@@CA@BQFDBLAB@BDGHF@@@@BI@DADEBBCDEGCD@A_@EAKACCA@CICDEPKGCEADNABFDCG@DFCBPE@FEDECBAFGBAGCBH@JDAENADAF@CBHACBA@@BCCQCF@FNNBAD@GABKAEBFACGCBFKCGOEBG@DBI@B@GBAJADIOWA@KKLCGFAABAR@TH@BBDAF@DMDA@AHAABREIABAHCED@@EAFHHEBEDSEABNMBAOREEJ@A@ALACIGHFBNPIEDDFDF@@KBHCGBBBOBCAILBFHDMATBDAD@ADFBWHJ@@BACCRC@FJAB@DCFM@IBHCIAF@ED@HAG@@@ECDHBAAHBEKDC@@@BCENC@C@ACDEBDG@A@A@K@BBCNOK@FBCAFIAPFECBBIOEGHDACGBB@@J@ADEECBEG@AACEADD@@JEGACHJ@BDE@JE@IFAQGEBFDDDKUECEEHFD_@CDCG@BJALEB@B@@QEKE@LKBD@ABW@QBNNAL@B@KCADDADA@BD@QBEQ@DQUC@EC@BOGB@AM@DGBAANEIAGFNPEICA@CHEDGDCD@A@LEP@N@CEMFJ@@BIACB@NIBJG@NG^A@EAIMCDHH@BCFEPOJGC@CSNAAAJ@FCGT@FAAOKHXFVFACJHFMAADAA@LA@MHLKTGSZ@HAAJ@AABD@BCBEPDHCJJB@JAABKEBCCEH@D@DBHIAACABAGBBB@EGCACFUDFC@LB@AAFHDBC@G@E@DQD@DKD@CFEBHABANEQ@CCLDAGCAHBA@@@CKC@DAHCGEMJOBGZ@A@CB@AD@ECQ@DAZNN@ACC@@CECDCJAFNJRGBGG@NCBJ@@BI@DBIDCO@B@CCDAAMTGGGCAKDGG@A@ALBA@@FDQ@BA@AB@AVKDJED@@@CDLFC@@C@PCBMCDK@IEHCEAC@CRCOBCAFAGEFUK@@BADGAUFBFIA@H@AI@DDB@BGAAHLVC@KCKBDCBBACHC@A@NI@BEBDIFVF@AGBCIELDIZABAJAFD@AUKS@DJ@@DD@BMHABFBE@IBBDBADAM@GMDBHD@@EAD@BEADGPGGAAFEEABBECKIBAW@BEEQE@DD@FCCAEHJFB@C@E@BMJCB@ALGD@CBC@F@AFJDECAAA@BEO@EBNACDCUH@@K@A@DB@BFECFMAEHDBAEEADFB@EE@CI@ABDBDCAD@A@@B@JCB@FAGJCK@GG@ABFLQ@BHDEHOAB@DBIDSBDBIVA@FD@@ABCAAAA`
                             switch_branch = 3
                             return P.a2(HtmlRenderer.static_init(), $async$iE)
@@ -13259,7 +13255,7 @@
             else r.textContent = " " + H.e(i.dx) + " "
             r = i.x
             r.toString
-            q = F.o6(i.fy)
+            q = F.get_sgl_css(i.fy)
             r.classList.add(q)
             if (J.nz(i.fy, $.aD())) i.y.textContent = " " + H.e(i.dx) + " "
             p = s.h(b, 4)
@@ -13391,7 +13387,7 @@
                 r = "" + C.d.R(a.c / 4) + "px"
                 q = s.z.style
                 q.width = r
-                s.fx = '<div class="plr_body ' + s.cy + '"><div class="sgl ' + H.e(F.o6(s.fy)) + '"></div>' + H.e(s.y.outerHTML) + '<div class="maxhp" style="width: ' + r + '" /></div>'
+                s.fx = '<div class="plr_body ' + s.cy + '"><div class="sgl ' + H.e(F.get_sgl_css(s.fy)) + '"></div>' + H.e(s.y.outerHTML) + '<div class="maxhp" style="width: ' + r + '" /></div>'
                 return s.fr
             }
             if (a instanceof T.bB) return '<div class="damage">' + H.e(a.a) + "</div>"
@@ -20586,6 +20582,6 @@
     Function.prototype.$6 = function (a, b, c, d, e, f) {
         return this(a, b, c, d, e, f)
     };
-    Q.iE()
+    Q.main_func()
 })()
 //# sourceMappingURL=md5.js.map
