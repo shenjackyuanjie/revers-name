@@ -70,20 +70,36 @@ void main() {
 
   // 插入
   test_map["b"] = 2;
-  print(test_map);
+  
   // 删除
   test_map.remove("a");
-  print(test_map);
+  
   // 修改
   test_map["b"] = 3;
-  print(test_map);
+  
   // 查找
   print(test_map["b"]);
   // 遍历
   test_map.forEach((key, value) {
     print("$key : $value");
   });
-
+  // 长度
+  print(test_map.length);
+  // 是否为空
+  print(test_map.isEmpty);
+  // 是否不为空
+  print(test_map.isNotEmpty);
+  // 是否包含key
+  print(test_map.containsKey("b"));
+  // 是否包含value
+  print(test_map.containsValue(3));
+  // 转换为list
+  print(test_map.keys.toList());
+  print(test_map.values.toList());
+  // 转换为json
+  print(test_map.toString());
+  // 清空
+  test_map.clear();
 
   print(test_map);
 

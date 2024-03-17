@@ -303,15 +303,36 @@
             checkNotNullable: function (value, $name, $T) {
                 return value;
             },
+            MappedIterable_MappedIterable: function (iterable, $function, $S, $T) {
+                return new H.EfficientLengthMappedIterable(iterable, $function, $S._eval$1("@<0>")._bind$1($T)._eval$1("EfficientLengthMappedIterable<1,2>"));
+            },
             LateError: function LateError(t0) {
                 this._message = t0;
             },
+            EfficientLengthIterable: function EfficientLengthIterable() {},
             ListIterator: function ListIterator(t0, t1, t2) {
                 var _ = this;
                 _.__internal$_iterable = t0;
                 _.__internal$_length = t1;
                 _.__internal$_index = 0;
                 _.__internal$_current = null;
+                _.$ti = t2;
+            },
+            MappedIterable: function MappedIterable(t0, t1, t2) {
+                this.__internal$_iterable = t0;
+                this._f = t1;
+                this.$ti = t2;
+            },
+            EfficientLengthMappedIterable: function EfficientLengthMappedIterable(t0, t1, t2) {
+                this.__internal$_iterable = t0;
+                this._f = t1;
+                this.$ti = t2;
+            },
+            MappedIterator: function MappedIterator(t0, t1, t2) {
+                var _ = this;
+                _.__internal$_current = null;
+                _._iterator = t0;
+                _._f = t1;
                 _.$ti = t2;
             },
             unminifyOrTag: function (rawClassName) {
@@ -859,6 +880,14 @@
                 }
                 throw H.wrapException(P.ArgumentError$("Field name " + fieldName + " not found."));
             },
+            boolConversionCheck: function (value) {
+                if (value == null)
+                    H.assertThrow("boolean expression must not be null");
+                return value;
+            },
+            assertThrow: function (message) {
+                throw H.wrapException(new H._AssertionError(message));
+            },
             throwCyclicInit: function (staticName) {
                 throw H.wrapException(new P.CyclicInitializationError(staticName));
             },
@@ -1094,18 +1123,39 @@
             RuntimeError: function RuntimeError(t0) {
                 this.message = t0;
             },
+            _AssertionError: function _AssertionError(t0) {
+                this.message = t0;
+            },
             JsLinkedHashMap: function JsLinkedHashMap(t0) {
                 var _ = this;
-                _.__js_helper$_length = 0;
-                _._last = _._first = _.__js_helper$_rest = _._nums = _._strings = null;
+                _._length = 0;
+                _._last = _._first = _._rest = _._nums = _._strings = null;
                 _._modifications = 0;
                 _.$ti = t0;
+            },
+            JsLinkedHashMap_values_closure: function JsLinkedHashMap_values_closure(t0) {
+                this.$this = t0;
+            },
+            JsLinkedHashMap_containsValue_closure: function JsLinkedHashMap_containsValue_closure(t0, t1) {
+                this.$this = t0;
+                this.value = t1;
             },
             LinkedHashMapCell: function LinkedHashMapCell(t0, t1) {
                 var _ = this;
                 _.hashMapCellKey = t0;
                 _.hashMapCellValue = t1;
                 _._previous = _._next = null;
+            },
+            LinkedHashMapKeyIterable: function LinkedHashMapKeyIterable(t0, t1) {
+                this._map = t0;
+                this.$ti = t1;
+            },
+            LinkedHashMapKeyIterator: function LinkedHashMapKeyIterator(t0, t1, t2) {
+                var _ = this;
+                _._map = t0;
+                _._modifications = t1;
+                _.__js_helper$_current = _._cell = null;
+                _.$ti = t2;
             },
             initHooks_closure: function initHooks_closure(t0) {
                 this.getTag = t0;
@@ -1165,7 +1215,7 @@
                             return rti;
                         return H._Universe__lookupFutureOrRti(universe, substitutedBaseType, true);
                     case 9:
-                        interfaceTypeArguments = rti._rest;
+                        interfaceTypeArguments = rti.__rti$_rest;
                         substitutedInterfaceTypeArguments = H._substituteArray(universe, interfaceTypeArguments, typeArguments, depth);
                         if (substitutedInterfaceTypeArguments === interfaceTypeArguments)
                             return rti;
@@ -1173,7 +1223,7 @@
                     case 10:
                         base = rti._primary;
                         substitutedBase = H._substitute(universe, base, typeArguments, depth);
-                        $arguments = rti._rest;
+                        $arguments = rti.__rti$_rest;
                         substitutedArguments = H._substituteArray(universe, $arguments, typeArguments, depth);
                         if (substitutedBase === base && substitutedArguments === $arguments)
                             return rti;
@@ -1181,13 +1231,13 @@
                     case 11:
                         returnType = rti._primary;
                         substitutedReturnType = H._substitute(universe, returnType, typeArguments, depth);
-                        functionParameters = rti._rest;
+                        functionParameters = rti.__rti$_rest;
                         substitutedFunctionParameters = H._substituteFunctionParameters(universe, functionParameters, typeArguments, depth);
                         if (substitutedReturnType === returnType && substitutedFunctionParameters === functionParameters)
                             return rti;
                         return H._Universe__lookupFunctionRti(universe, substitutedReturnType, substitutedFunctionParameters);
                     case 12:
-                        bounds = rti._rest;
+                        bounds = rti.__rti$_rest;
                         depth += bounds.length;
                         substitutedBounds = H._substituteArray(universe, bounds, typeArguments, depth);
                         base = rti._primary;
@@ -1351,7 +1401,7 @@
                     return H._finishIsFn(testRti, object, isFn);
                 if (unstarred._kind === 9) {
                     t1 = unstarred._primary;
-                    if (unstarred._rest.every(H.isTopType)) {
+                    if (unstarred.__rti$_rest.every(H.isTopType)) {
                         testRti._specializedTestResource = "$is" + t1;
                         return H._finishIsFn(testRti, object, H._isTestViaProperty);
                     }
@@ -1631,7 +1681,7 @@
                     outerContextLength = null;
                 }
                 t1 = functionType._primary;
-                parameters = functionType._rest;
+                parameters = functionType.__rti$_rest;
                 requiredPositional = parameters._requiredPositional;
                 requiredPositionalLength = requiredPositional.length;
                 optionalPositional = parameters._optionalPositional;
@@ -1690,13 +1740,13 @@
                     return "FutureOr<" + H._rtiToString(rti._primary, genericContext) + ">";
                 if (kind === 9) {
                     $name = H._unminifyOrTag(rti._primary);
-                    $arguments = rti._rest;
+                    $arguments = rti.__rti$_rest;
                     return $arguments.length !== 0 ? $name + ("<" + H._rtiArrayToString($arguments, genericContext) + ">") : $name;
                 }
                 if (kind === 11)
                     return H._functionRtiToString(rti, genericContext, null);
                 if (kind === 12)
-                    return H._functionRtiToString(rti._primary, genericContext, rti._rest);
+                    return H._functionRtiToString(rti._primary, genericContext, rti.__rti$_rest);
                 if (kind === 13) {
                     t1 = rti._primary;
                     t2 = genericContext.length;
@@ -1774,7 +1824,7 @@
                 probe = cache.get(argumentsRecipe);
                 if (probe != null)
                     return probe;
-                rti = H._Universe__lookupBindingRti(universe, environment, argumentsRti._kind === 10 ? argumentsRti._rest : [argumentsRti]);
+                rti = H._Universe__lookupBindingRti(universe, environment, argumentsRti._kind === 10 ? argumentsRti.__rti$_rest : [argumentsRti]);
                 cache.set(argumentsRecipe, rti);
                 return rti;
             },
@@ -1941,7 +1991,7 @@
                 rti = new H.Rti(null, null);
                 rti._kind = 9;
                 rti._primary = $name;
-                rti._rest = $arguments;
+                rti.__rti$_rest = $arguments;
                 if ($arguments.length > 0)
                     rti._precomputed1 = $arguments[0];
                 rti._canonicalRecipe = s;
@@ -1953,7 +2003,7 @@
                 var newBase, newArguments, key, probe, rti, t1;
                 if (base._kind === 10) {
                     newBase = base._primary;
-                    newArguments = base._rest.concat($arguments);
+                    newArguments = base.__rti$_rest.concat($arguments);
                 } else {
                     newArguments = $arguments;
                     newBase = base;
@@ -1965,7 +2015,7 @@
                 rti = new H.Rti(null, null);
                 rti._kind = 10;
                 rti._primary = newBase;
-                rti._rest = newArguments;
+                rti.__rti$_rest = newArguments;
                 rti._canonicalRecipe = key;
                 t1 = H._Universe__installTypeTests(universe, rti);
                 universe.eC.set(key, t1);
@@ -1998,7 +2048,7 @@
                 rti = new H.Rti(null, null);
                 rti._kind = 11;
                 rti._primary = returnType;
-                rti._rest = parameters;
+                rti.__rti$_rest = parameters;
                 rti._canonicalRecipe = key;
                 t1 = H._Universe__installTypeTests(universe, rti);
                 universe.eC.set(key, t1);
@@ -2035,7 +2085,7 @@
                 rti = new H.Rti(null, null);
                 rti._kind = 12;
                 rti._primary = baseFunctionType;
-                rti._rest = bounds;
+                rti.__rti$_rest = bounds;
                 rti._canonicalRecipe = key;
                 return H._Universe__installTypeTests(universe, rti);
             },
@@ -2270,7 +2320,7 @@
                 if (kind === 10) {
                     if (index === 0)
                         return environment._primary;
-                    typeArguments = environment._rest;
+                    typeArguments = environment.__rti$_rest;
                     len = typeArguments.length;
                     if (index <= len)
                         return typeArguments[index - 1];
@@ -2281,7 +2331,7 @@
                     return environment;
                 if (kind !== 9)
                     throw H.wrapException(P.AssertionError$("Indexed base must be an interface type"));
-                typeArguments = environment._rest;
+                typeArguments = environment.__rti$_rest;
                 if (index <= typeArguments.length)
                     return typeArguments[index - 1];
                 throw H.wrapException(P.AssertionError$("Bad index " + index + " for " + environment.toString$0(0)));
@@ -2362,8 +2412,8 @@
                         return true;
                     if (sKind !== 12)
                         return false;
-                    sBounds = s._rest;
-                    tBounds = t._rest;
+                    sBounds = s.__rti$_rest;
+                    tBounds = t.__rti$_rest;
                     sLength = sBounds.length;
                     if (sLength !== tBounds.length)
                         return false;
@@ -2395,8 +2445,8 @@
                 var sParameters, tParameters, sRequiredPositional, tRequiredPositional, sRequiredPositionalLength, tRequiredPositionalLength, requiredPositionalDelta, sOptionalPositional, tOptionalPositional, sOptionalPositionalLength, tOptionalPositionalLength, i, t1, sNamed, tNamed, sNamedLength, tNamedLength, sIndex, tIndex, tName, sName, sIsRequired;
                 if (!H._isSubtype(universe, s._primary, sEnv, t._primary, tEnv))
                     return false;
-                sParameters = s._rest;
-                tParameters = t._rest;
+                sParameters = s.__rti$_rest;
+                tParameters = t.__rti$_rest;
                 sRequiredPositional = sParameters._requiredPositional;
                 tRequiredPositional = tParameters._requiredPositional;
                 sRequiredPositionalLength = sRequiredPositional.length;
@@ -2465,8 +2515,8 @@
                     sName = s._primary,
                     tName = t._primary;
                 if (sName === tName) {
-                    sArgs = s._rest;
-                    tArgs = t._rest;
+                    sArgs = s.__rti$_rest;
+                    tArgs = t.__rti$_rest;
                     $length = sArgs.length;
                     for (i = 0; i < $length; ++i) {
                         t1 = sArgs[i];
@@ -2485,7 +2535,7 @@
                 if (supertypeArgs == null)
                     return false;
                 $length = supertypeArgs.length;
-                tArgs = t._rest;
+                tArgs = t.__rti$_rest;
                 for (i = 0; i < $length; ++i)
                     if (!H._isSubtype(universe, H._Universe_evalInEnvironment(universe, s, supertypeArgs[i]), sEnv, tArgs[i], tEnv))
                         return false;
@@ -2539,7 +2589,7 @@
                 _._is = t1;
                 _._cachedRuntimeType = _._specializedTestResource = _._precomputed1 = null;
                 _._kind = 0;
-                _._canonicalRecipe = _._bindCache = _._evalCache = _._rest = _._primary = null;
+                _._canonicalRecipe = _._bindCache = _._evalCache = _.__rti$_rest = _._primary = null;
             },
             _FunctionParameters: function _FunctionParameters() {
                 this._named = this._optionalPositional = this._requiredPositional = null;
@@ -2719,7 +2769,7 @@
             ArrayIterator: function ArrayIterator(t0, t1, t2) {
                 var _ = this;
                 _._iterable = t0;
-                _._length = t1;
+                _.__interceptors$_length = t1;
                 _._index = 0;
                 _._current = null;
                 _.$ti = t2;
@@ -2864,7 +2914,7 @@
                         t1 = _box_0.listenerValueOrError;
                         if (t4._is(t1)) {
                             t5 = _box_0.listener.$ti;
-                            t5 = t5._eval$1("Future<2>")._is(t1) || !t5._rest[1]._is(t1);
+                            t5 = t5._eval$1("Future<2>")._is(t1) || !t5.__rti$_rest[1]._is(t1);
                         } else
                             t5 = false;
                         if (t5) {
@@ -3133,6 +3183,25 @@
             LinkedHashMap_LinkedHashMap$_literal: function (keyValuePairs, $K, $V) {
                 return $K._eval$1("@<0>")._bind$1($V)._eval$1("LinkedHashMap<1,2>")._as(H.fillLiteralMap(keyValuePairs, new H.JsLinkedHashMap($K._eval$1("@<0>")._bind$1($V)._eval$1("JsLinkedHashMap<1,2>"))));
             },
+            IterableBase_iterableToShortString: function (iterable, leftDelimiter, rightDelimiter) {
+                var parts, t1;
+                if (P._isToStringVisiting(iterable)) {
+                    if (leftDelimiter === "(" && rightDelimiter === ")")
+                        return "(...)";
+                    return leftDelimiter + "..." + rightDelimiter;
+                }
+                parts = H.setRuntimeTypeInfo([], type$.JSArray_String);
+                C.JSArray_methods.add$1($._toStringVisiting, iterable);
+                try {
+                    P._iterablePartsToStrings(iterable, parts);
+                } finally {
+                    if (0 >= $._toStringVisiting.length)
+                        return H.ioore($._toStringVisiting, -1);
+                    $._toStringVisiting.pop();
+                }
+                t1 = P.StringBuffer__writeAll(leftDelimiter, type$.Iterable_dynamic._as(parts), ", ") + rightDelimiter;
+                return t1.charCodeAt(0) == 0 ? t1 : t1;
+            },
             IterableBase_iterableToFullString: function (iterable, leftDelimiter, rightDelimiter) {
                 var buffer, t1;
                 if (P._isToStringVisiting(iterable))
@@ -3157,6 +3226,88 @@
                     if (o === $._toStringVisiting[i])
                         return true;
                 return false;
+            },
+            _iterablePartsToStrings: function (iterable, parts) {
+                var next, ultimateString, penultimateString, penultimate, ultimate, ultimate0, elision,
+                    it = iterable.get$iterator(iterable),
+                    $length = 0,
+                    count = 0;
+                while (true) {
+                    if (!($length < 80 || count < 3))
+                        break;
+                    if (!it.moveNext$0())
+                        return;
+                    next = H.S(it.get$current());
+                    C.JSArray_methods.add$1(parts, next);
+                    $length += next.length + 2;
+                    ++count;
+                }
+                if (!it.moveNext$0()) {
+                    if (count <= 5)
+                        return;
+                    if (0 >= parts.length)
+                        return H.ioore(parts, -1);
+                    ultimateString = parts.pop();
+                    if (0 >= parts.length)
+                        return H.ioore(parts, -1);
+                    penultimateString = parts.pop();
+                } else {
+                    penultimate = it.get$current();
+                    ++count;
+                    if (!it.moveNext$0()) {
+                        if (count <= 4) {
+                            C.JSArray_methods.add$1(parts, H.S(penultimate));
+                            return;
+                        }
+                        ultimateString = H.S(penultimate);
+                        if (0 >= parts.length)
+                            return H.ioore(parts, -1);
+                        penultimateString = parts.pop();
+                        $length += ultimateString.length + 2;
+                    } else {
+                        ultimate = it.get$current();
+                        ++count;
+                        for (; it.moveNext$0(); penultimate = ultimate, ultimate = ultimate0) {
+                            ultimate0 = it.get$current();
+                            ++count;
+                            if (count > 100) {
+                                while (true) {
+                                    if (!($length > 75 && count > 3))
+                                        break;
+                                    if (0 >= parts.length)
+                                        return H.ioore(parts, -1);
+                                    $length -= parts.pop().length + 2;
+                                    --count;
+                                }
+                                C.JSArray_methods.add$1(parts, "...");
+                                return;
+                            }
+                        }
+                        penultimateString = H.S(penultimate);
+                        ultimateString = H.S(ultimate);
+                        $length += ultimateString.length + penultimateString.length + 4;
+                    }
+                }
+                if (count > parts.length + 2) {
+                    $length += 5;
+                    elision = "...";
+                } else
+                    elision = null;
+                while (true) {
+                    if (!($length > 80 && parts.length > 3))
+                        break;
+                    if (0 >= parts.length)
+                        return H.ioore(parts, -1);
+                    $length -= parts.pop().length + 2;
+                    if (elision == null) {
+                        $length += 5;
+                        elision = "...";
+                    }
+                }
+                if (elision != null)
+                    C.JSArray_methods.add$1(parts, elision);
+                C.JSArray_methods.add$1(parts, penultimateString);
+                C.JSArray_methods.add$1(parts, ultimateString);
             },
             MapBase_mapToString: function (m) {
                 var result, t1 = {};
@@ -3190,6 +3341,19 @@
                 if (object instanceof H.Closure)
                     return object.toString$0(0);
                 return "Instance of '" + H.Primitives_objectTypeName(object) + "'";
+            },
+            List_List$of: function (elements, growable, $E) {
+                var t1 = P.List_List$_of(elements, $E);
+                return t1;
+            },
+            List_List$_of: function (elements, $E) {
+                var list, t1;
+                if (Array.isArray(elements))
+                    return H.setRuntimeTypeInfo(elements.slice(0), $E._eval$1("JSArray<0>"));
+                list = H.setRuntimeTypeInfo([], $E._eval$1("JSArray<0>"));
+                for (t1 = J.get$iterator$ax(elements); t1.moveNext$0();)
+                    C.JSArray_methods.add$1(list, t1.get$current());
+                return list;
             },
             StringBuffer__writeAll: function (string, objects, separator) {
                 var iterator = J.get$iterator$ax(objects);
@@ -3292,6 +3456,8 @@
             _Exception: function _Exception(t0) {
                 this.message = t0;
             },
+            Iterable: function Iterable() {},
+            Iterator: function Iterator() {},
             Null: function Null() {},
             Object: function Object() {},
             _StringStackTrace: function _StringStackTrace() {},
@@ -3335,7 +3501,7 @@
         },
         V = {
             main: function () {
-                var t1, t2, t3, t4, t5, test_map, tr, td, t6, plist, pbody, p, a, i, b,
+                var t1, t2, t3, t4, t5, test_map, t6, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
                 P.print($.$get$Dt_at());
                 t1 = document;
@@ -3349,13 +3515,25 @@
                 t5 = type$.dynamic;
                 test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], t5, t5);
                 test_map.$indexSet(0, "b", 2);
-                P.print(test_map);
                 test_map.remove$1(0, "a");
-                P.print(test_map);
                 test_map.$indexSet(0, "b", 3);
-                P.print(test_map);
                 P.print(test_map.$index(0, "b"));
                 test_map.forEach$1(0, new V.main_closure());
+                P.print(test_map._length);
+                P.print(test_map._length === 0);
+                P.print(test_map._length !== 0);
+                P.print(test_map.containsKey$1("b"));
+                P.print(test_map.containsValue$1(3));
+                t6 = H._instanceType(test_map)._eval$1("LinkedHashMapKeyIterable<1>");
+                P.print(P.List_List$of(new H.LinkedHashMapKeyIterable(test_map, t6), true, t6._eval$1("Iterable.E")));
+                t6 = test_map.get$values(test_map);
+                P.print(P.List_List$of(t6, true, H._instanceType(t6)._eval$1("Iterable.E")));
+                P.print(P.MapBase_mapToString(test_map));
+                if (test_map._length > 0) {
+                    test_map._strings = test_map._nums = test_map._rest = test_map._first = test_map._last = null;
+                    test_map._length = 0;
+                    test_map._modified$0();
+                }
                 P.print(test_map);
                 tr = t1.createElement("tr");
                 td = t1.createElement("td");
@@ -3479,7 +3657,7 @@
             var t2, _this = this,
                 t1 = _this._iterable,
                 $length = t1.length;
-            if (_this._length !== $length)
+            if (_this.__interceptors$_length !== $length)
                 throw H.wrapException(H.throwConcurrentModificationError(t1));
             t2 = _this._index;
             if (t2 >= $length) {
@@ -3492,7 +3670,8 @@
         },
         set$_current: function (_current) {
             this._current = this.$ti._eval$1("1?")._as(_current);
-        }
+        },
+        $isIterator: 1
     };
     J.JSNumber.prototype = {
         toString$0: function (receiver) {
@@ -3574,6 +3753,7 @@
             return t1;
         }
     };
+    H.EfficientLengthIterable.prototype = {};
     H.ListIterator.prototype = {
         get$current: function () {
             return this.$ti._precomputed1._as(this.__internal$_current);
@@ -3596,6 +3776,36 @@
         },
         set$__internal$_current: function (_current) {
             this.__internal$_current = this.$ti._eval$1("1?")._as(_current);
+        },
+        $isIterator: 1
+    };
+    H.MappedIterable.prototype = {
+        get$iterator: function (_) {
+            var t1 = this.__internal$_iterable,
+                t2 = H._instanceType(this);
+            return new H.MappedIterator(t1.get$iterator(t1), this._f, t2._eval$1("@<1>")._bind$1(t2.__rti$_rest[1])._eval$1("MappedIterator<1,2>"));
+        },
+        get$length: function (_) {
+            return this.__internal$_iterable._map._length;
+        }
+    };
+    H.EfficientLengthMappedIterable.prototype = {};
+    H.MappedIterator.prototype = {
+        moveNext$0: function () {
+            var _this = this,
+                t1 = _this._iterator;
+            if (t1.moveNext$0()) {
+                _this.set$__internal$_current(_this._f.call$1(t1.$ti._precomputed1._as(t1.__js_helper$_current)));
+                return true;
+            }
+            _this.set$__internal$_current(null);
+            return false;
+        },
+        get$current: function () {
+            return this.$ti.__rti$_rest[1]._as(this.__internal$_current);
+        },
+        set$__internal$_current: function (_current) {
+            this.__internal$_current = this.$ti._eval$1("2?")._as(_current);
         }
     };
     H.TypeErrorDecoder.prototype = {
@@ -3722,9 +3932,27 @@
             return "RuntimeError: " + this.message;
         }
     };
+    H._AssertionError.prototype = {
+        toString$0: function (_) {
+            return "Assertion failed: " + P.Error_safeToString(this.message);
+        }
+    };
     H.JsLinkedHashMap.prototype = {
         get$length: function (_) {
-            return this.__js_helper$_length;
+            return this._length;
+        },
+        get$values: function (_) {
+            var t1 = H._instanceType(this);
+            return H.MappedIterable_MappedIterable(new H.LinkedHashMapKeyIterable(this, t1._eval$1("LinkedHashMapKeyIterable<1>")), new H.JsLinkedHashMap_values_closure(this), t1._precomputed1, t1.__rti$_rest[1]);
+        },
+        containsKey$1: function (key) {
+            var strings = this._strings;
+            if (strings == null)
+                return false;
+            return this._containsTableEntry$2(strings, key);
+        },
+        containsValue$1: function (value) {
+            return new H.LinkedHashMapKeyIterable(this, H._instanceType(this)._eval$1("LinkedHashMapKeyIterable<1>")).any$1(0, new H.JsLinkedHashMap_containsValue_closure(this, value));
         },
         $index: function (_, key) {
             var strings, cell, t1, nums, _this = this,
@@ -3748,7 +3976,7 @@
         },
         internalGet$1: function (key) {
             var bucket, index,
-                rest = this.__js_helper$_rest;
+                rest = this._rest;
             if (rest == null)
                 return null;
             bucket = this._getTableBucket$2(rest, J.get$hashCode$(key) & 0x3ffffff);
@@ -3761,7 +3989,7 @@
             var strings, nums, rest, hash, bucket, index, _this = this,
                 t1 = H._instanceType(_this);
             t1._precomputed1._as(key);
-            t1._rest[1]._as(value);
+            t1.__rti$_rest[1]._as(value);
             if (typeof key == "string") {
                 strings = _this._strings;
                 _this._addHashTableEntry$3(strings == null ? _this._strings = _this._newHashTable$0() : strings, key, value);
@@ -3769,9 +3997,9 @@
                 nums = _this._nums;
                 _this._addHashTableEntry$3(nums == null ? _this._nums = _this._newHashTable$0() : nums, key, value);
             } else {
-                rest = _this.__js_helper$_rest;
+                rest = _this._rest;
                 if (rest == null)
-                    rest = _this.__js_helper$_rest = _this._newHashTable$0();
+                    rest = _this._rest = _this._newHashTable$0();
                 hash = J.get$hashCode$(key) & 0x3ffffff;
                 bucket = _this._getTableBucket$2(rest, hash);
                 if (bucket == null)
@@ -3805,7 +4033,7 @@
             var cell, _this = this,
                 t1 = H._instanceType(_this);
             t1._precomputed1._as(key);
-            t1._rest[1]._as(value);
+            t1.__rti$_rest[1]._as(value);
             cell = _this._getTableCell$2(table, key);
             if (cell == null)
                 _this._setTableEntry$3(table, key, _this._newLinkedCell$2(key, value));
@@ -3829,7 +4057,7 @@
         _newLinkedCell$2: function (key, value) {
             var _this = this,
                 t1 = H._instanceType(_this),
-                cell = new H.LinkedHashMapCell(t1._precomputed1._as(key), t1._rest[1]._as(value));
+                cell = new H.LinkedHashMapCell(t1._precomputed1._as(key), t1.__rti$_rest[1]._as(value));
             if (_this._first == null)
                 _this._first = _this._last = cell;
             else {
@@ -3838,7 +4066,7 @@
                 cell._previous = t1;
                 _this._last = t1._next = cell;
             }
-            ++_this.__js_helper$_length;
+            ++_this._length;
             _this._modified$0();
             return cell;
         },
@@ -3854,7 +4082,7 @@
                 _this._last = previous;
             else
                 next._previous = previous;
-            --_this.__js_helper$_length;
+            --_this._length;
             _this._modified$0();
         },
         internalFindBucketIndex$2: function (bucket, key) {
@@ -3882,6 +4110,9 @@
         _deleteTableEntry$2: function (table, key) {
             delete table[key];
         },
+        _containsTableEntry$2: function (table, key) {
+            return this._getTableCell$2(table, key) != null;
+        },
         _newHashTable$0: function () {
             var _s20_ = "<non-identifier-key>",
                 table = Object.create(null);
@@ -3891,7 +4122,61 @@
         },
         $isLinkedHashMap: 1
     };
+    H.JsLinkedHashMap_values_closure.prototype = {
+        call$1: function (each) {
+            var t1 = this.$this,
+                t2 = H._instanceType(t1);
+            return t2.__rti$_rest[1]._as(t1.$index(0, t2._precomputed1._as(each)));
+        },
+        $signature: function () {
+            return H._instanceType(this.$this)._eval$1("2(1)");
+        }
+    };
+    H.JsLinkedHashMap_containsValue_closure.prototype = {
+        call$1: function (each) {
+            var t1 = this.$this;
+            return J.$eq$(t1.$index(0, H._instanceType(t1)._precomputed1._as(each)), this.value);
+        },
+        $signature: function () {
+            return H._instanceType(this.$this)._eval$1("bool(1)");
+        }
+    };
     H.LinkedHashMapCell.prototype = {};
+    H.LinkedHashMapKeyIterable.prototype = {
+        get$length: function (_) {
+            return this._map._length;
+        },
+        get$iterator: function (_) {
+            var t1 = this._map,
+                t2 = new H.LinkedHashMapKeyIterator(t1, t1._modifications, this.$ti._eval$1("LinkedHashMapKeyIterator<1>"));
+            t2._cell = t1._first;
+            return t2;
+        }
+    };
+    H.LinkedHashMapKeyIterator.prototype = {
+        get$current: function () {
+            return this.$ti._precomputed1._as(this.__js_helper$_current);
+        },
+        moveNext$0: function () {
+            var cell, _this = this,
+                t1 = _this._map;
+            if (_this._modifications !== t1._modifications)
+                throw H.wrapException(P.ConcurrentModificationError$(t1));
+            cell = _this._cell;
+            if (cell == null) {
+                _this.set$__js_helper$_current(null);
+                return false;
+            } else {
+                _this.set$__js_helper$_current(cell.hashMapCellKey);
+                _this._cell = cell._next;
+                return true;
+            }
+        },
+        set$__js_helper$_current: function (_current) {
+            this.__js_helper$_current = this.$ti._eval$1("1?")._as(_current);
+        },
+        $isIterator: 1
+    };
     H.initHooks_closure.prototype = {
         call$1: function (o) {
             return this.getTag(o);
@@ -4355,7 +4640,7 @@
     };
     P.MapMixin.prototype = {
         get$length: function (_) {
-            return this.__js_helper$_length;
+            return this._length;
         },
         toString$0: function (_) {
             return P.MapBase_mapToString(this);
@@ -4521,6 +4806,27 @@
             return "Exception: " + this.message;
         }
     };
+    P.Iterable.prototype = {
+        any$1: function (_, test) {
+            var t1;
+            H._instanceType(this)._eval$1("bool(Iterable.E)")._as(test);
+            for (t1 = this.get$iterator(this); t1.moveNext$0();)
+                if (H.boolConversionCheck(test.call$1(t1.get$current())))
+                    return true;
+            return false;
+        },
+        get$length: function (_) {
+            var count,
+                it = this.get$iterator(this);
+            for (count = 0; it.moveNext$0();)
+                ++count;
+            return count;
+        },
+        toString$0: function (_) {
+            return P.IterableBase_iterableToShortString(this, "(", ")");
+        }
+    };
+    P.Iterator.prototype = {};
     P.Null.prototype = {
         get$hashCode: function (_) {
             return P.Object.prototype.get$hashCode.call(C.JSNull_methods, this);
@@ -4679,7 +4985,8 @@
         },
         set$_html$_current: function (_current) {
             this._html$_current = this.$ti._eval$1("1?")._as(_current);
-        }
+        },
+        $isIterator: 1
     };
     W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase.prototype = {};
     W._NodeList_Interceptor_ListMixin.prototype = {};
@@ -4722,17 +5029,22 @@
             _inherit = hunkHelpers.inherit,
             _inheritMany = hunkHelpers.inheritMany;
         _inherit(P.Object, null);
-        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, H.ListIterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.Rti, H._FunctionParameters, P._TimerImpl, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
+        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, P.Iterable, H.ListIterator, P.Iterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.Rti, H._FunctionParameters, P._TimerImpl, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
         _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, W.EventTarget, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.DomException, W.DomTokenList, W._NodeList_Interceptor_ListMixin]);
         _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
         _inherit(J.JSUnmodifiableArray, J.JSArray);
         _inheritMany(J.JSNumber, [J.JSInt, J.JSDouble]);
-        _inheritMany(P.Error, [H.LateError, P.TypeError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, H._Error, P.AssertionError, P.NullThrownError, P.ArgumentError, P.UnsupportedError, P.UnimplementedError, P.ConcurrentModificationError, P.CyclicInitializationError]);
+        _inheritMany(P.Error, [H.LateError, P.TypeError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.NullThrownError, P.ArgumentError, P.UnsupportedError, P.UnimplementedError, P.ConcurrentModificationError, P.CyclicInitializationError]);
+        _inheritMany(P.Iterable, [H.EfficientLengthIterable, H.MappedIterable]);
+        _inherit(H.EfficientLengthMappedIterable, H.MappedIterable);
+        _inherit(H.MappedIterator, P.Iterator);
         _inherit(H.NullError, P.TypeError);
-        _inheritMany(H.Closure, [H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0, V.main_closure1]);
+        _inheritMany(H.Closure, [H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.JsLinkedHashMap_containsValue_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0, V.main_closure1]);
         _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
+        _inherit(H._AssertionError, P.AssertionError);
         _inherit(P.MapBase, P.MapMixin);
         _inherit(H.JsLinkedHashMap, P.MapBase);
+        _inherit(H.LinkedHashMapKeyIterable, H.EfficientLengthIterable);
         _inherit(H._TypeError, H._Error);
         _inherit(P._RootZone, P._Zone);
         _inherit(P.ListBase, P._ListBase_Object_ListMixin);
@@ -4775,8 +5087,8 @@
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
     };
-    H._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","JavaScriptFunction":"JavaScriptObject","AElement":"Element","GraphicsElement":"Element","SvgElement":"Element","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","CDataSection":"CharacterData","Text":"CharacterData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"JSNumber":{"num":[]},"JSInt":{"int":[],"num":[]},"JSDouble":{"num":[]},"JSString":{"String":[]},"LateError":{"Error":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"LinkedHashMap":["1","2"]},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"AsyncError":{"Error":[]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"]},"int":{"num":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"HtmlElement":{"Element":[],"Node":[]},"AnchorElement":{"Element":[],"Node":[]},"AreaElement":{"Element":[],"Node":[]},"CharacterData":{"Node":[]},"DivElement":{"Element":[],"Node":[]},"_FrozenElementList":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[]},"FormElement":{"Element":[],"Node":[]},"NodeList":{"ListMixin":["Node"],"ImmutableListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"SelectElement":{"Element":[],"Node":[]},"TableCellElement":{"Element":[],"Node":[]}}'));
-    H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"ListBase":1,"MapBase":2,"_ListBase_Object_ListMixin":1}'));
+    H._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","JavaScriptFunction":"JavaScriptObject","AElement":"Element","GraphicsElement":"Element","SvgElement":"Element","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","CDataSection":"CharacterData","Text":"CharacterData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"num":[]},"JSInt":{"int":[],"num":[]},"JSDouble":{"num":[]},"JSString":{"String":[]},"LateError":{"Error":[]},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"LinkedHashMap":["1","2"]},"LinkedHashMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"AsyncError":{"Error":[]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"]},"int":{"num":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"HtmlElement":{"Element":[],"Node":[]},"AnchorElement":{"Element":[],"Node":[]},"AreaElement":{"Element":[],"Node":[]},"CharacterData":{"Node":[]},"DivElement":{"Element":[],"Node":[]},"_FrozenElementList":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[]},"FormElement":{"Element":[],"Node":[]},"NodeList":{"ListMixin":["Node"],"ImmutableListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"SelectElement":{"Element":[],"Node":[]},"TableCellElement":{"Element":[],"Node":[]},"FixedSizeListIterator":{"Iterator":["1"]}}'));
+    H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"ListBase":1,"MapBase":2,"_ListBase_Object_ListMixin":1}'));
     0;
     var type$ = (function rtii() {
         var findType = H.findType;
@@ -4787,6 +5099,7 @@
             Error: findType("Error"),
             Function: findType("Function"),
             Future_dynamic: findType("Future<@>"),
+            Iterable_dynamic: findType("Iterable<@>"),
             JSArray_String: findType("JSArray<String>"),
             JSArray_dynamic: findType("JSArray<@>"),
             JSNull: findType("JSNull"),
