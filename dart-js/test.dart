@@ -63,6 +63,18 @@ List<String> test_list(String str) {
 
 }
 
+md5run() async{
+  print("object in md5run");
+  await Future.delayed(Duration(milliseconds: 1000));
+  print("object in md5run after 1s");
+}
+
+a_run() async{
+  print("object");
+  await md5run();
+  print("object after 1s");
+}
+
 void main() {
 
   print(test_list("abc"));
@@ -82,6 +94,8 @@ void main() {
   Map<String, int> test_map = {
     "a": 1,
   };
+
+  a_run();
 
   // 插入
   test_map["b"] = 2;

@@ -480,6 +480,8 @@
             unwrapException: function (ex) {
                 if (ex == null)
                     return new H.NullThrownFromJavaScriptException(ex);
+                if (ex instanceof H.ExceptionAndStackTrace)
+                    return H.saveStackTrace(ex, type$.Object._as(ex.dartException));
                 if (typeof ex !== "object")
                     return ex;
                 if ("dartException" in ex)
@@ -583,6 +585,8 @@
             },
             getTraceFromException: function (exception) {
                 var trace;
+                if (exception instanceof H.ExceptionAndStackTrace)
+                    return exception.stackTrace;
                 if (exception == null)
                     return new H._StackTrace(exception);
                 trace = exception.$cachedTrace;
@@ -1105,6 +1109,10 @@
             },
             NullThrownFromJavaScriptException: function NullThrownFromJavaScriptException(t0) {
                 this._irritant = t0;
+            },
+            ExceptionAndStackTrace: function ExceptionAndStackTrace(t0, t1) {
+                this.dartException = t0;
+                this.stackTrace = t1;
             },
             _StackTrace: function _StackTrace(t0) {
                 this._exception = t0;
@@ -2822,6 +2830,75 @@
                 t1._TimerImpl$2(milliseconds, callback);
                 return t1;
             },
+            _makeAsyncAwaitCompleter: function ($T) {
+                return new P._AsyncAwaitCompleter(new P._Future($.Zone__current, $T._eval$1("_Future<0>")), $T._eval$1("_AsyncAwaitCompleter<0>"));
+            },
+            _asyncStartSync: function (bodyFunction, completer) {
+                bodyFunction.call$2(0, null);
+                completer.isSync = true;
+                return completer._future;
+            },
+            _asyncAwait: function (object, bodyFunction) {
+                P._awaitOnObject(object, bodyFunction);
+            },
+            _asyncReturn: function (object, completer) {
+                var value, t2,
+                    t1 = completer.$ti;
+                t1._eval$1("1/?")._as(object);
+                value = object == null ? t1._precomputed1._as(object) : object;
+                if (!completer.isSync)
+                    completer._future._asyncComplete$1(value);
+                else {
+                    t2 = completer._future;
+                    if (t1._eval$1("Future<1>")._is(value))
+                        t2._chainFuture$1(value);
+                    else
+                        t2._completeWithValue$1(t1._precomputed1._as(value));
+                }
+            },
+            _asyncRethrow: function (object, completer) {
+                var t1 = H.unwrapException(object),
+                    st = H.getTraceFromException(object),
+                    t2 = completer.isSync,
+                    t3 = completer._future;
+                if (t2)
+                    t3._completeError$2(t1, st);
+                else
+                    t3._asyncCompleteError$2(t1, st);
+            },
+            _awaitOnObject: function (object, bodyFunction) {
+                var t1, future,
+                    thenCallback = new P._awaitOnObject_closure(bodyFunction),
+                    errorCallback = new P._awaitOnObject_closure0(bodyFunction);
+                if (object instanceof P._Future)
+                    object._thenAwait$1$2(thenCallback, errorCallback, type$.dynamic);
+                else {
+                    t1 = type$.dynamic;
+                    if (type$.Future_dynamic._is(object))
+                        object.then$1$2$onError(thenCallback, errorCallback, t1);
+                    else {
+                        future = new P._Future($.Zone__current, type$._Future_dynamic);
+                        future._state = 4;
+                        future._resultOrListeners = object;
+                        future._thenAwait$1$2(thenCallback, errorCallback, t1);
+                    }
+                }
+            },
+            _wrapJsFunctionForAsync: function ($function) {
+                var $protected = function (fn, ERROR) {
+                    return function (errorCode, result) {
+                        while (true)
+                            try {
+                                fn(errorCode, result);
+                                break;
+                            } catch (error) {
+                                result = error;
+                                errorCode = ERROR;
+                            }
+                    };
+                }($function, 1);
+                return $.Zone__current.registerBinaryCallback$3$1(new P._wrapJsFunctionForAsync_closure($protected), type$.void, type$.int, type$.dynamic);
+            },
             AsyncError$: function (error, stackTrace) {
                 var t1 = H.checkNotNullable(error, "error", type$.Object);
                 return new P.AsyncError(t1, stackTrace == null ? P.AsyncError_defaultStackTrace(error) : stackTrace);
@@ -2961,9 +3038,9 @@
                 }
             },
             _registerErrorHandler: function (errorHandler, zone) {
-                var t1 = type$.dynamic_Function_Object_StackTrace;
-                if (t1._is(errorHandler))
-                    return t1._as(errorHandler);
+                var t1;
+                if (type$.dynamic_Function_Object_StackTrace._is(errorHandler))
+                    return zone.registerBinaryCallback$3$1(errorHandler, type$.dynamic, type$.Object, type$.StackTrace);
                 t1 = type$.dynamic_Function_Object;
                 if (t1._is(errorHandler))
                     return t1._as(errorHandler);
@@ -3030,6 +3107,10 @@
                     return;
                 }
                 P._rootScheduleMicrotask(_null, _null, currentZone, type$.void_Function._as(currentZone.bindCallbackGuarded$1(callback)));
+            },
+            StreamIterator_StreamIterator: function (stream, $T) {
+                H.checkNotNullable(stream, "stream", type$.Object);
+                return new P._StreamIterator($T._eval$1("_StreamIterator<0>"));
             },
             Timer_Timer: function (duration, callback) {
                 var t1 = $.Zone__current;
@@ -3109,6 +3190,20 @@
                 this.$this = t0;
                 this.callback = t1;
             },
+            _AsyncAwaitCompleter: function _AsyncAwaitCompleter(t0, t1) {
+                this._future = t0;
+                this.isSync = false;
+                this.$ti = t1;
+            },
+            _awaitOnObject_closure: function _awaitOnObject_closure(t0) {
+                this.bodyFunction = t0;
+            },
+            _awaitOnObject_closure0: function _awaitOnObject_closure0(t0) {
+                this.bodyFunction = t0;
+            },
+            _wrapJsFunctionForAsync_closure: function _wrapJsFunctionForAsync_closure(t0) {
+                this.$protected = t0;
+            },
             AsyncError: function AsyncError(t0, t1) {
                 this.error = t0;
                 this.stackTrace = t1;
@@ -3153,6 +3248,19 @@
                 this.e = t1;
                 this.s = t2;
             },
+            _Future__asyncCompleteWithValue_closure: function _Future__asyncCompleteWithValue_closure(t0, t1) {
+                this.$this = t0;
+                this.value = t1;
+            },
+            _Future__chainFuture_closure: function _Future__chainFuture_closure(t0, t1) {
+                this.$this = t0;
+                this.value = t1;
+            },
+            _Future__asyncCompleteError_closure: function _Future__asyncCompleteError_closure(t0, t1, t2) {
+                this.$this = t0;
+                this.error = t1;
+                this.stackTrace = t2;
+            },
             _Future__propagateToListeners_handleWhenCompleteCallback: function _Future__propagateToListeners_handleWhenCompleteCallback(t0, t1, t2) {
                 this._box_0 = t0;
                 this._box_1 = t1;
@@ -3172,6 +3280,9 @@
             _AsyncCallbackEntry: function _AsyncCallbackEntry(t0) {
                 this.callback = t0;
                 this.next = null;
+            },
+            _StreamIterator: function _StreamIterator(t0) {
+                this.$ti = t0;
             },
             _Zone: function _Zone() {},
             _rootHandleUncaughtError_closure: function _rootHandleUncaughtError_closure(t0, t1) {
@@ -3386,6 +3497,9 @@
                 }
                 return string;
             },
+            Duration$: function (milliseconds) {
+                return new P.Duration(1000 * milliseconds);
+            },
             Error_safeToString: function (object) {
                 if (typeof object == "number" || H._isBool(object) || null == object)
                     return J.toString$0$(object);
@@ -3525,6 +3639,50 @@
                     return H.setRuntimeTypeInfo([], t1);
                 return H.setRuntimeTypeInfo(["a", "b", "c"], t1);
             },
+            md5run: function () {
+                var $async$goto = 0,
+                    $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic);
+                var $async$md5run = P._wrapJsFunctionForAsync(function ($async$errorCode, $async$result) {
+                    if ($async$errorCode === 1)
+                        return P._asyncRethrow($async$result, $async$completer);
+                    while (true)
+                        switch ($async$goto) {
+                            case 0:
+                                // Function start
+                                P.print("object in md5run");
+                                $async$goto = 2;
+                                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(1000), type$.dynamic), $async$md5run);
+                            case 2:
+                                // returning from await.
+                                P.print("object in md5run after 1s");
+                                // implicit return
+                                return P._asyncReturn(null, $async$completer);
+                        }
+                });
+                return P._asyncStartSync($async$md5run, $async$completer);
+            },
+            a_run: function () {
+                var $async$goto = 0,
+                    $async$completer = P._makeAsyncAwaitCompleter(type$.dynamic);
+                var $async$a_run = P._wrapJsFunctionForAsync(function ($async$errorCode, $async$result) {
+                    if ($async$errorCode === 1)
+                        return P._asyncRethrow($async$result, $async$completer);
+                    while (true)
+                        switch ($async$goto) {
+                            case 0:
+                                // Function start
+                                P.print("object");
+                                $async$goto = 2;
+                                return P._asyncAwait(V.md5run(), $async$a_run);
+                            case 2:
+                                // returning from await.
+                                P.print("object after 1s");
+                                // implicit return
+                                return P._asyncReturn(null, $async$completer);
+                        }
+                });
+                return P._asyncStartSync($async$a_run, $async$completer);
+            },
             main: function () {
                 var t1, t2, t3, t4, test_map, t5, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
@@ -3540,6 +3698,7 @@
                 H.checkTypeBound(t4, t4, "T", "querySelectorAll");
                 t4 = t1.querySelectorAll("div");
                 test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], type$.String, type$.int);
+                V.a_run();
                 test_map.$indexSet(0, "b", 2);
                 test_map.remove$1(0, "a");
                 test_map.$indexSet(0, "b", 3);
@@ -3589,7 +3748,7 @@
                     a += " " + C.JSInt_methods.toString$0(i);
                 for (b = 124242424, i = 0; i < 10; ++i)
                     b += b * i;
-                P.Future_Future$delayed(new P.Duration(1000000), type$.dynamic).then$1$1(new V.main_closure0(), type$.Null);
+                P.Future_Future$delayed(P.Duration$(1000), type$.dynamic).then$1$1(new V.main_closure0(), type$.Null);
                 new V.main_closure1().call$0();
                 P.print(a);
             },
@@ -3906,6 +4065,7 @@
             return "Throw of null ('" + (this._irritant === null ? "null" : "undefined") + "' from JavaScript)";
         }
     };
+    H.ExceptionAndStackTrace.prototype = {};
     H._StackTrace.prototype = {
         toString$0: function (_) {
             var trace,
@@ -4296,6 +4456,25 @@
         },
         $signature: 0
     };
+    P._AsyncAwaitCompleter.prototype = {};
+    P._awaitOnObject_closure.prototype = {
+        call$1: function (result) {
+            return this.bodyFunction.call$2(0, result);
+        },
+        $signature: 9
+    };
+    P._awaitOnObject_closure0.prototype = {
+        call$2: function (error, stackTrace) {
+            this.bodyFunction.call$2(1, new H.ExceptionAndStackTrace(error, type$.StackTrace._as(stackTrace)));
+        },
+        $signature: 10
+    };
+    P._wrapJsFunctionForAsync_closure.prototype = {
+        call$2: function (errorCode, result) {
+            this.$protected(H._asInt(errorCode), result);
+        },
+        $signature: 11
+    };
     P.AsyncError.prototype = {
         toString$0: function (_) {
             return H.S(this.error);
@@ -4348,6 +4527,14 @@
         },
         then$1$1: function (f, $R) {
             return this.then$1$2$onError(f, null, $R);
+        },
+        _thenAwait$1$2: function (f, onError, $E) {
+            var result,
+                t1 = this.$ti;
+            t1._bind$1($E)._eval$1("1/(2)")._as(f);
+            result = new P._Future($.Zone__current, $E._eval$1("_Future<0>"));
+            this._addListener$1(new P._FutureListener(result, 19, f, onError, t1._eval$1("@<1>")._bind$1($E)._eval$1("_FutureListener<1,2>")));
+            return result;
         },
         _addListener$1: function (listener) {
             var source, _this = this,
@@ -4438,6 +4625,14 @@
                 P._Future__propagateToListeners(_this, listeners);
             }
         },
+        _completeWithValue$1: function (value) {
+            var listeners, _this = this;
+            _this.$ti._precomputed1._as(value);
+            listeners = _this._removeListeners$0();
+            _this._state = 4;
+            _this._resultOrListeners = value;
+            P._Future__propagateToListeners(_this, listeners);
+        },
         _completeError$2: function (error, stackTrace) {
             var listeners, t1, _this = this;
             type$.StackTrace._as(stackTrace);
@@ -4446,6 +4641,39 @@
             _this._state = 8;
             _this._resultOrListeners = t1;
             P._Future__propagateToListeners(_this, listeners);
+        },
+        _asyncComplete$1: function (value) {
+            var t1 = this.$ti;
+            t1._eval$1("1/")._as(value);
+            if (t1._eval$1("Future<1>")._is(value)) {
+                this._chainFuture$1(value);
+                return;
+            }
+            this._asyncCompleteWithValue$1(t1._precomputed1._as(value));
+        },
+        _asyncCompleteWithValue$1: function (value) {
+            var _this = this;
+            _this.$ti._precomputed1._as(value);
+            _this._state = 1;
+            P._rootScheduleMicrotask(null, null, _this._zone, type$.void_Function._as(new P._Future__asyncCompleteWithValue_closure(_this, value)));
+        },
+        _chainFuture$1: function (value) {
+            var _this = this,
+                t1 = _this.$ti;
+            t1._eval$1("Future<1>")._as(value);
+            if (t1._is(value)) {
+                if (value._state === 8) {
+                    _this._state = 1;
+                    P._rootScheduleMicrotask(null, null, _this._zone, type$.void_Function._as(new P._Future__chainFuture_closure(_this, value)));
+                } else
+                    P._Future__chainCoreFuture(value, _this);
+                return;
+            }
+            _this._chainForeignFuture$1(value);
+        },
+        _asyncCompleteError$2: function (error, stackTrace) {
+            this._state = 1;
+            P._rootScheduleMicrotask(null, null, this._zone, type$.void_Function._as(new P._Future__asyncCompleteError_closure(this, error, stackTrace)));
         },
         $isFuture: 1
     };
@@ -4463,16 +4691,11 @@
     };
     P._Future__chainForeignFuture_closure.prototype = {
         call$1: function (value) {
-            var error, stackTrace, t2, listeners, exception,
+            var error, stackTrace, exception,
                 t1 = this.$this;
             t1._state = 0;
             try {
-                t2 = t1.$ti._precomputed1;
-                value = t2._as(t2._as(value));
-                listeners = t1._removeListeners$0();
-                t1._state = 4;
-                t1._resultOrListeners = value;
-                P._Future__propagateToListeners(t1, listeners);
+                t1._completeWithValue$1(t1.$ti._precomputed1._as(value));
             } catch (exception) {
                 error = H.unwrapException(exception);
                 stackTrace = H.getTraceFromException(exception);
@@ -4485,11 +4708,29 @@
         call$2: function (error, stackTrace) {
             this.$this._completeError$2(type$.Object._as(error), type$.StackTrace._as(stackTrace));
         },
-        $signature: 9
+        $signature: 12
     };
     P._Future__chainForeignFuture_closure1.prototype = {
         call$0: function () {
             this.$this._completeError$2(this.e, this.s);
+        },
+        $signature: 0
+    };
+    P._Future__asyncCompleteWithValue_closure.prototype = {
+        call$0: function () {
+            this.$this._completeWithValue$1(this.value);
+        },
+        $signature: 0
+    };
+    P._Future__chainFuture_closure.prototype = {
+        call$0: function () {
+            P._Future__chainCoreFuture(this.value, this.$this);
+        },
+        $signature: 0
+    };
+    P._Future__asyncCompleteError_closure.prototype = {
+        call$0: function () {
+            this.$this._completeError$2(this.error, this.stackTrace);
         },
         $signature: 0
     };
@@ -4533,7 +4774,7 @@
         call$1: function (_) {
             return this.originalSource;
         },
-        $signature: 10
+        $signature: 13
     };
     P._Future__propagateToListeners_handleValueCallback.prototype = {
         call$0: function () {
@@ -4580,6 +4821,7 @@
         $signature: 0
     };
     P._AsyncCallbackEntry.prototype = {};
+    P._StreamIterator.prototype = {};
     P._Zone.prototype = {
         $isZone: 1
     };
@@ -4633,6 +4875,9 @@
             if ($.Zone__current === C.C__RootZone)
                 return f.call$2(arg1, arg2);
             return P._rootRunBinary(null, null, this, f, arg1, arg2, $R, T1, T2);
+        },
+        registerBinaryCallback$3$1: function (f, $R, T1, T2) {
+            return $R._eval$1("@<0>")._bind$1(T1)._bind$1(T2)._eval$1("1(2,3)")._as(f);
         }
     };
     P._RootZone_bindCallback_closure.prototype = {
@@ -4677,7 +4922,7 @@
             t1._contents = t2 + ": ";
             t1._contents += H.S(v);
         },
-        $signature: 11
+        $signature: 14
     };
     P.MapMixin.prototype = {
         get$length: function (_) {
@@ -5038,7 +5283,7 @@
             H._asInt(value);
             P.print(key + " : " + value);
         },
-        $signature: 12
+        $signature: 15
     };
     V.main_closure0.prototype = {
         call$1: function (value) {
@@ -5072,7 +5317,7 @@
             _inherit = hunkHelpers.inherit,
             _inheritMany = hunkHelpers.inheritMany;
         _inherit(P.Object, null);
-        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, P.Iterable, H.ListIterator, P.Iterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.Rti, H._FunctionParameters, P._TimerImpl, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
+        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, P.Iterable, H.ListIterator, P.Iterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H.ExceptionAndStackTrace, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
         _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, W.EventTarget, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.DomException, W.DomTokenList, W._NodeList_Interceptor_ListMixin]);
         _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
         _inherit(J.JSUnmodifiableArray, J.JSArray);
@@ -5082,7 +5327,7 @@
         _inherit(H.EfficientLengthMappedIterable, H.MappedIterable);
         _inherit(H.MappedIterator, P.Iterator);
         _inherit(H.NullError, P.TypeError);
-        _inheritMany(H.Closure, [H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.JsLinkedHashMap_containsValue_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0, V.main_closure1]);
+        _inheritMany(H.Closure, [H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.JsLinkedHashMap_containsValue_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncCompleteWithValue_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, V.main_closure, V.main_closure0, V.main_closure1]);
         _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
         _inherit(H._AssertionError, P.AssertionError);
         _inherit(P.MapBase, P.MapMixin);
@@ -5125,7 +5370,7 @@
         mangledNames: {},
         getTypeFromName: getGlobalFromName,
         metadata: [],
-        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(String,int)"],
+        types: ["~()", "Null(@)", "Null()", "~(~())", "String(int)", "@(@)", "@(@,String)", "@(String)", "Null(~())", "~(@)", "Null(@,StackTrace)", "~(int,@)", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(String,int)"],
         interceptorsByTag: null,
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
