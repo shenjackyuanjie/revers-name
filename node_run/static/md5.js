@@ -3268,7 +3268,8 @@
                 return P.mh(H.set_run_time_type_info([r, q, p, o < 26 ? o + 65 : o + 71], t.i), 0, null)
             },
             j(a, b) {
-                return C.P_kj.bt(0, X.f4(a, b))
+                var result = C.P_kj.bt(0, X.f4(a, b))
+                return result
             },
             get_obfuscated_value(a) {
                 var s = $.hashmap_str_str.h(0, a)
@@ -4446,6 +4447,7 @@
                             if (J.Y(J.J(J.J(h, 0)[0], 0), $.qc())) {
                                 $.vr = 6
                                 if (J.aw(h) === 2)
+                                    // ???
                                     if (J.J(h, 1).length > 10 || J.lW(J.J(J.J(h, 1)[0], 0), LanData.j("S,AF", 5))) {
                                         a8 = J.J(h, 1)
                                         a9 = H.set_run_time_type_info([], t.t)
@@ -19215,55 +19217,55 @@
         lazy_old($, "Az", "ro", function () {
             return P.o_()
         })
-        lazy_old($, "yg", "cl", function () {
+        lazy_old($, "yg", "cl", function () { // !
             return LanData.j("bB", 89)
         })
-        lazy_old($, "y0", "lO", function () {
+        lazy_old($, "y0", "lO", function () { // +
             return LanData.j("YA", 51)
         })
-        lazy_old($, "y3", "n3", function () {
+        lazy_old($, "y3", "n3", function () { // @
             return LanData.j("CA", 66)
         })
-        lazy_old($, "y4", "aD", function () {
+        lazy_old($, "y4", "aD", function () { // @!
             return LanData.j("{[A", 63)
         })
-        lazy_old($, "ya", "n5", function () {
+        lazy_old($, "ya", "n5", function () { // :
             return LanData.j("DA", 57)
         })
-        lazy_old($, "yh", "qc", function () {
+        lazy_old($, "yh", "qc", function () { // !test
             return LanData.j("l1C~5RJB", 71)
         })
-        lazy_old($, "zm", "nk", function () {
+        lazy_old($, "zm", "nk", function () { // \u0002
             return LanData.j("lA", 39)
         })
-        lazy_old($, "zn", "qR", function () {
+        lazy_old($, "zn", "qR", function () { // \u0003
             return LanData.j("iA", 33)
         })
-        lazy_old($, "yN", "iK", function () {
+        lazy_old($, "yN", "iK", function () { // ??
             return LanData.j("=+A", 37)
         })
-        lazy_old($, "y2", "d2", function () {
+        lazy_old($, "y2", "d2", function () { // assassinate
             return LanData.j("+R/Iv*Y(WVEu;E", 21)
         })
-        lazy_old($, "yi", "d3", function () {
+        lazy_old($, "yi", "d3", function () { // exchange
             return LanData.j("<R;2&`|zWV", 30)
         })
-        lazy_old($, "ym", "eZ", function () {
+        lazy_old($, "ym", "eZ", function () { // half
             return LanData.j("U|,?M", 1)
         })
-        lazy_old($, "y7", "a7", function () {
+        lazy_old($, "y7", "a7", function () { // charge
             return LanData.j("@k%.*'GC", 5)
         })
-        lazy_old($, "yk", "eY", function () {
+        lazy_old($, "yk", "eY", function () { // fire
             return LanData.j("K[WvM", 87)
         })
-        lazy_old($, "yr", "bS", function () {
+        lazy_old($, "yr", "bS", function () { // ice
             return LanData.j("OZFE", 74)
         })
-        lazy_old($, "y_", "lN", function () {
+        lazy_old($, "y_", "lN", function () { // accumulate
             return LanData.j("w1{fb_W(wTt-B", 16)
         })
-        lazy_old($, "yK", "bT", function () {
+        lazy_old($, "yK", "bT", function () { // piston
             return LanData.j("PGOv0X*A", 77)
         })
         lazy_old($, "y5", "aJ", function () {
@@ -19284,64 +19286,64 @@
         lazy_old($, "yo", "d4", function () {
             return LanData.j("9s|Y@jA", 81)
         })
-        lazy_old($, "yc", "iJ", function () {
+        lazy_old($, "yc", "iJ", function () { // corpose
             return LanData.j("V_%Fz%}cF", 48)
         })
-        lazy_old($, "zg", "lR", function () {
+        lazy_old($, "zg", "lR", function () { // shield
             return LanData.j("LGI)Za A", 74)
         })
-        lazy_old($, "yL", "d6", function () {
+        lazy_old($, "yL", "d6", function () { // protect
             return LanData.j("r9sG{s5|C", 36)
         })
-        lazy_old($, "zo", "nl", function () {
+        lazy_old($, "zo", "nl", function () { // upgrade
             return LanData.j("Z430:)1HG", 4)
         })
-        lazy_old($, "yf", "lP", function () {
+        lazy_old($, "yf", "lP", function () { // disperse
             return LanData.j("e'teI>NNCU", 17)
         })
-        lazy_old($, "zA", "qZ", function () {
+        lazy_old($, "zA", "qZ", function () { // zombie
             return LanData.j("CXmc>1nB", 39)
         })
-        lazy_old($, "ze", "qM", function () {
+        lazy_old($, "ze", "qM", function () { // shadow
             return LanData.j("qnQymy)B", 38)
         })
-        lazy_old($, "zl", "qQ", function () {
+        lazy_old($, "zl", "qQ", function () { // summon
             return LanData.j("WG/z.8^B", 55)
         })
-        lazy_old($, "yE", "na", function () {
+        lazy_old($, "yE", "na", function () { // minionCount
             return LanData.j("EMzI&'T=]Q:wUF", 13)
         })
         lazy_old($, "y6", "n4", function () {
             return LanData.j("1m3tkgG&,{P", 97)
         })
-        lazy_old($, "yB", "lQ", function () {
+        lazy_old($, "yB", "lQ", function () { // mario
             return LanData.j("6ct2H)A", 11)
         })
-        lazy_old($, "zk", "qP", function () {
+        lazy_old($, "zk", "qP", function () { // sonic
             return LanData.j("`I|YpgA", 76)
         })
-        lazy_old($, "yF", "qo", function () {
+        lazy_old($, "yF", "qo", function () { // mosquito
             return LanData.j("$v&,:z_4~N", 62)
         })
-        lazy_old($, "zz", "qY", function () {
+        lazy_old($, "zz", "qY", function () { // yuri
             return LanData.j("jh&DG", 89)
         })
-        lazy_old($, "zi", "qO", function () {
+        lazy_old($, "zi", "qO", function () { // slime
             return LanData.j("~vBK@@A", 29)
         })
-        lazy_old($, "ys", "qh", function () {
+        lazy_old($, "ys", "qh", function () { // ikaruga
             return LanData.j("MWSWRPJLA", 99)
         })
-        lazy_old($, "yb", "qb", function () {
+        lazy_old($, "yb", "qb", function () { // conan
             return LanData.j("()9--8A", 54)
         })
-        lazy_old($, "y1", "q9", function () {
+        lazy_old($, "y1", "q9", function () { // aokiji
             return LanData.j(" &~zX$CC", 55)
         })
-        lazy_old($, "yy", "d5", function () {
+        lazy_old($, "yy", "d5", function () { // lazy
             return LanData.j(":[+0Z", 31)
         })
-        lazy_old($, "yd", "ck", function () {
+        lazy_old($, "yd", "ck", function () { // covid
             return LanData.j("jtK1|]A", 31)
         })
         lazy_old($, "zc", "qL", function () {
@@ -19434,10 +19436,10 @@
         lazy_old($, "yl", "qe", function () {
             return LanData.j("?hEGt00!>5nL[OI", 41)
         })
-        lazy_old($, "zd", "ni", function () {
+        lazy_old($, "zd", "ni", function () { // seed:
             return LanData.j("tU`0/mA", 2)
         })
-        lazy_old($, "yC", "qm", function () {
+        lazy_old($, "yC", "qm", function () { // dio
             return LanData.j(";kC;Z", 12)
         })
         lazy_old($, "yD", "qn", function () {
@@ -19464,10 +19466,10 @@
         lazy_old($, "yW", "ne", function () {
             return LanData.j("HOa,^Auk1x84LRKOnLivoA,^CvRYpI$Y&JxtF7P", 33)
         })
-        lazy_old($, "yX", "qy", function () {
+        lazy_old($, "yX", "qy", function () { // "<div class=\"smile s_dmg120\"></div>"
             return LanData.j("r;.1;m!Y`$*76X[kFwDg?m<on%f`.X:NNRQ)s^v=4G", 24)
         })
-        lazy_old($, "yY", "qz", function () {
+        lazy_old($, "yY", "qz", function () { // "<div class=\"smile s_dmg160\"></div>"
             return LanData.j("|Y`+RJRHLN.p,;hg%L5FNJDN7MKOXiBKr0vtWyC!eD", 45)
         })
         lazy_old($, "yQ", "qu", function () {
@@ -19488,10 +19490,10 @@
         lazy_old($, "z2", "qE", function () {
             return LanData.j("gM2vT&:&)xr*lb#RYZ:ZP&#[`yi*b5+ho<2JdcW<H", 64)
         })
-        lazy_old($, "z3", "qF", function () {
+        lazy_old($, "z3", "qF", function () { // "<div class=\"smile s_ice\"></div>"
             return LanData.j("U4|wQ;P'v0hw&aSMs)SbU;f[=1U-}*cln4|w./A", 80)
         })
-        lazy_old($, "z4", "qG", function () {
+        lazy_old($, "z4", "qG", function () { // "<div class=\"smile s_iron\"></div>"
             return LanData.j("j||XsipWY) l7j11O!(Mqi^.^v(d`hFV;7p4YRdB", 68)
         })
         lazy_old($, "z6", "qH", function () {
@@ -19512,13 +19514,13 @@
         lazy_old($, "za", "qK", function () {
             return LanData.j("4TmcbC~p%FZ3OG+NROs)LBB[)kvXjGQy?A8^J'Kzl-B", 35)
         })
-        lazy_old($, "yG", "qp", function () {  // deepmess.com/namerena
+        lazy_old($, "yG", "qp", function () { // deepmess.com/namerena
             return LanData.j("H<|dA6D5:4]j*v#HA'XH>zwoSP", 57)
         })
         lazy_old($, "yH", "qq", function () {
             return LanData.j("0fc/5.@{T*a]T^#TU9!P(q*yRaP@yG*Vp>'aEnltB", 31)
         })
-        lazy_old($, "zN", "nr", function () {
+        lazy_old($, "zN", "nr", function () { // "田一人" "云剑狄卡敢" "云剑穸跄祇"
             return P.dD([LanData.j("JIi6cgXO*d_", 22), $.iH(), LanData.j("Fmi6Vr!~c@]4ElFk,dC", 55), $.mO(), LanData.j("OeQh>Rep f~;YzR^Y%E", 16), $.lK()], t.String_list, t.B)
         })
         lazy_old($, "zE", "r0", function () {
