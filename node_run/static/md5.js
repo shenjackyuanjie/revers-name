@@ -8353,7 +8353,7 @@
         }
     }
     J.JsArray.prototype = {
-        j(a, b) {
+        add(a, b) {
             if (a.fixed$length) {
                 H.G(P.UnsupportedError("add"))
             }
@@ -8381,8 +8381,8 @@
             for (s = 0; s < a.length; ++s)
                 if (J.Y(a[s], b)) {
                     a.splice(s, 1)
-                    return !0
-                } return !1
+                    return true
+                } return false
         },
         a5(a, b) {
             var s, r
@@ -14813,14 +14813,14 @@
             o = s.y
             if (!C.Array.w(o.f, s)) {
                 n = o.a
-                if (!C.Array.w(n.c, s)) C.Array.j(n.c, s)
+                if (!C.Array.w(n.c, s)) C.Array.add(n.c, s)
                 n = n.e
                 if (!C.Array.w(n, s)) {
                     m = o.f
                     if (m.length > $.a()) C.Array.co(n, C.Array.aT(n, C.Array.last(m)) + $.i(), s)
                     else n.push(s)
                 }
-                C.Array.j(o.f, s)
+                C.Array.add(o.f, s)
             }
             o = LanData.get_obfuscated_value("imin")
             n = l.r
@@ -16551,7 +16551,7 @@
                 p = q.a
             if (!C.Array.w(p.c, a)) {
                 $.mc = $.ns() - 1
-                C.Array.j(p.c, a)
+                C.Array.add(p.c, a)
             }
             s = p.e
             if (!C.Array.w(s, a)) {
@@ -16560,9 +16560,9 @@
                 else s.push(a)
                 if (p.db > -$.i()) p.cq(a, q)
             }
-            if (!C.Array.w(q.e, a)) C.Array.j(q.e, a)
-            if (!C.Array.w(q.d, a)) C.Array.j(q.d, a)
-            if (!C.Array.w(q.f, a)) C.Array.j(q.f, a)
+            if (!C.Array.w(q.e, a)) C.Array.add(q.e, a)
+            if (!C.Array.w(q.d, a)) C.Array.add(q.d, a)
+            if (!C.Array.w(q.f, a)) C.Array.add(q.f, a)
         },
         dj(a) {
             var s, r, q, p
@@ -16773,7 +16773,7 @@
             for (s = h.X.c, s.length, r = h.a2, k = 0; k < 256; ++k) {
                 j = s[k]
                 i = (j * $.nW + $.nV & $.mP()) >>> 0
-                if (i >= $.mb && i < $.r2()) C.Array.j(h.t, (i + $.r3() * $.r4().ax($.eX()) & $.b2()) >>> 0)
+                if (i >= $.mb && i < $.r2()) C.Array.add(h.t, (i + $.r3() * $.r4().ax($.eX()) & $.b2()) >>> 0)
                 else r.push(j)
             }
             s = h.t
@@ -16844,12 +16844,12 @@
                 p = q.length - 1
                 if (p - 0 <= 32) H.ej(q, 0, p, J.bO())
                 else H.ei(q, 0, p, J.bO())
-                C.Array.j(r, q[$.i()])
+                C.Array.add(r, q[$.i()])
             }
             r = o.q
             q = C.Array.al(o.t, $.a(), $.Z())
             C.Array.aJ(q)
-            C.Array.j(r, C.Array.dz(C.Array.al(q, $.B(), $.ap()), new T.jX()) + $.mK())
+            C.Array.add(r, C.Array.dz(C.Array.al(q, $.B(), $.ap()), new T.jX()) + $.mK())
         },
         bP() {
             var s = this
