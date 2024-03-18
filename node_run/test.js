@@ -37,7 +37,7 @@ async function test(str){
         resources: 'usable',
         beforeParse(window) {
             window.FakelocalStorage = localStorageMock;
-            window.config =[{"count":10000}];
+            window.config =[{"count":10000,"score":30}];
             window.name_input = str;
             window.stage = 0;
             window.skillData = [];
@@ -59,6 +59,6 @@ async function test(str){
 
 
 //str="!test!\n!\n\n11@qwerb\n\n1233";
-str="!test!\n!\n\n11@qwerb\n1233";
+str="!test!\n!\n\n11@qwerb\n\n1233";
 test(str)
 

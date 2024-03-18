@@ -3229,13 +3229,13 @@
                 var _ = this
                 _.a = a
                 _.b = b
-                _.c = 1000
+                _.target_count = 1000
                 _.d = 33554431
                 _.e = c
                 _.f = d
                 _.r = e
                 _.x = f
-                _.z = _.y = 0
+                _.current_count = _.win_count = 0
                 _.Q = null
                 _.ch = g
             },
@@ -4491,7 +4491,7 @@
                                     g = new L.iR(a8, a9, a4, a3, a5, a6, new Float64Array(1))
                                     g.dY(a8, a9)
                                     b = g
-                                    b.c = 1000
+                                    b.target_count = 1000
                                     a = HtmlRenderer.init_out(b)
                                     a.r = 2000
                                     // return
@@ -12239,7 +12239,7 @@
                             s = 1
                             break
                         }
-                        if (p.z >= p.c) {
+                        if (p.current_count >= p.target_count) {
                             q = null
                             s = 1
                             break
@@ -12251,7 +12251,7 @@
                             break
                         }
                         h = H.set_run_time_type_info([m, l, [H.set_run_time_type_info([H.e($.ni()) + p.d++, $.cl()], k)]], j)
-                        if (p.z === 0) h.pop()
+                        if (p.current_count === 0) h.pop()
                         s = 5
                         return P.async_await(T.c2(h), $async$O)
                     case 5:
@@ -12275,25 +12275,46 @@
                         s = 6
                         break
                     case 8:
-                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) ++p.y;
+                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) ++p.win_count;
                         ++i;
-                        ++p.z
+                        ++p.current_count
                         s = 3
                         break
                     case 4:
+                        //胜率测试的输出部分
                         o = t.U
                         n = H.set_run_time_type_info([], o)
                         m = t.Y
                         l = H.set_run_time_type_info([], m)
-                        n.push(T.f(LanData.get_obfuscated_value("pkGN"), null, null, C._JsInt.ag(p.z, 100), null, 0, 0, 0))
-                        if (p.z >= p.c) {
+                        n.push(T.f(LanData.get_obfuscated_value("pkGN"), null, null, C._JsInt.ag(p.current_count, 100), null, 0, 0, 0))
+                        //原来的代码，用于输出到html
+                        
+                        if (p.current_count >= p.target_count) {
                             o = H.set_run_time_type_info([], o)
                             m = H.set_run_time_type_info([], m)
-                            o.push(T.f(LanData.get_obfuscated_value("Pnrn"), null, null, p.y * 100 / p.c, null, 0, 1000, 100))
+                            o.push(T.f(LanData.get_obfuscated_value("Pnrn"), null, null, p.win_count * 100 / p.target_count, null, 0, 1000, 100))
                             d.push(new T.aq(o, m))
-                            p.c *= 10
+                            p.target_count *= 10
                         }
                         q = new T.aq(n, l)
+                        
+                       
+                       //捕获胜率
+                        if (p.current_count >= config[stage].count) {
+                            const {
+                                score,
+                                end,
+                                skillLabel
+                            } = config[stage];
+                            
+                            var winRate=p.win_count * 100 / config[stage].count
+                            if(winRate<score)
+                                resolve(false, [], winRate, p.current_count);
+                            else if (stage === config.length - 1)
+                                resolve(true, [], winRate);
+                            stage++;
+                        }
+                        
                         s = 1
                         break
                     case 1:
