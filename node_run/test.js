@@ -37,13 +37,13 @@ async function test(str){
         resources: 'usable',
         beforeParse(window) {
             window.FakelocalStorage = localStorageMock;
-            window.config =[{"count":10000,"score":30}];
+            window.config =[{"count":5000,"score":10}];
             window.name_input = str;
             window.stage = 0;
             window.skillData = [];
             window.resolve = (...args) => {
-                //console.log(args);
-                resolvePromise(...args);
+                console.log(args);
+                resolvePromise(args);
                 window.close();
             }
         }
@@ -54,7 +54,7 @@ async function test(str){
     });
 
     const result = await resolver
-    //console.log(result)
+    console.log(result)
 }
 
 

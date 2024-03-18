@@ -12350,7 +12350,7 @@
                         l = H.set_run_time_type_info([], m)
                         n.push(T.f(LanData.get_obfuscated_value("pkGN"), null, null, C._JsInt.ag(p.current_count, 100), null, 0, 0, 0))
                         //原来的代码，用于输出到html
-                        
+
                         if (p.current_count >= p.target_count) {
                             o = H.set_run_time_type_info([], o)
                             m = H.set_run_time_type_info([], m)
@@ -12359,24 +12359,24 @@
                             p.target_count *= 10
                         }
                         q = new T.aq(n, l)
-                        
-                       
-                       //捕获胜率
+
+
+                        //捕获胜率
                         if (p.current_count >= config[stage].count) {
                             const {
                                 score,
                                 end,
                                 skillLabel
                             } = config[stage];
-                            
-                            var winRate=p.win_count * 100 / config[stage].count
-                            if(winRate<score)
+
+                            var winRate = p.win_count * 100 / config[stage].count
+                            if (winRate < score)
                                 resolve(false, [], winRate, p.current_count);
                             else if (stage === config.length - 1)
                                 resolve(true, [], winRate);
                             stage++;
                         }
-                        
+
                         async_goto = 1
                         break
                     case 1:
