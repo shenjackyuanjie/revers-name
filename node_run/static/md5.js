@@ -12419,29 +12419,29 @@
             if (q.length === 1) l.x = q[0]
         },
         O() {
-            var s = 0,
-                r = P.make_async_await_completer(t.d),
+            var async_goto = 0,
+                async_completer = P.make_async_await_completer(t.d),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4
             var $async$O = P.wrap_js_function_for_async(function (a5, a6) {
-                if (a5 === 1) return P.ai(a6, r)
-                while (true) switch (s) {
+                if (a5 === 1) return P.ai(a6, async_completer)
+                while (true) switch (async_goto) {
                     case 0:
                         a4 = p.y
                         if (a4.length !== 0) {
                             q = C.Array.cu(a4, 0)
-                            s = 1
+                            async_goto = 1
                             break
                         }
                         if (p.ch >= p.d) {
                             q = null
-                            s = 1
+                            async_goto = 1
                             break
                         }
                         a4 = p.r, o = t.v, n = p.z, m = p.b, l = p.a, k = t.V, j = t.D, i = 0
                     case 3:
                         if (!(i < 100)) {
-                            s = 4
+                            async_goto = 4
                             break
                         }
                         if (m.length === 1 && !p.c) h = H.set_run_time_type_info([
@@ -12453,22 +12453,22 @@
                             h = H.set_run_time_type_info([m, g], j)
                             for (f = 0; f < m.length; ++f) g.push(H.set_run_time_type_info(["" + p.e++, l], k))
                         }
-                        s = 5
+                        async_goto = 5
                         return P.async_await(T.c2(h), $async$O)
                     case 5:
                         e = a6
                         d = null
                     case 6:
                         if (!!0) {
-                            s = 8
+                            async_goto = 8
                             break
                         }
-                        s = 9
+                        async_goto = 9
                         return P.async_await(e.O(), $async$O)
                     case 9:
                         c = a6
                         if (c == null) {
-                            s = 8
+                            async_goto = 8
                             break
                         }
                         for (b = c.a, a = b.length, a0 = 0; a0 < b.length; b.length === a || (0, H.F)(b), ++a0) {
@@ -12486,13 +12486,13 @@
                         }
                     case 7:
                         d = c
-                        s = 6
+                        async_goto = 6
                         break
                     case 8:
                         if (C.Array.w(a4, o.a(d.a[0]).e.gb2())) ++p.Q;
                         ++i;
                         ++p.ch
-                        s = 3
+                        async_goto = 3
                         break
                     case 4:
                         a4 = H.set_run_time_type_info([], t.U)
@@ -12526,13 +12526,13 @@
 
                         if (p.ch >= p.d) p.eS()
                         q = new T.aq(a4, o)
-                        s = 1
+                        async_goto = 1
                         break
                     case 1:
-                        return P.async_return(q, r)
+                        return P.async_return(q, async_completer)
                 }
             })
-            return P.async_start_sync($async$O, r)
+            return P.async_start_sync($async$O, async_completer)
         },
         eS() {
             var s, r = this,
