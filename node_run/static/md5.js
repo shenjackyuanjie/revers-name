@@ -2964,7 +2964,7 @@
             t1(a, b) {
                 return J.lV(a, b)
             },
-            nN(a) {
+            check_str_legeal(a) {
                 if (a < 256) switch (a) {
                     case 9:
                     case 10:
@@ -3002,23 +3002,27 @@
                         return false
                 }
             },
-            t2(a, b) {
-                var s, r
-                for (s = a.length; b < s;) {
-                    r = C.String.a8(a, b)
-                    if (r !== 32 && r !== 13 && !J.nN(r)) break;
-                    ++b
+            check_from_start(str, start_index) {
+                var length, char_code
+                for (length = str.length; start_index < length;) {
+                    char_code = C.String.a8(str, start_index)
+                    if (char_code !== 32 && char_code !== 13 && !J.check_str_legeal(char_code)) {
+                        break
+                    };
+                    ++start_index
                 }
-                return b
+                return start_index
             },
-            t3(a, b) {
-                var s, r
-                for (; b > 0; b = s) {
-                    s = b - 1
-                    r = C.String.aQ(a, s)
-                    if (r !== 32 && r !== 13 && !J.nN(r)) break
+            check_from_end(str, end_index) {
+                var prev_index, char_code
+                for (; end_index > 0; end_index = prev_index) {
+                    prev_index = end_index - 1
+                    char_code = C.String.aQ(str, prev_index)
+                    if (char_code !== 32 && char_code !== 13 && !J.check_str_legeal(char_code)) {
+                        break
+                    };
                 }
-                return b
+                return end_index
             },
             get_interceptor(a) {
                 if (typeof a == "number") {
@@ -8690,11 +8694,11 @@
                 o = p.length
             if (o === 0) return p
             if (this.a8(p, 0) === 133) {
-                s = J.t2(p, 1)
+                s = J.check_from_start(p, 1)
                 if (s === o) return ""
             } else s = 0
             r = o - 1
-            q = this.aQ(p, r) === 133 ? J.t3(p, r) : o
+            q = this.aQ(p, r) === 133 ? J.check_from_end(p, r) : o
             if (s === 0 && q === o) return p
             return p.substring(s, q)
         },
