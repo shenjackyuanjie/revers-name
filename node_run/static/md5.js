@@ -4482,10 +4482,13 @@
                             // 这里在判定 第一组 第一个元素的第一个元素是否等于 $.qc() (即 !test!)
                             if (parsed_names[0][0][0] === $.qc()) {
                                 $.vr = 6
-                                if (J.aw(parsed_names) === 2)
+                                // J.aw(a) -> a.length
+                                // if (J.aw(parsed_names) === 2)
+                                if (parsed_names.length === 2) {
                                     // ???
                                     if (J.J(parsed_names, 1).length > 10 || J.lW(J.J(J.J(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
-                                        a8 = J.J(parsed_names, 1)
+                                        // a8 = J.J(parsed_names, 1)
+                                        a8 = parsed_names[1]
                                         a9 = H.set_run_time_type_info([], t.t)
                                         d = new X.iW(a9, new Float64Array(1))
                                         d.e_(a8)
@@ -4516,9 +4519,13 @@
                                         // return
                                         async_goto = 1
                                         break
-                                    } if (J.aw(parsed_names) === 3) {
-                                    a8 = J.J(parsed_names, 1)
-                                    a9 = J.J(parsed_names, 2)
+                                    }
+                                } else if (parsed_names.length === 3) {
+                                    // if (J.aw(parsed_names) === 3) {
+                                    // a8 = J.J(parsed_names, 1)
+                                    // a9 = J.J(parsed_names, 2)
+                                    a8 = parsed_names[1]
+                                    a9 = parsed_names[2]
                                     a3 = t.L
                                     a4 = H.set_run_time_type_info([], a3)
                                     a3 = H.set_run_time_type_info([], a3)
@@ -4534,6 +4541,7 @@
                                     async_goto = 1
                                     break
                                 }
+
                             }
                             async_goto = 8
                             return P.async_await(T.c2(parsed_names), $async$iE)

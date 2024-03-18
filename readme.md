@@ -14,6 +14,11 @@ h_(k) -> fYwD -> 名称输入 session storage
   - `d` -> `get_obfuscated_value`
   - `eq` -> `obfuscate_str_h`
 
+- `J`
+  - `Y(a, b)` -> `a === b`
+  - `J(a, b)` -> `a[b]`
+  - `aw(a)` -> `a.length`
+
 ## `md5.js`
 
 - [ ] 清理所有空函数
