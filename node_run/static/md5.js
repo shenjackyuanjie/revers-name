@@ -4426,7 +4426,7 @@
                     async_completer = P.make_async_await_completer(t.z),
                     q, switch_to = 2,
                     async_result_1, n = [],
-                    m, l, k, j, input_name, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0
+                    m, l, k, j, input_name, parsed_names, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0
                 var $async$iE = P.wrap_js_function_for_async(function (error_code, async_result) {
                     if (error_code === 1) {
                         async_result_1 = async_result
@@ -4469,14 +4469,23 @@
 
                             input_name = window.name_input
 
-                            h = T.parse_string(input_name)
+                            parsed_names = T.parse_string(input_name)
+
                             // $.qc -> !test!
-                            if (J.Y(J.J(J.J(h, 0)[0], 0), $.qc())) {
+                            // 猜测: 
+                            // J.J(a, b) -> a[b]
+                            // J.Y(a, b) -> a === b
+
+                            // if 翻译:
+                            // if (parsed_names[0][0][0] === $.qc()) {
+                            // if (J.Y(J.J(J.J(parsed_names, 0)[0], 0), $.qc())) {
+                            // 这里在判定 第一组 第一个元素的第一个元素是否等于 $.qc() (即 !test!)
+                            if (parsed_names[0][0][0] === $.qc()) {
                                 $.vr = 6
-                                if (J.aw(h) === 2)
+                                if (J.aw(parsed_names) === 2)
                                     // ???
-                                    if (J.J(h, 1).length > 10 || J.lW(J.J(J.J(h, 1)[0], 0), LanData.j("S,AF", 5))) {
-                                        a8 = J.J(h, 1)
+                                    if (J.J(parsed_names, 1).length > 10 || J.lW(J.J(J.J(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
+                                        a8 = J.J(parsed_names, 1)
                                         a9 = H.set_run_time_type_info([], t.t)
                                         d = new X.iW(a9, new Float64Array(1))
                                         d.e_(a8)
@@ -4490,10 +4499,10 @@
                                         // $.nk -> \u0002
                                         e = $.nk()
                                         // $.cl -> !
-                                        if (J.J(h, 0).length === 2 && J.Y(J.J(J.J(h, 0)[1], 0), $.cl())) {
+                                        if (J.J(parsed_names, 0).length === 2 && J.Y(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
                                             e = $.cl()
                                         }
-                                        a8 = J.J(h, 1)
+                                        a8 = J.J(parsed_names, 1)
                                         a9 = e
                                         a3 = H.set_run_time_type_info([], t.L)
                                         a4 = H.set_run_time_type_info([], t.V)
@@ -4507,9 +4516,9 @@
                                         // return
                                         async_goto = 1
                                         break
-                                    } if (J.aw(h) === 3) {
-                                    a8 = J.J(h, 1)
-                                    a9 = J.J(h, 2)
+                                    } if (J.aw(parsed_names) === 3) {
+                                    a8 = J.J(parsed_names, 1)
+                                    a9 = J.J(parsed_names, 2)
                                     a3 = t.L
                                     a4 = H.set_run_time_type_info([], a3)
                                     a3 = H.set_run_time_type_info([], a3)
@@ -4527,7 +4536,7 @@
                                 }
                             }
                             async_goto = 8
-                            return P.async_await(T.c2(h), $async$iE)
+                            return P.async_await(T.c2(parsed_names), $async$iE)
                         case 8:
                             a0 = async_result
                             HtmlRenderer.init_out(a0)
