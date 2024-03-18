@@ -12373,11 +12373,8 @@
                             } = config[stage];
 
                             var winRate = p.win_count * 100 / config[stage].count
-                            if (winRate < score)
-                                resolve(false, [], winRate, p.current_count);
-                            else if (stage === config.length - 1)
-                                resolve(true, [], winRate);
-                            stage++;
+                            //if (winRate < score) 对于cqd需要多个号取胜率平均，不需要在这里判断
+                            resolve(true, [], winRate, p.current_count);
                         }
 
                         async_goto = 1
