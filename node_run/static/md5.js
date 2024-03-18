@@ -1605,13 +1605,13 @@
                 _.d = _.c = null
             },
             init_hooks_closure: function lv(a) {
-                this.a = a
+                this.get_tag = a
             },
             init_hooks_closure_0: function lw(a) {
-                this.a = a
+                this.get_unknown_tag = a
             },
             init_hooks_closure_1: function lx(a) {
-                this.a = a
+                this.prototype_for_tag = a
             },
             ct: function ct(a, b) {
                 var _ = this
@@ -3365,8 +3365,8 @@
             async_return(a, b) {
                 b.bM(0, a)
             },
-            ai(a, b) {
-                b.cj(H.unwrap_Exception(a), H.get_trace_from_exception(a))
+            async_rethrow(obj, completer) {
+                completer.cj(H.unwrap_Exception(obj), H.get_trace_from_exception(obj))
             },
             await_on_object(a, b) {
                 var s, r, q = new P.lh(b),
@@ -3849,7 +3849,8 @@
                 return new H.JsLinkedHashMap(a.i("@<0>").aL(b).i("aT<1,2>"))
             },
             dD(a, b, c) {
-                return H.uQ(a, new H.JsLinkedHashMap(b.i("@<0>").aL(c).i("aT<1,2>")))
+                let result = new H.JsLinkedHashMap(b.i("@<0>").aL(c).i("aT<1,2>"))
+                return H.uQ(a, result)
             },
             create_hashmap(a, b) {
                 return new H.JsLinkedHashMap(a.i("@<0>").aL(b).i("aT<1,2>"))
@@ -3904,16 +3905,22 @@
                 var s, r, q, p, o, n, m, l = a.ga0(a),
                     k = 0,
                     j = 0
-                while (!0) {
-                    if (!(k < 80 || j < 3)) break
-                    if (!l.u()) return
+                while (true) {
+                    if (!(k < 80 || j < 3)) {
+                        break
+                    }
+                    if (!l.u()) {
+                        return
+                    }
                     s = H.e(l.gC())
                     b.push(s)
                     k += s.length + 2;
                     ++j
                 }
                 if (!l.u()) {
-                    if (j <= 5) return
+                    if (j <= 5) {
+                        return
+                    }
                     r = b.pop()
                     q = b.pop()
                 } else {
@@ -4182,7 +4189,7 @@
                 return H.nZ(p)
             },
             h_(a) {
-                return new H.ct(a, H.m7(a, !1, !0, !1, !1, !1))
+                return new H.ct(a, H.m7(a, false, true, false, false, false))
             },
             o7(a, b, c) {
                 var s = J.by(b)
@@ -4568,7 +4575,7 @@
                         case 1:
                             return P.async_return(q, async_completer)
                         case 2:
-                            return P.ai(async_result_1, async_completer)
+                            return P.async_rethrow(async_result_1, async_completer)
                     }
                 })
                 return P.async_start_sync($async$iE, async_completer)
@@ -5790,7 +5797,7 @@
                     r = P.make_async_await_completer(t.eF),
                     q, p, o, n, m, l, k, j, i, h
                 var $async$c2 = P.wrap_js_function_for_async(function (b, c) {
-                    if (b === 1) return P.ai(c, r)
+                    if (b === 1) return P.async_rethrow(c, r)
                     while (true) switch (s) {
                         case 0:
                             k = t.eV
@@ -7926,14 +7933,18 @@
                 H.mq(q, 0, null)
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
-                return new Uint32Array(q, 0, r)[1]
+                let result = new Uint32Array(q, 0, r)[1]
+                output("X.k", a, b, result)
+                return result
             },
             D(a, b) {
                 var s, r, q = new Uint8Array(H.on(X.f4(a, b))).buffer
                 H.mq(q, 0, null)
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
-                return new Float32Array(q, 0, r)[1]
+                let result = new Uint32Array(q, 0, r)[1]
+                output("X.D", a, b, result)
+                return result
             },
             je: function je() {},
             j9: function j9() {},
@@ -7981,7 +7992,7 @@
                     r = P.make_async_await_completer(t.z),
                     q, p
                 var $async$jv = P.wrap_js_function_for_async(function (a, b) {
-                    if (a === 1) return P.ai(b, r)
+                    if (a === 1) return P.async_rethrow(b, r)
                     while (true) switch (switch_branch) {
                         case 0:
                             Sgls.tw()
@@ -9289,29 +9300,29 @@
             s = r.c
             if (s == null) {
                 r.d = null
-                return !1
+                return false
             } else {
                 r.d = s.a
                 r.c = s.c
-                return !0
+                return true
             }
         }
     }
     H.init_hooks_closure.prototype = {
         $1(a) {
-            return this.a(a)
+            return this.get_tag(a)
         },
         $S: 28
     }
     H.init_hooks_closure_0.prototype = {
         $2(a, b) {
-            return this.a(a, b)
+            return this.get_unknown_tag(a, b)
         },
         $S: 48
     }
     H.init_hooks_closure_1.prototype = {
         $1(a) {
-            return this.a(a)
+            return this.prototype_for_tag(a)
         },
         $S: 58
     }
@@ -12290,9 +12301,11 @@
             var async_goto = 0,
                 async_completer = P.make_async_await_completer(t.d),
                 q, p = this,
-                o, n, m, l, k, j, i, h, g, f, e, d
-            var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, async_completer)
+                o, n, m, l, k, j, i, h, g, lang_data, e, d
+            var $async$O = P.wrap_js_function_for_async(function (async_error_code, async_result) {
+                if (async_error_code === 1) {
+                    return P.async_rethrow(async_result, async_completer)
+                }
                 while (true) switch (async_goto) {
                     case 0:
                         d = p.x
@@ -12313,12 +12326,14 @@
                             break
                         }
                         h = H.set_run_time_type_info([m, l, [H.set_run_time_type_info([H.e($.ni()) + p.d++, $.cl()], k)]], j)
-                        if (p.current_count === 0) h.pop()
+                        if (p.current_count === 0) {
+                            h.pop()
+                        }
                         async_goto = 5
                         return P.async_await(T.c2(h), $async$O)
                     case 5:
-                        g = b
-                        f = null
+                        g = async_result
+                        lang_data = null
                     case 6:
                         // if (!!0) {
                         //     s = 8
@@ -12327,19 +12342,23 @@
                         async_goto = 9
                         return P.async_await(g.O(), $async$O)
                     case 9:
-                        e = b
+                        e = async_result
                         if (e == null) {
                             async_goto = 8
                             break
                         }
                     case 7:
-                        f = e
+                        lang_data = e
                         async_goto = 6
                         break
                     case 8:
                         // Array.w(a, b) -> a.includes(b)
                         // if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
-                        if (o.includes(n.a(f.a[0]).e.gb2())) {
+                        // f.a[0] == [2]获得胜利
+                        if (lang_data.a[0] != "[2]获得胜利") {
+                            output("警告, 不等")
+                        }
+                        if (o.includes(n.a(lang_data.a[0]).e.gb2())) {
                             ++p.win_count
                         };
                         ++i;
@@ -12399,7 +12418,7 @@
                 q = this,
                 p, o, n, m, l
             var $async$ae = P.wrap_js_function_for_async(function (c, d) {
-                if (c === 1) return P.ai(d, r)
+                if (c === 1) return P.async_rethrow(d, r)
                 while (true) switch (s) {
                     case 0:
                         q.Q = b
@@ -12512,7 +12531,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4
             var $async$O = P.wrap_js_function_for_async(function (a5, a6) {
-                if (a5 === 1) return P.ai(a6, async_completer)
+                if (a5 === 1) return P.async_rethrow(a6, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         a4 = p.y
@@ -12648,7 +12667,7 @@
                 q = this,
                 p, o, n, m, l
             var $async$ae = P.wrap_js_function_for_async(function (c, d) {
-                if (c === 1) return P.ai(d, r)
+                if (c === 1) return P.async_rethrow(d, r)
                 while (true) switch (s) {
                     case 0:
                         q.cx = b
@@ -12742,7 +12761,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         e = p.b
@@ -13055,7 +13074,7 @@
                 q, p = this,
                 o
             var $async$b4 = P.wrap_js_function_for_async(function (async_error_code, async_result) {
-                if (async_error_code === 1) return P.ai(async_result, async_completer)
+                if (async_error_code === 1) return P.async_rethrow(async_result, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         p.d = null
@@ -13331,7 +13350,7 @@
                 q = this,
                 p, o, n
             var $async$$0 = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         n = t.z
@@ -16169,7 +16188,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3
             var $async$bD = P.wrap_js_function_for_async(function (b4, b5) {
-                if (b4 === 1) return P.ai(b5, r)
+                if (b4 === 1) return P.async_rethrow(b5, r)
                 while (true) switch (s) {
                     case 0:
                         b3 = H.set_run_time_type_info([], t.V)
@@ -16312,7 +16331,7 @@
             var s = 0,
                 r = P.make_async_await_completer(t.z)
             var $async$bE = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         s = 2
@@ -16344,7 +16363,7 @@
                 o = this,
                 n, m, l, k, j, i, h, g, f
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) $async$outer: switch (s) {
                     case 0:
                         if (o.cx) {
@@ -16787,7 +16806,7 @@
                 r = P.make_async_await_completer(t.z),
                 q = this
             var $async$cg = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         q.az()
@@ -19644,13 +19663,13 @@
         lazy_old($, "wX", "at", function () {
             return X.k("vF:G*ee&GC", 12)
         })
-        lazy_old($, "vF", "a", function () {
+        lazy_old($, "vF", "a", function () { // 0
             return X.k("IIq4zN_QaD", 19)
         })
-        lazy_old($, "vP", "i", function () {
+        lazy_old($, "vP", "i", function () { // 1
             return X.k("P1JU9kNX~I", 52)
         })
-        lazy_old($, "wr", "t", function () {
+        lazy_old($, "wr", "t", function () { // 2
             return X.k("Oi}Eh'8SJR", 99)
         })
         lazy_old($, "wn", "ph", function () {
@@ -19671,10 +19690,10 @@
         lazy_old($, "wp", "pi", function () {
             return X.D("Lo=*]5Lg#G", 25)
         })
-        lazy_old($, "w9", "eU", function () {
+        lazy_old($, "w9", "eU", function () { // 160
             return X.k("uo2[vY3QwA", 3)
         })
-        lazy_old($, "wQ", "B", function () {
+        lazy_old($, "wQ", "B", function () { // 3
             return X.k("Cv.c@Ovh.D", 22)
         })
         lazy_old($, "wa", "p8", function () {
@@ -19728,7 +19747,7 @@
         lazy_old($, "xh", "pK", function () {
             return X.k("KW3YIK.WUG", 36)
         })
-        lazy_old($, "xN", "b3", function () {
+        lazy_old($, "xN", "b3", function () { // 80
             return X.k("}:|quIE(@P", 92)
         })
         lazy_old($, "vQ", "Z", function () {
@@ -19767,7 +19786,7 @@
         lazy_old($, "ww", "bx", function () {
             return X.k("27>.]$_<VQ", 94)
         })
-        lazy_old($, "xd", "bg", function () {
+        lazy_old($, "xd", "bg", function () { // 40
             return X.k("5+yzR?1-FQ", 93)
         })
         lazy_old($, "vM", "p0", function () {
@@ -19779,16 +19798,16 @@
         lazy_old($, "vU", "lG", function () {
             return X.D("'00dRlSitU", 54)
         })
-        lazy_old($, "vW", "p3", function () {
+        lazy_old($, "vW", "p3", function () { // 110
             return X.k("`aa.s&j;mC", 14)
         })
         lazy_old($, "wD", "pq", function () {
             return X.k("y{5]U4S1PH", 83)
         })
-        lazy_old($, "w0", "d_", function () {
+        lazy_old($, "w0", "d_", function () { // 128
             return X.k("?`C3ou}R1L", 67)
         })
-        lazy_old($, "wj", "pe", function () {
+        lazy_old($, "wj", "pe", function () { // 1066359849
             return X.D("ThP:gnU]RI", 16)
         })
         lazy_old($, "vH", "oX", function () {
@@ -19812,7 +19831,7 @@
         lazy_old($, "xK", "pZ", function () {
             return X.D("Pb8apiJXjT", 50)
         })
-        lazy_old($, "x7", "mU", function () {
+        lazy_old($, "x7", "mU", function () { // 36
             return X.k("+O2YYGy,+H", 45)
         })
         lazy_old($, "vJ", "oZ", function () {
@@ -19854,7 +19873,7 @@
         lazy_old($, "w8", "aR", function () {
             return X.k("o.qW!KX[gF", 31)
         })
-        lazy_old($, "wE", "mO", function () {
+        lazy_old($, "wE", "mO", function () { // 25
             return X.k("#U<=KBe&GC", 24)
         })
         lazy_old($, "wL", "iI", function () {
@@ -19863,7 +19882,7 @@
         lazy_old($, "vX", "cY", function () {
             return X.k("l@(lK%,MPO", 82)
         })
-        lazy_old($, "xz", "b2", function () {
+        lazy_old($, "xz", "b2", function () { // 63
             return X.k("Q9p3NSeckG", 37)
         })
         lazy_old($, "xg", "mV", function () {
@@ -19965,7 +19984,7 @@
         lazy_old($, "wd", "pb", function () {
             return X.k(",r=TU*tMlL", 66)
         })
-        lazy_old($, "xP", "q0", function () {
+        lazy_old($, "xP", "q0", function () { // 8208
             return X.k("0X)=.x6uSP", 88)
         })
         lazy_old($, "x5", "pE", function () {
