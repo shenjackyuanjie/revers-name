@@ -5713,16 +5713,20 @@
                     }
                     l = $.lO()
                     m.toString
+
                     if (l == null) H.G(H.R(l))
+
                     if (H.iF(m, l, 0)) {
                         k = C.String.aT(m, $.lO())
-                        j = C.String.dF(C.String.ay(m, k + $.i()))
+                        j = C.String.trim_name(C.String.ay(m, k + $.i())) // trim
                         l = C.String.af(m, $.a(), k)
                         i = $.nq()
                         m = H.iG(l, i, "", 0)
                     } else j = e
                     l = $.n3()
+
                     if (l == null) H.G(H.R(l))
+
                     if (H.iF(m, l, 0)) {
                         h = C.String.cK(m, $.n3())
                         if (J.m1(h[$.a()], " ")) {
@@ -5741,8 +5745,9 @@
                         } else l = !0
                         if (l) current_group.push(H.set_run_time_type_info([h[$.a()], null, j], r))
                         else current_group.push(H.set_run_time_type_info([h[$.a()], h[$.i()], j], r))
-                    } else if (C.String.bA(m, " ")) current_group.push(H.set_run_time_type_info([C.String.ay(m, $.i()), n, j], r))
-                    else {
+                    } else if (C.String.bA(m, " ")) {
+                        current_group.push(H.set_run_time_type_info([C.String.ay(m, $.i()), n, j], r))
+                    } else {
                         if (s + $.i() < names.length) {
                             l = $.n5()
                             if (l == null) H.G(H.R(l))
@@ -8689,17 +8694,27 @@
         fN(a) {
             return a.toLowerCase()
         },
-        dF(a) {
+        trim_name(a) {
+            // trim unicode 133(\n)
             var s, r, q, p = a.trim(),
                 o = p.length
-            if (o === 0) return p
-            if (this.a8(p, 0) === 133) {
+            if (o === 0) {
+                return p
+            }
+            // if (this.a8(p, 0) === 133) {
+            if (p.charCodeAt(0) === 133) {
                 s = J.check_from_start(p, 1)
-                if (s === o) return ""
-            } else s = 0
+                if (s === o) {
+                    return ""
+                }
+            } else {
+                s = 0
+            }
             r = o - 1
             q = this.aQ(p, r) === 133 ? J.check_from_end(p, r) : o
-            if (s === 0 && q === o) return p
+            if (s === 0 && q === o) {
+                return p
+            }
             return p.substring(s, q)
         },
         cG(a, b) {
