@@ -50,7 +50,10 @@ process.on('message', ([mode, name]) => {
 				window.resolve = (...args) => {
 					process.send(args);
 					window.close();
-				}
+				};
+				window.output = (...message) => {
+					console.log('page:', message);
+				};
 			}
 		});
 	} catch (e) {
