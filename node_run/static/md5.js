@@ -3282,9 +3282,9 @@
                 return result
             },
             get_obfuscated_value(a) {
-                var s = $.hashmap_str_str.h(0, a)
-                if (s == null) return ""
-                return s
+                var result = $.hashmap_str_str.h(0, a)
+                if (result == null) return ""
+                return result
             },
             out_load_lan(a) {
                 J.lY(a, new LanData.load_lan())
@@ -12360,7 +12360,7 @@
                         }
                         q = new T.aq(n, l)
 
-
+                        output(p.current_count, p.target_count, p.win_count * 100 / p.current_count)
                         //捕获胜率
                         if (p.current_count >= config[stage].count) {
                             const {
