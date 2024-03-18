@@ -52,13 +52,13 @@ async function test(str) {
                 window.close();
             };
             window.output = (...message) => {
-                console.log('From the page:', message);
+                console.log('page:', message);
             };
         }
     });
 
     virtualConsole.on('log', (message) => {
-        console.log('From the page:', message);
+        console.log('page:', message);
     });
 
     const result = await resolver
@@ -67,5 +67,5 @@ async function test(str) {
 
 
 //str="!test!\n!\n\n11@qwerb\n\n1233";
-str = "!test!\n!\n\n11@qwerb\n\n1233";
+str = "!test!\n!\n\n一一唹咤嵀㴁@shenjack\n\n一一塄望烀㴁@shenjack";
 test(str)
