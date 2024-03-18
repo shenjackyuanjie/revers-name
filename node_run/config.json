@@ -1,8 +1,18 @@
 {
   "备注": "//mode只有preliminary是测，其它任何字段都是不测 //count应该是测多少次的意思//score是个分数限制，低于这个就认为失败，不记录",
-  "threads": 2,
-  "QP": {
+  "threads": 1,
+  "CQD": {
     "mode": "preliminary",
+    "thresholds": [
+      {
+        "score": 0,
+        "count": 100
+      }
+      
+    ]
+  },
+  "QP": {
+    "mode": "disabled",
     "thresholds": [
       {
         "score": 5500,
@@ -15,7 +25,7 @@
     ]
   },
   "QD": {
-    "mode": "preliminary",
+    "mode": "disabled",
     "thresholds": [
       {
         "score": 5500,
