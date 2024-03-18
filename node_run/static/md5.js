@@ -4502,7 +4502,10 @@
                                         // $.nk -> \u0002
                                         e = $.nk()
                                         // $.cl -> !
-                                        if (J.J(parsed_names, 0).length === 2 && J.Y(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
+                                        // if (J.J(parsed_names, 0).length === 2 && J.Y(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
+                                        //     e = $.cl()
+                                        // }
+                                        if (parsed_names[0].length === 2 && parsed_names[0][1][0] === $.cl()) {
                                             e = $.cl()
                                         }
                                         a8 = J.J(parsed_names, 1)
