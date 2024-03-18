@@ -483,7 +483,7 @@
                 c.m(a3, d, c.h(a3, a5))
                 r = a4 + 1
                 q = a5 - 1
-                if (J.Y(a6.$2(a, a1), 0)) {
+                if (J.equal(a6.$2(a, a1), 0)) {
                     for (p = r; p <= q; ++p) {
                         o = c.h(a3, p)
                         n = a6.$2(o, a)
@@ -561,8 +561,8 @@
                 H.hL(a3, q + 2, a5, a6)
                 if (k) return
                 if (r < h && q > g) {
-                    for (; J.Y(a6.$2(c.h(a3, r), a), 0);) ++r
-                    for (; J.Y(a6.$2(c.h(a3, q), a1), 0);) --q
+                    for (; J.equal(a6.$2(c.h(a3, r), a), 0);) ++r
+                    for (; J.equal(a6.$2(c.h(a3, q), a1), 0);) --q
                     for (p = r; p <= q; ++p) {
                         o = c.h(a3, p)
                         if (a6.$2(o, a) === 0) {
@@ -3097,12 +3097,12 @@
                 if (typeof a == "number" && typeof b == "number") return a + b
                 return J.oA(a).B(a, b)
             },
-            Y(a, b) {
+            equal(a, b) {
                 if (a == null) return b == null
                 if (typeof a != "object") return b != null && a === b
                 return J.get_interceptor(a).aW(a, b)
             },
-            J(a, b) {
+            index_get(a, b) {
                 if (typeof b === "number")
                     if (a.constructor == Array || typeof a == "string" || H.oG(a, a[v.dispatchPropertyName]))
                         if (b >>> 0 === b && b < a.length) return a[b]
@@ -3282,9 +3282,10 @@
                 return result
             },
             get_obfuscated_value(a) {
-                var s = $.hashmap_str_str.h(0, a)
-                if (s == null) return ""
-                return s
+                var result = $.hashmap_str_str.h(0, a)
+                if (result == null) return ""
+                output("get_obfuscated_value: ", a, result)
+                return result
             },
             out_load_lan(a) {
                 J.lY(a, new LanData.load_lan())
@@ -4493,7 +4494,7 @@
                                 // if (J.aw(parsed_names) === 2)
                                 if (parsed_names.length === 2) {
                                     // ???
-                                    if (J.J(parsed_names, 1).length > 10 || J.lW(J.J(J.J(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
+                                    if (J.index_get(parsed_names, 1).length > 10 || J.lW(J.index_get(J.index_get(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
                                         // a8 = J.J(parsed_names, 1)
                                         a8 = parsed_names[1]
                                         a9 = H.set_run_time_type_info([], t.t)
@@ -4515,7 +4516,7 @@
                                         if (parsed_names[0].length === 2 && parsed_names[0][1][0] === $.cl()) {
                                             e = $.cl()
                                         }
-                                        a8 = J.J(parsed_names, 1)
+                                        a8 = J.index_get(parsed_names, 1)
                                         a9 = e
                                         a3 = H.set_run_time_type_info([], t.L)
                                         a4 = H.set_run_time_type_info([], t.V)
@@ -5535,12 +5536,12 @@
                     e.a.push(T.f(LanData.get_obfuscated_value("toAn"), a, b, null, null, 0, 1000, 100))
                     for (n = a.y.a.e, m = n.length, p = 0; p < n.length; n.length === m || (0, H.F)(n), ++p) {
                         o = n[p]
-                        if (J.Y(o, b)) o.l = o.l + $.bx()
+                        if (J.equal(o, b)) o.l = o.l + $.bx()
                         else o.l = o.l - $.eX()
                     }
-                    return !0
+                    return true
                 }
-                return !1
+                return false
             },
             tB(a, b, c, d, e) {
                 if (b.r2.h(0, $.ck()) == null && (d.n() & 63) + 1 < c) T.j7(a, b, $.bg(), d, e)
@@ -5760,9 +5761,9 @@
                             l = $.a()
                             h[l] = J.nB(h[l], $.i())
                         }
-                        if (!J.Y(h[$.i()], "")) {
+                        if (!J.equal(h[$.i()], "")) {
                             l = h[$.i()]
-                            i = $.n5()
+                            i = $.n5() // :
                             l.toString
                             if (i == null) H.G(H.R(i))
                             g = J.a3(l)
@@ -7877,17 +7878,17 @@
                             r -= 14
                         }
                         n = p + 1
-                        l[p] = J.J($.iM(), C._JsInt.V(q, 93))
+                        l[p] = J.index_get($.iM(), C._JsInt.V(q, 93))
                         p = n + 1
-                        l[n] = J.J($.iM(), q / 93 | 0)
+                        l[n] = J.index_get($.iM(), q / 93 | 0)
                     }
                 }
                 if (r > 0) {
                     n = p + 1
-                    l[p] = J.J($.iM(), C._JsInt.V(s, 93))
+                    l[p] = J.index_get($.iM(), C._JsInt.V(s, 93))
                     if (r > 7 || s > 92) {
                         p = n + 1
-                        l[n] = J.J($.iM(), s / 93 | 0)
+                        l[n] = J.index_get($.iM(), s / 93 | 0)
                     } else p = n
                 }
                 C.Array.sp(l, p)
@@ -7899,7 +7900,7 @@
                 for (s = J.aQ(a), r = 0, q = 0, p = -1, o = 0, n = 0; n < j; ++n) {
                     m = s.a8(a, n)
                     if (m > 126) continue
-                    l = J.J($.oS(), m)
+                    l = J.index_get($.oS(), m)
                     if (l === 93) continue
                     if (p === -1) p = l
                     else {
@@ -8042,7 +8043,7 @@
                 s.imageSmoothingEnabled = !1
                 s.fillStyle = "white"
                 J.bj(s, 0, 0, f.width, f.height)
-                if (!J.Y(e, 1)) J.rC(s, e, 0, 0, e, 0, 0)
+                if (!J.equal(e, 1)) J.rC(s, e, 0, 0, e, 0, 0)
                 q = document.body
                 q.toString
                 s.font = window.getComputedStyle(q, "").font
@@ -8379,7 +8380,7 @@
             var s
             if (a.fixed$length) H.G(P.UnsupportedError("remove"))
             for (s = 0; s < a.length; ++s)
-                if (J.Y(a[s], b)) {
+                if (J.equal(a[s], b)) {
                     a.splice(s, 1)
                     return true
                 } return false
@@ -8471,13 +8472,13 @@
             var s, r = a.length
             if (0 >= r) return -1
             for (s = 0; s < r; ++s)
-                if (J.Y(a[s], b)) return s
+                if (J.equal(a[s], b)) return s
             return -1
         },
         w(a, b) {
             var s
             for (s = 0; s < a.length; ++s)
-                if (J.Y(a[s], b)) return !0
+                if (J.equal(a[s], b)) return !0
             return !1
         },
         k(a) {
@@ -9246,7 +9247,7 @@
             if (a == null) return -1
             s = a.length
             for (r = 0; r < s; ++r)
-                if (J.Y(a[r].a, b)) return r
+                if (J.equal(a[r].a, b)) return r
             return -1
         },
         k(a) {
@@ -10408,7 +10409,7 @@
             if (a == null) return -1
             s = a.length
             for (r = 0; r < s; ++r)
-                if (J.Y(a[r].a, b)) return r
+                if (J.equal(a[r].a, b)) return r
             return -1
         }
     }
@@ -11821,7 +11822,7 @@
                 r = s.c + 1,
                 q = s.b
             if (r < q) {
-                s.d = J.J(s.a, r)
+                s.d = J.index_get(s.a, r)
                 s.c = r
                 return !0
             }
@@ -12512,7 +12513,7 @@
         dZ(a, b) {
             var s, r, q, p, o, n, m, l = this,
                 k = l.b
-            if (k.length === 2 && J.Y(J.J(k[0], 0), J.J(k[1], 0)) && J.Y(J.J(k[0], 1), J.J(k[1], 1))) {
+            if (k.length === 2 && J.equal(J.index_get(k[0], 0), J.index_get(k[1], 0)) && J.equal(J.index_get(k[0], 1), J.index_get(k[1], 1))) {
                 k.pop()
                 l.c = !0
             }
@@ -12975,7 +12976,7 @@
             var s = b.data,
                 r = new P.kx([], [])
             r.c = !0
-            if (J.Y(r.aO(s), $.iK())) this.y = 2000
+            if (J.equal(r.aO(s), $.iK())) this.y = 2000
         },
         on_resize(a, b) {
             var s = this.a
@@ -13007,7 +13008,7 @@
             n = P.aa(new H.y(H.set_run_time_type_info(C.P_kj.bt(0, P.aa(new H.y(new H.a9(r, q), new HtmlRenderer.jx(a), p), !0, p.i("M.E"))).split("\n"), t.s), new HtmlRenderer.jy(), o), !0, o.i("M.E"))
             r = n.length
             if (r > 1) {
-                if (!J.Y(J.J(J.J(n[0], 0), 0), "")) {
+                if (!J.equal(J.index_get(J.index_get(n[0], 0), 0), "")) {
                     for (m = 0; m < n.length; n.length === r || (0, H.F)(n), ++m) {
                         l = n[m]
                         q = J.a3(l)
@@ -13036,7 +13037,7 @@
                         g = k[m]
                         f = document.createElement("p")
                         f.classList.add("row")
-                        f.textContent = J.J(g, 1)
+                        f.textContent = J.index_get(g, 1)
                         p.appendChild(f)
                     }
                 }
@@ -13058,9 +13059,9 @@
             } else {
                 e = n[0]
                 r = J.a3(e)
-                q = J.J(r.h(e, 0), 0)
+                q = J.index_get(r.h(e, 0), 0)
                 r = r.h(e, 1)
-                d = J.J(r, 0)
+                d = J.index_get(r, 0)
                 if (!$.ay.J(0, d)) {
                     c = $.ay.h(0, q)
                     b = HtmlRenderer.t8(c.a, r, !1)
@@ -13463,7 +13464,7 @@
                 i.r.appendChild(j.createElement("br"))
                 d.a = 5
                 C.h.cJ(k, H.oO(LanData.get_obfuscated_value("ezfN"), "[]", new HtmlRenderer.jV(d, b), h))
-                if (!J.Y(s.h(b, 12), "")) switch (s.h(b, 12)) {
+                if (!J.equal(s.h(b, 12), "")) switch (s.h(b, 12)) {
                     case "2":
                         C.h.bk(k, e, C.String.B(" ", $.qC()), h, $.bV())
                         break
@@ -13514,7 +13515,7 @@
     }
     HtmlRenderer.jV.prototype = {
         $1(a) {
-            return HtmlRenderer.replace_add_str(J.J(this.b, this.a.a++))
+            return HtmlRenderer.replace_add_str(J.index_get(this.b, this.a.a++))
         },
         $S: 17
     }
@@ -13635,12 +13636,12 @@
                 } else s = !1
             else s = !1
             if (s) return !0
-            if (J.J(J.J($.nv(), a), p.b) < 90) return !1
+            if (J.index_get(J.index_get($.nv(), a), p.b) < 90) return !1
             for (s = o.length, r = 0; r < s; ++r)
                 if (o[r] === a) return !0
             for (r = 0; r < o.length; o.length === s || (0, H.F)(o), ++r) {
                 q = o[r]
-                if (J.J(J.J($.nv(), a), q) < 90) return !1
+                if (J.index_get(J.index_get($.nv(), a), q) < 90) return !1
             }
             return !0
         },
@@ -15249,11 +15250,11 @@
     }
     T.h6.prototype = {
         aq(a, b, c, d, e) {
-            if (a > $.a() && J.Y(c, T.mE())) {
+            if (a > $.a() && J.equal(c, T.mE())) {
                 e.a.push(T.f(LanData.get_obfuscated_value("HwtN"), this.r, null, null, null, a, 1000, 100))
                 return -a
             }
-            return a > $.a() && J.Y(c, T.oH()) ? $.a() : a
+            return a > $.a() && J.equal(c, T.oH()) ? $.a() : a
         },
         W() {
             this.r.y2.j(0, this)
@@ -16801,10 +16802,10 @@
             var s, r = this
             if (a.length === r.t.length) {
                 for (s = $.ap(); s < r.t.length; ++s)
-                    if (J.Y(a[s - $.i()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
+                    if (J.equal(a[s - $.i()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
                 if (r.a == r.b)
                     for (s = $.X(); s < r.t.length; ++s)
-                        if (J.Y(a[s - $.t()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
+                        if (J.equal(a[s - $.t()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
             }
         },
         cg() {
@@ -18561,7 +18562,7 @@
         fj(a, b) {
             var s, r, q = a.length
             if (q === 1) {
-                if (!J.Y(a[0], b)) return a[0]
+                if (!J.equal(a[0], b)) return a[0]
             } else if (q > 1) {
                 s = C.Array.aT(a, b)
                 if (s < 0) return a[this.ax(a.length)]
@@ -19741,7 +19742,7 @@
         lazy_old($, "xc", "C", function () {
             return X.k("T,tQQy%'LN", 76)
         })
-        lazy_old($, "wH", "eX", function () {
+        lazy_old($, "wH", "eX", function () { // 256
             return X.k("$YcaZZ:WUG", 36)
         })
         lazy_old($, "wk", "pf", function () {
