@@ -699,7 +699,7 @@
             },
             tc(a) {
                 var s, r, q, p
-                if (a instanceof P.Object) return H.aH(H.b_(a), null)
+                if (a instanceof P.Object) return H.rti_to_string(H.b_(a), null)
                 if (J.get_interceptor(a) === C.Interceptor || t.bI.b(a)) {
                     s = C.p(a)
                     r = s !== "Object" && s !== ""
@@ -712,7 +712,7 @@
                         if (r) return p
                     }
                 }
-                return H.aH(H.b_(a), null)
+                return H.rti_to_string(H.b_(a), null)
             },
             nY(a) {
                 var s, r, q, p, o = a.length
@@ -836,7 +836,7 @@
             },
             br(a) {
                 var s, r, q, p, o, n
-                a = H.oM(a.replace(String({}), "$receiver$"))
+                a = H.quote_string_for_regexp(a.replace(String({}), "$receiver$"))
                 s = a.match(/\\\$[a-zA-Z]+\\\$/g)
                 if (s == null) s = H.set_run_time_type_info([], t.s)
                 r = s.indexOf("\\$arguments\\$")
@@ -999,7 +999,8 @@
                 var s
                 if (a == null) return null
                 s = a.$identity
-                if (!!s) return s
+                // if (!!s) return s
+                if (s) return s
                 s = function (c, d, e) {
                     return function (f, g, h, i) {
                         return e(c, d, f, g, h, i)
@@ -1389,7 +1390,7 @@
                 }
             },
             init_hooks() {
-                var s, r, q, p, o, n, m = C.w()
+                var s, r, q, get_tag, get_unknown_tag, prototype_for_tag, hooks = C.w()
                 // m = H.cT(C.x, H.cT(C.y, H.cT(C.q, H.cT(C.q, H.cT(C.z, H.cT(C.A, H.cT(C.B(C.p), m)))))))
                 // if (typeof dartNativeDispatchHooksTransformer != "undefined") {
                 //     s = dartNativeDispatchHooksTransformer
@@ -1400,12 +1401,12 @@
                 //             if (typeof q == "function") m = q(m) || m
                 //         }
                 // }
-                p = m.getTag
-                o = m.getUnknownTag
-                n = m.prototypeForTag
-                $.oB = new H.lv(p)
-                $.ov = new H.lw(o)
-                $.oL = new H.lx(n)
+                get_tag = hooks.getTag
+                get_unknown_tag = hooks.getUnknownTag
+                prototype_for_tag = hooks.prototypeForTag
+                $.oB = new H.init_hooks_closure(get_tag)
+                $.ov = new H.init_hooks_closure_0(get_unknown_tag)
+                $.oL = new H.init_hooks_closure_1(prototype_for_tag)
             },
             cT(a, b) {
                 return a(b) || b
@@ -1444,7 +1445,7 @@
                 if (s == null) return a
                 return H.mG(a, s.b.index, s.gbh(), c)
             },
-            oM(a) {
+            quote_string_for_regexp(a) {
                 if (/[[\]{}()*+?.\\^$|]/.test(a)) return a.replace(/[[\]{}()*+?.\\^$|]/g, "\\$&")
                 return a
             },
@@ -1463,7 +1464,7 @@
                 p = a.indexOf(b, 0)
                 if (p < 0) return a
                 if (a.length < 500 || c.indexOf("$", 0) >= 0) return a.split(b).join(c)
-                return a.replace(new RegExp(H.oM(b), "g"), H.oz(c))
+                return a.replace(new RegExp(H.quote_string_for_regexp(b), "g"), H.oz(c))
             },
             mv(a) {
                 return a
@@ -1603,13 +1604,13 @@
                 _.b = b
                 _.d = _.c = null
             },
-            lv: function lv(a) {
+            init_hooks_closure: function lv(a) {
                 this.a = a
             },
-            lw: function lw(a) {
+            init_hooks_closure_0: function lw(a) {
                 this.a = a
             },
-            lx: function lx(a) {
+            init_hooks_closure_1: function lx(a) {
                 this.a = a
             },
             ct: function ct(a, b) {
@@ -1704,64 +1705,64 @@
                 return a.cy
             },
             find_type(a) {
-                return H.universe_eval(v.typeUniverse, a, !1)
+                return H.universe_eval(v.typeUniverse, a, false)
             },
-            bP(a, b, a0, a1) {
-                var s, r, q, p, o, n, m, l, k, j, i, h, g, f, e, d, c = b.y
+            substitute(universe, rti, a0, a1) {
+                var s, r, q, p, o, n, m, l, k, j, i, h, g, f, e, d, c = rti.y
                 switch (c) {
                     case 5:
                     case 1:
                     case 2:
                     case 3:
                     case 4:
-                        return b
+                        return rti
                     case 6:
-                        s = b.z
-                        r = H.bP(a, s, a0, a1)
-                        if (r === s) return b
-                        return H.universe_lookup_star_Rti(a, r, !0)
+                        s = rti.z
+                        r = H.substitute(universe, s, a0, a1)
+                        if (r === s) return rti
+                        return H.universe_lookup_star_Rti(universe, r, !0)
                     case 7:
-                        s = b.z
-                        r = H.bP(a, s, a0, a1)
-                        if (r === s) return b
-                        return H.universe_lookup_question_Rti(a, r, !0)
+                        s = rti.z
+                        r = H.substitute(universe, s, a0, a1)
+                        if (r === s) return rti
+                        return H.universe_lookup_question_Rti(universe, r, !0)
                     case 8:
-                        s = b.z
-                        r = H.bP(a, s, a0, a1)
-                        if (r === s) return b
-                        return H.universe_lookup_future_or_Rti(a, r, !0)
+                        s = rti.z
+                        r = H.substitute(universe, s, a0, a1)
+                        if (r === s) return rti
+                        return H.universe_lookup_future_or_Rti(universe, r, !0)
                     case 9:
-                        q = b.Q
-                        p = H.eP(a, q, a0, a1)
-                        if (p === q) return b
-                        return H.universe_lookup_interface_Rti(a, b.z, p)
+                        q = rti.Q
+                        p = H.eP(universe, q, a0, a1)
+                        if (p === q) return rti
+                        return H.universe_lookup_interface_Rti(universe, rti.z, p)
                     case 10:
-                        o = b.z
-                        n = H.bP(a, o, a0, a1)
-                        m = b.Q
-                        l = H.eP(a, m, a0, a1)
-                        if (n === o && l === m) return b
-                        return H.universe_lookup_binding_Rti(a, n, l)
+                        o = rti.z
+                        n = H.substitute(universe, o, a0, a1)
+                        m = rti.Q
+                        l = H.eP(universe, m, a0, a1)
+                        if (n === o && l === m) return rti
+                        return H.universe_lookup_binding_Rti(universe, n, l)
                     case 11:
-                        k = b.z
-                        j = H.bP(a, k, a0, a1)
-                        i = b.Q
-                        h = H.uE(a, i, a0, a1)
-                        if (j === k && h === i) return b
-                        return H.universe_lookup_function_Rti(a, j, h)
+                        k = rti.z
+                        j = H.substitute(universe, k, a0, a1)
+                        i = rti.Q
+                        h = H.uE(universe, i, a0, a1)
+                        if (j === k && h === i) return rti
+                        return H.universe_lookup_function_Rti(universe, j, h)
                     case 12:
-                        g = b.Q
+                        g = rti.Q
                         a1 += g.length
-                        f = H.eP(a, g, a0, a1)
-                        o = b.z
-                        n = H.bP(a, o, a0, a1)
-                        if (f === g && n === o) return b
-                        return H.universe_lookup_generic_function_Rti(a, n, f, !0)
+                        f = H.eP(universe, g, a0, a1)
+                        o = rti.z
+                        n = H.substitute(universe, o, a0, a1)
+                        if (f === g && n === o) return rti
+                        return H.universe_lookup_generic_function_Rti(universe, n, f, !0)
                     case 13:
-                        e = b.z
-                        if (e < a1) return b
+                        e = rti.z
+                        if (e < a1) return rti
                         d = a0[e - a1]
-                        if (d == null) return b
+                        if (d == null) return rti
                         return d
                     default:
                         throw H.h(P.iP("Attempted to substitute unexpected RTI kind " + c))
@@ -1772,7 +1773,7 @@
                     n = H.ld(o)
                 for (s = !1, r = 0; r < o; ++r) {
                     q = b[r]
-                    p = H.bP(a, q, c, d)
+                    p = H.substitute(a, q, c, d)
                     if (p !== q) s = !0
                     n[r] = p
                 }
@@ -1785,7 +1786,7 @@
                     q = b[r]
                     p = b[r + 1]
                     o = b[r + 2]
-                    n = H.bP(a, o, c, d)
+                    n = H.substitute(a, o, c, d)
                     if (n !== o) s = !0
                     l.splice(r, 3, q, p, n)
                 }
@@ -1873,21 +1874,26 @@
                 s = a.cy
                 r = s.replace(/\*/g, "")
                 if (r === s) return a.x = new H.iu(a)
-                q = H.universe_eval(v.typeUniverse, r, !0)
+                q = H.universe_eval(v.typeUniverse, r, true)
                 p = q.x
                 return a.x = p == null ? q.x = new H.iu(q) : p
             },
             vp(a) {
-                return H.mz(H.universe_eval(v.typeUniverse, a, !1))
+                return H.mz(H.universe_eval(v.typeUniverse, a, false))
             },
-            ul(a) {
+            install_specialized_is_test(a) {
                 var s, r, q, p = this,
                     o = t.K
                 if (p === o) return H.cQ(p, a, H.uq)
                 if (!H.is_strong_top_type(p))
-                    if (!(p === t.c)) o = p === o
-                else o = !0
-                else o = !0
+                    if (!(p === t.c)) {
+                        o = p === o
+                    }
+                else {
+                    o = true
+                } else {
+                    o = true
+                }
                 if (o) return H.cQ(p, a, H.ut)
                 o = p.y
                 s = o === 6 ? p.z : p
@@ -1972,11 +1978,11 @@
                 H.oo(a, s)
             },
             oo(a, b) {
-                throw H.h(H.u_(H.ob(a, H.oE(a, b), H.aH(b, null))))
+                throw H.h(H.u_(H.ob(a, H.oE(a, b), H.rti_to_string(b, null))))
             },
             ob(a, b, c) {
                 var s = P.jh(a),
-                    r = H.aH(b == null ? H.b_(a) : b, null)
+                    r = H.rti_to_string(b == null ? H.b_(a) : b, null)
                 return s + ": type '" + H.e(r) + "' is not a subtype of type '" + H.e(c) + "'"
             },
             u_(a) {
@@ -2084,7 +2090,7 @@
             },
             uB(a, b) {
                 var s, r, q
-                for (s = "", r = "", q = 0; q < a.length; ++q, r = ", ") s += C.String.B(r, H.aH(a[q], b))
+                for (s = "", r = "", q = 0; q < a.length; ++q, r = ", ") s += C.String.B(r, H.rti_to_string(a[q], b))
                 return s
             },
             op(a4, a5, a6) {
@@ -2105,7 +2111,7 @@
                             if (!(j === n)) h = j === m
                         else h = !0
                         else h = !0
-                        if (!h) l += C.String.B(" extends ", H.aH(j, a5))
+                        if (!h) l += C.String.B(" extends ", H.rti_to_string(j, a5))
                     }
                     l += ">"
                 } else {
@@ -2120,11 +2126,11 @@
                 c = d.length
                 b = g.c
                 a = b.length
-                a0 = H.aH(o, a5)
-                for (a1 = "", a2 = "", p = 0; p < e; ++p, a2 = a3) a1 += C.String.B(a2, H.aH(f[p], a5))
+                a0 = H.rti_to_string(o, a5)
+                for (a1 = "", a2 = "", p = 0; p < e; ++p, a2 = a3) a1 += C.String.B(a2, H.rti_to_string(f[p], a5))
                 if (c > 0) {
                     a1 += a2 + "["
-                    for (a2 = "", p = 0; p < c; ++p, a2 = a3) a1 += C.String.B(a2, H.aH(d[p], a5))
+                    for (a2 = "", p = 0; p < c; ++p, a2 = a3) a1 += C.String.B(a2, H.rti_to_string(d[p], a5))
                     a1 += "]"
                 }
                 if (a > 0) {
@@ -2132,7 +2138,7 @@
                     for (a2 = "", p = 0; p < a; p += 3, a2 = a3) {
                         a1 += a2
                         if (b[p + 1]) a1 += "required "
-                        a1 += J.iN(H.aH(b[p + 2], a5), " ") + b[p]
+                        a1 += J.iN(H.rti_to_string(b[p + 2], a5), " ") + b[p]
                     }
                     a1 += "}"
                 }
@@ -2142,34 +2148,34 @@
                 }
                 return l + "(" + a1 + ") => " + H.e(a0)
             },
-            aH(a, b) {
-                var s, r, q, p, o, n, m = a.y
+            rti_to_string(rti, b) {
+                var s, r, q, p, o, n, m = rti.y
                 if (m === 5) return "erased"
                 if (m === 2) return "dynamic"
                 if (m === 3) return "void"
                 if (m === 1) return "Never"
                 if (m === 4) return "any"
                 if (m === 6) {
-                    s = H.aH(a.z, b)
+                    s = H.rti_to_string(rti.z, b)
                     return s
                 }
                 if (m === 7) {
-                    r = a.z
-                    s = H.aH(r, b)
+                    r = rti.z
+                    s = H.rti_to_string(r, b)
                     q = r.y
                     return J.iN(q === 11 || q === 12 ? C.String.B("(", s) + ")" : s, "?")
                 }
-                if (m === 8) return "FutureOr<" + H.e(H.aH(a.z, b)) + ">"
+                if (m === 8) return "FutureOr<" + H.e(H.rti_to_string(rti.z, b)) + ">"
                 if (m === 9) {
-                    p = H.uG(a.z)
-                    o = a.Q
+                    p = H.uG(rti.z)
+                    o = rti.Q
                     return o.length > 0 ? p + ("<" + H.uB(o, b) + ">") : p
                 }
-                if (m === 11) return H.op(a, b, null)
-                if (m === 12) return H.op(a.z, b, a.Q)
+                if (m === 11) return H.op(rti, b, null)
+                if (m === 12) return H.op(rti.z, b, rti.Q)
                 if (m === 13) {
                     b.toString
-                    n = a.z
+                    n = rti.z
                     return b[b.length - 1 - n]
                 }
                 return "?"
@@ -2234,7 +2240,7 @@
             },
             universe_install_type_tests(a, b) {
                 b.a = H.uk
-                b.b = H.ul
+                b.b = H.install_specialized_is_test
                 return b
             },
             universe_lookup_terminal_Rti(a, b, c) {
@@ -2442,7 +2448,7 @@
                         }
                     }
                     if (q > 0) {
-                        n = H.bP(a, b, r, 0)
+                        n = H.substitute(a, b, r, 0)
                         m = H.eP(a, c, r, 0)
                         return H.universe_lookup_generic_function_Rti(a, n, m, c !== m)
                     }
@@ -2968,9 +2974,9 @@
                     case 32:
                     case 133:
                     case 160:
-                        return !0
+                        return true
                     default:
-                        return !1
+                        return false
                 }
                 switch (a) {
                     case 5760:
@@ -2991,9 +2997,9 @@
                     case 8287:
                     case 12288:
                     case 65279:
-                        return !0
+                        return true
                     default:
-                        return !1
+                        return false
                 }
             },
             t2(a, b) {
@@ -3451,31 +3457,44 @@
                     if (p) {
                         k = e.c
                         k = (k & 1) !== 0 || (k & 15) === 8
-                    } else k = !0
+                    } else {
+                        k = true
+                    }
                     if (k) {
                         j = e.b.b
                         if (o) {
                             q = q.b === j
                             q = !(q || q)
-                        } else q = !1
+                        } else {
+                            q = false
+                        }
                         if (q) {
                             P.root_handle_uncaught_error(l.a, l.b)
                             return
                         }
                         i = $.P
-                        if (i !== j) $.P = j
-                        else i = null
+                        if (i !== j) {
+                            $.P = j
+                        } else i = null
                         e = e.c
                         if ((e & 15) === 8) new P.kR(r, f, o).$0()
                         else if (p) {
                             if ((e & 1) !== 0) new P.kQ(r, l).$0()
-                        } else if ((e & 2) !== 0) new P.kP(f, r).$0()
-                        if (i != null) $.P = i
+                        } else {
+                            if ((e & 2) !== 0) {
+                                new P.kP(f, r).$0()
+                            }
+                        }
+                        if (i != null) {
+                            $.P = i
+                        }
                         e = r.c
                         if (s.b(e)) {
                             q = r.a.$ti
                             q = q.i("bl<2>").b(e) || !q.Q[1].b(e)
-                        } else q = !1
+                        } else {
+                            q = false
+                        }
                         if (q) {
                             result = r.a.b
                             if (e instanceof P.U)
@@ -3487,8 +3506,12 @@
                                     result.c = e.c
                                     f.a = e
                                     continue
-                                } else P.mk(e, result)
-                            else result.cV(e)
+                                } else {
+                                    P.mk(e, result)
+                                }
+                            else {
+                                result.cV(e)
+                            }
                             return
                         }
                     }
@@ -7909,17 +7932,17 @@
             }
         },
         HtmlRenderer = {
-            hM(a) {
+            add_span(a) {
                 var s = document.createElement("span")
                 s.classList.add(a)
                 return s
             },
-            ae(a) {
+            add_div(a) {
                 var s = document.createElement("div")
                 s.classList.add(a)
                 return s
             },
-            nS(a) {
+            add_p(a) {
                 var s = document.createElement("p")
                 s.classList.add(a)
                 return s
@@ -8068,12 +8091,12 @@
                 return a
             },
             t7(a, b, c) {
-                var s = HtmlRenderer.ae("plr_list"),
-                    r = HtmlRenderer.ae("sgl"),
-                    q = HtmlRenderer.ae("name"),
-                    p = HtmlRenderer.ae("maxhp"),
-                    o = HtmlRenderer.ae("oldhp"),
-                    n = HtmlRenderer.ae("hp"),
+                var s = HtmlRenderer.add_div("plr_list"),
+                    r = HtmlRenderer.add_div("sgl"),
+                    q = HtmlRenderer.add_div("name"),
+                    p = HtmlRenderer.add_div("maxhp"),
+                    o = HtmlRenderer.add_div("oldhp"),
+                    n = HtmlRenderer.add_div("hp"),
                     m = $.jU + 1
                 $.jU = m
                 m = new HtmlRenderer.ax(a, s, r, q, p, o, n, m)
@@ -8081,12 +8104,12 @@
                 return m
             },
             t8(a, b, c) {
-                var s = HtmlRenderer.ae("plr_list"),
-                    r = HtmlRenderer.ae("sgl"),
-                    q = HtmlRenderer.ae("name"),
-                    p = HtmlRenderer.ae("maxhp"),
-                    o = HtmlRenderer.ae("oldhp"),
-                    n = HtmlRenderer.ae("hp"),
+                var s = HtmlRenderer.add_div("plr_list"),
+                    r = HtmlRenderer.add_div("sgl"),
+                    q = HtmlRenderer.add_div("name"),
+                    p = HtmlRenderer.add_div("maxhp"),
+                    o = HtmlRenderer.add_div("oldhp"),
+                    n = HtmlRenderer.add_div("hp"),
                     m = $.jU + 1
                 $.jU = m
                 m = new HtmlRenderer.fW(a, s, r, q, p, o, n, m)
@@ -8097,7 +8120,7 @@
                 var s, r, q, p, o, n, m, l, k, j, i, h, g, f = a.a
                 if (f > 0 && a.e != null) $.ay.h(0, a.e.gb2()).dc(f)
                 s = H.set_run_time_type_info([], t.j)
-                r = HtmlRenderer.hM("u")
+                r = HtmlRenderer.add_span("u")
                 C.R.by(r, H.oO(a.d, $.rm(), new HtmlRenderer.lq(new HtmlRenderer.lp(s, a), a), null), $.bV())
                 for (f = s.length, q = t.A, p = 0; p < s.length; s.length === f || (0, H.F)(s), ++p) {
                     o = s[p]
@@ -9235,19 +9258,19 @@
             }
         }
     }
-    H.lv.prototype = {
+    H.init_hooks_closure.prototype = {
         $1(a) {
             return this.a(a)
         },
         $S: 28
     }
-    H.lw.prototype = {
+    H.init_hooks_closure_0.prototype = {
         $2(a, b) {
             return this.a(a, b)
         },
         $S: 48
     }
-    H.lx.prototype = {
+    H.init_hooks_closure_1.prototype = {
         $1(a) {
             return this.a(a)
         },
@@ -9495,7 +9518,7 @@
     H.function_parameters.prototype = {}
     H.iu.prototype = {
         k(a) {
-            return H.aH(this.a, null)
+            return H.rti_to_string(this.a, null)
         }
     }
     H.i9.prototype = {
@@ -12225,60 +12248,60 @@
             }
         },
         O() {
-            var s = 0,
-                r = P.make_async_await_completer(t.d),
+            var async_goto = 0,
+                async_completer = P.make_async_await_completer(t.d),
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
-                while (true) switch (s) {
+                if (a === 1) return P.ai(b, async_completer)
+                while (true) switch (async_goto) {
                     case 0:
                         d = p.x
                         if (d.length !== 0) {
                             q = C.Array.cu(d, 0)
-                            s = 1
+                            async_goto = 1
                             break
                         }
                         if (p.current_count >= p.target_count) {
                             q = null
-                            s = 1
+                            async_goto = 1
                             break
                         }
                         o = p.r, n = t.v, m = p.a, l = p.b, k = t.V, j = t.D, i = 0
                     case 3:
                         if (!(i < 100)) {
-                            s = 4
+                            async_goto = 4
                             break
                         }
                         h = H.set_run_time_type_info([m, l, [H.set_run_time_type_info([H.e($.ni()) + p.d++, $.cl()], k)]], j)
                         if (p.current_count === 0) h.pop()
-                        s = 5
+                        async_goto = 5
                         return P.async_await(T.c2(h), $async$O)
                     case 5:
                         g = b
                         f = null
                     case 6:
-                        if (!!0) {
-                            s = 8
-                            break
-                        }
-                        s = 9
+                        // if (!!0) {
+                        //     s = 8
+                        //     break
+                        // }
+                        async_goto = 9
                         return P.async_await(g.O(), $async$O)
                     case 9:
                         e = b
                         if (e == null) {
-                            s = 8
+                            async_goto = 8
                             break
                         }
                     case 7:
                         f = e
-                        s = 6
+                        async_goto = 6
                         break
                     case 8:
                         if (C.Array.w(o, n.a(f.a[0]).e.gb2())) ++p.win_count;
                         ++i;
                         ++p.current_count
-                        s = 3
+                        async_goto = 3
                         break
                     case 4:
                         //胜率测试的输出部分
@@ -12315,13 +12338,13 @@
                             stage++;
                         }
                         
-                        s = 1
+                        async_goto = 1
                         break
                     case 1:
-                        return P.async_return(q, r)
+                        return P.async_return(q, async_completer)
                 }
             })
-            return P.async_start_sync($async$O, r)
+            return P.async_start_sync($async$O, async_completer)
         },
         ae(a, b) {
             return this.dJ(0, b)
@@ -12480,10 +12503,10 @@
                         e = a6
                         d = null
                     case 6:
-                        if (!!0) {
-                            async_goto = 8
-                            break
-                        }
+                        // if (!!0) {
+                        //     async_goto = 8
+                        //     break
+                        // }
                         async_goto = 9
                         return P.async_await(e.O(), $async$O)
                     case 9:
@@ -12497,7 +12520,9 @@
                             if (a1.a > 0) {
                                 a2 = a1.e
                                 a2 = a2 != null && a2.gb2() == p.x
-                            } else a2 = !1
+                            } else {
+                                a2 = false
+                            }
                             if (a2) {
                                 a3 = a1.d
                                 if (C.String.bA(a3, "[0]"))
@@ -12510,7 +12535,9 @@
                         async_goto = 6
                         break
                     case 8:
-                        if (C.Array.w(a4, o.a(d.a[0]).e.gb2())) ++p.Q;
+                        if (C.Array.w(a4, o.a(d.a[0]).e.gb2())) {
+                            ++p.Q
+                        };
                         ++i;
                         ++p.ch
                         async_goto = 3
@@ -12859,13 +12886,13 @@
             p.d = P.mi(P.fm(10, 0), p.gbc(p))
             W.es(window, "resize", p.gff(p), false)
             p.ds(0, null)
-            s = HtmlRenderer.nS("row")
+            s = HtmlRenderer.add_p("row")
             r = p.b
             r.appendChild(s)
-            q = HtmlRenderer.hM("welcome")
+            q = HtmlRenderer.add_span("welcome")
             q.textContent = LanData.get_obfuscated_value("CeaN")
             s.appendChild(q)
-            q = HtmlRenderer.hM("welcome2")
+            q = HtmlRenderer.add_span("welcome2")
             q.textContent = LanData.get_obfuscated_value("NosN")
             s.appendChild(q)
             q = p.c
@@ -13067,7 +13094,7 @@
                 // // q.db.appendChild(HtmlRenderer.uI(q.cx))
                 // 总结一下上面那一大堆没啥用的代码
                 if (q.db == null) {
-                    q.db = HtmlRenderer.nS("row")
+                    q.db = HtmlRenderer.add_p("row")
                 }
                 q.dx = false
                 q.b4()
@@ -13084,7 +13111,7 @@
             // console.log("!this.cx instanceof T.RunUpdateWin", !this.cx instanceof T.RunUpdateWin)
             if (this.cx instanceof T.RunUpdateWin) {} else {
                 if (this.db == null) {
-                    this.db = HtmlRenderer.nS("row")
+                    this.db = HtmlRenderer.add_p("row")
                 }
                 this.dx = false
                 this.b4()
@@ -13280,8 +13307,8 @@
     HtmlRenderer.jT.prototype = {
         e3(a, grouped, detailed) {
             var s, r, q, p, o = this
-            if (grouped || detailed) o.b = HtmlRenderer.ae("plrg_body_gouped")
-            else o.b = HtmlRenderer.ae("plrg_body")
+            if (grouped || detailed) o.b = HtmlRenderer.add_div("plrg_body_gouped")
+            else o.b = HtmlRenderer.add_div("plrg_body")
             for (s = J.by(a), r = o.a; s.u();) {
                 q = s.gC()
                 if (J.aw(q) < 2) return
@@ -13309,8 +13336,8 @@
                 f = '<div class="name"> ',
                 e = "beforeend"
             i.cy = "pid" + i.cx
-            if (c) i.r = HtmlRenderer.ae("plr1")
-            else i.r = HtmlRenderer.ae("plr0")
+            if (c) i.r = HtmlRenderer.add_div("plr1")
+            else i.r = HtmlRenderer.add_div("plr0")
             s = J.a3(b)
             i.db = s.h(b, 0)
             i.dx = s.h(b, 1)
@@ -13344,7 +13371,7 @@
             m = J.m_(i.dy, "+")
             if (m > -1) {
                 q = i.r
-                l = HtmlRenderer.hM("small")
+                l = HtmlRenderer.add_span("small")
                 l.textContent = J.nB(i.dy, m)
                 q.appendChild(l)
                 i.r.appendChild(document.createTextNode(" "))
@@ -13352,14 +13379,14 @@
             i.fr = g + i.cy + '">' + H.e(i.x.outerHTML) + f + C.o.ab(i.dx) + " </div></div>"
             i.fx = g + i.cy + '">' + H.e(i.x.outerHTML) + f + C.o.ab(i.dx) + ' </div><div class="maxhp" style="width: ' + n + '" /></div>'
             if (c) {
-                k = HtmlRenderer.ae("detail")
+                k = HtmlRenderer.add_div("detail")
                 q = i.r
                 l = LanData.get_obfuscated_value("BxJN") + (" " + H.e(i.go))
                 j = document
                 q.appendChild(j.createTextNode(l))
                 if (p != null) {
                     q = i.r
-                    l = HtmlRenderer.hM("small")
+                    l = HtmlRenderer.add_span("small")
                     l.textContent = p
                     q.appendChild(l)
                 }
@@ -18613,11 +18640,11 @@
         inherit_may(P.fv, [H.fB, H.hX])
         inherit_may(H.M, [H.y, H.a9, P.id])
         inherit(H.dP, P.bc)
-        inherit_may(H.c_, [H.j5, H.j6, H.kg, H.jH, H.lv, H.lx, P.kB, P.kA, P.lh, P.kK, P.kS, P.ke, P.kZ, P.jc, P.jd, W.jf, W.kF, W.jP, W.jO, W.l0, W.l1, W.l7, P.lE, P.lF, L.iS, L.iT, L.iU, V.j0, V.j1, X.iX, X.iY, X.iZ, HtmlRenderer.jx, HtmlRenderer.jy, HtmlRenderer.jw, HtmlRenderer.jz, HtmlRenderer.jB, HtmlRenderer.jC, HtmlRenderer.jD, HtmlRenderer.jV, HtmlRenderer.lp, HtmlRenderer.lq, Sgls.k5, Sgls.k6, T.k9, T.jk, T.jj, T.jl, T.ji, T.lD, T.jW, T.k3, T.kb, T.ko, T.kp, LanData.k_])
+        inherit_may(H.c_, [H.j5, H.j6, H.kg, H.jH, H.init_hooks_closure, H.init_hooks_closure_1, P.kB, P.kA, P.lh, P.kK, P.kS, P.ke, P.kZ, P.jc, P.jd, W.jf, W.kF, W.jP, W.jO, W.l0, W.l1, W.l7, P.lE, P.lF, L.iS, L.iT, L.iU, V.j0, V.j1, X.iX, X.iY, X.iZ, HtmlRenderer.jx, HtmlRenderer.jy, HtmlRenderer.jw, HtmlRenderer.jz, HtmlRenderer.jB, HtmlRenderer.jC, HtmlRenderer.jD, HtmlRenderer.jV, HtmlRenderer.lp, HtmlRenderer.lq, Sgls.k5, Sgls.k6, T.k9, T.jk, T.jj, T.jl, T.ji, T.lD, T.jW, T.k3, T.kb, T.ko, T.kp, LanData.k_])
         inherit_may(H.kg, [H.kc, H.dg])
         inherit(P.dG, P.aU)
         inherit_may(P.dG, [H.JsLinkedHashMap, P.ic, W.i2])
-        inherit_may(H.j6, [H.lw, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, Sgls.k7, LanData.load_lan, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
+        inherit_may(H.j6, [H.init_hooks_closure_0, P.li, P.lr, P.kL, P.jM, W.kd, W.le, P.l5, P.l6, P.ky, V.j_, HtmlRenderer.jA, Sgls.k7, LanData.load_lan, T.ka, T.jX, T.jY, T.k2, T.kq, T.kr, T.ks, T.kt, T.ku])
         inherit(H.hZ, P.dy)
         inherit(H.cw, H.ab)
         inherit_may(H.cw, [H.ey, H.eA])
