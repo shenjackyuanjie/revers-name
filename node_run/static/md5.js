@@ -12337,7 +12337,9 @@
                         async_goto = 6
                         break
                     case 8:
-                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
+                        // Array.w(a, b) -> a.includes(b)
+                        // if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
+                        if (o.includes(n.a(f.a[0]).e.gb2())) {
                             ++p.win_count
                         };
                         ++i;

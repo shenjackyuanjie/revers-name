@@ -18,6 +18,7 @@ h_(k) -> fYwD -> 名称输入 session storage
   - `Y(a, b)` -> `a === b`
   - `J(a, b)` -> `a[b]`
   - `aw(a)` -> `a.length`
+  - `JsArray.w(a, b)` -> `a.includes(b)`
 
 ## `md5.js`
 
