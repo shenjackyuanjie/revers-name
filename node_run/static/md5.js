@@ -3282,9 +3282,9 @@
                 return result
             },
             get_obfuscated_value(a) {
-                var result = $.hashmap_str_str.h(0, a)
-                if (result == null) return ""
-                return result
+                var s = $.hashmap_str_str.h(0, a)
+                if (s == null) return ""
+                return s
             },
             out_load_lan(a) {
                 J.lY(a, new LanData.load_lan())
@@ -12363,7 +12363,7 @@
                         q = new T.aq(n, l)
 
                         // 当前场次, 目标场次, 胜率
-                        output(p.current_count, p.target_count, p.win_count * 100 / p.current_count)
+
                         //捕获胜率
                         if (p.current_count >= config[stage].count) {
                             const {
@@ -12373,8 +12373,11 @@
                             } = config[stage];
 
                             var winRate = p.win_count * 100 / config[stage].count
-                            //if (winRate < score) 对于cqd需要多个号取胜率平均，不需要在这里判断
-                            resolve(true, [], winRate, p.current_count);
+                            if (winRate < score)
+                                resolve(false, [], winRate, p.current_count);
+                            else if (stage === config.length - 1)
+                                resolve(true, [], winRate);
+                            stage++;
                         }
 
                         async_goto = 1
