@@ -12337,7 +12337,9 @@
                         async_goto = 6
                         break
                     case 8:
-                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) ++p.win_count;
+                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
+                            ++p.win_count
+                        };
                         ++i;
                         ++p.current_count
                         async_goto = 3
@@ -12360,6 +12362,7 @@
                         }
                         q = new T.aq(n, l)
 
+                        // 当前场次, 目标场次, 胜率
                         output(p.current_count, p.target_count, p.win_count * 100 / p.current_count)
                         //捕获胜率
                         if (p.current_count >= config[stage].count) {
