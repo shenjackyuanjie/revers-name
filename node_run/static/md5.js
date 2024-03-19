@@ -1978,9 +1978,9 @@
                 H.oo(a, s)
             },
             oo(a, b) {
-                throw H.h(H.u_(H.ob(a, H.oE(a, b), H.rti_to_string(b, null))))
+                throw H.h(H.u_(H.error_compose(a, H.oE(a, b), H.rti_to_string(b, null))))
             },
-            ob(a, b, c) {
+            error_compose(a, b, c) {
                 var s = P.jh(a),
                     r = H.rti_to_string(b == null ? H.b_(a) : b, null)
                 return s + ": type '" + H.e(r) + "' is not a subtype of type '" + H.e(c) + "'"
@@ -1989,7 +1989,7 @@
                 return new H.eI("TypeError: " + a)
             },
             aC(a, b) {
-                return new H.eI("TypeError: " + H.ob(a, null, b))
+                return new H.eI("TypeError: " + H.error_compose(a, null, b))
             },
             uq(a) {
                 return a != null
