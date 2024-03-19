@@ -483,7 +483,7 @@
                 c.m(a3, d, c.h(a3, a5))
                 r = a4 + 1
                 q = a5 - 1
-                if (J.Y(a6.$2(a, a1), 0)) {
+                if (J.equal(a6.$2(a, a1), 0)) {
                     for (p = r; p <= q; ++p) {
                         o = c.h(a3, p)
                         n = a6.$2(o, a)
@@ -561,8 +561,8 @@
                 H.hL(a3, q + 2, a5, a6)
                 if (k) return
                 if (r < h && q > g) {
-                    for (; J.Y(a6.$2(c.h(a3, r), a), 0);) ++r
-                    for (; J.Y(a6.$2(c.h(a3, q), a1), 0);) --q
+                    for (; J.equal(a6.$2(c.h(a3, r), a), 0);) ++r
+                    for (; J.equal(a6.$2(c.h(a3, q), a1), 0);) --q
                     for (p = r; p <= q; ++p) {
                         o = c.h(a3, p)
                         if (a6.$2(o, a) === 0) {
@@ -3097,7 +3097,7 @@
                 if (typeof a == "number" && typeof b == "number") return a + b
                 return J.oA(a).B(a, b)
             },
-            Y(a, b) {
+            equal(a, b) {
                 if (a == null) return b == null
                 if (typeof a != "object") return b != null && a === b
                 return J.get_interceptor(a).aW(a, b)
@@ -4474,11 +4474,11 @@
                             // $.qc -> !test!
                             // 猜测: 
                             // J.J(a, b) -> a[b]
-                            // J.Y(a, b) -> a === b
+                            // J.equal(a, b) -> a === b
 
                             // if 翻译:
                             // if (parsed_names[0][0][0] === $.qc()) {
-                            // if (J.Y(J.J(J.J(parsed_names, 0)[0], 0), $.qc())) {
+                            // if (J.equal(J.J(J.J(parsed_names, 0)[0], 0), $.qc())) {
                             // 这里在判定 第一组 第一个元素的第一个元素是否等于 $.qc() (即 !test!)
                             if (parsed_names[0][0][0] === $.qc()) {
                                 $.vr = 6
@@ -4502,7 +4502,7 @@
                                         // $.nk -> \u0002
                                         e = $.nk()
                                         // $.cl -> !
-                                        // if (J.J(parsed_names, 0).length === 2 && J.Y(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
+                                        // if (J.J(parsed_names, 0).length === 2 && J.equal(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
                                         //     e = $.cl()
                                         // }
                                         if (parsed_names[0].length === 2 && parsed_names[0][1][0] === $.cl()) {
@@ -5528,7 +5528,7 @@
                     e.a.push(T.f(LanData.get_obfuscated_value("toAn"), a, b, null, null, 0, 1000, 100))
                     for (n = a.y.a.e, m = n.length, p = 0; p < n.length; n.length === m || (0, H.F)(n), ++p) {
                         o = n[p]
-                        if (J.Y(o, b)) o.l = o.l + $.bx()
+                        if (J.equal(o, b)) o.l = o.l + $.bx()
                         else o.l = o.l - $.eX()
                     }
                     return !0
@@ -5699,7 +5699,7 @@
                 //     }
                 //   }
 
-                // for (; J.Y(C.Array.last(names), "");) {
+                // for (; J.equal(C.Array.last(names), "");) {
                 while (C.Array.last(names) == "") {
                     names.pop() // 移除列表names的最后一个元素
                     // 如果列表names为空
@@ -5753,7 +5753,7 @@
                             l = $.a()
                             h[l] = J.nB(h[l], $.i())
                         }
-                        if (!J.Y(h[$.i()], "")) {
+                        if (!J.equal(h[$.i()], "")) {
                             l = h[$.i()]
                             i = $.n5()
                             l.toString
@@ -8031,7 +8031,7 @@
                 s.imageSmoothingEnabled = !1
                 s.fillStyle = "white"
                 J.bj(s, 0, 0, f.width, f.height)
-                if (!J.Y(e, 1)) J.rC(s, e, 0, 0, e, 0, 0)
+                if (!J.equal(e, 1)) J.rC(s, e, 0, 0, e, 0, 0)
                 q = document.body
                 q.toString
                 s.font = window.getComputedStyle(q, "").font
@@ -8362,7 +8362,7 @@
             var s
             if (!!a.fixed$length) H.G(P.S("remove"))
             for (s = 0; s < a.length; ++s)
-                if (J.Y(a[s], b)) {
+                if (J.equal(a[s], b)) {
                     a.splice(s, 1)
                     return !0
                 } return !1
@@ -8454,13 +8454,13 @@
             var s, r = a.length
             if (0 >= r) return -1
             for (s = 0; s < r; ++s)
-                if (J.Y(a[s], b)) return s
+                if (J.equal(a[s], b)) return s
             return -1
         },
         w(a, b) {
             var s
             for (s = 0; s < a.length; ++s)
-                if (J.Y(a[s], b)) return !0
+                if (J.equal(a[s], b)) return !0
             return !1
         },
         k(a) {
@@ -9229,7 +9229,7 @@
             if (a == null) return -1
             s = a.length
             for (r = 0; r < s; ++r)
-                if (J.Y(a[r].a, b)) return r
+                if (J.equal(a[r].a, b)) return r
             return -1
         },
         k(a) {
@@ -10391,7 +10391,7 @@
             if (a == null) return -1
             s = a.length
             for (r = 0; r < s; ++r)
-                if (J.Y(a[r].a, b)) return r
+                if (J.equal(a[r].a, b)) return r
             return -1
         }
     }
@@ -12482,7 +12482,7 @@
         dZ(a, b) {
             var s, r, q, p, o, n, m, l = this,
                 k = l.b
-            if (k.length === 2 && J.Y(J.J(k[0], 0), J.J(k[1], 0)) && J.Y(J.J(k[0], 1), J.J(k[1], 1))) {
+            if (k.length === 2 && J.equal(J.J(k[0], 0), J.J(k[1], 0)) && J.equal(J.J(k[0], 1), J.J(k[1], 1))) {
                 k.pop()
                 l.c = !0
             }
@@ -12945,7 +12945,7 @@
             var s = b.data,
                 r = new P.kx([], [])
             r.c = !0
-            if (J.Y(r.aO(s), $.iK())) this.y = 2000
+            if (J.equal(r.aO(s), $.iK())) this.y = 2000
         },
         on_resize(a, b) {
             var s = this.a
@@ -12977,7 +12977,7 @@
             n = P.aa(new H.y(H.set_run_time_type_info(C.P_kj.bt(0, P.aa(new H.y(new H.a9(r, q), new HtmlRenderer.jx(a), p), !0, p.i("M.E"))).split("\n"), t.s), new HtmlRenderer.jy(), o), !0, o.i("M.E"))
             r = n.length
             if (r > 1) {
-                if (!J.Y(J.J(J.J(n[0], 0), 0), "")) {
+                if (!J.equal(J.J(J.J(n[0], 0), 0), "")) {
                     for (m = 0; m < n.length; n.length === r || (0, H.F)(n), ++m) {
                         l = n[m]
                         q = J.a3(l)
@@ -13433,7 +13433,7 @@
                 i.r.appendChild(j.createElement("br"))
                 d.a = 5
                 C.h.cJ(k, H.oO(LanData.get_obfuscated_value("ezfN"), "[]", new HtmlRenderer.jV(d, b), h))
-                if (!J.Y(s.h(b, 12), "")) switch (s.h(b, 12)) {
+                if (!J.equal(s.h(b, 12), "")) switch (s.h(b, 12)) {
                     case "2":
                         C.h.bk(k, e, C.String.B(" ", $.qC()), h, $.bV())
                         break
@@ -15219,11 +15219,11 @@
     }
     T.h6.prototype = {
         aq(a, b, c, d, e) {
-            if (a > $.a() && J.Y(c, T.mE())) {
+            if (a > $.a() && J.equal(c, T.mE())) {
                 e.a.push(T.f(LanData.get_obfuscated_value("HwtN"), this.r, null, null, null, a, 1000, 100))
                 return -a
             }
-            return a > $.a() && J.Y(c, T.oH()) ? $.a() : a
+            return a > $.a() && J.equal(c, T.oH()) ? $.a() : a
         },
         W() {
             this.r.y2.j(0, this)
@@ -16771,10 +16771,10 @@
             var s, r = this
             if (a.length === r.t.length) {
                 for (s = $.ap(); s < r.t.length; ++s)
-                    if (J.Y(a[s - $.i()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
+                    if (J.equal(a[s - $.i()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
                 if (r.a == r.b)
                     for (s = $.X(); s < r.t.length; ++s)
-                        if (J.Y(a[s - $.t()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
+                        if (J.equal(a[s - $.t()], r.E[s]) && a[s] > r.t[s]) r.t[s] = a[s]
             }
         },
         cg() {
@@ -18531,7 +18531,7 @@
         fj(a, b) {
             var s, r, q = a.length
             if (q === 1) {
-                if (!J.Y(a[0], b)) return a[0]
+                if (!J.equal(a[0], b)) return a[0]
             } else if (q > 1) {
                 s = C.Array.aT(a, b)
                 if (s < 0) return a[this.ax(a.length)]
