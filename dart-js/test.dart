@@ -44,7 +44,6 @@ num drawText(CanvasRenderingContext2D ctx, String txt, int x, int y, int w,
 }
 
 class Dt {
-
   static String ex = b('!');
   static String add = b('+');
   static String at = b('@');
@@ -60,7 +59,6 @@ List<String> test_list(String str) {
   }
 
   return ["a", "b", "c"];
-
 }
 
 b_run() async {
@@ -70,7 +68,7 @@ b_run() async {
   print("object after 1s");
 }
 
-md5run() async{
+md5run() async {
   print("object in md5run");
   await Future.delayed(Duration(milliseconds: 1000));
   print("object in md5run after 1s");
@@ -88,7 +86,7 @@ async_catch() async {
   }
 }
 
-a_run() async{
+a_run() async {
   print("object");
   await md5run();
   await b_run();
@@ -96,19 +94,22 @@ a_run() async{
 }
 
 void main() {
-
   print(test_list("abc"));
   print(test_list(""));
 
   print(Dt.at);
 
+  var reg_exp = RegExp(r"^\d{1,2}$");
+
+  print(reg_exp.hasMatch("1"));
+
   // Find an element by id (an-id).
   Element idElement = querySelector('#an-id')!;
 
-// Find an element by class (a-class).
+  // Find an element by class (a-class).
   Element classElement = querySelector('.a-class')!;
 
-// Find all elements by tag (<div>).
+  // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
   Map<String, int> test_map = {
@@ -119,13 +120,13 @@ void main() {
 
   // 插入
   test_map["b"] = 2;
-  
+
   // 删除
   test_map.remove("a");
-  
+
   // 修改
   test_map["b"] = 3;
-  
+
   // 查找
   print(test_map["b"]);
   // 遍历
@@ -197,4 +198,3 @@ void main() {
   closuer();
   print(a);
 }
-

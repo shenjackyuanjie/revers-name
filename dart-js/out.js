@@ -1081,6 +1081,23 @@
             applyHooksTransformer: function (transformer, hooks) {
                 return transformer(hooks) || hooks;
             },
+            JSSyntaxRegExp_makeNative: function (source, multiLine, caseSensitive, unicode, dotAll, global) {
+                var m = multiLine ? "m" : "",
+                    i = caseSensitive ? "" : "i",
+                    u = unicode ? "u" : "",
+                    s = dotAll ? "s" : "",
+                    g = global ? "g" : "",
+                    regexp = function (source, modifiers) {
+                        try {
+                            return new RegExp(source, modifiers);
+                        } catch (e) {
+                            return e;
+                        }
+                    }(source, m + i + u + s + g);
+                if (regexp instanceof RegExp)
+                    return regexp;
+                throw H.wrapException(new P.FormatException("Illegal RegExp pattern (" + String(regexp) + ")", source));
+            },
             quoteStringForRegExp: function (string) {
                 if (/[[\]{}()*+?.\\^$|]/.test(string))
                     return string.replace(/[[\]{}()*+?.\\^$|]/g, "\\$&");
@@ -1173,6 +1190,12 @@
             },
             initHooks_closure1: function initHooks_closure1(t0) {
                 this.prototypeForTag = t0;
+            },
+            JSSyntaxRegExp: function JSSyntaxRegExp(t0, t1) {
+                var _ = this;
+                _.pattern = t0;
+                _._nativeRegExp = t1;
+                _._nativeAnchoredRegExp = _._nativeGlobalRegExp = null;
             },
             Rti__getQuestionFromStar: function (universe, rti) {
                 var question = rti._precomputed1;
@@ -3482,6 +3505,9 @@
                     C.JSArray_methods.add$1(list, t1.get$current());
                 return list;
             },
+            RegExp_RegExp: function (source) {
+                return new H.JSSyntaxRegExp(source, H.JSSyntaxRegExp_makeNative(source, false, true, false, false, false));
+            },
             StringBuffer__writeAll: function (string, objects, separator) {
                 var iterator = J.get$iterator$ax(objects);
                 if (!iterator.moveNext$0())
@@ -3588,6 +3614,10 @@
             },
             _Exception: function _Exception(t0) {
                 this.message = t0;
+            },
+            FormatException: function FormatException(t0, t1) {
+                this.message = t0;
+                this.source = t1;
             },
             Iterable: function Iterable() {},
             Iterator: function Iterator() {},
@@ -3780,11 +3810,13 @@
                 return P._asyncStartSync($async$a_run, $async$completer);
             },
             main: function () {
-                var t1, t2, t3, t4, test_map, t5, tr, td, plist, pbody, p, a, i, b,
+                var reg_exp, t1, t2, t3, t4, test_map, t5, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
                 P.print(V.test_list("abc"));
                 P.print(V.test_list(""));
                 P.print($.$get$Dt_at());
+                reg_exp = P.RegExp_RegExp("^\\d{1,2}$");
+                P.print(reg_exp._nativeRegExp.test("1"));
                 t1 = document;
                 t2 = t1.querySelector("#an-id");
                 t2.toString;
@@ -4023,6 +4055,17 @@
     J.JSString.prototype = {
         $add: function (receiver, other) {
             return receiver + other;
+        },
+        substring$2: function (receiver, startIndex, endIndex) {
+            if (endIndex == null)
+                endIndex = receiver.length;
+            if (startIndex < 0)
+                throw H.wrapException(P.RangeError$value(startIndex, null));
+            if (startIndex > endIndex)
+                throw H.wrapException(P.RangeError$value(startIndex, null));
+            if (endIndex > receiver.length)
+                throw H.wrapException(P.RangeError$value(endIndex, null));
+            return receiver.substring(startIndex, endIndex);
         },
         toString$0: function (receiver) {
             return receiver;
@@ -4491,6 +4534,11 @@
             return this.prototypeForTag(H._asString(tag));
         },
         $signature: 7
+    };
+    H.JSSyntaxRegExp.prototype = {
+        toString$0: function (_) {
+            return "RegExp/" + this.pattern + "/" + this._nativeRegExp.flags;
+        }
     };
     H.Rti.prototype = {
         _eval$1: function (recipe) {
@@ -5188,6 +5236,16 @@
             return "Exception: " + this.message;
         }
     };
+    P.FormatException.prototype = {
+        toString$0: function (_) {
+            var message = this.message,
+                report = "" !== message ? "FormatException: " + message : "FormatException",
+                source = this.source;
+            if (source.length > 78)
+                source = C.JSString_methods.substring$2(source, 0, 75) + "...";
+            return report + "\n" + source;
+        }
+    };
     P.Iterable.prototype = {
         any$1: function (_, test) {
             var t1;
@@ -5413,7 +5471,7 @@
             _inherit = hunkHelpers.inherit,
             _inheritMany = hunkHelpers.inheritMany;
         _inherit(P.Object, null);
-        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, P.Iterable, H.ListIterator, P.Iterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H.ExceptionAndStackTrace, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
+        _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, P.Error, P.Iterable, H.ListIterator, P.Iterator, H.TypeErrorDecoder, H.NullThrownFromJavaScriptException, H.ExceptionAndStackTrace, H._StackTrace, H.Closure, P.MapMixin, H.LinkedHashMapCell, H.LinkedHashMapKeyIterator, H.JSSyntaxRegExp, H.Rti, H._FunctionParameters, P._TimerImpl, P._AsyncAwaitCompleter, P.AsyncError, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.Duration, P.StackOverflowError, P._Exception, P.FormatException, P.Null, P._StringStackTrace, P.StringBuffer, W.CssStyleDeclarationBase, W.ImmutableListMixin, W.FixedSizeListIterator]);
         _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, W.EventTarget, W._CssStyleDeclaration_Interceptor_CssStyleDeclarationBase, W.DomException, W.DomTokenList, W._NodeList_Interceptor_ListMixin]);
         _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
         _inherit(J.JSUnmodifiableArray, J.JSArray);
