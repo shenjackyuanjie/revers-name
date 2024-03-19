@@ -4260,7 +4260,7 @@
                 var s = e == null ? J.aw(b) : e
                 return new P.fs(s, !0, a, c, "Index out of range")
             },
-            S(a) {
+            UnsupportedError(a) {
                 return new P.hW(a)
             },
             hT(a) {
@@ -8343,24 +8343,24 @@
     }
     J.JsArray.prototype = {
         j(a, b) {
-            if (!!a.fixed$length) H.G(P.S("add"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("add"))
             a.push(b)
         },
         cu(a, b) {
             var s
-            if (!!a.fixed$length) H.G(P.S("removeAt"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("removeAt"))
             s = a.length
             if (b >= s) throw H.h(P.k0(b, null))
             return a.splice(b, 1)[0]
         },
         co(a, b, c) {
-            if (!!a.fixed$length) H.G(P.S("insert"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("insert"))
             if (b < 0 || b > a.length) throw H.h(P.k0(b, null))
             a.splice(b, 0, c)
         },
         U(a, b) {
             var s
-            if (!!a.fixed$length) H.G(P.S("remove"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("remove"))
             for (s = 0; s < a.length; ++s)
                 if (J.equal(a[s], b)) {
                     a.splice(s, 1)
@@ -8369,7 +8369,7 @@
         },
         a5(a, b) {
             var s, r
-            if (!!a.fixed$length) H.G(P.S("addAll"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("addAll"))
             if (Array.isArray(b)) {
                 this.ea(a, b)
                 return
@@ -8444,7 +8444,7 @@
             return !1
         },
         bb(a, b) {
-            if (!!a.immutable$list) H.G(P.S("sort"))
+            if (!!a.immutable$list) H.G(P.UnsupportedError("sort"))
             H.tJ(a, b == null ? J.bO() : b)
         },
         aJ(a) {
@@ -8476,7 +8476,7 @@
             return a.length
         },
         sp(a, b) {
-            if (!!a.fixed$length) H.G(P.S("set length"))
+            if (!!a.fixed$length) H.G(P.UnsupportedError("set length"))
             if (!H.aP(b)) throw H.h(P.da(b, "newLength", null))
             a.length = b
         },
@@ -8486,7 +8486,7 @@
             return a[b]
         },
         m(a, b, c) {
-            if (!!a.immutable$list) H.G(P.S("indexed set"))
+            if (!!a.immutable$list) H.G(P.UnsupportedError("indexed set"))
             if (!H.aP(b)) throw H.h(H.bQ(a, b))
             if (b >= a.length || b < 0) throw H.h(H.bQ(a, b))
             a[b] = c
@@ -8546,7 +8546,7 @@
             } else if (a >= -2147483648) return a | 0
             r = Math.ceil(a)
             if (isFinite(r)) return r
-            throw H.h(P.S("" + a + ".ceil()"))
+            throw H.h(P.UnsupportedError("" + a + ".ceil()"))
         },
         eW(a) {
             var s, r
@@ -8558,13 +8558,13 @@
             }
             r = Math.floor(a)
             if (isFinite(r)) return r
-            throw H.h(P.S("" + a + ".floor()"))
+            throw H.h(P.UnsupportedError("" + a + ".floor()"))
         },
         aI(a) {
             if (a > 0) {
                 if (a !== 1 / 0) return Math.round(a)
             } else if (a > -1 / 0) return 0 - Math.round(0 - a)
-            throw H.h(P.S("" + a + ".round()"))
+            throw H.h(P.UnsupportedError("" + a + ".round()"))
         },
         k(a) {
             if (a === 0 && 1 / a < 0) return "-0.0"
@@ -8603,7 +8603,7 @@
             if (s > 0) {
                 if (s !== 1 / 0) return Math.floor(s)
             } else if (s > -1 / 0) return Math.ceil(s)
-            throw H.h(P.S("Result of truncating division is " + H.e(s) + ": " + H.e(a) + " ~/ " + b))
+            throw H.h(P.UnsupportedError("Result of truncating division is " + H.e(s) + ": " + H.e(a) + " ~/ " + b))
         },
         bX(a, b) {
             if (typeof b != "number") throw H.h(H.R(b))
@@ -8931,15 +8931,15 @@
     }
     H.du.prototype = {
         sp(a, b) {
-            throw H.h(P.S("Cannot change the length of a fixed-length list"))
+            throw H.h(P.UnsupportedError("Cannot change the length of a fixed-length list"))
         }
     }
     H.hV.prototype = {
         m(a, b, c) {
-            throw H.h(P.S("Cannot modify an unmodifiable list"))
+            throw H.h(P.UnsupportedError("Cannot modify an unmodifiable list"))
         },
         sp(a, b) {
-            throw H.h(P.S("Cannot change the length of an unmodifiable list"))
+            throw H.h(P.UnsupportedError("Cannot change the length of an unmodifiable list"))
         }
     }
     H.cJ.prototype = {}
@@ -11452,7 +11452,7 @@
             return this.a.childNodes.length
         },
         sp(a, b) {
-            throw H.h(P.S("Cannot set length on immutable List."))
+            throw H.h(P.UnsupportedError("Cannot set length on immutable List."))
         },
         h(a, b) {
             return this.a.childNodes[b]
@@ -11478,10 +11478,10 @@
             return a[b]
         },
         m(a, b, c) {
-            throw H.h(P.S("Cannot assign element of immutable List."))
+            throw H.h(P.UnsupportedError("Cannot assign element of immutable List."))
         },
         sp(a, b) {
-            throw H.h(P.S("Cannot resize immutable List."))
+            throw H.h(P.UnsupportedError("Cannot resize immutable List."))
         },
         ai(a, b) {
             return a[b]
@@ -11604,10 +11604,10 @@
             return a[b]
         },
         m(a, b, c) {
-            throw H.h(P.S("Cannot assign element of immutable List."))
+            throw H.h(P.UnsupportedError("Cannot assign element of immutable List."))
         },
         sp(a, b) {
-            throw H.h(P.S("Cannot resize immutable List."))
+            throw H.h(P.UnsupportedError("Cannot resize immutable List."))
         },
         ai(a, b) {
             return a[b]
@@ -11625,10 +11625,10 @@
             return a[b]
         },
         m(a, b, c) {
-            throw H.h(P.S("Cannot assign element of immutable List."))
+            throw H.h(P.UnsupportedError("Cannot assign element of immutable List."))
         },
         sp(a, b) {
-            throw H.h(P.S("Cannot resize immutable List."))
+            throw H.h(P.UnsupportedError("Cannot resize immutable List."))
         },
         gbl(a) {
             var s = a.length
@@ -16265,7 +16265,7 @@
                             k = H.set_run_time_type_info(n.slice(0), m)
                             e.d = k
                             n = H.set_run_time_type_info(n.slice(0), m)
-                            if (!!n.immutable$list) H.G(P.S("sort"))
+                            if (!!n.immutable$list) H.G(P.UnsupportedError("sort"))
                             m = n.length - 1
                             if (m - 0 <= 32) H.ej(n, 0, m, T.mD())
                             else H.ei(n, 0, m, T.mD())
@@ -16810,7 +16810,7 @@
             for (s = $.Z(); s < $.d1(); s += $.B()) {
                 r = o.q
                 q = C.Array.al(o.t, s, s + $.B())
-                if (!!q.immutable$list) H.G(P.S("sort"))
+                if (!!q.immutable$list) H.G(P.UnsupportedError("sort"))
                 p = q.length - 1
                 if (p - 0 <= 32) H.ej(q, 0, p, J.bO())
                 else H.ei(q, 0, p, J.bO())
@@ -16909,7 +16909,7 @@
                 if (!(n < $.aR() && n < o.k2.length)) break
                 s = o.k2[n]
                 r = C.Array.al(a, m, m + $.C())
-                if (!!r.immutable$list) H.G(P.S("sort"))
+                if (!!r.immutable$list) H.G(P.UnsupportedError("sort"))
                 q = r.length - 1
                 if (q - 0 <= 32) H.ej(r, 0, q, J.bO())
                 else H.ei(r, 0, q, J.bO())
@@ -16918,7 +16918,7 @@
                 r = $.a()
                 if (p > r) {
                     r = C.Array.al(b, m, m + $.C())
-                    if (!!r.immutable$list) H.G(P.S("sort"))
+                    if (!!r.immutable$list) H.G(P.UnsupportedError("sort"))
                     q = r.length - 1
                     if (q - 0 <= 32) H.ej(r, 0, q, J.bO())
                     else H.ei(r, 0, q, J.bO())
@@ -17198,7 +17198,7 @@
                 s = H.set_run_time_type_info([], t.i)
                 for (r = $.Z(); r < $.d1(); r += $.B()) {
                     q = C.Array.al(o.E, r, r + $.B())
-                    if (!!q.immutable$list) H.G(P.S("sort"))
+                    if (!!q.immutable$list) H.G(P.UnsupportedError("sort"))
                     p = q.length - 1
                     if (p - 0 <= 32) H.ej(q, 0, p, J.bO())
                     else H.ei(q, 0, p, J.bO())
