@@ -1,6 +1,3 @@
-function output(...args){
-    return
-}
 (function dartProgram() {
     function copyProperties(a, b) {
         var s = Object.keys(a)
