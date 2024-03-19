@@ -12291,9 +12291,9 @@
             var async_goto = 0,
                 async_completer = P.make_async_await_completer(t.d),
                 q, p = this,
-                o, n, m, l, k, j, i, h, g, f, e, d
-            var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.async_rethrow(b, async_completer)
+                o, n, m, l, k, j, i, h, g, lang_data, e, d
+            var $async$O = P.wrap_js_function_for_async(function (async_error_code, async_result) {
+                if (async_error_code === 1) return P.async_rethrow(async_result, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         d = p.x
@@ -12318,8 +12318,8 @@
                         async_goto = 5
                         return P.async_await(T.c2(h), $async$O)
                     case 5:
-                        g = b
-                        f = null
+                        g = async_result
+                        lang_data = null
                     case 6:
                         // if (!!0) {
                         //     s = 8
@@ -12328,17 +12328,18 @@
                         async_goto = 9
                         return P.async_await(g.O(), $async$O)
                     case 9:
-                        e = b
+                        e = async_result
                         if (e == null) {
                             async_goto = 8
                             break
                         }
                     case 7:
-                        f = e
+                        lang_data = e
                         async_goto = 6
                         break
                     case 8:
-                        if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
+                        // if (C.Array.w(o, n.a(lang_data.a[0]).e.gb2())) {
+                        if (o.includes(n.a(lang_data.a[0]).e.gb2())) {
                             ++p.win_count
                         };
                         ++i;
