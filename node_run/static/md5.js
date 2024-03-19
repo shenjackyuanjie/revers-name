@@ -7927,14 +7927,18 @@
                 H.mq(q, 0, null)
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
-                return new Uint32Array(q, 0, r)[1]
+                let result = new Uint32Array(q, 0, r)[1]
+                output(a, b, result)
+                return result
             },
             D(a, b) {
                 var s, r, q = new Uint8Array(H.on(X.f4(a, b))).buffer
                 H.mq(q, 0, null)
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
-                return new Float32Array(q, 0, r)[1]
+                let result = new Uint32Array(q, 0, r)[1]
+                output(a, b, result)
+                return result
             },
             je: function je() {},
             j9: function j9() {},
