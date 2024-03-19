@@ -5403,7 +5403,7 @@
                         $.vq = r.length > s && C.String.a8(r, s) === $.q0() ? $.pE() : $.mS()
                         return a1
                     }
-                    if ($.nr().index_get(0, a4)) {
+                    if ($.nr().J(0, a4)) {
                         s = $.cl()
                         r = $.nr().h(0, a4)
                         q = $.a()
