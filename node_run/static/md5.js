@@ -3365,7 +3365,7 @@
             async_return(a, b) {
                 b.bM(0, a)
             },
-            ai(a, b) {
+            async_rethrow(a, b) {
                 b.cj(H.unwrap_Exception(a), H.get_trace_from_exception(a))
             },
             await_on_object(a, b) {
@@ -4568,7 +4568,7 @@
                         case 1:
                             return P.async_return(q, async_completer)
                         case 2:
-                            return P.ai(async_result_1, async_completer)
+                            return P.async_rethrow(async_result_1, async_completer)
                     }
                 })
                 return P.async_start_sync($async$iE, async_completer)
@@ -5790,7 +5790,7 @@
                     r = P.make_async_await_completer(t.eF),
                     q, p, o, n, m, l, k, j, i, h
                 var $async$c2 = P.wrap_js_function_for_async(function (b, c) {
-                    if (b === 1) return P.ai(c, r)
+                    if (b === 1) return P.async_rethrow(c, r)
                     while (true) switch (s) {
                         case 0:
                             k = t.eV
@@ -7981,7 +7981,7 @@
                     r = P.make_async_await_completer(t.z),
                     q, p
                 var $async$jv = P.wrap_js_function_for_async(function (a, b) {
-                    if (a === 1) return P.ai(b, r)
+                    if (a === 1) return P.async_rethrow(b, r)
                     while (true) switch (switch_branch) {
                         case 0:
                             Sgls.tw()
@@ -12292,7 +12292,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, async_completer)
+                if (a === 1) return P.async_rethrow(b, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         d = p.x
@@ -12394,7 +12394,7 @@
                 q = this,
                 p, o, n, m, l
             var $async$ae = P.wrap_js_function_for_async(function (c, d) {
-                if (c === 1) return P.ai(d, r)
+                if (c === 1) return P.async_rethrow(d, r)
                 while (true) switch (s) {
                     case 0:
                         q.Q = b
@@ -12507,7 +12507,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4
             var $async$O = P.wrap_js_function_for_async(function (a5, a6) {
-                if (a5 === 1) return P.ai(a6, async_completer)
+                if (a5 === 1) return P.async_rethrow(a6, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         a4 = p.y
@@ -12643,7 +12643,7 @@
                 q = this,
                 p, o, n, m, l
             var $async$ae = P.wrap_js_function_for_async(function (c, d) {
-                if (c === 1) return P.ai(d, r)
+                if (c === 1) return P.async_rethrow(d, r)
                 while (true) switch (s) {
                     case 0:
                         q.cx = b
@@ -12737,7 +12737,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         e = p.b
@@ -13050,7 +13050,7 @@
                 q, p = this,
                 o
             var $async$b4 = P.wrap_js_function_for_async(function (async_error_code, async_result) {
-                if (async_error_code === 1) return P.ai(async_result, async_completer)
+                if (async_error_code === 1) return P.async_rethrow(async_result, async_completer)
                 while (true) switch (async_goto) {
                     case 0:
                         p.d = null
@@ -13326,7 +13326,7 @@
                 q = this,
                 p, o, n
             var $async$$0 = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         n = t.z
@@ -16164,7 +16164,7 @@
                 q, p = this,
                 o, n, m, l, k, j, i, h, g, f, e, d, c, b, a, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, b0, b1, b2, b3
             var $async$bD = P.wrap_js_function_for_async(function (b4, b5) {
-                if (b4 === 1) return P.ai(b5, r)
+                if (b4 === 1) return P.async_rethrow(b5, r)
                 while (true) switch (s) {
                     case 0:
                         b3 = H.set_run_time_type_info([], t.V)
@@ -16307,7 +16307,7 @@
             var s = 0,
                 r = P.make_async_await_completer(t.z)
             var $async$bE = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         s = 2
@@ -16339,7 +16339,7 @@
                 o = this,
                 n, m, l, k, j, i, h, g, f
             var $async$O = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) $async$outer: switch (s) {
                     case 0:
                         if (o.cx) {
@@ -16782,7 +16782,7 @@
                 r = P.make_async_await_completer(t.z),
                 q = this
             var $async$cg = P.wrap_js_function_for_async(function (a, b) {
-                if (a === 1) return P.ai(b, r)
+                if (a === 1) return P.async_rethrow(b, r)
                 while (true) switch (s) {
                     case 0:
                         q.az()
