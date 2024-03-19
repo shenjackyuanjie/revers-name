@@ -78,7 +78,7 @@ const cqd_name_list = [
 	'U>7D3Ol7uWKIfTC@XJ联队'
 ]
 
-function createJSDOMForOpponent(opponent, name, mode, testString, config, localStorageMock, path, results) {
+function createJSDOMForOpponent(input_str,mode,config,results) {
 	return new Promise((resolve) => {
 		new JSDOM(fs.readFileSync(path.join(__dirname, 'static/md5.html'), 'utf-8'), {
 			url: 'file://' + path.join(__dirname, 'static/'),
@@ -87,7 +87,7 @@ function createJSDOMForOpponent(opponent, name, mode, testString, config, localS
 			beforeParse(window) {
 				window.FakelocalStorage = localStorageMock;
 				window.config = config[mode].thresholds;
-				window.name_input = testString[mode].replace(/\$name1/g, name).replace(/\$name2/g, opponent);
+				window.name_input = input_str;
 				window.stage = 0;
 				window.skillData = [];
 				window.resolve = (...args) => {
@@ -102,9 +102,17 @@ function createJSDOMForOpponent(opponent, name, mode, testString, config, localS
 		});
 	});
 }
+
+function calcAvg(arr) {
+	// 使用reduce方法计算总和
+	const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+	// 计算平均值
+	const average = sum / arr.length;
+	return average;
+  }
+
 console.log(chalk`{gray child {bold ${id}} started.}`);
 process.on('message', ([mode, name]) => {
-
 	try {
 		console.log(chalk`{magentaBright [${id}] ${name} ${mode} started.}`)
 		if (mode != "CQD") {
@@ -133,11 +141,16 @@ process.on('message', ([mode, name]) => {
 				for (let i = 0; i < cqd_name_list.length; i++) {
 					var opponent = cqd_name_list[i];
 					// 等待当前的JSDOM操作完成
-					await createJSDOMForOpponent(opponent, name, mode, testString, config, localStorageMock, path, results);
+					await createJSDOMForOpponent(testString[mode].replace(/\$name1/g, name).replace(/\$name2/g, opponent),mode,config,results);
 				}
+				var score=parseFloat(calcAvg(results).toFixed(2))
+				if(score<config[mode].thresholds[0].score)
+					process.send([false,[],score,config[mode].thresholds[0].count])
+				else
+					process.send([true,[],score])
 			})();
 
-			console.log(results)
+			
 		}
 	} catch (e) {
 		console.error(e);
