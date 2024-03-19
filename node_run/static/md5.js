@@ -3213,7 +3213,7 @@
             JsBool: function fw() {},
             JsNull: function cs() {},
             JavaScriptObject: function bE() {},
-            fO: function fO() {},
+            PlainJavaScriptObject: function fO() {},
             UnknownJavaScriptObject: function bs() {},
             JavaScriptFunction: function bn() {},
             JsArray: function E(a) {
@@ -8332,7 +8332,7 @@
         },
         $inM: 1
     }
-    J.fO.prototype = {}
+    J.PlainJavaScriptObject.prototype = {}
     J.UnknownJavaScriptObject.prototype = {}
     J.JavaScriptFunction.prototype = {
         k(a) {
@@ -18666,7 +18666,7 @@
         inherit(P.Object, null)
         inherit_may(P.Object, [H.Js_Const, J.Interceptor, J.ArrayIterator, P.Error, P.ev, P.L, H.cv, P.fv, H.du, H.hV, H.kh, H.jR, H.dt, H.eE, H.c_, P.aU, H.jK, H.fA, H.ct, H.ew, H.kz, H.bK, H.l3, H.Rti, H.function_parameters, H.iu, P.l8, P.i_, P.AsyncError, P.i4, P.cN, P.U, P.i0, P.em, P.hO, P.hP, P.im, P.i1, P.i3, P.i7, P.ii, P.io, P.lf, P.eM, P.kV, P.ie, P.z, P.dY, P.fg, P.js, P.lc, P.lb, P.dq, P.c1, P.fM, P.el, P.kG, P.jm, P.N, P.iq, P.cH, W.j8, W.m5, W.cP, W.cr, W.dN, W.eD, W.is, W.dv, W.kE, W.l_, W.ix, P.l4, P.kw, P.eJ, P.jQ, P.kT, Y.dW, L.iR, V.iV, X.iW, S.fK, HtmlRenderer.fq, HtmlRenderer.jT, HtmlRenderer.ax, Sgls.a_, Sgls.n, T.x, T.u, T.dk, T.fo, T.b7, T.fr, T.bB, T.bm, T.aX, T.aq, T.bG, T.bL, T.fl])
         inherit_may(J.Interceptor, [J.JsBool, J.JsNull, J.JavaScriptObject, J.JsArray, J.JsNumber, J.JsString, H.dJ, H.ab, W.fn, W.bX, W.fe, W.i6, W.bb, W.ja, W.jb, W.o, W.c4, W.jL, W.ig, W.il, W.iy, W.iA])
-        inherit_may(J.JavaScriptObject, [J.fO, J.UnknownJavaScriptObject, J.JavaScriptFunction])
+        inherit_may(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction])
         inherit(J.jG, J.JsArray)
         inherit_may(J.JsNumber, [J.JsInt, J.JsDouble])
         inherit_may(P.Error, [H.fz, H.dO, P.bc, H.fx, H.hU, H.h3, H.i9, P.f2, P.fL, P.aS, P.hW, P.hS, P.bJ, P.fh, P.fj])
@@ -18941,7 +18941,7 @@
         C.String = J.JsString.prototype
         C.K = J.JavaScriptFunction.prototype
         C.Q = W.dQ.prototype
-        C.t = J.fO.prototype
+        C.t = J.PlainJavaScriptObject.prototype
         C.R = W.ek.prototype
         C.j = W.ce.prototype
         C.u = W.en.prototype
