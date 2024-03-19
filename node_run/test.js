@@ -40,7 +40,7 @@ async function test(str) {
         beforeParse(window) {
             window.FakelocalStorage = localStorageMock;
             window.config = [{
-                "count": 12000,
+                "count": 10000,
                 "score": 10
             }];
             window.name_input = str;

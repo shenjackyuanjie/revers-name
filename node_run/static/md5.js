@@ -1978,9 +1978,9 @@
                 H.oo(a, s)
             },
             oo(a, b) {
-                throw H.h(H.u_(H.ob(a, H.oE(a, b), H.rti_to_string(b, null))))
+                throw H.h(H.u_(H.error_compose(a, H.oE(a, b), H.rti_to_string(b, null))))
             },
-            ob(a, b, c) {
+            error_compose(a, b, c) {
                 var s = P.jh(a),
                     r = H.rti_to_string(b == null ? H.b_(a) : b, null)
                 return s + ": type '" + H.e(r) + "' is not a subtype of type '" + H.e(c) + "'"
@@ -1989,7 +1989,7 @@
                 return new H.eI("TypeError: " + a)
             },
             aC(a, b) {
-                return new H.eI("TypeError: " + H.ob(a, null, b))
+                return new H.eI("TypeError: " + H.error_compose(a, null, b))
             },
             uq(a) {
                 return a != null
@@ -3284,7 +3284,7 @@
             get_obfuscated_value(a) {
                 var result = $.hashmap_str_str.h(0, a)
                 if (result == null) return ""
-                output("get_obfuscated_value: ", a, result)
+                // output("get_obfuscated_value: ", a, result)
                 return result
             },
             out_load_lan(a) {
@@ -7935,7 +7935,7 @@
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
                 let result = new Uint32Array(q, 0, r)[1]
-                output("X.k", a, b, result)
+                // output("X.k", a, b, result)
                 return result
             },
             D(a, b) {
@@ -7944,7 +7944,7 @@
                 s = q.byteLength
                 r = C._JsInt.ag(s - 0, 4)
                 let result = new Uint32Array(q, 0, r)[1]
-                output("X.D", a, b, result)
+                // output("X.D", a, b, result)
                 return result
             },
             je: function je() {},
@@ -12362,9 +12362,9 @@
                         // Array.w(a, b) -> a.includes(b)
                         // if (C.Array.w(o, n.a(f.a[0]).e.gb2())) {
                         // f.a[0] == [2]获得胜利
-                        if (lang_data.a[0] != "[2]获得胜利") {
-                            output("警告, 不等")
-                        }
+                        // if (lang_data.a[0] != "[2]获得胜利") {
+                            // output("警告, 不等")
+                        // }
                         if (o.includes(n.a(lang_data.a[0]).e.gb2())) {
                             ++p.win_count
                         };
