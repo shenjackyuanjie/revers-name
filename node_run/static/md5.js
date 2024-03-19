@@ -3102,7 +3102,7 @@
                 if (typeof a != "object") return b != null && a === b
                 return J.get_interceptor(a).aW(a, b)
             },
-            J(a, b) {
+            index_get(a, b) {
                 if (typeof b === "number")
                     if (a.constructor == Array || typeof a == "string" || H.oG(a, a[v.dispatchPropertyName]))
                         if (b >>> 0 === b && b < a.length) return a[b]
@@ -4473,12 +4473,12 @@
 
                             // $.qc -> !test!
                             // 猜测: 
-                            // J.J(a, b) -> a[b]
+                            // J.index_get(a, b) -> a[b]
                             // J.equal(a, b) -> a === b
 
                             // if 翻译:
                             // if (parsed_names[0][0][0] === $.qc()) {
-                            // if (J.equal(J.J(J.J(parsed_names, 0)[0], 0), $.qc())) {
+                            // if (J.equal(J.index_get(J.index_get(parsed_names, 0)[0], 0), $.qc())) {
                             // 这里在判定 第一组 第一个元素的第一个元素是否等于 $.qc() (即 !test!)
                             if (parsed_names[0][0][0] === $.qc()) {
                                 $.vr = 6
@@ -4486,8 +4486,8 @@
                                 // if (J.aw(parsed_names) === 2)
                                 if (parsed_names.length === 2) {
                                     // ???
-                                    if (J.J(parsed_names, 1).length > 10 || J.lW(J.J(J.J(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
-                                        // a8 = J.J(parsed_names, 1)
+                                    if (J.index_get(parsed_names, 1).length > 10 || J.lW(J.index_get(J.index_get(parsed_names, 1)[0], 0), LanData.j("S,AF", 5))) {
+                                        // a8 = J.index_get(parsed_names, 1)
                                         a8 = parsed_names[1]
                                         a9 = H.set_run_time_type_info([], t.t)
                                         d = new X.iW(a9, new Float64Array(1))
@@ -4502,13 +4502,13 @@
                                         // $.nk -> \u0002
                                         e = $.nk()
                                         // $.cl -> !
-                                        // if (J.J(parsed_names, 0).length === 2 && J.equal(J.J(J.J(parsed_names, 0)[1], 0), $.cl())) {
+                                        // if (J.index_get(parsed_names, 0).length === 2 && J.equal(J.index_get(J.index_get(parsed_names, 0)[1], 0), $.cl())) {
                                         //     e = $.cl()
                                         // }
                                         if (parsed_names[0].length === 2 && parsed_names[0][1][0] === $.cl()) {
                                             e = $.cl()
                                         }
-                                        a8 = J.J(parsed_names, 1)
+                                        a8 = J.index_get(parsed_names, 1)
                                         a9 = e
                                         a3 = H.set_run_time_type_info([], t.L)
                                         a4 = H.set_run_time_type_info([], t.V)
@@ -4525,8 +4525,8 @@
                                     }
                                 } else if (parsed_names.length === 3) {
                                     // if (J.aw(parsed_names) === 3) {
-                                    // a8 = J.J(parsed_names, 1)
-                                    // a9 = J.J(parsed_names, 2)
+                                    // a8 = J.index_get(parsed_names, 1)
+                                    // a9 = J.index_get(parsed_names, 2)
                                     a8 = parsed_names[1]
                                     a9 = parsed_names[2]
                                     a3 = t.L
@@ -5402,7 +5402,7 @@
                         $.vq = r.length > s && C.String.a8(r, s) === $.q0() ? $.pE() : $.mS()
                         return a1
                     }
-                    if ($.nr().J(0, a4)) {
+                    if ($.nr().index_get(0, a4)) {
                         s = $.cl()
                         r = $.nr().h(0, a4)
                         q = $.a()
@@ -7870,17 +7870,17 @@
                             r -= 14
                         }
                         n = p + 1
-                        l[p] = J.J($.iM(), C._JsInt.V(q, 93))
+                        l[p] = J.index_get($.iM(), C._JsInt.V(q, 93))
                         p = n + 1
-                        l[n] = J.J($.iM(), q / 93 | 0)
+                        l[n] = J.index_get($.iM(), q / 93 | 0)
                     }
                 }
                 if (r > 0) {
                     n = p + 1
-                    l[p] = J.J($.iM(), C._JsInt.V(s, 93))
+                    l[p] = J.index_get($.iM(), C._JsInt.V(s, 93))
                     if (r > 7 || s > 92) {
                         p = n + 1
-                        l[n] = J.J($.iM(), s / 93 | 0)
+                        l[n] = J.index_get($.iM(), s / 93 | 0)
                     } else p = n
                 }
                 C.Array.sp(l, p)
@@ -7892,7 +7892,7 @@
                 for (s = J.aQ(a), r = 0, q = 0, p = -1, o = 0, n = 0; n < j; ++n) {
                     m = s.a8(a, n)
                     if (m > 126) continue
-                    l = J.J($.oS(), m)
+                    l = J.index_get($.oS(), m)
                     if (l === 93) continue
                     if (p === -1) p = l
                     else {
@@ -11804,7 +11804,7 @@
                 r = s.c + 1,
                 q = s.b
             if (r < q) {
-                s.d = J.J(s.a, r)
+                s.d = J.index_get(s.a, r)
                 s.c = r
                 return !0
             }
@@ -12482,7 +12482,7 @@
         dZ(a, b) {
             var s, r, q, p, o, n, m, l = this,
                 k = l.b
-            if (k.length === 2 && J.equal(J.J(k[0], 0), J.J(k[1], 0)) && J.equal(J.J(k[0], 1), J.J(k[1], 1))) {
+            if (k.length === 2 && J.equal(J.index_get(k[0], 0), J.index_get(k[1], 0)) && J.equal(J.index_get(k[0], 1), J.index_get(k[1], 1))) {
                 k.pop()
                 l.c = !0
             }
@@ -12977,7 +12977,7 @@
             n = P.aa(new H.y(H.set_run_time_type_info(C.P_kj.bt(0, P.aa(new H.y(new H.a9(r, q), new HtmlRenderer.jx(a), p), !0, p.i("M.E"))).split("\n"), t.s), new HtmlRenderer.jy(), o), !0, o.i("M.E"))
             r = n.length
             if (r > 1) {
-                if (!J.equal(J.J(J.J(n[0], 0), 0), "")) {
+                if (!J.equal(J.index_get(J.index_get(n[0], 0), 0), "")) {
                     for (m = 0; m < n.length; n.length === r || (0, H.F)(n), ++m) {
                         l = n[m]
                         q = J.a3(l)
@@ -13006,7 +13006,7 @@
                         g = k[m]
                         f = document.createElement("p")
                         f.classList.add("row")
-                        f.textContent = J.J(g, 1)
+                        f.textContent = J.index_get(g, 1)
                         p.appendChild(f)
                     }
                 }
@@ -13028,9 +13028,9 @@
             } else {
                 e = n[0]
                 r = J.a3(e)
-                q = J.J(r.h(e, 0), 0)
+                q = J.index_get(r.h(e, 0), 0)
                 r = r.h(e, 1)
-                d = J.J(r, 0)
+                d = J.index_get(r, 0)
                 if (!$.ay.J(0, d)) {
                     c = $.ay.h(0, q)
                     b = HtmlRenderer.t8(c.a, r, !1)
@@ -13239,7 +13239,7 @@
         //     d = h.style
         //     c = "" + (C.Number.aI(m.offsetWidth) - C.Number.aI(h.offsetWidth) - 8) + "px"
         //     d.marginLeft = c
-        //     if (W.ll(window.parent) !== window) new HtmlRenderer.post_message(f, p, o, n, $.ay.h(0, J.J(J.J(f.z[0], 0), 0))).$0()
+        //     if (W.ll(window.parent) !== window) new HtmlRenderer.post_message(f, p, o, n, $.ay.h(0, J.index_get(J.index_get(f.z[0], 0), 0))).$0()
         // }
     }
     HtmlRenderer.jx.prototype = {
@@ -13484,7 +13484,7 @@
     }
     HtmlRenderer.jV.prototype = {
         $1(a) {
-            return HtmlRenderer.replace_add_str(J.J(this.b, this.a.a++))
+            return HtmlRenderer.replace_add_str(J.index_get(this.b, this.a.a++))
         },
         $S: 17
     }
@@ -13605,12 +13605,12 @@
                 } else s = !1
             else s = !1
             if (s) return !0
-            if (J.J(J.J($.nv(), a), p.b) < 90) return !1
+            if (J.index_get(J.index_get($.nv(), a), p.b) < 90) return !1
             for (s = o.length, r = 0; r < s; ++r)
                 if (o[r] === a) return !0
             for (r = 0; r < o.length; o.length === s || (0, H.F)(o), ++r) {
                 q = o[r]
-                if (J.J(J.J($.nv(), a), q) < 90) return !1
+                if (J.index_get(J.index_get($.nv(), a), q) < 90) return !1
             }
             return !0
         },
