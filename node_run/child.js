@@ -77,27 +77,31 @@ const cqd_name_list = [
 	'Iwn<Zo@nan',
 	'U>7D3Ol7uWKIfTC@XJ联队'
 ]
+
 function createJSDOMForOpponent(opponent, name, mode, testString, config, localStorageMock, path, results) {
 	return new Promise((resolve) => {
-	  new JSDOM(fs.readFileSync(path.join(__dirname, 'static/md5.html'), 'utf-8'), {
-		url: 'file://' + path.join(__dirname, 'static/'),
-		runScripts: 'dangerously',
-		resources: 'usable',
-		beforeParse(window) {
-		  window.FakelocalStorage = localStorageMock;
-		  window.config = config[mode].thresholds;
-		  window.name_input = testString[mode].replace(/\$name1/g, name).replace(/\$name2/g, opponent);
-		  window.stage = 0;
-		  window.skillData = [];
-		  window.resolve = (...args) => {
-			results.push(args[2]);
-			window.close();
-			resolve(); // 解决Promise，表示当前JSDOM操作完成
-		  }
-		}
-	  });
+		new JSDOM(fs.readFileSync(path.join(__dirname, 'static/md5.html'), 'utf-8'), {
+			url: 'file://' + path.join(__dirname, 'static/'),
+			runScripts: 'dangerously',
+			resources: 'usable',
+			beforeParse(window) {
+				window.FakelocalStorage = localStorageMock;
+				window.config = config[mode].thresholds;
+				window.name_input = testString[mode].replace(/\$name1/g, name).replace(/\$name2/g, opponent);
+				window.stage = 0;
+				window.skillData = [];
+				window.resolve = (...args) => {
+					results.push(args[2]);
+					window.close();
+					resolve(); // 解决Promise，表示当前JSDOM操作完成
+				};
+				window.output = (...message) => {
+					console.log('page:', message);
+				};
+			}
+		});
 	});
-  }
+}
 console.log(chalk`{gray child {bold ${id}} started.}`);
 process.on('message', ([mode, name]) => {
 
@@ -123,16 +127,16 @@ process.on('message', ([mode, name]) => {
 					};
 				}
 			});
-		}else if(mode == "CQD"){
-			var results=[];
+		} else if (mode == "CQD") {
+			var results = [];
 			(async () => {
 				for (let i = 0; i < cqd_name_list.length; i++) {
-				  var opponent = cqd_name_list[i];
-				  // 等待当前的JSDOM操作完成
-				  await createJSDOMForOpponent(opponent, name, mode, testString, config, localStorageMock, path, results);
+					var opponent = cqd_name_list[i];
+					// 等待当前的JSDOM操作完成
+					await createJSDOMForOpponent(opponent, name, mode, testString, config, localStorageMock, path, results);
 				}
-			  })();
-			  
+			})();
+
 			console.log(results)
 		}
 	} catch (e) {
