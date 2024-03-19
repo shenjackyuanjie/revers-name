@@ -1411,21 +1411,22 @@
             cT(a, b) {
                 return a(b) || b
             },
-            m7(a, b, c, d, e, f) {
-                var s = b ? "m" : "",
-                    r = c ? "" : "i",
-                    q = d ? "u" : "",
-                    p = e ? "s" : "",
-                    o = f ? "g" : "",
-                    n = function (g, h) {
+            js_synatax_regexp_make_native(source, multline, cast_sensitive, unicode, dot_all, global) {
+                var s = multline ? "m" : "",
+                    r = cast_sensitive ? "" : "i",
+                    q = unicode ? "u" : "",
+                    p = dot_all ? "s" : "",
+                    o = global ? "g" : "",
+                    n = function (source, modifiers) {
                         try {
-                            return new RegExp(g, h)
-                        } catch (m) {
-                            return m
+                            return new RegExp(source, modifiers)
+                        } catch (e) {
+                            return e
                         }
-                    }(a, s + r + q + p + o)
-                if (n instanceof RegExp) return n
-                throw H.h(P.jn("Illegal RegExp pattern (" + String(n) + ")", a, null))
+                    }(source, s + r + q + p + o)
+                if (n instanceof RegExp)
+                    return n;
+                throw H.h(P.jn("Illegal RegExp pattern (" + String(n) + ")", source, null))
             },
             iF(a, b, c) {
                 var s
@@ -4182,7 +4183,7 @@
                 return H.nZ(p)
             },
             h_(a) {
-                return new H.ct(a, H.m7(a, !1, !0, !1, !1, !1))
+                return new H.ct(a, H.js_synatax_regexp_make_native(a, false, true, false, false, false))
             },
             o7(a, b, c) {
                 var s = J.by(b)
@@ -9324,14 +9325,14 @@
                 r = s.c
             if (r != null) return r
             r = s.b
-            return s.c = H.m7(s.a, r.multiline, !r.ignoreCase, r.unicode, r.dotAll, !0)
+            return s.c = H.js_synatax_regexp_make_native(s.a, r.multiline, !r.ignoreCase, r.unicode, r.dotAll, !0)
         },
         gep() {
             var s = this,
                 r = s.d
             if (r != null) return r
             r = s.b
-            return s.d = H.m7(s.a + "|()", r.multiline, !r.ignoreCase, r.unicode, r.dotAll, !0)
+            return s.d = H.js_synatax_regexp_make_native(s.a + "|()", r.multiline, !r.ignoreCase, r.unicode, r.dotAll, !0)
         },
         eU(a) {
             var s
