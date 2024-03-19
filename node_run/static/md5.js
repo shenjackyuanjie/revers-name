@@ -1,3 +1,6 @@
+function output(...args){
+    return
+}
 (function dartProgram() {
     function copyProperties(a, b) {
         var s = Object.keys(a)
@@ -12391,7 +12394,7 @@
                         q = new T.aq(n, l)
 
                         // 当前场次, 目标场次, 胜率
-                        output(p.current_count, p.target_count, p.win_count * 100 / p.current_count)
+                        //output(p.current_count, p.target_count, p.win_count * 100 / p.current_count)
                         // debug 用, 留着吧
 
                         //捕获胜率
