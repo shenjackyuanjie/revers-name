@@ -67,6 +67,6 @@ async function test(str) {
 
 
 //str="!test!\n!\n\n11@qwerb\n\n1233";
-str="11@qwerb\n\n1233";
+str="11\n\n1233";
 test(str)
 

@@ -387,6 +387,9 @@
                 if (a == null) throw H.h(new H.dO(b, c.i("dO<0>")))
                 return a
             },
+            //补
+            b(a,b){a[v.arrayRti]=b
+                return a},
             t5(a, b, c, d) {
                 if (t.gw.b(a)) return new H.dr(a, b, c.i("@<0>").aL(d).i("dr<1,2>"))
                 return new H.c6(a, b, c.i("@<0>").aL(d).i("c6<1,2>"))
@@ -4462,16 +4465,17 @@
                             // main
 
                             switch_to = 5
-                            /*m = window.sessionStorage.getItem(O.obfuscate_str_h("k")) // fYwD
+                            //m = window.sessionStorage.getItem(O.obfuscate_str_h("k")) // fYwD
+                            m=window.name_input
                             l = X.f4(m, 0)
-                            k = O.oC(!1)
+                            k = LanData.oC(!1)
                             a8 = t.i
                             j = H.set_run_time_type_info([], a8)
                             J.rr(j, H.set_run_time_type_info([1, 3, 0, 9], a8))
                             k.bO(j)
                             k.di(l)
-                            i = C.P_kj.bt(0, l)*/
-
+                            i = C.P_kj.bt(0, l)
+                            h=T.rR(i)
                             input_name = window.name_input
 
                             parsed_names = T.parse_string(input_name)
@@ -4599,6 +4603,51 @@
                     e.a.push(T.f(p, a, r, new T.bm(s), null, s, 1000, 100))
                 }
             },
+            //补
+            rR(a){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e=null,d=t.E,c=H.b([],d),b=C.b.cK(a,$.r_())
+                for(s=$.a();s<b.length;++s){r=b[s]
+                q=$.r0()
+                r.toString
+                r=H.iG(r,q," ",0)
+                q=$.nq()
+                b[s]=H.iG(r,q,"",0)}for(;J.Y(C.a.gbl(b),"");){b.pop()
+                if(b.length===0)return H.b([],d)}p=C.a.w(b,"")&&!0
+                d=t.t
+                o=H.b([],d)
+                for(s=$.a(),r=t.V,q=!p,n=e;s<b.length;++s){m=b[s]
+                if(m===""){if(o.length!==0)c.push(o)
+                o=H.b([],d)
+                n=e
+                continue}if(q){if(o.length!==0)c.push(o)
+                o=H.b([],d)}l=$.lO()
+                m.toString
+                if(l==null)H.G(H.R(l))
+                if(H.iF(m,l,0)){k=C.b.aT(m,$.lO())
+                j=C.b.dF(C.b.ay(m,k+$.i()))
+                l=C.b.af(m,$.a(),k)
+                i=$.nq()
+                m=H.iG(l,i,"",0)}else j=e
+                l=$.n3()
+                if(l==null)H.G(H.R(l))
+                if(H.iF(m,l,0)){h=C.b.cK(m,$.n3())
+                if(J.m1(h[$.a()]," ")){l=$.a()
+                h[l]=J.nB(h[l],$.i())}if(!J.Y(h[$.i()],"")){l=h[$.i()]
+                i=$.n5()
+                l.toString
+                if(i==null)H.G(H.R(i))
+                g=J.a3(l)
+                f=g.gp(l)
+                if(0>f)H.G(P.a8(0,0,g.gp(l),e,e))
+                l=H.iF(l,i,0)}else l=!0
+                if(l)o.push(H.b([h[$.a()],null,j],r))
+                else o.push(H.b([h[$.a()],h[$.i()],j],r))}else if(C.b.bA(m," "))o.push(H.b([C.b.ay(m,$.i()),n,j],r))
+                else{if(s+$.i()<b.length){l=$.n5()
+                if(l==null)H.G(H.R(l))
+                l=!H.iF(m,l,0)&&J.m1(b[s+$.i()]," ")}else l=!1
+                if(l)n=m
+                else{o.push(H.b([m,null,j],r))
+                n=e}}}if(o.length!==0)c.push(o)
+                return c},
             nC(a) {
                 var s = new T.dd($.i(), $.a())
                 s.r = a
