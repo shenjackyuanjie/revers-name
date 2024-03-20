@@ -4465,6 +4465,7 @@
                             // main
 
                             switch_to = 5
+                            /*
                             //m = window.sessionStorage.getItem(O.obfuscate_str_h("k")) // fYwD
                             m=window.name_input
                             l = X.f4(m, 0)
@@ -4476,6 +4477,7 @@
                             k.di(l)
                             i = C.P_kj.bt(0, l)
                             h=T.rR(i)
+                            */
                             input_name = window.name_input
 
                             parsed_names = T.parse_string(input_name)
@@ -4559,7 +4561,7 @@
                             return P.async_await(T.c2(parsed_names), $async$iE)
                         case 8:
                             a0 = async_result
-                            HtmlRenderer.init_out(a0)
+                            var document1=HtmlRenderer.init_out(a0)
                             switch_to = 2
                             async_goto = 7
                             break
@@ -12973,21 +12975,21 @@
         $iaN: 1
     }
     HtmlRenderer.fq.prototype = {
-        e0(a) {
+        e0(a) {//似乎在渲染什么，应该是跟主页面html交互，但现在会报错
             var s, r, q, p = this
             if (p.a == null) return
             A.vo(p.gfd())
             p.d = P.mi(P.fm(10, 0), p.gbc(p))
-            W.es(window, "resize", p.gff(p), false)
-            p.ds(0, null)
+            W.es(window, "resize", p.gff(p), false)//此处p.gff(p)报错
+            p.ds(0, null)//p.ds undefined
             s = HtmlRenderer.add_p("row")
             r = p.b
             r.appendChild(s)
             q = HtmlRenderer.add_span("welcome")
-            q.textContent = LanData.get_obfuscated_value("CeaN")
+            q.textContent = "名字竞技场"
             s.appendChild(q)
             q = HtmlRenderer.add_span("welcome2")
-            q.textContent = LanData.get_obfuscated_value("NosN")
+            q.textContent = "(MD5大作战10周年纪念)"
             s.appendChild(q)
             q = p.c
             if (q.gbu(q) != null) {
