@@ -665,16 +665,16 @@
                 return t.aU.b(a)
             },
             e(a) {
-                var s
+                var res
                 if (typeof a == "string") return a
                 if (typeof a == "number") {
                     if (a !== 0) return "" + a
-                } else if (!0 === a) return "true"
-                else if (!1 === a) return "false"
+                } else if (true === a) return "true"
+                else if (false === a) return "false"
                 else if (a == null) return "null"
-                s = J.b4(a)
-                if (typeof s != "string") throw H.h(H.R(a))
-                return s
+                res = J.b4(a)
+                if (typeof res != "string") throw H.h(H.R(a))
+                return res
             },
             dU(a) {
                 var s = a.$identityHash
@@ -1982,9 +1982,9 @@
                 throw H.h(H.u_(H.error_compose(a, H.oE(a, b), H.rti_to_string(b, null))))
             },
             error_compose(a, b, c) {
-                var s = P.jh(a),
+                var obj_description = P.Error_safe_to_string(a),
                     r = H.rti_to_string(b == null ? H.b_(a) : b, null)
-                return s + ": type '" + H.e(r) + "' is not a subtype of type '" + H.e(c) + "'"
+                return obj_description + ": type '" + H.e(r) + "' is not a subtype of type '" + H.e(c) + "'"
             },
             u_(a) {
                 return new H.eI("TypeError: " + a)
@@ -4217,7 +4217,7 @@
             fm(a, b) {
                 return new P.c1(1e6 * b + 1000 * a)
             },
-            jh(a) {
+            Error_safe_to_string(a) {
                 if (typeof a == "number" || H.lm(a) || a == null) return J.b4(a)
                 if (typeof a == "string") return JSON.stringify(a)
                 return P.rQ(a)
@@ -10925,7 +10925,7 @@
     P.f2.prototype = {
         k(a) {
             var s = this.a
-            if (s != null) return "Assertion failed: " + P.jh(s)
+            if (s != null) return "Assertion failed: " + P.Error_safe_to_string(s)
             return "Assertion failed"
         }
     }
@@ -10951,7 +10951,7 @@
                 l = q.gc7() + o + m
             if (!q.a) return l
             s = q.gc6()
-            r = P.jh(q.b)
+            r = P.Error_safe_to_string(q.b)
             return l + s + ": " + r
         }
     }
@@ -11003,7 +11003,7 @@
         k(a) {
             var s = this.a
             if (s == null) return "Concurrent modification during iteration."
-            return "Concurrent modification during iteration: " + P.jh(s) + "."
+            return "Concurrent modification during iteration: " + P.Error_safe_to_string(s) + "."
         }
     }
     P.fM.prototype = {
@@ -12311,7 +12311,14 @@
                             async_goto = 1
                             break
                         }
-                        o = p.r, n = t.v, m = p.a, l = p.b, k = t.V, j = t.D, i = 0
+                        // o = p.r, n = t.v, m = p.a, l = p.b, k = t.V, j = t.D, i = 0
+                        o = p.r;
+                        n = t.v;
+                        m = p.a;
+                        l = p.b;
+                        k = t.V;
+                        j = t.D;
+                        i = 0;
                     case 3:
                         if (!(i < 100)) {
                             async_goto = 4
@@ -12342,7 +12349,9 @@
                         async_goto = 6
                         break
                     case 8:
-                        if (C.Array.w(o, n.a(lang_data.a[0]).e.gb2())) {
+                        let tmp = n.a(lang_data.a[0]).e.gb2()
+                        if (o.includes(tmp)) {
+                        // if (C.Array.w(o, n.a(lang_data.a[0]).e.gb2())) {
                         // if (o.includes(n.a(lang_data.a[0]).e.gb2())) {
                             ++p.win_count
                         };
