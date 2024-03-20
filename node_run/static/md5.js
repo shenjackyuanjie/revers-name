@@ -3363,6 +3363,10 @@
             async_await(a, b) {
                 P.await_on_object(a, b)
             },
+            //补回来
+            am(a) {
+				return new P.i_(new P.U($.P, a.i("U<0>")), a.i("i_<0>"))
+			},
             async_return(a, b) {
                 b.bM(0, a)
             },
@@ -16400,10 +16404,10 @@
             return this.dM(0, b)
         },
         dM(a, b) {
-            // var s = 0,
-            //     r = P.am(t.z),
-            //     q = this,
-            //     p, o, n, m, l, k, j
+             var s = 0,
+                 r = P.am(t.z),
+                 q = this,
+                 p, o, n, m, l, k, j
             // var $async$ae = P.an(function (c, d) {
             //     if (c === 1) return P.ai(d, r)
             //     while (true) switch (s) {
