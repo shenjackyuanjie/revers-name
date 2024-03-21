@@ -758,8 +758,10 @@
           s = "go​ogle_experiment_mod1"
           // if ((window.localStorage.getItem(s) == null || C.a.n(window.localStorage.getItem(s).length, 100) !== 0) && $.i7.d != null) window.localStorage.setItem(s, new H.c3(H.a($.i7.d.split(""), t.s), t.H).cZ(0))
           $.ht = J.iH($.id.d, "[1,3,0,9]", J.aD($.hA))
-          console.log("$.hA", $.hA, "J.aD($.hA)", J.aD($.hA))
+          // console.log("$.hA == $.ht  $.ht == $.id.d", $.hA == $.ht, $.ht == $.id.d)
+          // console.log("$.hA", $.hA, "J.aD($.hA)", J.aD($.hA))
           // console.log("$.hA, $.ht, $.id.d", $.hA, "|", $.ht, "|", $.id.d)
+          // console.log("$.ht.indexOf('[1,3,0,9]')", $.ht.indexOf("[1,3,0,9]"), $.ht.indexOf("[0]"), $.ht.substring(3640, 3650))
           r = (self.URL || self.webkitURL).createObjectURL(W.iK([$.i8.d], "text/css"))
           q = (self.URL || self.webkitURL).createObjectURL(W.iK([J.iH($.ib.d, "md5.css", r)], "text/html"))
           $.iy().src = q
@@ -788,11 +790,12 @@
         s = $.hs
         q = C.f.ga1().I(s)
         $.ii.ak(q)
-        console.log("fskN before", q)
+        // console.log("fskN before", q)
         p = X.kU(q)
-        console.log("fskN", p)
+        // console.log("fskN", p)
         window.sessionStorage.setItem("fSkN", p)
-        console.log("fskN after, $.hD, $.hD.aj, $.ht", $.hD, $.hD().aj, $.ht)
+        // console.log("fskN after, $.hD, $.hD.aj, $.ht", $.hD, $.hD().aj, $.ht)
+        // console.log($.ht)
         $.hD().aj("eval", [$.ht])
       },
       nL() {
