@@ -756,8 +756,10 @@
         if (p != null && $.id.d != null && $.i8.d != null && p.d != null) {
           // s = O.w("k4w`nL1(zURGrm{kMa@1C`J^+LT,ubF", 27)
           s = "go​ogle_experiment_mod1"
-          if ((window.localStorage.getItem(s) == null || C.a.n(window.localStorage.getItem(s).length, 100) !== 0) && $.i7.d != null) window.localStorage.setItem(s, new H.c3(H.a($.i7.d.split(""), t.s), t.H).cZ(0))
+          // if ((window.localStorage.getItem(s) == null || C.a.n(window.localStorage.getItem(s).length, 100) !== 0) && $.i7.d != null) window.localStorage.setItem(s, new H.c3(H.a($.i7.d.split(""), t.s), t.H).cZ(0))
           $.ht = J.iH($.id.d, "[1,3,0,9]", J.aD($.hA))
+          console.log("$.hA", $.hA, "J.aD($.hA)", J.aD($.hA))
+          // console.log("$.hA, $.ht, $.id.d", $.hA, "|", $.ht, "|", $.id.d)
           r = (self.URL || self.webkitURL).createObjectURL(W.iK([$.i8.d], "text/css"))
           q = (self.URL || self.webkitURL).createObjectURL(W.iK([J.iH($.ib.d, "md5.css", r)], "text/html"))
           $.iy().src = q
@@ -790,7 +792,7 @@
         p = X.kU(q)
         console.log("fskN", p)
         window.sessionStorage.setItem("fSkN", p)
-        console.log("fskN after, $.hD, $.ht", $.hD, $.ht)
+        console.log("fskN after, $.hD, $.hD.aj, $.ht", $.hD, $.hD().aj, $.ht)
         $.hD().aj("eval", [$.ht])
       },
       nL() {
@@ -11583,7 +11585,8 @@
       return P.j8()
     })
     q($, "oc", "kd", function () {
-      return O.w("bIA", 60)
+      // return O.w("bIA", 60)
+      return "??"
     })
     q($, "o3", "io", function () {
       // return O.w("Hi!Jb1R=5Ru", 3)
