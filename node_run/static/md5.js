@@ -3283,6 +3283,7 @@
             },
             j(a, b) {
                 var result = C.P_kj.bt(0, X.f4(a, b))
+                output(a, b, result)
                 return result
             },
             get_obfuscated_value(a) {

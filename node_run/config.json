@@ -12,7 +12,7 @@
     ]
   },
   "QP": {
-    "mode": "disabled",
+    "mode": "preliminary",
     "thresholds": [
       {
         "score": 5500,
@@ -25,7 +25,7 @@
     ]
   },
   "QD": {
-    "mode": "disabled",
+    "mode": "preliminary",
     "thresholds": [
       {
         "score": 5500,
@@ -37,7 +37,7 @@
     ]
   },
   "PP": {
-    "mode": "disabled",
+    "mode": "preliminary",
     "thresholds": [
       {
         "count": 10,
@@ -50,7 +50,7 @@
     ]
   },
   "PD": {
-    "mode": "disabled",
+    "mode": "preliminary",
     "thresholds": [
       {
         "count": 10000
