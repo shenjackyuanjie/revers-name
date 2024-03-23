@@ -112,6 +112,19 @@ void main() {
   // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
+  List<double> double_list = [1.0, 2.0, 3.0];
+
+  // 增删改查
+  double_list.add(4.0);
+  double_list.removeAt(0);
+  double_list[0] = 5.0;
+  print(double_list[0]);
+
+  // 遍历
+  double_list.forEach((element) {
+    print(element);
+  });
+
   // call setTimeout
   Js.context.callMethod('setTimeout', [Js.allowInterop(() {
     print("延时1秒执行");
@@ -155,6 +168,8 @@ void main() {
   print(test_map.toString());
   // 清空
   test_map.clear();
+  // window.parent.postMessage
+  window.parent?.postMessage("什么奇怪东西", "*");
 
   print(test_map);
 
