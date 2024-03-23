@@ -112,6 +112,11 @@ void main() {
   // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
+  // call setTimeout
+  Js.context.callMethod('setTimeout', [Js.allowInterop(() {
+    print("延时1秒执行");
+  }), 1000]);
+
   Map<String, int> test_map = {
     "a": 1,
   };
