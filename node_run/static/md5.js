@@ -3208,7 +3208,7 @@
                 return J.bv(a).fO(a, b, c, d, e, f, g)
             },
             rD(a) {
-                return J.aQ(a).dF(a)
+                return J.aQ(a).trim_name(a)
             },
             Interceptor: function af() {},
             JsBool: function fw() {},
