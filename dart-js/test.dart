@@ -93,6 +93,10 @@ a_run() async {
   print("object after 1s");
 }
 
+void test() {
+  print("test");
+}
+
 void main() {
   print(test_list("abc"));
   print(test_list(""));
@@ -108,6 +112,10 @@ void main() {
 
   // Find an element by class (a-class).
   Element classElement = querySelector('.a-class')!;
+
+  classElement.addEventListener('click', (event) {
+    print("click");
+  });
 
   // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');

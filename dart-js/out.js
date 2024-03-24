@@ -768,7 +768,10 @@
                 throw H.wrapException(new P._Exception("Unsupported number of arguments for wrapped closure"));
             },
             convertDartClosureToJS: function (closure, arity) {
-                var $function = closure.$identity;
+                var $function;
+                if (closure == null)
+                    return null;
+                $function = closure.$identity;
                 if (!!$function)
                     return $function;
                 $function = function (closure, arity, invoke) {
@@ -2996,6 +2999,9 @@
                     return a0 != null && receiver === a0;
                 return J.getInterceptor$(receiver).$eq(receiver, a0);
             },
+            _addEventListener$3$x: function (receiver, a0, a1, a2) {
+                return J.getInterceptor$x(receiver)._addEventListener$3(receiver, a0, a1, a2);
+            },
             elementAt$1$ax: function (receiver, a0) {
                 return J.getInterceptor$ax(receiver).elementAt$1(receiver, a0);
             },
@@ -4269,6 +4275,7 @@
                 t2.toString;
                 t3 = t1.querySelector(".a-class");
                 t3.toString;
+                J._addEventListener$3$x(t3, "click", type$.nullable_dynamic_Function_Event._as(new V.main_closure()), null);
                 t4 = type$.Element;
                 H.checkTypeBound(t4, t4, "T", "querySelectorAll");
                 t4 = t1.querySelectorAll("div");
@@ -4284,15 +4291,15 @@
                 if (0 >= double_list.length)
                     return H.ioore(double_list, 0);
                 P.print(double_list[0]);
-                C.JSArray_methods.forEach$1(double_list, new V.main_closure());
-                $.$get$_context().callMethod$2("setTimeout", [P.allowInterop(new V.main_closure0(), type$.Null_Function), 1000]);
+                C.JSArray_methods.forEach$1(double_list, new V.main_closure0());
+                $.$get$_context().callMethod$2("setTimeout", [P.allowInterop(new V.main_closure1(), type$.Null_Function), 1000]);
                 test_map = P.LinkedHashMap_LinkedHashMap$_literal(["a", 1], type$.String, type$.int);
                 V.a_run();
                 test_map.$indexSet(0, "b", 2);
                 test_map.remove$1(0, "a");
                 test_map.$indexSet(0, "b", 3);
                 P.print(test_map.$index(0, "b"));
-                test_map.forEach$1(0, new V.main_closure1());
+                test_map.forEach$1(0, new V.main_closure2());
                 P.print(test_map._length);
                 P.print(test_map._length === 0);
                 P.print(test_map._length !== 0);
@@ -4336,15 +4343,16 @@
                     a += " " + C.JSInt_methods.toString$0(i);
                 for (b = 124242424, i = 0; i < 10; ++i)
                     b += b * i;
-                P.Future_Future$delayed(P.Duration$(1000), type$.dynamic).then$1$1(new V.main_closure2(), type$.Null);
-                new V.main_closure3().call$0();
+                P.Future_Future$delayed(P.Duration$(1000), type$.dynamic).then$1$1(new V.main_closure3(), type$.Null);
+                new V.main_closure4().call$0();
                 P.print(a);
             },
             main_closure: function main_closure() {},
             main_closure0: function main_closure0() {},
             main_closure1: function main_closure1() {},
             main_closure2: function main_closure2() {},
-            main_closure3: function main_closure3() {}
+            main_closure3: function main_closure3() {},
+            main_closure4: function main_closure4() {}
         };
     var holders = [C, H, J, P, W, V];
     hunkHelpers.setFunctionNamesIfNecessary(holders);
@@ -6186,7 +6194,11 @@
     W.Event.prototype = {
         $isEvent: 1
     };
-    W.EventTarget.prototype = {};
+    W.EventTarget.prototype = {
+        _addEventListener$3: function (receiver, type, listener, options) {
+            return receiver.addEventListener(type, H.convertDartClosureToJS(type$.nullable_dynamic_Function_Event._as(listener), 1), options);
+        }
+    };
     W.File.prototype = {
         $isFile: 1
     };
@@ -6490,12 +6502,19 @@
     };
     P._JsArray_JsObject_ListMixin.prototype = {};
     V.main_closure.prototype = {
-        call$1: function (element) {
-            P.print(H._asDouble(element));
+        call$1: function ($event) {
+            type$.Event._as($event);
+            P.print("click");
         },
         $signature: 22
     };
     V.main_closure0.prototype = {
+        call$1: function (element) {
+            P.print(H._asDouble(element));
+        },
+        $signature: 23
+    };
+    V.main_closure1.prototype = {
         call$0: function () {
             P.print("\u5ef6\u65f61\u79d2\u6267\u884c");
         },
@@ -6503,22 +6522,22 @@
         $requiredArgCount: 0,
         $signature: 1
     };
-    V.main_closure1.prototype = {
+    V.main_closure2.prototype = {
         call$2: function (key, value) {
             H._asString(key);
             H._asInt(value);
             P.print(key + " : " + value);
         },
-        $signature: 23
+        $signature: 24
     };
-    V.main_closure2.prototype = {
+    V.main_closure3.prototype = {
         call$1: function (value) {
             P.print("\u5ef6\u65f61\u79d2\u6267\u884c then ");
             P.print(value);
         },
         $signature: 3
     };
-    V.main_closure3.prototype = {
+    V.main_closure4.prototype = {
         call$0: function () {
             P.print("closuer");
         },
@@ -6541,8 +6560,8 @@
         _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 4);
         _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 4);
         _static_0(P, "async___startMicrotaskLoop$closure", "_startMicrotaskLoop", 0);
-        _static_1(P, "js___convertToJS$closure", "_convertToJS", 24);
-        _static_1(P, "js___convertToDart$closure", "_convertToDart", 25);
+        _static_1(P, "js___convertToJS$closure", "_convertToJS", 25);
+        _static_1(P, "js___convertToDart$closure", "_convertToDart", 26);
     })();
     (function inheritance() {
         var _mixin = hunkHelpers.mixin,
@@ -6564,7 +6583,7 @@
         _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
         _inherit(H.ConstantMapView, P.UnmodifiableMapView);
         _inherit(H.ConstantStringMap, H.ConstantMap);
-        _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.JsLinkedHashMap_containsValue_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncCompleteWithValue_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.NoSuchMethodError_toString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, V.main_closure, V.main_closure0, V.main_closure1, V.main_closure2, V.main_closure3]);
+        _inheritMany(H.Closure, [H.Primitives_functionNoSuchMethod_closure, H.TearOffClosure, H.JsLinkedHashMap_values_closure, H.JsLinkedHashMap_containsValue_closure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__asyncCompleteWithValue_closure, P._Future__chainFuture_closure, P._Future__asyncCompleteError_closure, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.MapBase_mapToString_closure, P.NoSuchMethodError_toString_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P._StructuredClone_walk_closure, P._StructuredClone_walk_closure0, P._convertToJS_closure, P._convertToJS_closure0, P._wrapToDart_closure, P._wrapToDart_closure0, P._wrapToDart_closure1, V.main_closure, V.main_closure0, V.main_closure1, V.main_closure2, V.main_closure3, V.main_closure4]);
         _inherit(H.NullError, P.TypeError);
         _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
         _inherit(H._AssertionError, P.AssertionError);
@@ -6624,7 +6643,7 @@
         mangledNames: {},
         getTypeFromName: getGlobalFromName,
         metadata: [],
-        types: ["~()", "Null()", "@(@)", "Null(@)", "~(~())", "String(int)", "~(String,@)", "@(@,String)", "@(String)", "Null(~())", "~(@)", "Null(@,StackTrace)", "~(int,@)", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(Symbol0,@)", "~(@,@)", "Null(@,@)", "JsFunction(@)", "JsArray<@>(@)", "JsObject(@)", "~(double)", "~(String,int)", "Object?(Object?)", "Object?(@)"],
+        types: ["~()", "Null()", "@(@)", "Null(@)", "~(~())", "String(int)", "~(String,@)", "@(@,String)", "@(String)", "Null(~())", "~(@)", "Null(@,StackTrace)", "~(int,@)", "Null(Object,StackTrace)", "_Future<@>(@)", "~(Object?,Object?)", "~(Symbol0,@)", "~(@,@)", "Null(@,@)", "JsFunction(@)", "JsArray<@>(@)", "JsObject(@)", "Null(Event)", "~(double)", "~(String,int)", "Object?(Object?)", "Object?(@)"],
         interceptorsByTag: null,
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
@@ -6690,6 +6709,7 @@
             nullable_Future_Null: findType("Future<Null>?"),
             nullable_Object: findType("Object?"),
             nullable__FutureListener_dynamic_dynamic: findType("_FutureListener<@,@>?"),
+            nullable_dynamic_Function_Event: findType("@(Event)?"),
             num: findType("num"),
             void: findType("~"),
             void_Function: findType("~()")
