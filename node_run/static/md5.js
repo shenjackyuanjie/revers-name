@@ -13173,89 +13173,89 @@
             // throw new Error("c5")
             // throw "em"
         },
-        // add_plr_to_table() {
-        //     var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
-        //         e = "click",
-        //         d = f.b,
-        //         c = document
-        //     d.appendChild(c.createElement("br"))
-        //     s = f.cx.e.gb2()
-        //     r = $.ay.h(0, s).a
-        //     q = t.ak
-        //     p = H.set_run_time_type_info([], q)
-        //     o = H.set_run_time_type_info([], q)
-        //     n = []
-        //     $.ay.aw(0, new HtmlRenderer.jA(r, p, n, o))
-        //     C.Array.bb(p, HtmlRenderer.oD())
-        //     C.Array.bb(o, HtmlRenderer.oD())
-        //     m = c.createElement("table")
-        //     l = new HtmlRenderer.jz(m)
-        //     k = c.createElement("tr")
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     C.j.by(j, C.String.B(J.iN($.nh(), LanData.get_obfuscated_value("ePya")), $.nh()), $.bV())
-        //     q = j.style
-        //     q.minWidth = "112px"
-        //     q = j.style
-        //     q.height = "32px"
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("AoUA")
-        //     q = j.style
-        //     q.width = "44px"
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("aXIa")
-        //     q = j.style
-        //     q.width = "44px"
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("MdQa")
-        //     q = j.style
-        //     q.minWidth = "112px"
-        //     q = k.style
-        //     q.background = "#FAFAFA"
-        //     m.appendChild(k)
-        //     for (q = p.length, i = 0; i < p.length; p.length === q || (0, H.F)(p), ++i) l.$1(p[i])
-        //     k = c.createElement("tr")
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     C.j.by(j, C.String.B(J.iN($.nf(), LanData.get_obfuscated_value("eFKN")), $.nf()), $.bV())
-        //     q = j.style
-        //     q.height = "32px"
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("AoUA")
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("aXIa")
-        //     j = c.createElement("td")
-        //     k.appendChild(j)
-        //     j.textContent = LanData.get_obfuscated_value("MdQa")
-        //     q = k.style
-        //     q.background = "#FAFAFA"
-        //     m.appendChild(k)
-        //     for (q = o.length, i = 0; i < o.length; o.length === q || (0, H.F)(o), ++i) l.$1(o[i])
-        //     d.appendChild(m)
-        //     h = HtmlRenderer.ae("buttonBar")
-        //     d.appendChild(h)
-        //     g = c.createElement("button")
-        //     g.textContent = LanData.get_obfuscated_value("xPRN")
-        //     h.appendChild(g)
-        //     W.es(g, e, new HtmlRenderer.jB(), !1)
-        //     g = c.createElement("button")
-        //     g.textContent = LanData.get_obfuscated_value("KXmn")
-        //     h.appendChild(g)
-        //     W.es(g, e, new HtmlRenderer.jC(), !1)
-        //     g = c.createElement("button")
-        //     g.textContent = LanData.get_obfuscated_value("Zvon")
-        //     h.appendChild(g)
-        //     W.es(g, e, new HtmlRenderer.jD($.qq()), !1)
-        //     d = h.style
-        //     c = "" + (C.Number.aI(m.offsetWidth) - C.Number.aI(h.offsetWidth) - 8) + "px"
-        //     d.marginLeft = c
-        //     if (W.ll(window.parent) !== window) new HtmlRenderer.post_message(f, p, o, n, $.ay.h(0, J.index_get(J.index_get(f.z[0], 0), 0))).$0()
-        // }
+        add_plr_to_table() {
+            var s, r, q, p, o, n, m, l, k, j, i, h, g, f = this,
+                e = "click",
+                d = f.b,
+                c = document
+            d.appendChild(c.createElement("br"))
+            s = f.cx.e.gb2()
+            r = $.ay.h(0, s).a
+            q = t.ak
+            p = H.set_run_time_type_info([], q)
+            o = H.set_run_time_type_info([], q)
+            n = []
+            $.ay.aw(0, new HtmlRenderer.jA(r, p, n, o))
+            C.Array.bb(p, HtmlRenderer.oD())
+            C.Array.bb(o, HtmlRenderer.oD())
+            m = c.createElement("table")
+            l = new HtmlRenderer.jz(m)
+            k = c.createElement("tr")
+            j = c.createElement("td")
+            k.appendChild(j)
+            C.j.by(j, C.String.B(J.iN($.nh(), LanData.get_obfuscated_value("ePya")), $.nh()), $.bV())
+            q = j.style
+            q.minWidth = "112px"
+            q = j.style
+            q.height = "32px"
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("AoUA")
+            q = j.style
+            q.width = "44px"
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("aXIa")
+            q = j.style
+            q.width = "44px"
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("MdQa")
+            q = j.style
+            q.minWidth = "112px"
+            q = k.style
+            q.background = "#FAFAFA"
+            m.appendChild(k)
+            for (q = p.length, i = 0; i < p.length; p.length === q || (0, H.F)(p), ++i) l.$1(p[i])
+            k = c.createElement("tr")
+            j = c.createElement("td")
+            k.appendChild(j)
+            C.j.by(j, C.String.B(J.iN($.nf(), LanData.get_obfuscated_value("eFKN")), $.nf()), $.bV())
+            q = j.style
+            q.height = "32px"
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("AoUA")
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("aXIa")
+            j = c.createElement("td")
+            k.appendChild(j)
+            j.textContent = LanData.get_obfuscated_value("MdQa")
+            q = k.style
+            q.background = "#FAFAFA"
+            m.appendChild(k)
+            for (q = o.length, i = 0; i < o.length; o.length === q || (0, H.F)(o), ++i) l.$1(o[i])
+            d.appendChild(m)
+            h = HtmlRenderer.ae("buttonBar")
+            d.appendChild(h)
+            g = c.createElement("button")
+            g.textContent = LanData.get_obfuscated_value("xPRN")
+            h.appendChild(g)
+            W.es(g, e, new HtmlRenderer.jB(), !1)
+            g = c.createElement("button")
+            g.textContent = LanData.get_obfuscated_value("KXmn")
+            h.appendChild(g)
+            W.es(g, e, new HtmlRenderer.jC(), !1)
+            g = c.createElement("button")
+            g.textContent = LanData.get_obfuscated_value("Zvon")
+            h.appendChild(g)
+            W.es(g, e, new HtmlRenderer.jD($.qq()), !1)
+            d = h.style
+            c = "" + (C.Number.aI(m.offsetWidth) - C.Number.aI(h.offsetWidth) - 8) + "px"
+            d.marginLeft = c
+            if (W.ll(window.parent) !== window) new HtmlRenderer.post_message(f, p, o, n, $.ay.h(0, J.index_get(J.index_get(f.z[0], 0), 0))).$0()
+        }
     }
     HtmlRenderer.jx.prototype = {
         $1(a) {
