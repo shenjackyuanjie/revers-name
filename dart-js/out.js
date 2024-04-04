@@ -303,6 +303,13 @@
             checkNotNullable: function (value, $name, $T) {
                 return value;
             },
+            SubListIterable$: function (_iterable, _start, _endOrLength, $E) {
+                P.RangeError_checkNotNegative(_start, "start");
+                P.RangeError_checkNotNegative(_endOrLength, "end");
+                if (_start > _endOrLength)
+                    H.throwExpression(P.RangeError$range(_start, 0, _endOrLength, "start", null));
+                return new H.SubListIterable(_iterable, _start, _endOrLength, $E._eval$1("SubListIterable<0>"));
+            },
             MappedIterable_MappedIterable: function (iterable, $function, $S, $T) {
                 return new H.EfficientLengthMappedIterable(iterable, $function, $S._eval$1("@<0>")._bind$1($T)._eval$1("EfficientLengthMappedIterable<1,2>"));
             },
@@ -311,6 +318,13 @@
             },
             EfficientLengthIterable: function EfficientLengthIterable() {},
             ListIterable: function ListIterable() {},
+            SubListIterable: function SubListIterable(t0, t1, t2, t3) {
+                var _ = this;
+                _.__internal$_iterable = t0;
+                _._start = t1;
+                _._endOrLength = t2;
+                _.$ti = t3;
+            },
             ListIterator: function ListIterator(t0, t1, t2) {
                 var _ = this;
                 _.__internal$_iterable = t0;
@@ -2911,6 +2925,11 @@
                     throw H.wrapException(P.RangeError$range($length, 0, 4294967295, "length", null));
                 return J.JSArray_JSArray$markFixed(new Array($length), $E);
             },
+            JSArray_JSArray$growable: function ($length, $E) {
+                if ($length < 0)
+                    throw H.wrapException(P.ArgumentError$("Length must be a non-negative integer: " + $length));
+                return H.setRuntimeTypeInfo(new Array($length), $E._eval$1("JSArray<0>"));
+            },
             JSArray_JSArray$markFixed: function (allocation, $E) {
                 return J.JSArray_markFixedList(H.setRuntimeTypeInfo(allocation, $E._eval$1("JSArray<0>")), $E);
             },
@@ -3718,9 +3737,9 @@
             },
             List_List$filled: function ($length, fill, growable, $E) {
                 var i,
-                    result = J.JSArray_JSArray$fixed($length, $E);
+                    result = growable ? J.JSArray_JSArray$growable($length, $E) : J.JSArray_JSArray$fixed($length, $E);
                 if ($length !== 0 && fill != null)
-                    for (i = 0; i < $length; ++i)
+                    for (i = 0; i < result.length; ++i)
                         result[i] = fill;
                 return result;
             },
@@ -3812,6 +3831,16 @@
             },
             RangeError$range: function (invalidValue, minValue, maxValue, $name, message) {
                 return new P.RangeError(minValue, maxValue, true, invalidValue, $name, "Invalid value");
+            },
+            RangeError_checkValidRange: function (start, end, $length) {
+                if (start > $length)
+                    throw H.wrapException(P.RangeError$range(start, 0, $length, "start", null));
+                if (start > end || end > $length)
+                    throw H.wrapException(P.RangeError$range(end, start, $length, "end", null));
+                return end;
+            },
+            RangeError_checkNotNegative: function (value, $name) {
+                return value;
             },
             IndexError$: function (invalidValue, indexable, $name, message, $length) {
                 var t1 = H._asInt($length == null ? J.get$length$asx(indexable) : $length);
@@ -4263,7 +4292,7 @@
                 return P._asyncStartSync($async$a_run, $async$completer);
             },
             main: function () {
-                var reg_exp, t1, t2, t3, t4, double_list, t5, test_map, tr, td, plist, pbody, p, a, i, b,
+                var reg_exp, t1, t2, t3, t4, double_list, t5, range, index, test_map, tr, td, plist, pbody, p, a, i, b,
                     _s13_ = "Hello, World!";
                 P.print(V.test_list("abc"));
                 P.print(V.test_list(""));
@@ -4279,7 +4308,16 @@
                 t4 = type$.Element;
                 H.checkTypeBound(t4, t4, "T", "querySelectorAll");
                 t4 = t1.querySelectorAll("div");
-                double_list = H.setRuntimeTypeInfo([1, 2, 3], type$.JSArray_double);
+                double_list = H.setRuntimeTypeInfo([1, 2, 3, 5, 5.002], type$.JSArray_double);
+                P.RangeError_checkValidRange(0, 2, double_list.length);
+                t5 = type$.double;
+                P.print(H.SubListIterable$(double_list, 0, 2, t5).toList$0(0));
+                range = H.setRuntimeTypeInfo(new Array(5), type$.JSArray_int);
+                for (index = 0; index < 5; ++index)
+                    range[index] = index;
+                P.print(range);
+                P.RangeError_checkValidRange(3, 1, double_list.length);
+                P.print(H.SubListIterable$(double_list, 3, 1, t5).toList$0(0));
                 C.JSArray_methods.add$1(double_list, 4);
                 if (!!double_list.fixed$length)
                     H.throwExpression(P.UnsupportedError$("removeAt"));
@@ -4466,7 +4504,7 @@
             return list.join(separator);
         },
         elementAt$1: function (receiver, index) {
-            if (index >= receiver.length)
+            if (index < 0 || index >= receiver.length)
                 return H.ioore(receiver, index);
             return receiver[index];
         },
@@ -4619,7 +4657,64 @@
     H.ListIterable.prototype = {
         get$iterator: function (_) {
             var _this = this;
-            return new H.ListIterator(_this, _this.get$length(_this), _this.$ti._eval$1("ListIterator<ListIterable.E>"));
+            return new H.ListIterator(_this, _this.get$length(_this), H._instanceType(_this)._eval$1("ListIterator<ListIterable.E>"));
+        }
+    };
+    H.SubListIterable.prototype = {
+        get$_endIndex: function () {
+            var $length = J.get$length$asx(this.__internal$_iterable),
+                endOrLength = this._endOrLength;
+            if (endOrLength > $length)
+                return $length;
+            return endOrLength;
+        },
+        get$_startIndex: function () {
+            var $length = J.get$length$asx(this.__internal$_iterable),
+                t1 = this._start;
+            if (t1 > $length)
+                return $length;
+            return t1;
+        },
+        get$length: function (_) {
+            var endOrLength,
+                $length = J.get$length$asx(this.__internal$_iterable),
+                t1 = this._start;
+            if (t1 >= $length)
+                return 0;
+            endOrLength = this._endOrLength;
+            if (endOrLength >= $length)
+                return $length - t1;
+            return endOrLength - t1;
+        },
+        elementAt$1: function (_, index) {
+            var _this = this,
+                realIndex = _this.get$_startIndex() + index,
+                t1 = _this.get$_endIndex();
+            if (realIndex >= t1)
+                throw H.wrapException(P.IndexError$(index, _this, "index", null, null));
+            return J.elementAt$1$ax(_this.__internal$_iterable, realIndex);
+        },
+        toList$0: function (_) {
+            var $length, result, i, _this = this,
+                start = _this._start,
+                t1 = _this.__internal$_iterable,
+                t2 = J.getInterceptor$asx(t1),
+                end = t2.get$length(t1),
+                endOrLength = _this._endOrLength;
+            if (endOrLength < end)
+                end = endOrLength;
+            $length = end - start;
+            if ($length <= 0) {
+                t1 = J.JSArray_JSArray$growable(0, _this.$ti._precomputed1);
+                return t1;
+            }
+            result = P.List_List$filled($length, t2.elementAt$1(t1, start), true, _this.$ti._precomputed1);
+            for (i = 1; i < $length; ++i) {
+                C.JSArray_methods.$indexSet(result, i, t2.elementAt$1(t1, start + i));
+                if (t2.get$length(t1) < end)
+                    throw H.wrapException(P.ConcurrentModificationError$(_this));
+            }
+            return result;
         }
     };
     H.ListIterator.prototype = {
@@ -6088,6 +6183,17 @@
                 ++count;
             return count;
         },
+        elementAt$1: function (_, index) {
+            var t1, elementIndex, element;
+            P.RangeError_checkNotNegative(index, "index");
+            for (t1 = this.get$iterator(this), elementIndex = 0; t1.moveNext$0();) {
+                element = t1.get$current();
+                if (index === elementIndex)
+                    return element;
+                ++elementIndex;
+            }
+            throw H.wrapException(P.IndexError$(index, this, "index", null, elementIndex));
+        },
         toString$0: function (_) {
             return P.IterableBase_iterableToShortString(this, "(", ")");
         }
@@ -6230,7 +6336,7 @@
             return receiver[index];
         },
         elementAt$1: function (receiver, index) {
-            if (index >= receiver.length)
+            if (index < 0 || index >= receiver.length)
                 return H.ioore(receiver, index);
             return receiver[index];
         },
@@ -6576,9 +6682,9 @@
         _inheritMany(P.Error, [H.LateError, P.TypeError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.RuntimeError, P.AssertionError, H._Error, P.NullThrownError, P.ArgumentError, P.NoSuchMethodError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
         _inheritMany(P.Iterable, [H.EfficientLengthIterable, H.MappedIterable]);
         _inheritMany(H.EfficientLengthIterable, [H.ListIterable, H.LinkedHashMapKeyIterable]);
+        _inheritMany(H.ListIterable, [H.SubListIterable, H.MappedListIterable]);
         _inherit(H.EfficientLengthMappedIterable, H.MappedIterable);
         _inherit(H.MappedIterator, P.Iterator);
-        _inherit(H.MappedListIterable, H.ListIterable);
         _inherit(P._UnmodifiableMapView_MapView__UnmodifiableMapMixin, P.MapView);
         _inherit(P.UnmodifiableMapView, P._UnmodifiableMapView_MapView__UnmodifiableMapMixin);
         _inherit(H.ConstantMapView, P.UnmodifiableMapView);
@@ -6648,7 +6754,7 @@
         leafTags: null,
         arrayRti: typeof Symbol == "function" && typeof Symbol() == "symbol" ? Symbol("$ti") : "$ti"
     };
-    H._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","JavaScriptFunction":"JavaScriptObject","AbortPaymentEvent":"Event","ExtendableEvent":"Event","AElement":"Element","GraphicsElement":"Element","SvgElement":"Element","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","NativeFloat32List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"double":[],"int":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[]},"LateError":{"Error":[]},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"Iterable":["2"],"Iterable.E":"2","ListIterable.E":"2"},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"]},"LinkedHashMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["1"],"NativeTypedData":[],"TypedData":[]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["double"],"List":["double"],"NativeTypedData":[],"TypedData":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"ListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"]},"NativeInt16List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint8List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"AsyncError":{"Error":[]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"double":{"num":[]},"int":{"num":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"HtmlElement":{"Element":[],"Node":[]},"AnchorElement":{"Element":[],"Node":[]},"AreaElement":{"Element":[],"Node":[]},"CharacterData":{"Node":[]},"DivElement":{"Element":[],"Node":[]},"_FrozenElementList":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[]},"File":{"Blob":[]},"FormElement":{"Element":[],"Node":[]},"NodeList":{"ListMixin":["Node"],"ImmutableListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"SelectElement":{"Element":[],"Node":[]},"TableCellElement":{"Element":[],"Node":[]},"Window":{"WindowBase":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"}}'));
+    H._Universe_addRules(init.typeUniverse, JSON.parse('{"PlainJavaScriptObject":"JavaScriptObject","UnknownJavaScriptObject":"JavaScriptObject","JavaScriptFunction":"JavaScriptObject","AbortPaymentEvent":"Event","ExtendableEvent":"Event","AElement":"Element","GraphicsElement":"Element","SvgElement":"Element","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","DedicatedWorkerGlobalScope":"WorkerGlobalScope","CDataSection":"CharacterData","Text":"CharacterData","NativeFloat32List":"NativeTypedArrayOfDouble","NativeByteData":"NativeTypedData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptObject":{"JSObject":[],"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"double":[],"num":[]},"JSInt":{"double":[],"int":[],"num":[]},"JSDouble":{"double":[],"num":[]},"JSString":{"String":[]},"LateError":{"Error":[]},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"Iterable":["1"]},"SubListIterable":{"ListIterable":["1"],"Iterable":["1"],"Iterable.E":"1","ListIterable.E":"1"},"ListIterator":{"Iterator":["1"]},"MappedIterable":{"Iterable":["2"],"Iterable.E":"2"},"EfficientLengthMappedIterable":{"MappedIterable":["1","2"],"Iterable":["2"],"Iterable.E":"2"},"MappedIterator":{"Iterator":["2"]},"MappedListIterable":{"ListIterable":["2"],"Iterable":["2"],"Iterable.E":"2","ListIterable.E":"2"},"Symbol":{"Symbol0":[]},"ConstantMapView":{"UnmodifiableMapView":["1","2"],"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"ConstantMap":{"Map":["1","2"]},"ConstantStringMap":{"ConstantMap":["1","2"],"Map":["1","2"]},"JSInvocationMirror":{"Invocation":[]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"LinkedHashMap":["1","2"],"Map":["1","2"]},"LinkedHashMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"JSSyntaxRegExp":{"RegExp":[]},"NativeTypedData":{"TypedData":[]},"NativeTypedArray":{"JavaScriptIndexingBehavior":["1"],"NativeTypedData":[],"TypedData":[]},"NativeTypedArrayOfDouble":{"ListMixin":["double"],"JavaScriptIndexingBehavior":["double"],"List":["double"],"NativeTypedData":[],"TypedData":[],"Iterable":["double"],"FixedLengthListMixin":["double"],"ListMixin.E":"double"},"NativeTypedArrayOfInt":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"]},"NativeInt16List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeInt32List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeInt8List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint16List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint32List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint8ClampedList":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"NativeUint8List":{"ListMixin":["int"],"JavaScriptIndexingBehavior":["int"],"List":["int"],"NativeTypedData":[],"TypedData":[],"Iterable":["int"],"FixedLengthListMixin":["int"],"ListMixin.E":"int"},"_Error":{"Error":[]},"_TypeError":{"Error":[]},"AsyncError":{"Error":[]},"_Future":{"Future":["1"]},"_Zone":{"Zone":[]},"_RootZone":{"_Zone":[],"Zone":[]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"MapView":{"Map":["1","2"]},"UnmodifiableMapView":{"_UnmodifiableMapView_MapView__UnmodifiableMapMixin":["1","2"],"MapView":["1","2"],"_UnmodifiableMapMixin":["1","2"],"Map":["1","2"]},"double":{"num":[]},"int":{"num":[]},"AssertionError":{"Error":[]},"TypeError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"NoSuchMethodError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"_StringStackTrace":{"StackTrace":[]},"HtmlElement":{"Element":[],"Node":[]},"AnchorElement":{"Element":[],"Node":[]},"AreaElement":{"Element":[],"Node":[]},"CharacterData":{"Node":[]},"DivElement":{"Element":[],"Node":[]},"_FrozenElementList":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"},"Element":{"Node":[]},"File":{"Blob":[]},"FormElement":{"Element":[],"Node":[]},"NodeList":{"ListMixin":["Node"],"ImmutableListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"SelectElement":{"Element":[],"Node":[]},"TableCellElement":{"Element":[],"Node":[]},"Window":{"WindowBase":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_DOMWindowCrossFrame":{"WindowBase":[]},"JsArray":{"ListMixin":["1"],"List":["1"],"Iterable":["1"],"ListMixin.E":"1"}}'));
     H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"NativeTypedArray":1,"ListBase":1,"MapBase":2,"_ListBase_Object_ListMixin":1,"_JsArray_JsObject_ListMixin":1}'));
     0;
     var type$ = (function rtii() {
@@ -6670,6 +6776,7 @@
             JSArray_String: findType("JSArray<String>"),
             JSArray_double: findType("JSArray<double>"),
             JSArray_dynamic: findType("JSArray<@>"),
+            JSArray_int: findType("JSArray<int>"),
             JSNull: findType("JSNull"),
             JSObject: findType("JSObject"),
             JavaScriptFunction: findType("JavaScriptFunction"),

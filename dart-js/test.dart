@@ -120,7 +120,15 @@ void main() {
   // Find all elements by tag (<div>).
   List<Element> divElements = querySelectorAll('div');
 
-  List<double> double_list = [1.0, 2.0, 3.0];
+  List<double> double_list = [1.0, 2.0, 3.0, 5.0, 5.002];
+
+  // range in list
+  print(double_list.getRange(0, 2).toList());
+
+  // range
+  var range = List.generate(5, (index) => index);
+  print(range);
+  print(double_list.getRange(Range.END_TO_START, Range.START_TO_END).toList());
 
   // 增删改查
   double_list.add(4.0);
