@@ -113,6 +113,19 @@ void main() {
   // Find an element by class (a-class).
   Element classElement = querySelector('.a-class')!;
 
+  Comment comment = Comment("comment");
+
+  // canvas
+  CanvasElement canvas = CanvasElement(width: 100, height: 100);
+  CanvasRenderingContext2D ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, 100, 100);
+  ctx.fillStyle = 'white';
+  drawText(ctx, 'Hello, World!', 0, 0, 100, true);
+
+  // Add a click event listener to the class element.
+  comment.addEventListener('click', (event) => null);
+
   classElement.addEventListener('click', (event) {
     print("click");
   });
