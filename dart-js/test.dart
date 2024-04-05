@@ -117,7 +117,8 @@ void main() {
 
   // canvas
   CanvasElement canvas = CanvasElement(width: 100, height: 100);
-  CanvasRenderingContext2D ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+  CanvasRenderingContext2D ctx =
+      canvas.getContext('2d') as CanvasRenderingContext2D;
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, 100, 100);
   ctx.fillStyle = 'white';
@@ -155,9 +156,12 @@ void main() {
   });
 
   // call setTimeout
-  Js.context.callMethod('setTimeout', [Js.allowInterop(() {
-    print("延时1秒执行");
-  }), 1000]);
+  Js.context.callMethod('setTimeout', [
+    Js.allowInterop(() {
+      print("延时1秒执行");
+    }),
+    1000
+  ]);
 
   Map<String, int> test_map = {
     "a": 1,
@@ -173,6 +177,10 @@ void main() {
 
   // 修改
   test_map["b"] = 3;
+
+  if (test_map.containsKey("b")) {
+    test_map["b"] = 4;
+  }
 
   // 查找
   print(test_map["b"]);
